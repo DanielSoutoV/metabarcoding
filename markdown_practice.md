@@ -10,7 +10,7 @@ metacoder package from the Grunwald Lab.
 
 ``` r
 #the small green box to insert chunks in different formats. 
-#```{r} for R, message =FALSE is to avoid seeing messages from this whole chunk, in this case, any warning coming from loading R packages (e.g. version warning, masking, etc)
+#```{r} for R.
 rm(list=ls()) #reoves all objects in workspace, start with clean environment
 #load packages
 library('tidyr')
@@ -29,7 +29,8 @@ library('metacoder')
 ```
 
 First thing is to merge and clean the samples from the format downloaded
-from mbrave
+from mbrave as right now its rather chaotic with column 1 sample, 2
+BIN#, 3 #of seqs and 4 classificaiton.
 
 ``` r
 all_merged <- read.csv('data/light_trap_19_21.csv', header=T)
@@ -50,3 +51,17 @@ head(all_merged)
     ## 4                                     Arthropoda;Insecta;Lepidoptera;Depressariidae;Stenomatinae;Stenoma;Stenoma Janzen364
     ## 5                                                                             Arthropoda;Insecta;Coleoptera;Nitidulidae;;;
     ## 6                                                                                Arthropoda;Insecta;Coleoptera;Aderidae;;;
+
+We need to group (and add) reads for the same BIN/classification in each
+sample
+
+``` r
+all_merged %>%
+  group_by(bin_uri, classification, sampleId) %>%
+  summarise_all(sum) %>%
+  data.frame() -> all_merged
+write.csv(all_merged, 'data/dataset_merged.csv', row.names =FALSE)
+```
+
+This document now needs to be transposed (sample ID in columns, BIN_uri
+and classificaiton in rows). I did in excel, surely a way to do in R.
