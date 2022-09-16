@@ -36,3 +36,14 @@ write.csv(all_merged, 'data/dataset_merged.csv', row.names =FALSE)
 ```
 
 This document now needs to be transposed (sample ID in columns, BIN_uri and classificaiton in rows). I did in excel, surely a way to do in R.
+
+```{r}
+merged_colnames <-read.csv('data/dataset_merged_samplecols.csv', header = T)
+merged_colnames %>% #remove duplicated rows while adding reads to each 'sample' column
+  group_by(bin_uri, classification) %>% #No more sampleID because they are the columns now
+  summarise_all(sum) %>%
+  data.frame() -> all_merged # so that newdf can further be used, if needed
+write.csv(all_merged, 'data/merged_colnames_final.csv', row.names = F)
+```
+
+Now we have the final dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
