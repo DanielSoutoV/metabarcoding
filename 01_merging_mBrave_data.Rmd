@@ -1,5 +1,5 @@
 ---
-title: "Merging mBrave data"
+title: "01 Merging mBrave data"
 author: "Daniel"
 date: "16/09/2022"
 output: github_document
@@ -46,8 +46,9 @@ merged_colnames %>% #remove duplicated rows while adding reads to each 'sample' 
 write.csv(all_merged, 'data/merged_colnames_final.csv', row.names = F)
 ```
 
-Now we have the final dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
+Now we have the dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
 Column 1 BIN_uri, Col2 classification (note issues with unique names and match) cols 3-46 number of reads per sample.
+The data could be further cleaned (e.g. include only classifications beyond genus, or match to a single species name) but we first will remove contaminants (e.g. species which ocurr with less than X amount of reads.)
 
 ```{r}
 head(all_merged)
