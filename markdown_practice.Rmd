@@ -1,5 +1,5 @@
 ---
-title: "Rmarkdown"
+title: "Merging mBrave data"
 author: "Daniel"
 date: "16/09/2022"
 output: github_document
@@ -47,3 +47,8 @@ write.csv(all_merged, 'data/merged_colnames_final.csv', row.names = F)
 ```
 
 Now we have the final dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
+Column 1 BIN_uri, Col2 classification (note issues with unique names and match) cols 3-46 number of reads per sample.
+
+```{r}
+head(all_merged)
+```
