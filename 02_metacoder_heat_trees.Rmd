@@ -1,0 +1,8 @@
+---
+title: "02 Metacoder heat trees"
+author: "Daniel"
+date: "19/09/2022"
+output: github_document
+---
+
+This script takes the previously merged and formatted data from mBrave (produced through script 01) and does preliminary analyses with Metacoder.
