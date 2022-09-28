@@ -1,0 +1,43 @@
+---
+title: "03_ordination_diversity"
+author: "Daniel"
+date: "27/09/2022"
+output: html_document
+---
+
+
+```{r message=FALSE, warning=FALSE}
+rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
+library('tidyr')
+library('dplyr')
+library('metacoder')
+library('ggplot2')
+library('agricolae')
+
+obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+sample <- read.csv('data/location_ctrl.csv')
+```
+
+
+```{r}
+sample$inv_simp <- diversity(obj$data$tax_data[, sample$sampleID],
+                             index = "invsimpson",
+                             MARGIN = 2) # What orietation the matrix is in
+ggplot(sample, aes(x = SEASON, y = inv_simp)) +
+  geom_boxplot()
+anova_result <- aov(inv_simp ~ SEASON, sample)
+summary(anova_result)
+tukey_result <- HSD.test(anova_result, "SEASON", group = TRUE)
+print(tukey_result)
+
+group_data <- tukey_result$groups[order(rownames(tukey_result$groups)),]
+ggplot(sample, aes(x = SEASON, y = inv_simp)) +
+  geom_text(data = data.frame(),
+            aes(x = rownames(group_data), y = max(sample$inv_simp) + 1, label = group_data$groups),
+            col = 'black',
+            size = 10) +
+  geom_boxplot() +
+  ggtitle("Inverse Simpson diversity") +
+  xlab("Season") +
+  ylab("Inverse simpson index")
+```

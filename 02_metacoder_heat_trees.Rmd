@@ -8,7 +8,7 @@ output: github_document
 This script takes the previously merged and formatted data from mBrave (produced through script 01) and does preliminary analyses with Metacoder.
 The idea of this script is to have a preliminary estimate of diversity within the metabarcoding samples. Due to the nature of mBrave's classification assosiated with BOLD databases, there are a number of BINs which have multiple identificaitons. I have cleaned the data even further, now we are only including species name for the 1st BOLD BIN hit. This is normally either, the species form the BCI database (the first dataset used to classify through mBRAVE), or the species most frequently 'named' that name. E.g. Agelenopsis pennsylvanica, potteri, emertoni, katsoni, acutosa, is now Agelenopsis pennsylvanica. The file used is the final dataset with ~3557 BINs.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
 library('tidyr')
 library('dplyr')
@@ -315,3 +315,9 @@ heat_tree(obj,
 Now we can see some clear differences between seasons. As expected, the wet season has higher diversity compared to the dry season, and here we can see where the differences are concentrated (branches in blue indicate that those taxa are significantly more abundant in the wet season when compared to the dry). Gray branches indicate no significant difference between number of reads for that tasxa in wet or dry season.
 
 These are visually insteresing results but we still need to compare these data statistically through diversity and ordination analyses which will be covered in the following script.
+
+```{r}
+
+saveRDS(object = obj, file = "data/taxmap_object.rds") #this will save the clean, filtered taxmap object for future uses
+
+```
