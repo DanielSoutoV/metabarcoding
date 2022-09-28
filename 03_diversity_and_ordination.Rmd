@@ -151,6 +151,9 @@ pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=15) +
 pclass2
 ```
 
+These following chunks might be best to compare metabarcoding vs traditional data but its OK to visualize below.
+Way too many species difference between both sampling strategies and so the plots are messy  - after Kruskal, Wilcox and LDA, 264 taxa are discriminative between wet and dry seasons.
+
 ```{r}
 library('coin')#for kruskal and wilcox test
 # Since the effect size was calculated by randomly re-sampling, 
@@ -200,4 +203,24 @@ diffclade_p <- ggdiffclade(
     legend.box.spacing=unit(0.02,"cm")
   )
 diffclade_p
+```
+
+```{r}
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^c__", f)) %>% ggdiffbox(colorlist=c("orange", "darkcyan"))
+```
+
+
+```{r}
+diffbox <- ggdiffbox(obj=deres, box_notch=FALSE, 
+                     colorlist=c("orange", "darkcyan"), l_xlabtext="relative abundance", ytextsize = 0.5)
+diffbox
+```
+
+```{r}
+es_p <- ggeffectsize(obj=deres, 
+                     lineheight=0.1,
+                     linewidth=0.3) + 
+  scale_color_manual(values=c("orange","darkcyan")) 
+
+es_p
 ```
