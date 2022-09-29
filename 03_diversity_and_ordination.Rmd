@@ -2,7 +2,7 @@
 title: "03_ordination_diversity"
 author: "Daniel"
 date: "27/09/2022"
-output: html_document
+output: github_document
 ---
 
 
