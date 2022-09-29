@@ -2,7 +2,7 @@
 title: "03_ordination_diversity"
 author: "Daniel"
 date: "27/09/2022"
-output: html_document
+output: github_document
 ---
 
 
@@ -209,13 +209,13 @@ diffclade_p
 ```
 
 ```{r}
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^c_", f)) %>% ggdiffbox(colorlist=c("orange", "darkcyan"), notch = FALSE)
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^c_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
 ```
 
 
 ```{r}
 diffbox <- ggdiffbox(obj=deres, box_notch=FALSE, 
-                     colorlist=c("orange", "darkcyan"), l_xlabtext="relative abundance", ytextsize = 0.5)
+                     colorlist=c("darkcyan", "orange"), l_xlabtext="relative abundance", ytextsize = 0.5)
 diffbox
 ```
 
@@ -223,7 +223,7 @@ diffbox
 es_p <- ggeffectsize(obj=deres, 
                      lineheight=0.1,
                      linewidth=0.3) + 
-  scale_color_manual(values=c("orange","darkcyan")) 
+  scale_color_manual(values=c("darkcyan", "orange")) 
 
 es_p
 ```

@@ -19,34 +19,8 @@ used is the final dataset with \~3557 BINs.
 ``` r
 rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
 library('tidyr')
-```
-
-    ## Warning: package 'tidyr' was built under R version 4.1.2
-
-``` r
 library('dplyr')
-```
-
-    ## Warning: package 'dplyr' was built under R version 4.1.3
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
 library('metacoder')
-```
-
-    ## This is metacoder verison 0.3.5 (stable)
-
-``` r
 dat<- read.csv('data/finaldat_merged.csv', header = TRUE)
 sample <- read.csv('data/location_ctrl.csv')
 obj <- parse_tax_data(dat,
@@ -209,7 +183,7 @@ we can now view distribution of reads in the samples:
 hist(colSums(obj$data$tax_data[ , sample$sampleID]))
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HistogramReads-1.png)<!-- -->
 sampling is quite uneven with one sample with \< 100,000 reads. We will
 rarefy our data to simulate even number of reads per sample (18914 is
 the minium depth) keep in mind that this discards a lot of data - we
@@ -249,7 +223,7 @@ rarecurve(t(obj$data$tax_data[, sample$sampleID]), step = 1000,
           col = "blue", cex = 0.8)
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/RarefactionCurves-1.png)<!-- -->
 
 Below an OPTIONAL chunk to visualize a very rudimentary heat tree for
 all counts for metabaroded data. It is meant for illustration purposes
@@ -268,7 +242,7 @@ heat_tree(obj,
           initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/OPTIONALTREE-1.png)<!-- -->
 
 Far more informative would be to see the differences between seasons in
 this case. We can easily calculate the number of samples that have reads
@@ -407,7 +381,7 @@ heat_tree(obj,
           initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/quickHeatTreeMEANDIFFAll-1.png)<!-- -->
 But more interesting for us, to separate them according to focal groups.
 
 ``` r
@@ -428,7 +402,7 @@ obj %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-1.png)<!-- -->
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -448,7 +422,7 @@ obj %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-9-2.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-2.png)<!-- -->
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -468,7 +442,7 @@ obj %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-9-3.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-3.png)<!-- -->
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -488,7 +462,7 @@ obj %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-9-4.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-4.png)<!-- -->
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -508,7 +482,7 @@ obj %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-9-5.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-5.png)<!-- -->
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -529,7 +503,7 @@ obj %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-9-6.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-6.png)<!-- -->
 Note these above are mean differences between seasons (node_color =
 mean_diff). In orange for dry season, in blue for wet season. There is
 no statsitical test associated with these trees yet, but we can do it
@@ -552,7 +526,7 @@ obj %>%
             initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-1.png)<!-- -->
 
 ``` r
 obj %>%
@@ -571,7 +545,7 @@ obj %>%
             initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-2.png)<!-- -->
 
 ``` r
 obj %>%
@@ -590,7 +564,7 @@ obj %>%
             initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-3.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-3.png)<!-- -->
 
 ``` r
 obj %>%
@@ -609,7 +583,7 @@ obj %>%
             initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-4.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-4.png)<!-- -->
 
 ``` r
 obj %>%
@@ -628,7 +602,7 @@ obj %>%
             initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-5.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-5.png)<!-- -->
 
 ``` r
 obj %>%
@@ -647,7 +621,7 @@ obj %>%
             initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-6.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-6.png)<!-- -->
 
 ``` r
 heat_tree(obj,
@@ -664,7 +638,7 @@ heat_tree(obj,
           initial_layout = "reingold-tilford")
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/unnamed-chunk-10-7.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-7.png)<!-- -->
 Now we can see some clear differences between seasons. As expected, the
 wet season has higher diversity compared to the dry season, and here we
 can see where the differences are concentrated (branches in blue
@@ -675,3 +649,7 @@ difference between number of reads for that tasxa in wet or dry season.
 These are visually insteresing results but we still need to compare
 these data statistically through diversity and ordination analyses which
 will be covered in the following script.
+
+``` r
+saveRDS(object = obj, file = "data/taxmap_object.rds") #this will save the clean, filtered taxmap object for future uses
+```
