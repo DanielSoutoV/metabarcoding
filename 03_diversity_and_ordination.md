@@ -186,7 +186,7 @@ p_alpha <- ggbox(alphaobj, geom="violin", factorNames="SEASON", indexNames = c('
 p_alpha
 ```
 
-    ## Warning in wilcox.test.default(c(126, 139, 111, 131, 132, 149, 145, 156, :
+    ## Warning in wilcox.test.default(c(126, 139, 111, 132, 132, 149, 145, 156, :
     ## cannot compute exact p-value with ties
 
 ![](03_diversity_and_ordination_files/figure-gfm/MBPPlotsDiversityIndices-1.png)<!-- -->
@@ -197,20 +197,13 @@ alphaobj <- get_alphaindex(ps_obj)
 head(as.data.frame(alphaobj))
 ```
 
-    ##       Observe    Chao1     ACE  Shannon   Simpson         J site day SEASON
-    ## ARM1A     126 126.0000 126.000 3.615511 0.9431365 0.7475807 ARM1   a    dry
-    ## ARM1B     139 139.0000 139.000 3.068927 0.8237105 0.6219360 ARM1   b    dry
-    ## ARM2A     111 111.0000 111.000 3.689828 0.9561758 0.7834811 ARM2   a    dry
-    ## ARM2B     132 132.3333 132.331 2.054278 0.5818133 0.4207170 ARM2   b    dry
-    ## ARM3A     132 132.0000 132.000 3.901274 0.9599091 0.7989826 ARM3   a    dry
-    ## ARM3B     149 149.0000 149.000 4.229560 0.9762476 0.8452448 ARM3   b    dry
-    ##        inv_simp
-    ## ARM1A 17.531036
-    ## ARM1B  5.591829
-    ## ARM2A 22.774330
-    ## ARM2B  2.395061
-    ## ARM3A 24.943300
-    ## ARM3B 42.042631
+    ##       Observe Chao1 ACE  Shannon   Simpson         J site day SEASON  inv_simp
+    ## ARM1A     126   126 126 3.608448 0.9431490 0.7461202 ARM1   a    dry 17.531036
+    ## ARM1B     139   139 139 3.079002 0.8274742 0.6239778 ARM1   b    dry  5.591829
+    ## ARM2A     111   111 111 3.696454 0.9565079 0.7848880 ARM2   a    dry 22.774330
+    ## ARM2B     132   132 132 2.056055 0.5829942 0.4210809 ARM2   b    dry  2.395061
+    ## ARM3A     132   132 132 3.901274 0.9599091 0.7989826 ARM3   a    dry 24.943300
+    ## ARM3B     149   149 149 4.231287 0.9762837 0.8455900 ARM3   b    dry 42.042631
 
 ``` r
 rareres <- get_rarecurve(obj=ps_obj, chunks=400)
@@ -422,7 +415,7 @@ diffbox
 es_p <- ggeffectsize(obj=deres, 
                      lineheight=0.1,
                      linewidth=0.3) + 
-  scale_color_manual(values=c("darkcyan", "orange")) 
+  scale_color_manual(values=c("orange", "darkcyan")) 
 ```
 
     ## The color has been set automatically, you can reset it manually by adding scale_color_manual(values=yourcolors)
