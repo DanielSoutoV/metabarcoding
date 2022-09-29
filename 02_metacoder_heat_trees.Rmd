@@ -43,14 +43,14 @@ print(obj)
 Notice we now have 3 tibbles, one for counts (tax_data - this could be changed with something like: >names(obj$data) <- "otu_counts"), one for proportion (tax_props) and one for abundance (tax_abund). We can and will add more refined datasets afterwards, all linked to the orignal parsing so we never loose the information of what taxonid actually means.
 
 we can now view distribution of reads in the samples:
-```{r}
+```{r HistogramReads}
 hist(colSums(obj$data$tax_data[ , sample$sampleID]))
 ```
 sampling is quite uneven with one sample with < 100,000 reads. We will rarefy our data to simulate even number of reads per sample (18914 is the minium depth) keep in mind that this discards a lot of data - we could probably instead remove some of the smaples with the lowest reads instead.
 We can add the rarefied dataset as a sepparate dataframe as we did above with tax_props and tax_abund.
 If you want, you can print(obj$data$tax_rarefied) to see what it looks like. We can also make a rarefaction curve with metacoder, but look at script 0X where we do rarefaction curves with ggplot instead
 
-```{r}
+```{r RarefactionCurves}
 obj$data$tax_rarefied <- rarefy_obs(obj, "tax_data", cols = sample$sampleID, other_cols = TRUE)
 library(vegan)
 rarecurve(t(obj$data$tax_data[, sample$sampleID]), step = 1000,
@@ -61,7 +61,7 @@ rarecurve(t(obj$data$tax_data[, sample$sampleID]), step = 1000,
 Below an OPTIONAL chunk to visualize a very rudimentary heat tree for all counts for metabaroded data.
 It is meant for illustration purposes only and its not very informative, it also takes a long time to run. See figure allcounts.pdf in the project.
 
-```{r}
+```{r OPTIONALTREE}
 set.seed(99) # This makes the plot appear the same each time it is run
 heat_tree(obj,
           node_label = taxon_names,
@@ -91,7 +91,7 @@ print(obj)
 
 And we can plot these differences in a metacoder heat tree.
 
-```{r}
+```{r quickHeatTreeMEANDIFFAll}
 heat_tree(obj,
           node_label = taxon_names,
           node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -106,7 +106,7 @@ heat_tree(obj,
 ```
 But more interesting for us, to separate them according to focal groups.
 
-```{r}
+```{r HeatTreeMEANDIFFFocalSpp}
 set.seed(16)#to make sure the figures is always the same
 obj %>%
   filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
@@ -209,7 +209,7 @@ obj %>%
 ```
 Note these above are mean differences between seasons (node_color = mean_diff). In orange for dry season, in blue for wet season. There is no statsitical test associated with these trees yet, but we can do it using the wilcox_p_value function we ran on the diff_table above. 
 
-```{r}
+```{r HeatTreesSTATDIFFBetweenSeasonsFocalSpecies}
 obj %>%
   filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
