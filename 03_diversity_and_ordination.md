@@ -170,11 +170,31 @@ plot_richness(ps_obj, color = "day", x = "SEASON")
     ## We recommended that you find the un-trimmed data and retry.
 
 ![](03_diversity_and_ordination_files/figure-gfm/multipleDiversityIndices-2.png)<!-- -->
+
+``` r
+library(microViz)
+```
+
+    ## Warning: package 'microViz' was built under R version 4.1.3
+
+    ## 
+    ## microViz version 0.9.4 - Copyright (C) 2021 David Barnett
+    ## * Website: https://david-barnett.github.io/microViz/
+    ## * Useful? For citation info, run: citation('microViz')
+    ## * Silence: suppressPackageStartupMessages(library(microViz))
+
+``` r
+ps_obj2 <- tax_mutate(ps_obj, Rank_0 = "Animalia", .before =1)
+#Note that there is an issue with ps_obj and the way the data has been exported and parsed from mBrave. The issue is that when parsing, Metacoder took the ; as a separation between taxonomic rank, but we do not have a 'Kingdom' or 'root' rank. Straight up to Phyllum. This added some issues downstream, exclusively in the MicroBiotaProcess pipelines. The line above adds this single column to the begining of the tax_table in the phyloseq object. Use this for all MicroBiotaProcess analyeses. 
+
+#ALTERNATIVELY, we could edit the original data sheet used in script 01 to inlcude 'Kingdom'  - I thought this was easier.
+```
+
 Figures above OK but we can do better. I am using the MicrobiotaProcess
 next
 
 ``` r
-alphaobj <- get_alphaindex(ps_obj)
+alphaobj <- get_alphaindex(ps_obj2)
 p_alpha <- ggbox(alphaobj, geom="violin", factorNames="SEASON", indexNames = c('Observe', 'Shannon', 'Simpson'),  signifmap = TRUE) +
   scale_fill_manual(values=c("orange", "darkcyan"))+
   theme(strip.background = element_rect(colour=NA, fill="grey"))
@@ -193,20 +213,27 @@ p_alpha
 And look at rarefaction curves for both seasons:
 
 ``` r
-alphaobj <- get_alphaindex(ps_obj)
+alphaobj <- get_alphaindex(ps_obj2)
 head(as.data.frame(alphaobj))
 ```
 
-    ##       Observe Chao1 ACE  Shannon   Simpson         J site day SEASON  inv_simp
-    ## ARM1A     126   126 126 3.608448 0.9431490 0.7461202 ARM1   a    dry 17.531036
-    ## ARM1B     139   139 139 3.079002 0.8274742 0.6239778 ARM1   b    dry  5.591829
-    ## ARM2A     111   111 111 3.696454 0.9565079 0.7848880 ARM2   a    dry 22.774330
-    ## ARM2B     132   132 132 2.056055 0.5829942 0.4210809 ARM2   b    dry  2.395061
-    ## ARM3A     132   132 132 3.901274 0.9599091 0.7989826 ARM3   a    dry 24.943300
-    ## ARM3B     149   149 149 4.231287 0.9762837 0.8455900 ARM3   b    dry 42.042631
+    ##       Observe Chao1      ACE  Shannon   Simpson         J site day SEASON
+    ## ARM1A     126 126.0 126.0000 3.600195 0.9422695 0.7444138 ARM1   a    dry
+    ## ARM1B     139 139.0 139.0000 3.061092 0.8221029 0.6203482 ARM1   b    dry
+    ## ARM2A     111 111.0 111.0000 3.685066 0.9559076 0.7824699 ARM2   a    dry
+    ## ARM2B     132 132.5 132.3604 2.053448 0.5819609 0.4205470 ARM2   b    dry
+    ## ARM3A     132 132.0 132.0000 3.901274 0.9599091 0.7989826 ARM3   a    dry
+    ## ARM3B     149 149.0 149.0000 4.229049 0.9762380 0.8451427 ARM3   b    dry
+    ##        inv_simp
+    ## ARM1A 17.531036
+    ## ARM1B  5.591829
+    ## ARM2A 22.774330
+    ## ARM2B  2.395061
+    ## ARM3A 24.943300
+    ## ARM3B 42.042631
 
 ``` r
-rareres <- get_rarecurve(obj=ps_obj, chunks=400)
+rareres <- get_rarecurve(obj=ps_obj2, chunks=400)
 
 prare2 <- ggrarecurve(obj=rareres,
                       factorNames="SEASON",
@@ -235,7 +262,7 @@ differences
 ``` r
 # distmethod
 # "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
-pcoares <- get_pcoa(obj=ps_obj, distmethod="bray", method="hellinger")
+pcoares <- get_pcoa(obj=ps_obj2, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("SEASON"), ellipse=TRUE) +
@@ -252,7 +279,9 @@ pcoaplot1 | pcoaplot2
 ![](03_diversity_and_ordination_files/figure-gfm/MBPPCoAPlots-1.png)<!-- -->
 
 ``` r
-classtaxa <- get_taxadf(obj=ps_obj, taxlevel=3)
+#IMPORTANT - FROM HERE ON ITS CRITICAL TO USE PS_OBJ2 IN CASE YOU DIDN'T BEFORE
+
+classtaxa <- get_taxadf(obj=ps_obj2, taxlevel=4)
 # The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
 pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=10) +
   xlab(NULL) +
@@ -268,12 +297,6 @@ pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=10) +
     ## will replace the existing scale.
 
 ``` r
-pclass
-```
-
-![](03_diversity_and_ordination_files/figure-gfm/MBPTaxonAbundanceTOP10-1.png)<!-- -->
-
-``` r
 #note the flag "count=TRUE", this shows now total reads, rather than proportion %
 pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=15) +
   xlab(NULL) +
@@ -284,15 +307,14 @@ pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=15) +
 
     ## The color has been set automatically, you can reset it 
     ##             manually by adding scale_fill_manual(values=yourcolors)
-
     ## Scale for 'fill' is already present. Adding another scale for 'fill', which
     ## will replace the existing scale.
 
 ``` r
-pclass2
+pclass | pclass2
 ```
 
-![](03_diversity_and_ordination_files/figure-gfm/MBPTaxonAbundanceTOP15-1.png)<!-- -->
+![](03_diversity_and_ordination_files/figure-gfm/MBPTaxonAbundanceTOP10-1.png)<!-- -->
 
 These following chunks might be best to compare metabarcoding vs
 traditional data but its OK to visualize below. Way too many species
@@ -312,7 +334,7 @@ library('coin')#for kruskal and wilcox test
 # Since the effect size was calculated by randomly re-sampling, 
 # the seed should be set for reproducibly results.
 set.seed(1024)
-deres <- diff_analysis(obj = ps_obj, classgroup = "SEASON",
+deres <- diff_analysis(obj = ps_obj2, classgroup = "SEASON",
                        mlfun = "lda",
                        filtermod = "pvalue",
                        firstcomfun = "kruskal_test",
@@ -327,9 +349,9 @@ deres <- diff_analysis(obj = ps_obj, classgroup = "SEASON",
 deres
 ```
 
-    ## The original data: 3001 features and 40 samples
+    ## The original data: 3002 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 2236 by 7 rank
+    ## The taxda contained 2236 by 8 rank
     ## after first test (kruskal_test) number of feature (pvalue<=0.05):781
     ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:538
     ## after lda, Number of discriminative features: 264 (certain taxonomy classification:184; uncertain taxonomy classication: 80)
@@ -342,7 +364,7 @@ diffclade_p <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=7, #taxonomy level from 1 to 7 phylum:class:order:family:subfamily:genus:species
+  taxlevel=4, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -380,7 +402,7 @@ diffclade_p
 ![](03_diversity_and_ordination_files/figure-gfm/MessyFigure-1.png)<!-- -->
 
 ``` r
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^c_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+ps_obj2 %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^o_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
 ```
 
     ## The otutree is empty in the MPSE object!
@@ -393,7 +415,7 @@ ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbunda
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
 
-![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
 diffbox <- ggdiffbox(obj=deres, box_notch=FALSE, 
@@ -409,12 +431,12 @@ diffbox <- ggdiffbox(obj=deres, box_notch=FALSE,
 diffbox
 ```
 
-![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
 es_p <- ggeffectsize(obj=deres, 
                      lineheight=0.1,
-                     linewidth=0.3) + 
+                     linewidth=0.3, ytextsize = 0.3) + 
   scale_color_manual(values=c("orange", "darkcyan")) 
 ```
 
@@ -427,4 +449,4 @@ es_p <- ggeffectsize(obj=deres,
 es_p
 ```
 
-![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->

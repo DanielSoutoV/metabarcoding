@@ -76,16 +76,27 @@ ps_obj <- metacoder::as_phyloseq(obj,
                       sample_data = sample,
                       sample_id_col = "sampleID")
 
+
+
 #normally, I load every package I need at the start of the script, but this may cause function masking problems (e.g. both MicrobiotaProcess and Metacoder has a 'as_phyloseq' function and you have to specify to R which package you want to use -  see above: metacoder::as_phyloseq - this means I am telling R to use the 'as_phyloseq' function from the metacoder package)
 plot_richness(ps_obj, color = "SEASON", x = "site") #phyloseq function
 plot_richness(ps_obj, color = "day", x = "SEASON")
 
 ```
+
+```{r}
+library(microViz)
+ps_obj2 <- tax_mutate(ps_obj, Rank_0 = "Animalia", .before =1)
+#Note that there is an issue with ps_obj and the way the data has been exported and parsed from mBrave. The issue is that when parsing, Metacoder took the ; as a separation between taxonomic rank, but we do not have a 'Kingdom' or 'root' rank. Straight up to Phyllum. This added some issues downstream, exclusively in the MicroBiotaProcess pipelines. The line above adds this single column to the begining of the tax_table in the phyloseq object. Use this for all MicroBiotaProcess analyeses. 
+
+#ALTERNATIVELY, we could edit the original data sheet used in script 01 to inlcude 'Kingdom'  - I thought this was easier.
+```
+
 Figures above OK but we can do better.
 I am using the MicrobiotaProcess next
 
 ```{r MBPPlotsDiversityIndices}
-alphaobj <- get_alphaindex(ps_obj)
+alphaobj <- get_alphaindex(ps_obj2)
 p_alpha <- ggbox(alphaobj, geom="violin", factorNames="SEASON", indexNames = c('Observe', 'Shannon', 'Simpson'),  signifmap = TRUE) +
   scale_fill_manual(values=c("orange", "darkcyan"))+
   theme(strip.background = element_rect(colour=NA, fill="grey"))
@@ -93,10 +104,10 @@ p_alpha
 ```
 And look at rarefaction curves for both seasons:
 ```{r MBPRarefactionCurvesPerSeason}
-alphaobj <- get_alphaindex(ps_obj)
+alphaobj <- get_alphaindex(ps_obj2)
 head(as.data.frame(alphaobj))
 
-rareres <- get_rarecurve(obj=ps_obj, chunks=400)
+rareres <- get_rarecurve(obj=ps_obj2, chunks=400)
 
 prare2 <- ggrarecurve(obj=rareres,
                       factorNames="SEASON",
@@ -117,7 +128,7 @@ We can also do a Principal Coordinate Analysis to see not onlyl the differences 
 ```{r MBPPCoAPlots}
 # distmethod
 # "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
-pcoares <- get_pcoa(obj=ps_obj, distmethod="bray", method="hellinger")
+pcoares <- get_pcoa(obj=ps_obj2, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("SEASON"), ellipse=TRUE) +
@@ -132,25 +143,28 @@ pcoaplot1 | pcoaplot2
 ```
 
 ```{r MBPTaxonAbundanceTOP10}
-classtaxa <- get_taxadf(obj=ps_obj, taxlevel=3)
+
+#IMPORTANT - FROM HERE ON ITS CRITICAL TO USE PS_OBJ2 IN CASE YOU DIDN'T BEFORE
+
+classtaxa <- get_taxadf(obj=ps_obj2, taxlevel=4)
 # The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
 pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=10) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
   guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
-pclass
-```
 
-```{r MBPTaxonAbundanceTOP15}
 #note the flag "count=TRUE", this shows now total reads, rather than proportion %
 pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=15) +
   xlab(NULL) +
   ylab("count reads") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
   guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
-pclass2
+
+
+pclass | pclass2
 ```
+
 
 These following chunks might be best to compare metabarcoding vs traditional data but its OK to visualize below.
 Way too many species difference between both sampling strategies and so the plots are messy  - after Kruskal, Wilcox and LDA, 264 taxa are discriminative between wet and dry seasons.
@@ -160,7 +174,7 @@ library('coin')#for kruskal and wilcox test
 # Since the effect size was calculated by randomly re-sampling, 
 # the seed should be set for reproducibly results.
 set.seed(1024)
-deres <- diff_analysis(obj = ps_obj, classgroup = "SEASON",
+deres <- diff_analysis(obj = ps_obj2, classgroup = "SEASON",
                        mlfun = "lda",
                        filtermod = "pvalue",
                        firstcomfun = "kruskal_test",
@@ -183,7 +197,7 @@ diffclade_p <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=7, #taxonomy level from 1 to 7 phylum:class:order:family:subfamily:genus:species
+  taxlevel=4, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -209,7 +223,7 @@ diffclade_p
 ```
 
 ```{r}
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^c_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+ps_obj2 %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^o_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
 ```
 
 
@@ -222,7 +236,7 @@ diffbox
 ```{r}
 es_p <- ggeffectsize(obj=deres, 
                      lineheight=0.1,
-                     linewidth=0.3) + 
+                     linewidth=0.3, ytextsize = 0.3) + 
   scale_color_manual(values=c("orange", "darkcyan")) 
 
 es_p
