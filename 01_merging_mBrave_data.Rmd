@@ -9,7 +9,7 @@ I am now changing the markdown file to include my own script for BCI metabarcodi
 This analysis relies hevily on tutorial for the metacoder package from the Grunwald Lab.
 https://grunwaldlab.github.io/metacoder_documentation/example.html
 
-```{r, message = FALSE}
+```{r, message = FALSE warning = FALSE}
 #the small green box to insert chunks in different formats. 
 #```{r} for R.
 rm(list=ls()) #reoves all objects in workspace, start with clean environment

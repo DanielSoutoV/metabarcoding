@@ -1,0 +1,443 @@
+---
+title: "04_focal_order_seasons"
+author: "Daniel"
+date: "06/10/2022"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
+library('tidyr')
+library('dplyr')
+library('metacoder')
+library('ggplot2')
+library('agricolae')
+library('vegan')
+library('MicrobiotaProcess')
+library('phyloseq')
+library('ggtree')
+library('coin')
+
+obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+
+obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> leps #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
+
+obj %>%  metacoder::filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> coleo
+obj %>%  metacoder::filter_taxa(taxon_names %in% c("Diptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> dips
+obj %>%  metacoder::filter_taxa(taxon_names %in% c("Hymenoptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> bees #i know its hymenoptera
+obj %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> hemi
+obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> blats 
+
+sample <- read.csv('data/location_ctrl.csv')
+```
+
+The script above gave me the taxmap object separated by order, however, it removes all taxonomic ranks up until "Order", so the script below is firstly, changing the taxmap object (e.g. leps) into a phyloseq object (as_phyloseq) and then using the microViz package to add the taxonomic ranks. 
+
+There must be certainly a cleaner way how to do this without so many steps, butI then had to change the classification rank names again (rank_0 instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some dont, some have subfamily, some dont, so it seems easier to simply keep rank_0 to _7 in this case and take note of the nomenclature you are using. I am using Kingdom;Phylum;Clss;Order;Family;SubFamily;genus:species.
+
+If someone knows how to write a loop, this would be faster too. 
+```{r CreatingOrderFiles message=FALSE, warning=FALSE, include=FALSE}
+ps_leps <- metacoder::as_phyloseq(leps,
+                      otu_table = "tax_data",
+                      otu_id_col = "bin_uri",
+                      sample_data = sample,
+                      sample_id_col = "sampleID") %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_leps 
+colnames(tax_table(ps_leps)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+  
+
+ps_coleo <- metacoder::as_phyloseq(coleo,
+                      otu_table = "tax_data",
+                      otu_id_col = "bin_uri",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_coleo
+
+colnames(tax_table(ps_coleo)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+
+ps_dips <- metacoder::as_phyloseq(dips,
+                      otu_table = "tax_data",
+                      otu_id_col = "bin_uri",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_dips
+colnames(tax_table(ps_dips)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+
+ps_bees <- metacoder::as_phyloseq(bees,
+                      otu_table = "tax_data",
+                      otu_id_col = "bin_uri",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_bees
+colnames(tax_table(ps_bees)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+
+ps_blats <- metacoder::as_phyloseq(blats,
+                      otu_table = "tax_data",
+                      otu_id_col = "bin_uri",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_blats
+colnames(tax_table(ps_blats)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+
+ps_hemi <- metacoder::as_phyloseq(hemi,
+                      otu_table = "tax_data",
+                      otu_id_col = "bin_uri",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_hemi
+colnames(tax_table(ps_hemi)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+
+```
+
+Ok we now have datasets separated for each order (ForestGEO focal plus diptera - if we want more, we can adapt the script above)
+But below we will create now some taxonomic trees showing differences between seasons (as in the MessyFigure chunk)
+
+```{r Lepidoptera}
+set.seed(1024)
+deresleps <- diff_analysis(obj = ps_leps, classgroup = "SEASON",
+                       mlfun = "lda",
+                       filtermod = "pvalue",
+                       firstcomfun = "kruskal_test",
+                       firstalpha = 0.05,
+                       strictmod = TRUE,
+                       secondcomfun = "wilcox_test",
+                       subclmin = 3,
+                       subclwilc = TRUE,
+                       secondalpha = 0.01,
+                       lda=3,
+                       action = "add")
+deresleps
+
+diffclade_leps <- ggdiffclade(
+  obj=deresleps, 
+  alpha=0.2, 
+  linewd=0.15,
+  skpointsize=0.2, 
+  layout="radial",
+  cladetext = 0.7,
+  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  removeUnkown=TRUE,
+  reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
+) +
+  scale_fill_manual(
+    values=c("orange", "darkcyan")
+  ) +
+  guides(color = guide_legend(
+    keywidth = 0.1, 
+    keyheight = 0.6,
+    order = 5,
+    ncol=3)
+  ) +
+  theme(
+    panel.background=element_rect(fill=NA),
+    legend.position="right", 
+    plot.margin=margin(0,0,0,0),
+    legend.spacing.y=unit(0.02, "cm"), 
+    legend.title=element_text(size=7),
+    legend.text=element_text(size=6), 
+    legend.box.spacing=unit(0.02,"cm")
+  )
+diffclade_leps
+
+ps_leps %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+
+es_leps <- ggeffectsize(obj=deresleps, 
+                     lineheight=0.1,
+                     linewidth=0.3, ytextsize = 0.3) + 
+  scale_color_manual(values=c("orange", "darkcyan")) 
+
+es_leps
+
+
+```
+
+```{r Coleoptera}
+set.seed(1024)
+derescoleo <- diff_analysis(obj = ps_coleo, classgroup = "SEASON",
+                       mlfun = "lda",
+                       filtermod = "pvalue",
+                       firstcomfun = "kruskal_test",
+                       firstalpha = 0.05,
+                       strictmod = TRUE,
+                       secondcomfun = "wilcox_test",
+                       subclmin = 3,
+                       subclwilc = TRUE,
+                       secondalpha = 0.01,
+                       lda=3,
+                       action = "add")
+derescoleo
+
+diffclade_coleo <- ggdiffclade(
+  obj=derescoleo, 
+  alpha=0.2, 
+  linewd=0.15,
+  skpointsize=0.2, 
+  layout="radial",
+  cladetext = 0.7,
+  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  removeUnkown=TRUE,
+  reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
+) +
+  scale_fill_manual(
+    values=c("orange", "darkcyan")
+  ) +
+  guides(color = guide_legend(
+    keywidth = 0.1, 
+    keyheight = 0.6,
+    order = 5,
+    ncol=3)
+  ) +
+  theme(
+    panel.background=element_rect(fill=NA),
+    legend.position="right", 
+    plot.margin=margin(0,0,0,0),
+    legend.spacing.y=unit(0.02, "cm"), 
+    legend.title=element_text(size=7),
+    legend.text=element_text(size=6), 
+    legend.box.spacing=unit(0.02,"cm")
+  )
+diffclade_coleo
+
+ps_coleo %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+
+es_coleo <- ggeffectsize(obj=derescoleo, 
+                     lineheight=0.1,
+                     linewidth=0.3, ytextsize = 0.3) + 
+  scale_color_manual(values=c("orange", "darkcyan")) 
+
+es_coleo
+```
+
+```{r Diptera}
+set.seed(1024)
+deresdips <- diff_analysis(obj = ps_dips, classgroup = "SEASON",
+                       mlfun = "lda",
+                       filtermod = "pvalue",
+                       firstcomfun = "kruskal_test",
+                       firstalpha = 0.05,
+                       strictmod = TRUE,
+                       secondcomfun = "wilcox_test",
+                       subclmin = 3,
+                       subclwilc = TRUE,
+                       secondalpha = 0.01,
+                       lda=3,
+                       action = "add")
+deresdips
+
+diffclade_dips <- ggdiffclade(
+  obj=deresdips, 
+  alpha=0.2, 
+  linewd=0.15,
+  skpointsize=0.2, 
+  layout="radial",
+  cladetext = 0.7,
+  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  removeUnkown=TRUE,
+  reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
+) +
+  scale_fill_manual(
+    values=c("orange", "darkcyan")
+  ) +
+  guides(color = guide_legend(
+    keywidth = 0.1, 
+    keyheight = 0.6,
+    order = 5,
+    ncol=3)
+  ) +
+  theme(
+    panel.background=element_rect(fill=NA),
+    legend.position="right", 
+    plot.margin=margin(0,0,0,0),
+    legend.spacing.y=unit(0.02, "cm"), 
+    legend.title=element_text(size=7),
+    legend.text=element_text(size=6), 
+    legend.box.spacing=unit(0.02,"cm")
+  )
+diffclade_dips
+
+ps_dips %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+
+es_dips <- ggeffectsize(obj=deresdips, 
+                     lineheight=0.1,
+                     linewidth=0.3, ytextsize = 0.3) + 
+  scale_color_manual(values=c("orange", "darkcyan")) 
+
+es_dips
+
+```
+
+
+
+```{r Hemyptera}
+set.seed(1024)
+dereshemi <- diff_analysis(obj = ps_hemi, classgroup = "SEASON",
+                       mlfun = "lda",
+                       filtermod = "pvalue",
+                       firstcomfun = "kruskal_test",
+                       firstalpha = 0.05,
+                       strictmod = TRUE,
+                       secondcomfun = "wilcox_test",
+                       subclmin = 3,
+                       subclwilc = TRUE,
+                       secondalpha = 0.01,
+                       lda=3,
+                       action = "add")
+dereshemi
+
+diffclade_hemi <- ggdiffclade(
+  obj=dereshemi, 
+  alpha=0.2, 
+  linewd=0.15,
+  skpointsize=0.2, 
+  layout="radial",
+  cladetext = 0.7,
+  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  removeUnkown=TRUE,
+  reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
+) +
+  scale_fill_manual(
+    values=c("orange", "darkcyan")
+  ) +
+  guides(color = guide_legend(
+    keywidth = 0.1, 
+    keyheight = 0.6,
+    order = 5,
+    ncol=3)
+  ) +
+  theme(
+    panel.background=element_rect(fill=NA),
+    legend.position="right", 
+    plot.margin=margin(0,0,0,0),
+    legend.spacing.y=unit(0.02, "cm"), 
+    legend.title=element_text(size=7),
+    legend.text=element_text(size=6), 
+    legend.box.spacing=unit(0.02,"cm")
+  )
+diffclade_hemi
+
+ps_hemi %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+
+es_hemi <- ggeffectsize(obj=dereshemi, 
+                     lineheight=0.1,
+                     linewidth=0.3, ytextsize = 0.3) + 
+  scale_color_manual(values=c("orange", "darkcyan")) 
+
+es_hemi
+```
+
+There are problems with the Hymenoptera and Blattodea datasets. I still must figure it out. 
+
+```{r Hymenoptera}
+set.seed(1024)
+deresbees <- diff_analysis(obj = ps_bees, classgroup = "SEASON",
+                       mlfun = "lda",
+                       filtermod = "pvalue",
+                       firstcomfun = "kruskal_test",
+                       firstalpha = 0.05,
+                       strictmod = TRUE,
+                       secondcomfun = "wilcox_test",
+                       subclmin = 3,
+                       subclwilc = FALSE,
+                       secondalpha = 0.05,
+                       lda=1,
+                       action = "get")
+deresbees
+
+diffclade_bees <- ggdiffclade(
+  obj=deresbees, 
+  alpha=0.2, 
+  linewd=0.15,
+  skpointsize=0.2, 
+  layout="radial",
+  cladetext = 0.7,
+  taxlevel=1, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  removeUnkown=TRUE,
+  reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
+) +
+  scale_fill_manual(
+    values=c("orange", "darkcyan")
+  ) +
+  guides(color = guide_legend(
+    keywidth = 0.1, 
+    keyheight = 0.6,
+    order = 5,
+    ncol=3)
+  ) +
+  theme(
+    panel.background=element_rect(fill=NA),
+    legend.position="right", 
+    plot.margin=margin(0,0,0,0),
+    legend.spacing.y=unit(0.02, "cm"), 
+    legend.title=element_text(size=7),
+    legend.text=element_text(size=6), 
+    legend.box.spacing=unit(0.02,"cm")
+  )
+diffclade_bees
+
+ps_bees %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^s_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+
+es_bees <- ggeffectsize(obj=deresbees, 
+                     lineheight=0.1,
+                     linewidth=0.3, ytextsize = 0.3) + 
+  scale_color_manual(values=c("orange", "darkcyan")) 
+
+es_bees
+
+```
+
+```{r Blattodea}
+set.seed(1024)
+deresblats <- diff_analysis(obj = ps_blats, classgroup = "SEASON",
+                       mlfun = "lda",
+                       filtermod = "pvalue",
+                       firstcomfun = "kruskal_test",
+                       firstalpha = 0.05,
+                       strictmod = TRUE,
+                       secondcomfun = "wilcox_test",
+                       subclmin = 3,
+                       subclwilc = TRUE,
+                       secondalpha = 0.01,
+                       lda=3,
+                       action = "add")
+deresblats
+
+diffclade_blats <- ggdiffclade(
+  obj=deresblats, 
+  alpha=0.2, 
+  linewd=0.15,
+  skpointsize=0.2, 
+  layout="radial",
+  cladetext = 0.7,
+  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  removeUnkown=TRUE,
+  reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
+) +
+  scale_fill_manual(
+    values=c("orange", "darkcyan")
+  ) +
+  guides(color = guide_legend(
+    keywidth = 0.1, 
+    keyheight = 0.6,
+    order = 5,
+    ncol=3)
+  ) +
+  theme(
+    panel.background=element_rect(fill=NA),
+    legend.position="right", 
+    plot.margin=margin(0,0,0,0),
+    legend.spacing.y=unit(0.02, "cm"), 
+    legend.title=element_text(size=7),
+    legend.text=element_text(size=6), 
+    legend.box.spacing=unit(0.02,"cm")
+  )
+diffclade_blats
+
+ps_blats %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^st_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+
+es_blats <- ggeffectsize(obj=deresblats, 
+                     lineheight=0.1,
+                     linewidth=0.3, ytextsize = 0.3) + 
+  scale_color_manual(values=c("orange", "darkcyan")) 
+
+es_blats
+```
