@@ -1,0 +1,695 @@
+---
+title: "05_traditional_&_metabarcoding_data_for_LightTraps_only!"
+author: "Daniel"
+date: "15/11/2022"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r message=FALSE, warning=FALSE}
+rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
+library('tidyr')
+library('dplyr')
+library('metacoder')
+library('ggplot2')
+library('agricolae')
+library('vegan')
+library('MicrobiotaProcess')
+library('phyloseq')
+library('ggtree')
+library('coin')
+library('microViz')
+library('VennDiagram')
+library('UpSetR')
+library('iNEXT')
+
+tradmetabr <- read.csv('data/tradmetabr_merged.csv')
+sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
+head(tradmetabr)
+obj <- parse_tax_data(tradmetabr,
+                      class_cols = "classification",
+                      class_sep = ";",
+                      class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
+                      class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
+
+obj$data$tax_table <- calc_taxon_abund(obj, data = "tax_data", cols = sample$sampleID)
+obj$data$tax_props <- calc_obs_props(obj, "tax_data", cols= sample$sampleID, other_cols = TRUE)
+
+obj$data$diff_table <- compare_groups(obj, data = "tax_table",
+                                      cols = sample$sampleID,
+                                      groups = sample$methodClass)
+
+```
+Data above now is prepared for comparing traditional classification vs metabarcoding similar to what was done in Basset et al. (2021) Scientific Reports
+Next is a preliminary tree but we still have to separate them by focal groups (potentially by season too).
+
+```{r metacoderTree all counts}
+
+##trhis takes nearly 30 minutes to run
+
+heat_tree(obj,
+          node_label = taxon_names,
+          node_size = n_obs,
+          node_color = mean_diff,
+          node_color_interval = c(-0.5, 0.5),
+          node_color_range =c("goldenrod", "gray", "darkorchid"),
+          node_color_digits = 1,
+          node_size_axis_label = "BIN count",
+          node_color_axis_label = "Mean difference in sample proportions",
+          node_label_size_range = c( 0.005, 0.03),
+          layout = "davidson-harel",
+          initial_layout = "reingold-tilford")
+
+```
+
+Once agsain, to understand the colouring scheme, read this paragraph carefully from the metacoder tutorial:
+
+### What color corresponds to each group depends on the order they were given in the compare_groups function. Since “leaf” is “treatment_1” in the “diff_table”, and “log2_median_ratio” is defined as “log2(treatment_1 / treatment_2)”, when a taxon has more counts in leaf samples, the ratio is positive, therefore taxa more abundant in leafs are colored magenta in this case.
+
+their code has 'node_color_range = c("cyan", "gray", "magenta")### 
+
+If we look at print(obj$data$diff_table) above the plot, we can see that in our case, treatment_1 is 'TRAD'. The log2 median ratio is defined as"log2(TRAD / METABR). When a taxon has more counts with traditional classificaiton, the ratio is positive, therefore taxa more abundant with traditional are coloured 'darkorchid (purple)' in our case (not magenta).
+
+
+```{r diversity indeces all counts} 
+
+sample$inv_simp <- diversity(obj$data$tax_data[, sample$sampleID],
+                             index = "invsimpson",
+                             MARGIN = 2) # What orietation the matrix is in
+ggplot(sample, aes(x = methodClass, y = inv_simp)) +
+  geom_boxplot()
+anova_result <- aov(inv_simp ~ methodClass, sample)
+summary(anova_result)
+tukey_result <- HSD.test(anova_result, "methodClass", group = TRUE)
+print(tukey_result)
+
+group_data <- tukey_result$groups[order(rownames(tukey_result$groups)),]
+ggplot(sample, aes(x = methodClass, y = inv_simp)) +
+  geom_text(data = data.frame(),
+            aes(x = rownames(group_data), y = max(sample$inv_simp) + 1, label = group_data$groups),
+            col = 'black',
+            size = 10) +
+  geom_boxplot() +
+  ggtitle("Inverse Simpson diversity") +
+  xlab("Season") +
+  ylab("Inverse simpson index")
+
+
+
+```
+
+```{r MBPPCoAPlots and Venn diagram all counts}
+
+ps_obj_all <- metacoder::as_phyloseq(obj,
+                      otu_table = "tax_data",
+                      otu_id_col = "bold_bin",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")
+# distmethod
+# "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
+pcoares <- get_pcoa(obj=ps_obj_all, distmethod="bray", method="hellinger")
+# Visualizing the result
+pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+# first and third principal co-ordinates
+pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+pcoaplot1
+pcoaplot2
+
+pcoaplot1a <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "season"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+# first and third principal co-ordinates
+pcoaplot2a <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "season"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+pcoaplot1a #| pcoaplot2a
+pcoaplot2a
+
+pcoaplot1c <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "method"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+# first and third principal co-ordinates
+pcoaplot2c <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "method"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+pcoaplot1c
+pcoaplot2c
+
+###### I HAVE A SMALL PROBLEM WITH grid PACKAGE. IT IS PLOTING ON TOP OF PREVIOUS PLOTS SO DO THIS dev.off() to draw in a new plot
+
+dev.off()
+
+vennlist <- get_vennlist(obj=ps_obj_all, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+grid::grid.draw(vennp)
+
+dev.off()
+
+
+
+```
+
+```{r MBPTaxonAbundanceTOP10}
+
+classtaxa <- get_taxadf(obj=ps_obj_all, taxlevel=4)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=10) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+#note the flag "count=TRUE", this shows now total reads, rather than proportion %
+pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="methodClass", topn=10) +
+  xlab(NULL) +
+  ylab("count reads") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+
+pclass
+
+pclass2
+
+
+```
+
+```{r}
+
+obj_LT <- parse_tax_data(tradmetabr,
+                    class_cols = "classification",
+                      class_sep = ";",
+                      class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
+                      class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
+sample_LT <- filter(sample, method == "LT")
+
+obj_LT$data$tax_data <- obj_LT$data$tax_data[c("taxon_id","bold_bin", "classification", sample_LT$sampleID)]
+print(obj_LT)
+
+no_reads <- rowSums(obj_LT$data$tax_data[, sample_LT$sampleID]) == 0
+sum(no_reads) 
+#there are 928 BINs that do not have reads when we filter by trap method. We must remove
+obj_LT <- filter_obs(obj_LT, data = "tax_data", ! no_reads, drop_taxa = TRUE)
+
+obj_LT$data$tax_table <- calc_taxon_abund(obj_LT, data = "tax_data", cols = sample_LT$sampleID)
+obj_LT$data$tax_props <- calc_obs_props(obj_LT, "tax_data", cols = sample_LT$sampleID)
+
+obj_LT$data$diff_table <- compare_groups(obj_LT, data = "tax_table",
+                                      cols = sample_LT$sampleID,
+                                      groups = sample_LT$methodClass)
+
+ps_obj_LT <- metacoder::as_phyloseq(obj_LT,
+                      otu_table = "tax_data",
+                      otu_id_col = "bold_bin",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")
+
+pcoares_LT <- get_pcoa(obj=ps_obj_LT, distmethod="bray", method="hellinger")
+# Visualizing the result
+pcoaplot1_LT <- ggordpoint(obj=pcoares_LT, biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "season"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+# first and third principal co-ordinates
+pcoaplot2_LT <- ggordpoint(obj=pcoares_LT, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "season"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+pcoaplot1_LT #| pcoaplot2_LT
+pcoaplot2_LT
+
+heat_tree(obj_LT,
+          node_label = taxon_names,
+          node_size = n_obs,
+          node_color = mean_diff,
+          node_color_interval = c(-0.5, 0.5),
+          node_color_range = c("goldenrod", "gray", "darkorchid"),
+          node_color_digits = 1,
+          node_size_axis_label = "BIN count",
+          node_color_axis_label = "Mean difference in sample proportions",
+          node_label_size_range = c( 0.005, 0.03),
+          layout = "davidson-harel",
+          initial_layout = "reingold-tilford")
+
+##This one takes about 15 minutes to run
+
+dev.off()
+
+vennlist <- get_vennlist(obj=ps_obj_LT, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+grid::grid.draw(vennp)
+
+dev.off()
+
+obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera", "Coleoptera", "Hymenoptera", "Hemiptera", "Blattodea"),#here is to fliter the figure by focal groups
+              subtaxa = TRUE) -> obj_focal
+
+no_reads <- rowSums(obj_focal$data$tax_data[, sample_LT$sampleID]) == 0 #check for zeroes after filtering always. Otherwise we get bad results
+sum(no_reads) #in this case theree is no zeroes, which is good, but we should always check
+
+
+
+obj_focal$data$tax_data <- obj_focal$data$tax_data[c("taxon_id","bold_bin", "classification", sample_LT$sampleID)]
+print(obj_focal)
+
+obj_focal$data$tax_table <- calc_taxon_abund(obj_focal, data = "tax_data", cols = sample_LT$sampleID)
+obj_focal$data$tax_props <- calc_obs_props(obj_focal, "tax_data", cols = sample_LT$sampleID)
+
+obj_focal$data$diff_table <- compare_groups(obj_focal, data = "tax_table",
+                                      cols = sample_LT$sampleID,
+                                      groups = sample_LT$methodClass)
+
+ps_obj_focal <- metacoder::as_phyloseq(obj_focal,
+                      otu_table = "tax_data",
+                      otu_id_col = "bold_bin",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")
+
+pcoares_focal <- get_pcoa(obj=ps_obj_focal, distmethod="bray", method="hellinger")
+# Visualizing the result
+pcoaplot1_focal <- ggordpoint(obj=pcoares_focal, biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "season"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+# first and third principal co-ordinates
+pcoaplot2_focal <- ggordpoint(obj=pcoares_focal, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
+                        factorNames=c("methodClass", "season"), ellipse=TRUE) +
+  scale_color_manual(values=c("goldenrod", "darkorchid")) +
+  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+pcoaplot1_focal #| pcoaplot2_focal
+pcoaplot2_focal
+
+heat_tree(obj_focal,
+          node_label = taxon_names,
+          node_size = n_obs,
+          node_color = mean_diff,
+          node_color_interval = c(-0.5, 0.5),
+          node_color_range = c("goldenrod", "gray", "darkorchid"),
+          node_color_digits = 1,
+          node_size_axis_label = "BIN count",
+          node_color_axis_label = "Mean difference in sample proportions",
+          node_label_size_range = c( 0.005, 0.03),
+          layout = "davidson-harel",
+          initial_layout = "reingold-tilford")
+
+#this one takes about 10 minutes to run
+
+dev.off()
+
+vennlist <- get_vennlist(obj=ps_obj_focal, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+grid::grid.draw(vennp)
+dev.off()
+
+
+```
+
+```{r}
+
+set.seed(16)#to make sure the figures is always the same
+obj_focal %>%
+  metacoder::filter_taxa(taxon_names == "Lepidoptera",#here is to filter the figure by groups
+              subtaxa = TRUE) %>%  
+  heat_tree(node_label = taxon_names,
+            #node_size_range = c(0.005, 0.02),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used Treatment_1 (trad) corresponds to DarkOrchid Color
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+#this one takes about 
+
+obj_focal %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> leps_LT #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
+no_reads <- rowSums(leps_LT$data$tax_data[, sample_LT$sampleID]) == 0 #check for zeroes after filtering always. Otherwise we get bad results
+sum(no_reads) #in this case theree is no zeroes, which is good, but we should always check
+
+
+ps_leps_LT <- metacoder::as_phyloseq(leps_LT,
+                      otu_table = "tax_data",
+                      otu_id_col = "bold_bin",
+                      sample_data = sample,
+                      sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_leps_LT
+colnames(tax_table(ps_leps_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+dev.off()
+
+vennlist <- get_vennlist(obj=ps_leps_LT, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+grid::grid.draw(vennp)
+
+dev.off()
+
+```
+
+
+```{r}
+
+set.seed(16)#to make sure the figures is always the same
+obj_LT %>%
+  metacoder::filter_taxa(taxon_names == "Coleoptera",#here is to fliter the figure by groups
+              subtaxa = TRUE) %>% 
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.02),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.005, 0.03),
+            #edge_label = n_obs,
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+#<1 minute
+
+dev.off()
+
+
+obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> coleo_LT
+
+ps_coleo_LT <- metacoder::as_phyloseq(coleo_LT,
+                                      otu_table = "tax_data",
+                                      otu_id_col = "bold_bin",
+                                      sample_data = sample,
+                                      sample_id_col = "sampleID")
+
+
+vennlist <- get_vennlist(obj=ps_coleo_LT, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+grid::grid.draw(vennp)
+
+dev.off()
+
+```
+
+```{r}
+
+set.seed(16)#to make sure the figures is always the same
+obj_LT %>%
+  metacoder::filter_taxa(taxon_names == "Hymenoptera",#here is to fliter the figure by groups
+              subtaxa = TRUE) %>% 
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.02),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classifcaiton method",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+#>1 minute
+dev.off()
+
+obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Hymenoptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> bees_LT #i know its hymenoptera
+
+ps_bees_LT <- metacoder::as_phyloseq(bees_LT,
+                                      otu_table = "tax_data",
+                                      otu_id_col = "bold_bin",
+                                      sample_data = sample,
+                                      sample_id_col = "sampleID")
+vennlist <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+grid::grid.draw(vennp)
+
+dev.off()
+
+```
+
+```{r]}
+
+set.seed(16)#to make sure the figures is always the same
+obj_LT %>%
+  metacoder::filter_taxa(taxon_names == "Hemiptera",#here is to fliter the figure by groups
+              subtaxa = TRUE) %>% 
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification method",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+#>1 minute
+
+dev.off()
+
+obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> hemi_LT
+ps_hemi_LT <- metacoder::as_phyloseq(hemi_LT,
+                                      otu_table = "tax_data",
+                                      otu_id_col = "bold_bin",
+                                      sample_data = sample,
+                                      sample_id_col = "sampleID")
+vennlist <- get_vennlist(obj=ps_hemi_LT, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+grid::grid.draw(vennp)
+
+dev.off()
+
+```
+
+
+```{r}
+
+set.seed(16)#to make sure the figures is always the same
+obj_LT %>%
+  metacoder::filter_taxa(taxon_names == "Blattodea",#here is to filter the figure by groups
+              subtaxa = TRUE) %>% 
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+#<1 minute
+
+dev.off()
+
+obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
+              subtaxa = TRUE) -> blats_LT 
+
+ps_blats_LT <- metacoder::as_phyloseq(blats_LT,
+                                      otu_table = "tax_data",
+                                      otu_id_col = "bold_bin",
+                                      sample_data = sample,
+                                      sample_id_col = "sampleID")
+
+vennlist <- get_vennlist(obj=ps_blats_LT, factorNames="methodClass")
+vennp <- venn.diagram(vennlist,
+                      height=5,
+                      width=5, 
+                      filename=NULL, 
+                      fill=c("goldenrod", "darkorchid"),
+                      cat.col=c("goldenrod", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+grid::grid.draw(vennp)
+
+
+
+```
+
+```{r]}
+set.seed(16)#to make sure the figures is always the same
+obj_LT %>%
+  metacoder::filter_taxa(taxon_names == "Trichoptera",#here is to filter the figure by groups
+              subtaxa = TRUE) %>% 
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.02, 0.05),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+
+
+set.seed(16)#to make sure the figures is always the same
+obj_LT %>%
+  metacoder::filter_taxa(taxon_names =="Diptera" ,#here is to filter the figure by groups
+              subtaxa = TRUE) %>% 
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.02),
+            #edge_size_range = c(0.005, 0.01),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
+            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+
+
+
+```
+

@@ -2,7 +2,9 @@
 title: "04_focal_order_seasons"
 author: "Daniel"
 date: "06/10/2022"
-output: html_document
+output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -39,7 +41,7 @@ sample <- read.csv('data/location_ctrl.csv')
 
 The script above gave me the taxmap object separated by order, however, it removes all taxonomic ranks up until "Order", so the script below is firstly, changing the taxmap object (e.g. leps) into a phyloseq object (as_phyloseq) and then using the microViz package to add the taxonomic ranks. 
 
-There must be certainly a cleaner way how to do this without so many steps, butI then had to change the classification rank names again (rank_0 instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some dont, some have subfamily, some dont, so it seems easier to simply keep rank_0 to _7 in this case and take note of the nomenclature you are using. I am using Kingdom;Phylum;Clss;Order;Family;SubFamily;genus:species.
+There must be certainly a cleaner way how to do this without so many steps, but I then had to change the classification rank names again (rank_0 instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some dont, some have subfamily, some dont, so it seems easier to simply keep rank_0 to _7 in this case and take note of the nomenclature you are using. I am using Kingdom;Phylum;Clss;Order;Family;SubFamily;genus:species.
 
 If someone knows how to write a loop, this would be faster too. 
 ```{r CreatingOrderFiles message=FALSE, warning=FALSE, include=FALSE}
@@ -48,7 +50,7 @@ ps_leps <- metacoder::as_phyloseq(leps,
                       otu_id_col = "bin_uri",
                       sample_data = sample,
                       sample_id_col = "sampleID") %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_leps 
-colnames(tax_table(ps_leps)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+colnames(tax_table(ps_leps)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
   
 
 ps_coleo <- metacoder::as_phyloseq(coleo,
@@ -57,35 +59,35 @@ ps_coleo <- metacoder::as_phyloseq(coleo,
                       sample_data = sample,
                       sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_coleo
 
-colnames(tax_table(ps_coleo)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+colnames(tax_table(ps_coleo)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
 
 ps_dips <- metacoder::as_phyloseq(dips,
                       otu_table = "tax_data",
                       otu_id_col = "bin_uri",
                       sample_data = sample,
                       sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_dips
-colnames(tax_table(ps_dips)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+colnames(tax_table(ps_dips)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
 
 ps_bees <- metacoder::as_phyloseq(bees,
                       otu_table = "tax_data",
                       otu_id_col = "bin_uri",
                       sample_data = sample,
                       sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_bees
-colnames(tax_table(ps_bees)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+colnames(tax_table(ps_bees)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
 
 ps_blats <- metacoder::as_phyloseq(blats,
                       otu_table = "tax_data",
                       otu_id_col = "bin_uri",
                       sample_data = sample,
                       sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_blats
-colnames(tax_table(ps_blats)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+colnames(tax_table(ps_blats)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
 
 ps_hemi <- metacoder::as_phyloseq(hemi,
                       otu_table = "tax_data",
                       otu_id_col = "bin_uri",
                       sample_data = sample,
                       sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_hemi
-colnames(tax_table(ps_hemi)) <- c("rank_0", "rank_1", "rank_2", "rank_3", "rank_4", "rank_5", "rank_6" ,"rank_7")
+colnames(tax_table(ps_hemi)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
 
 ```
 
@@ -115,7 +117,7 @@ diffclade_leps <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  taxlevel=5, #taxonomy level from 1 to 7 kingdom:phylum:class:order:family:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -174,7 +176,7 @@ diffclade_coleo <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -231,7 +233,7 @@ diffclade_dips <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -291,12 +293,12 @@ diffclade_hemi <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=6, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("darkcyan", "orange" ) #Note that I had to change the order here, there are no hemiptera differences in DRY season so they did not come out in plot
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -320,7 +322,7 @@ ps_hemi %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbund
 es_hemi <- ggeffectsize(obj=dereshemi, 
                      lineheight=0.1,
                      linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
+  scale_color_manual(values=c( "darkcyan", "orange")) #same change due to wrong plotting 
 
 es_hemi
 ```
@@ -337,10 +339,10 @@ deresbees <- diff_analysis(obj = ps_bees, classgroup = "SEASON",
                        strictmod = TRUE,
                        secondcomfun = "wilcox_test",
                        subclmin = 3,
-                       subclwilc = FALSE,
-                       secondalpha = 0.05,
-                       lda=1,
-                       action = "get")
+                       subclwilc = TRUE,
+                       secondalpha = 0.01,
+                       lda=3,
+                       action = "add")
 deresbees
 
 diffclade_bees <- ggdiffclade(
@@ -350,7 +352,7 @@ diffclade_bees <- ggdiffclade(
   skpointsize=0.2, 
   layout="radial",
   cladetext = 0.7,
-  taxlevel=1, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -374,7 +376,7 @@ diffclade_bees <- ggdiffclade(
   )
 diffclade_bees
 
-ps_bees %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^s_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+ps_bees %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
 
 es_bees <- ggeffectsize(obj=deresbees, 
                      lineheight=0.1,
