@@ -3,8 +3,8 @@ title: "05_traditional_&_metabarcoding_data_for_LightTraps_only!"
 author: "Daniel"
 date: "15/11/2022"
 output: github_document
-editor_options: 
-  chunk_output_type: console
+#editor_options: 
+  #chunk_output_type: console
 ---
 
 ```{r message=FALSE, warning=FALSE}

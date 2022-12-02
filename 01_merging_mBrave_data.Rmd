@@ -7,16 +7,16 @@ output: github_document
 
 There is a lot of manipulation that needs to be done with the data. In general, what we need to analyze metabarcoding data is a data frame organized as:
 Bold Bin and classification (separated by taxonomic rank by ";" as: k__ ; p__ ; etc.) in rows, and samples in columns.
-One of the main issues with the data is that we have multiple duplicated BINs as they are present in multiple sample columns. The scripts below use tidyr and dplyr to merge these duplicates and sum the number of reads in the columns.
+Some of the main issues with the data is that we have multiple duplicated BINs as they are present in multiple sample columns. The scripts below use tidyr and dplyr to merge these duplicates and sum the number of reads in the columns.
 
-The scripts create multiple files which will be used in the subsequent scripts. Sometimes they are redundant because I had to manually check these files for more duplicates.
+The scripts create multiple files which will be used in the subsequent scripts. Sometimes they are redundant because I had to manually check these files for more duplicates. We have issues with BOLD bins being the same even though classified as different species, and several cases where we have duplicated species with different BINs. 
 
 There is one big problem with nomenclature. Particularly when comparing traditional taxonomic records vs metabarcoded records. The problem is that duplicate BOLD BINs are named different in the BOLD database (the name used by mBrave) and the ForestGEO (the names used for the traditional data set). The names can be completely different, but sometimes include spaces or periods, such as sp. 1YB vs sp1YB.
 
 Be aware that this is a very Frankenstein-ish pipeline which heavily depends on other tutorials I've found. Specifically the metacoder package from the Grunwald Lab (https://grunwaldlab.github.io/metacoder_documentation/example.html) and the Microbiotaprocess package from the Yu Lab (https://github.com/YuLab-SMU/MicrobiotaProcess). Some of the scripts are my own (the dirtier ones), and some of the manipulation has been done in Excel (since I don't know the best way to do so in R - particularly the checking for duplicates and editing the species names).
 
 
-############ Warning: These scripts have been ran already, and are meant only for information on the data cleaning/merging process. You should not run them as you risk overwriting the final datasets (it does not really matter since you will arrive to the same final data set but it will save you time).
+############ Warning: These scripts have been ran already, and are meant only for information on the data cleaning/merging process. DO NOT RUN THEM as you risk overwriting the final datasets (it does not really matter since you will arrive to the same final data set but it will save you time).
 
 Any questions or comments can be asked directly on the GitHub repo or to my email: daniel.souto.v@gmail.com
 
@@ -31,7 +31,7 @@ library('tidyr')
 library('dplyr')
 ```
 
-First thing is to merge and clean the samples from the format downloaded from mbrave as right now its rather chaotic with column 1 sample, 2 BIN#, 3 #of seqs and 4 classification. Note that I am using the formatted spreadsheet as directly downloaded from mBrave. When in doubt of what I mean, look at the original file called, and then the written new file.
+First thing is to merge and clean the samples from the format downloaded from mbrave as right now its rather chaotic with column 1 sample, 2 BIN#, 3 #of READS and 4 classification. Note that I am using the formatted spreadsheet as directly downloaded from mBrave. When in doubt of what I mean, look at the original file called (light_trap_19_21.csv), and then the written new file (dataset_merged.csv).
 
 ```{r Merging_and_Grouping_Metabarcoding_data}
 all_merged <- read.csv('data/light_trap_19_21.csv', header=T)
@@ -44,7 +44,7 @@ all_merged %>%
 write.csv(all_merged, 'data/dataset_merged.csv', row.names =FALSE)
 ```
 
-This document now needs to be transposed (sample ID in columns, BIN_uri and classification in rows). I did this in excel, surely a way to do in R with dplyr probably with the "transpose_long" function. Then once again we group the bins and classifications and add the columns to avoid repeating BINs
+This document now needs to be transposed (sample ID in columns, BIN_uri and classification in rows). I did this in excel, surely a way to do in R with dplyr probably with the "transpose_long" function. Then once again we group the bins and classifications and add the columns to avoid repeating BINs.
 
 ```{r FinalMergeofMetabrData}
 merged_colnames <-read.csv('data/dataset_merged_samplecols.csv', header = T) #this is a modified version of dataset_merged.csv above but now samples are in columns.
@@ -80,6 +80,11 @@ write.csv(traditional2, 'data/tradbinary_merged.csv', row.names = FALSE)
 
 #This second run was to make sure that no BOLD_BINs were repeated, I manually checked the first tradbinary_merged.csv file and changed names which needed to be double checked. I did this by hihglighting duplicate BOLD_BINs in excel and check any which was duplicated whit a different name.
 ########################################
+
+```
+The next chunk is run to include the metabarcoding data to the newly created 'tradbinary_merged.csv'
+To do this, there is probably a right_join function to run in R, but instead I did so manually in excel, adding all metabarcoding BINs to the final row of the spreadsheet plus all the columns from the mtabarcoding to the final column of the tradbinary_merged.csv. (look at trad_and_meta_toMerge.csv)
+```{r}
 
 tradmeta_toMerge <- read.csv('data/trad_and_meta_toMerge.csv') #this new file is the tradbinary_merged.csv with the metabarcoding data added to the end.
 tradmeta_toMerge %>%

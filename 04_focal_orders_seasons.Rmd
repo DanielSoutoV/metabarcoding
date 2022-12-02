@@ -3,8 +3,8 @@ title: "04_focal_order_seasons"
 author: "Daniel"
 date: "06/10/2022"
 output: github_document
-editor_options: 
-  chunk_output_type: console
+#editor_options: 
+  #chunk_output_type: console
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -41,7 +41,7 @@ sample <- read.csv('data/location_ctrl.csv')
 
 The script above gave me the taxmap object separated by order, however, it removes all taxonomic ranks up until "Order", so the script below is firstly, changing the taxmap object (e.g. leps) into a phyloseq object (as_phyloseq) and then using the microViz package to add the taxonomic ranks. 
 
-There must be certainly a cleaner way how to do this without so many steps, but I then had to change the classification rank names again (rank_0 instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some dont, some have subfamily, some dont, so it seems easier to simply keep rank_0 to _7 in this case and take note of the nomenclature you are using. I am using Kingdom;Phylum;Clss;Order;Family;SubFamily;genus:species.
+There must be certainly a cleaner way how to do this without so many steps, but I then had to change the classification rank names again ("k__" instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some don't, some have subfamily, some don't, so take note of the nomenclature you are using. I am using Kingdom;Phylum;Order;Class;Family;genus;species  (1 - 7).
 
 If someone knows how to write a loop, this would be faster too. 
 ```{r CreatingOrderFiles message=FALSE, warning=FALSE, include=FALSE}
@@ -91,7 +91,7 @@ colnames(tax_table(ps_hemi)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__
 
 ```
 
-Ok we now have datasets separated for each order (ForestGEO focal plus diptera - if we want more, we can adapt the script above)
+Ok we now have datasets separated for each order (ForestGEO focal plus diptera - if we want more, we can adapt the script above to include more focal groups, or even to refine them)
 But below we will create now some taxonomic trees showing differences between seasons (as in the MessyFigure chunk)
 
 ```{r Lepidoptera}

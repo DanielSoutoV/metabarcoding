@@ -3,8 +3,8 @@ title: "02 Metacoder heat trees"
 author: "Daniel"
 date: "19/09/2022"
 output: github_document
-editor_options: 
-  chunk_output_type: console
+#editor_options: 
+  #chunk_output_type: console
 ---
 
 This script takes the previously merged and formatted data from mBrave (produced through script 01) and does preliminary analyses with Metacoder.
@@ -25,7 +25,7 @@ obj <- parse_tax_data(dat,
 print(obj)
 
 ```
-Above is the print out of a taxmap object. The R console output shows that there are 3,750 unique taxa and lists their ID, but this includes many NA's (unassigned taxonomies), Better to look at the tbl_df which shows a 'tibble' of 3,495 rows (assigned classifications) in 44 columns (40 samples + taxon_id, bin_uri, OTU_ID and classification). Each row shows how many reads for that taxon was in each sample.
+Above is the print out of a taxmap object. The R console output shows that there are 3,651 unique taxa and lists their ID, but this includes many NA's (unassigned taxonomies), Better to look at the tbl_df which shows a 'tibble' of 3,173 rows (assigned classifications) in 43 columns (40 samples + taxon_id, bin_uri and classification). Each row shows how many reads for that taxon was in each sample.
 
 ```{r}
 obj$data$tax_data <- obj$data$tax_data[c("taxon_id","bin_uri", sample$sampleID)]
@@ -45,14 +45,14 @@ obj$data$tax_abund <- calc_taxon_abund(obj, "tax_data", cols = sample$sampleID)
 print(obj)
 
 ```
-Notice we now have 3 tibbles, one for counts (tax_data - this could be changed with something like: >names(obj$data) <- "otu_counts"), one for proportion (tax_props) and one for abundance (tax_abund). We can, and will add more refined data sets afterwards, all linked to the original parsing so we never loose the information of what taxonid actually means.
+Notice we now have 3 tibbles, one for counts (tax_data - this could be changed with something like: >names(obj$data) <- "otu_counts"), one for proportion (tax_props) and one for abundance (tax_abund). We can, and will, add more refined data sets afterwards, all linked to the original parsing so we never loose the information of what taxonid actually means.
 
 we can now view distribution of reads in the samples:
 ```{r HistogramReads}
 hist(colSums(obj$data$tax_data[ , sample$sampleID]))
 ```
 
-Sampling is quite uneven with one sample with < 100,000 reads. We will rarefy our data to simulate even number of reads per sample (18914 is the minimum depth) keep in mind that this discards a lot of data - we could probably instead remove some of the samples with the lowest reads instead.
+Sampling is quite uneven with one samples with < 100,000 reads. We will rarefy our data to simulate even number of reads per sample (18914 is the minimum depth) keep in mind that this discards a lot of data - we could probably instead remove some of the samples with the lowest reads instead.
 We can add the rarefied data set as a separate data frame as we did above with tax_props and tax_abund.
 If you want, you can print(obj$data$tax_rarefied) to see what it looks like. We can also make a rarefaction curve with metacoder, but look at script 03_diversity_and_ordination where we do rarefaction curves with ggplot instead.
 
@@ -75,8 +75,11 @@ heat_tree(obj,
           node_color = n_obs,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Samples with reads",
+          node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel", # The primary layout algorithm
           initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+
+# this takes > 30 minutes to run
 ```
 
 Far more informative would be to see the differences between seasons in this case. We can easily calculate the number of samples that have reads for each taxon according to different groups. We can also compare statistically using Wilcoxon Rank Sum test, significant differences between taxa samples in wet or dry season.
@@ -106,8 +109,11 @@ heat_tree(obj,
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportion",
+          node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel", # The primary layout algorithm
           initial_layout = "reingold-tilford")
+
+#>30 minutes to run
 ```
 
 To understand the colouring scheme, read this paragraph carefully from the metacoder tutorial:
@@ -134,6 +140,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 
@@ -149,6 +156,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 
@@ -164,6 +172,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 
@@ -179,6 +188,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 
@@ -194,6 +204,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 obj %>%
@@ -208,6 +219,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 
@@ -223,6 +235,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 
