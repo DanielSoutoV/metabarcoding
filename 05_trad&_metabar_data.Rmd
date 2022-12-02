@@ -651,13 +651,14 @@ grid::grid.draw(vennp)
 
 ```
 
+
 ```{r]}
 set.seed(16)#to make sure the figures is always the same
 obj_LT %>%
   metacoder::filter_taxa(taxon_names == "Trichoptera",#here is to filter the figure by groups
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
-            node_size_range = c(0.02, 0.05),
+            node_size_range = c(0.01, 0.03),
             #edge_size_range = c(0.005, 0.01),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
@@ -676,7 +677,7 @@ obj_LT %>%
   metacoder::filter_taxa(taxon_names =="Diptera" ,#here is to filter the figure by groups
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
+            node_size_range = c(0.01, 0.03),
             #edge_size_range = c(0.005, 0.01),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
