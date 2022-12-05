@@ -9,12 +9,13 @@ Metacoder. The idea of this script is to have a preliminary estimate of
 diversity within the metabarcoding samples. Due to the nature of
 mBrave’s classification associated with BOLD databases, there are a
 number of BINs which have multiple, uncertain, identifications. I have
-cleaned the data even further, now we are only including species name
-for the 1st BOLD BIN hit. This is normally either, the species form the
-BCI database (the first dataset used to classify through mBRAVE), or the
-species most frequently ‘named’ that name. E.g. Agelenopsis
+(manually) cleaned the data further, now we are only including species
+name for the 1st BOLD BIN hit. This is normally either, the species form
+the BCI database (the first dataset used to classify through mBRAVE), or
+the species most frequently ‘named’ that name. E.g. Agelenopsis
 pennsylvanica, potteri, emertoni, katsoni, acutosa, is now Agelenopsis
-pennsylvanica. The file used is the final dataset with \~3557 BINs.
+pennsylvanica. The file used is the final dataset with \~3500 BINs
+(finaldat_merged.csv).
 
 ``` r
 rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
@@ -25,43 +26,53 @@ dat<- read.csv('data/finaldat_merged.csv', header = TRUE)
 sample <- read.csv('data/location_ctrl.csv')
 obj <- parse_tax_data(dat,
                       class_cols = "classification",
-                      class_sep = ";")
+                      class_sep = ";",
+                      class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
+                      class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
 print(obj)
 ```
 
     ## <Taxmap>
-    ##   3705 taxa: aab. Arthropoda, aac. Insecta ... fmn. nitens
-    ##   3705 edges: NA->aab, aab->aac, aab->aad ... dcc->fmm, dcd->fmn
-    ##   1 data sets:
+    ##   3091 taxa: aab. Animalia, aac. Arthropoda ... eox. nitens
+    ##   3091 edges: NA->aab, aab->aac, aac->aad ... bzn->eow, bzo->eox
+    ##   2 data sets:
     ##     tax_data:
-    ##       # A tibble: 3,495 x 44
-    ##         taxon~1 bin_uri OTU_ID class~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>   <chr>  <chr>     <int>   <int>   <int>   <int>
-    ## NANANA
-    ## NANANA
-    ## NANANA
-    ##       # ... with 3,492 more rows, 36 more variables:
+    ##       # A tibble: 3,173 x 43
+    ##         taxon_id bin_uri      classi~1 total~2 total~3 total~4 total~5
+    ##         <chr>    <chr>        <chr>      <int>   <int>   <int>   <int>
+    ##       1 bzp      BOLD:AAA0009 k__Anim~       0       0       0       0
+    ##       2 bzq      BOLD:AAA0012 k__Anim~       0       0       0       0
+    ##       3 bzr      BOLD:AAA0016 k__Anim~       0       0       0       0
+    ##       # ... with 3,170 more rows, 36 more variables:
     ##       #   total39868 <int>, total39869 <int>, total39870 <int>,
     ##       #   total39871 <int>, total39872 <int>, total39873 <int>,
     ##       #   total39874 <int>, total39875 <int>, total39876 <int>,
     ##       #   total39877 <int>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: classification, 3: total39864,
-    ##       #   4: total39865, 5: total39866, 6: total39867
+    ##       #   1: classification, 2: total39864, 3: total39865,
+    ##       #   4: total39866, 5: total39867
+    ##     class_data:
+    ##       # A tibble: 22,211 x 5
+    ##         taxon_id input_index tax_rank name       regex_match  
+    ##         <chr>          <int> <chr>    <chr>      <chr>        
+    ##       1 aab                1 k        Animalia   k__Animalia  
+    ##       2 aac                1 p        Arthropoda p__Arthropoda
+    ##       3 aad                1 c        Insecta    c__Insecta   
+    ##       # ... with 22,208 more rows
     ##   0 functions:
 
 Above is the print out of a taxmap object. The R console output shows
-that there are 3,750 unique taxa and lists their ID, but this includes
+that there are 3,651 unique taxa and lists their ID, but this includes
 many NA’s (unassigned taxonomies), Better to look at the tbl_df which
-shows a ‘tibble’ of 3,495 rows (assigned clssifications) in 44 columns
-(40 samples + taxon_id, bin_uri, OTU_ID and classificaiton). Each row
-shows how many reads for that taxon was in each sample.
+shows a ‘tibble’ of 3,173 rows (assigned classifications) in 43 columns
+(40 samples + taxon_id, bin_uri and classification). Each row shows how
+many reads for that taxon was in each sample.
 
 ``` r
-obj$data$tax_data <- obj$data$tax_data[c("taxon_id","OTU_ID","bin_uri", sample$sampleID)]
+obj$data$tax_data <- obj$data$tax_data[c("taxon_id","bin_uri", sample$sampleID)]
 obj$data$tax_data <- zero_low_counts(obj, data = "tax_data", min_count = 10, cols= sample$sampleID, other_cols = TRUE)
 ```
 
-    ## Zeroing 5811 of 139800 counts less than 10.
+    ## Zeroing 5811 of 126920 counts less than 10.
 
     ## Warning: The following columns will be replaced in the output:
     ##    total39883, total39882, total39881 ... ZET1B, ZET2A, ZET2B
@@ -72,7 +83,7 @@ no_reads <- rowSums(obj$data$tax_data[, sample$sampleID]) == 0
 sum(no_reads) 
 ```
 
-    ## [1] 1259
+    ## [1] 937
 
 ``` r
 #there are 1259 taxon_id's with less than 10 reads which we will remove in the next step
@@ -81,26 +92,34 @@ print(obj) #2236 taxa in 40 samples (it says 43 columns because of columns taxon
 ```
 
     ## <Taxmap>
-    ##   2752 taxa: aab. Arthropoda, aac. Insecta ... fmn. nitens
-    ##   2752 edges: NA->aab, aab->aac, aab->aad ... dcb->fml, dcd->fmn
-    ##   1 data sets:
+    ##   2572 taxa: aab. Animalia, aac. Arthropoda ... eox. nitens
+    ##   2572 edges: NA->aab, aab->aac, aac->aad ... bzm->eov, bzo->eox
+    ##   2 data sets:
     ##     tax_data:
-    ##       # A tibble: 2,236 x 43
-    ##         taxon~1 OTU_ID bin_uri total~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ## NANANA
-    ## NANANA
-    ## NANANA
+    ##       # A tibble: 2,236 x 42
+    ##         taxon_id bin_uri      total3~1 total~2 total~3 total~4 total~5
+    ##         <chr>    <chr>           <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    ##       1 bzp      BOLD:AAA0009        0       0       0       0       0
+    ##       2 bzr      BOLD:AAA0016        0       0       0       0       0
+    ##       3 bzv      BOLD:AAA0100        0       0       0       0       0
     ##       # ... with 2,233 more rows, 35 more variables:
     ##       #   total39878 <dbl>, total39877 <dbl>, total39876 <dbl>,
     ##       #   total39875 <dbl>, total39874 <dbl>, total39873 <dbl>,
     ##       #   total39872 <dbl>, total39871 <dbl>, total39870 <dbl>,
     ##       #   total39869 <dbl>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: total39883, 3: total39882, 4: total39881,
-    ##       #   5: total39880, 6: total39879
+    ##       #   1: total39883, 2: total39882, 3: total39881, 4: total39880,
+    ##       #   5: total39879
+    ##     class_data:
+    ##       # A tibble: 21,590 x 5
+    ##         taxon_id input_index tax_rank name       regex_match  
+    ##         <chr>          <int> <chr>    <chr>      <chr>        
+    ##       1 aab                1 k        Animalia   k__Animalia  
+    ##       2 aac                1 p        Arthropoda p__Arthropoda
+    ##       3 aad                1 c        Insecta    c__Insecta   
+    ##       # ... with 21,587 more rows
     ##   0 functions:
 
-We now have cleaned dataset (with our chosen minimum number of reads to
+We now have cleaned data set (with our chosen minimum number of reads to
 \>10) We can add new ‘tibbles’ to obj\$data such as proportion of total
 reads, or abundance
 
@@ -117,52 +136,60 @@ obj$data$tax_props <- calc_obs_props(obj, "tax_data", cols= sample$sampleID, oth
 obj$data$tax_abund <- calc_taxon_abund(obj, "tax_data", cols = sample$sampleID)
 ```
 
-    ## Summing per-taxon counts from 40 columns for 2752 taxa
+    ## Summing per-taxon counts from 40 columns for 2572 taxa
 
 ``` r
 print(obj)
 ```
 
     ## <Taxmap>
-    ##   2752 taxa: aab. Arthropoda, aac. Insecta ... fmn. nitens
-    ##   2752 edges: NA->aab, aab->aac, aab->aad ... dcb->fml, dcd->fmn
-    ##   3 data sets:
+    ##   2572 taxa: aab. Animalia, aac. Arthropoda ... eox. nitens
+    ##   2572 edges: NA->aab, aab->aac, aac->aad ... bzm->eov, bzo->eox
+    ##   4 data sets:
     ##     tax_data:
-    ##       # A tibble: 2,236 x 43
-    ##         taxon~1 OTU_ID bin_uri total~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ## NANANA
-    ## NANANA
-    ## NANANA
+    ##       # A tibble: 2,236 x 42
+    ##         taxon_id bin_uri      total3~1 total~2 total~3 total~4 total~5
+    ##         <chr>    <chr>           <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    ##       1 bzp      BOLD:AAA0009        0       0       0       0       0
+    ##       2 bzr      BOLD:AAA0016        0       0       0       0       0
+    ##       3 bzv      BOLD:AAA0100        0       0       0       0       0
     ##       # ... with 2,233 more rows, 35 more variables:
     ##       #   total39878 <dbl>, total39877 <dbl>, total39876 <dbl>,
     ##       #   total39875 <dbl>, total39874 <dbl>, total39873 <dbl>,
     ##       #   total39872 <dbl>, total39871 <dbl>, total39870 <dbl>,
     ##       #   total39869 <dbl>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: total39883, 3: total39882, 4: total39881,
-    ##       #   5: total39880, 6: total39879
+    ##       #   1: total39883, 2: total39882, 3: total39881, 4: total39880,
+    ##       #   5: total39879
+    ##     class_data:
+    ##       # A tibble: 21,590 x 5
+    ##         taxon_id input_index tax_rank name       regex_match  
+    ##         <chr>          <int> <chr>    <chr>      <chr>        
+    ##       1 aab                1 k        Animalia   k__Animalia  
+    ##       2 aac                1 p        Arthropoda p__Arthropoda
+    ##       3 aad                1 c        Insecta    c__Insecta   
+    ##       # ... with 21,587 more rows
     ##     tax_props:
-    ##       # A tibble: 2,236 x 43
-    ##         taxon~1 OTU_ID bin_uri total~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ## NANANA
-    ## NANANA
-    ## NANANA
+    ##       # A tibble: 2,236 x 42
+    ##         taxon_id bin_uri      total3~1 total~2 total~3 total~4 total~5
+    ##         <chr>    <chr>           <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
+    ##       1 bzp      BOLD:AAA0009        0       0       0       0       0
+    ##       2 bzr      BOLD:AAA0016        0       0       0       0       0
+    ##       3 bzv      BOLD:AAA0100        0       0       0       0       0
     ##       # ... with 2,233 more rows, 35 more variables:
     ##       #   total39878 <dbl>, total39877 <dbl>, total39876 <dbl>,
     ##       #   total39875 <dbl>, total39874 <dbl>, total39873 <dbl>,
     ##       #   total39872 <dbl>, total39871 <dbl>, total39870 <dbl>,
     ##       #   total39869 <dbl>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: total39883, 3: total39882, 4: total39881,
-    ##       #   5: total39880, 6: total39879
+    ##       #   1: total39883, 2: total39882, 3: total39881, 4: total39880,
+    ##       #   5: total39879
     ##     tax_abund:
-    ##       # A tibble: 2,752 x 41
+    ##       # A tibble: 2,572 x 41
     ##         taxon_id total39883 total39882 total~1 total~2 total~3 total~4
     ##         <chr>         <dbl>      <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
     ##       1 aab           57486      74134   95845   87200   63183   70228
-    ##       2 aac           57486      74080   95797   87200   63045   70228
-    ##       3 aad               0         54      48       0      59       0
-    ##       # ... with 2,749 more rows, 34 more variables:
+    ##       2 aac           57486      74134   95845   87200   63183   70228
+    ##       3 aad           57486      74080   95797   87200   63045   70228
+    ##       # ... with 2,569 more rows, 34 more variables:
     ##       #   total39877 <dbl>, total39876 <dbl>, total39875 <dbl>,
     ##       #   total39874 <dbl>, total39873 <dbl>, total39872 <dbl>,
     ##       #   total39871 <dbl>, total39870 <dbl>, total39869 <dbl>,
@@ -172,10 +199,10 @@ print(obj)
 
 Notice we now have 3 tibbles, one for counts (tax_data - this could be
 changed with something like: \>names(obj\$data) \<- “otu_counts”), one
-for proportion (tax_props) and one for abundance (tax_abund). We can and
-will add more refined datasets afterwards, all linked to the orignal
-parsing so we never loose the information of what taxonid actually
-means.
+for proportion (tax_props) and one for abundance (tax_abund). We can,
+and will, add more refined data sets afterwards, all linked to the
+original parsing so we never loose the information of what taxonid
+actually means.
 
 we can now view distribution of reads in the samples:
 
@@ -184,15 +211,17 @@ hist(colSums(obj$data$tax_data[ , sample$sampleID]))
 ```
 
 ![](02_metacoder_heat_trees_files/figure-gfm/HistogramReads-1.png)<!-- -->
-sampling is quite uneven with one sample with \< 100,000 reads. We will
+
+Sampling is quite uneven with one samples with \< 100,000 reads. We will
 rarefy our data to simulate even number of reads per sample (18914 is
-the minium depth) keep in mind that this discards a lot of data - we
-could probably instead remove some of the smaples with the lowest reads
-instead. We can add the rarefied dataset as a sepparate dataframe as we
+the minimum depth) keep in mind that this discards a lot of data - we
+could probably instead remove some of the samples with the lowest reads
+instead. We can add the rarefied data set as a separate data frame as we
 did above with tax_props and tax_abund. If you want, you can
 print(obj$data$tax_rarefied) to see what it looks like. We can also make
-a rarefaction curve with metacoder, but look at script 0X where we do
-rarefaction curves with ggplot instead
+a rarefaction curve with metacoder, but look at script
+03_diversity_and_ordination where we do rarefaction curves with ggplot
+instead.
 
 ``` r
 obj$data$tax_rarefied <- rarefy_obs(obj, "tax_data", cols = sample$sampleID, other_cols = TRUE)
@@ -238,11 +267,16 @@ heat_tree(obj,
           node_color = n_obs,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Samples with reads",
+          node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel", # The primary layout algorithm
           initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 ```
 
-![](02_metacoder_heat_trees_files/figure-gfm/OPTIONALTREE-1.png)<!-- -->
+![](02_metacoder_heat_trees_files/figure-gfm/allcounts-1.png)<!-- -->
+
+``` r
+# this takes > 30 minutes to run
+```
 
 Far more informative would be to see the differences between seasons in
 this case. We can easily calculate the number of samples that have reads
@@ -254,26 +288,26 @@ between taxa samples in wet or dry season.
 obj$data$tax_occ <- calc_n_samples(obj, "tax_abund", groups = sample$SEASON, cols = sample$sampleID)
 ```
 
-    ## Calculating number of samples with a value greater than 0 for 40 columns in 2 groups for 2752 observations
+    ## Calculating number of samples with a value greater than 0 for 40 columns in 2 groups for 2572 observations
 
 ``` r
 print(obj$data$tax_occ)
 ```
 
-    ## # A tibble: 2,752 x 3
+    ## # A tibble: 2,572 x 3
     ##    taxon_id   wet   dry
     ##    <chr>    <int> <int>
     ##  1 aab         20    20
     ##  2 aac         20    20
-    ##  3 aad         11     0
-    ##  4 aae          5     0
-    ##  5 aaf         20    20
-    ##  6 aag         20    19
-    ##  7 aah         20    20
+    ##  3 aad         20    20
+    ##  4 aae         11     0
+    ##  5 aaf          5     0
+    ##  6 aag         20    20
+    ##  7 aah         20    19
     ##  8 aai         20    20
     ##  9 aaj         20    19
-    ## 10 aak          5     0
-    ## # ... with 2,742 more rows
+    ## 10 aak         20    20
+    ## # ... with 2,562 more rows
 
 ``` r
 obj$data$diff_table <- compare_groups(obj, data = "tax_abund",
@@ -282,88 +316,7 @@ obj$data$diff_table <- compare_groups(obj, data = "tax_abund",
 obj <- mutate_obs(obj, "diff_table",
                   wilcox_p_value = p.adjust(wilcox_p_value, method = "fdr"))
 obj$data$diff_table$log2_median_ratio[obj$data$diff_table$wilcox_p_value > 0.05] <- 0 #get significant values for group comparison
-
-print(obj)
 ```
-
-    ## <Taxmap>
-    ##   2752 taxa: aab. Arthropoda, aac. Insecta ... fmn. nitens
-    ##   2752 edges: NA->aab, aab->aac, aab->aad ... dcb->fml, dcd->fmn
-    ##   6 data sets:
-    ##     tax_data:
-    ##       # A tibble: 2,236 x 43
-    ##         taxon~1 OTU_ID bin_uri total~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ## NANANA
-    ## NANANA
-    ## NANANA
-    ##       # ... with 2,233 more rows, 35 more variables:
-    ##       #   total39878 <dbl>, total39877 <dbl>, total39876 <dbl>,
-    ##       #   total39875 <dbl>, total39874 <dbl>, total39873 <dbl>,
-    ##       #   total39872 <dbl>, total39871 <dbl>, total39870 <dbl>,
-    ##       #   total39869 <dbl>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: total39883, 3: total39882, 4: total39881,
-    ##       #   5: total39880, 6: total39879
-    ##     tax_props:
-    ##       # A tibble: 2,236 x 43
-    ##         taxon~1 OTU_ID bin_uri total~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ## NANANA
-    ## NANANA
-    ## NANANA
-    ##       # ... with 2,233 more rows, 35 more variables:
-    ##       #   total39878 <dbl>, total39877 <dbl>, total39876 <dbl>,
-    ##       #   total39875 <dbl>, total39874 <dbl>, total39873 <dbl>,
-    ##       #   total39872 <dbl>, total39871 <dbl>, total39870 <dbl>,
-    ##       #   total39869 <dbl>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: total39883, 3: total39882, 4: total39881,
-    ##       #   5: total39880, 6: total39879
-    ##     tax_abund:
-    ##       # A tibble: 2,752 x 41
-    ##         taxon_id total39883 total39882 total~1 total~2 total~3 total~4
-    ##         <chr>         <dbl>      <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ##       1 aab           57486      74134   95845   87200   63183   70228
-    ##       2 aac           57486      74080   95797   87200   63045   70228
-    ##       3 aad               0         54      48       0      59       0
-    ##       # ... with 2,749 more rows, 34 more variables:
-    ##       #   total39877 <dbl>, total39876 <dbl>, total39875 <dbl>,
-    ##       #   total39874 <dbl>, total39873 <dbl>, total39872 <dbl>,
-    ##       #   total39871 <dbl>, total39870 <dbl>, total39869 <dbl>,
-    ##       #   total39868 <dbl>, ..., and abbreviated variable names
-    ##       #   1: total39881, 2: total39880, 3: total39879, 4: total39878
-    ##     tax_rarefied:
-    ##       # A tibble: 2,236 x 43
-    ##         taxon~1 OTU_ID bin_uri total~2 total~3 total~4 total~5 total~6
-    ##         <chr>   <chr>  <chr>     <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ## NANANA
-    ## NANANA
-    ## NANANA
-    ##       # ... with 2,233 more rows, 35 more variables:
-    ##       #   total39878 <dbl>, total39877 <dbl>, total39876 <dbl>,
-    ##       #   total39875 <dbl>, total39874 <dbl>, total39873 <dbl>,
-    ##       #   total39872 <dbl>, total39871 <dbl>, total39870 <dbl>,
-    ##       #   total39869 <dbl>, ..., and abbreviated variable names
-    ##       #   1: taxon_id, 2: total39883, 3: total39882, 4: total39881,
-    ##       #   5: total39880, 6: total39879
-    ##     tax_occ:
-    ##       # A tibble: 2,752 x 3
-    ##         taxon_id   wet   dry
-    ##         <chr>    <int> <int>
-    ##       1 aab         20    20
-    ##       2 aac         20    20
-    ##       3 aad         11     0
-    ##       # ... with 2,749 more rows
-    ##     diff_table:
-    ##       # A tibble: 2,752 x 7
-    ##         taxon_id treatment_1 treatme~1 log2_~2 media~3 mean_~4 wilco~5
-    ##         <chr>    <chr>       <chr>       <dbl>   <dbl>   <dbl>   <dbl>
-    ##       1 aab      wet         dry          1.61 49945   44719.  1.42e-6
-    ##       2 aac      wet         dry          1.61 49945   44672.  1.42e-6
-    ##       3 aad      wet         dry        Inf       12.5    26.8 1.87e-3
-    ##       # ... with 2,749 more rows, and abbreviated variable names
-    ##       #   1: treatment_2, 2: log2_median_ratio, 3: median_diff,
-    ##       #   4: mean_diff, 5: wilcox_p_value
-    ##   0 functions:
 
 And we can plot these differences in a metacoder heat tree.
 
@@ -371,147 +324,44 @@ And we can plot these differences in a metacoder heat tree.
 heat_tree(obj,
           node_label = taxon_names,
           node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
-          node_color = mean_diff, # A column from `obj$data$diff_table`
+          node_color = log2_median_ratio, # A column from `obj$data$diff_table`
           node_color_interval = c(-0.5, 0.5), # The range of `mean_diff` to display
-          node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
+          node_color_range = c("goldenrod", "gray", "steelblue"), # The color palette used
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportion",
+          node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel", # The primary layout algorithm
           initial_layout = "reingold-tilford")
 ```
 
 ![](02_metacoder_heat_trees_files/figure-gfm/quickHeatTreeMEANDIFFAll-1.png)<!-- -->
+
+``` r
+#>30 minutes to run
+```
+
+To understand the colouring scheme, read this paragraph carefully from
+the metacoder tutorial:
+
+### What color corresponds to each group depends on the order they were given in the compare_groups function. Since “leaf” is “treatment_1” in the “diff_table”, and “log2_median_ratio” is defined as “log2(treatment_1 / treatment_2)”, when a taxon has more counts in leaf samples, the ratio is positive, therefore taxa more abundant in leafs are colored magenta in this case.
+
+their code has ’node_color_range = c(“cyan”, “gray”, “magenta”)###
+
+If we look at print(obj$data$diff_table) above the plot, we can see that
+in our case, treatment_1 is ‘WET’. The log2 median ratio is defined
+as”log2(wet / dry). When a taxon has more counts in the wet season, the
+ratio is positive, therefore taxa more abundant in the wet season are
+coloured ‘steelblue’ in our case (not magenta).
+
 But more interesting for us, to separate them according to focal groups.
-
-``` r
-set.seed(16)#to make sure the figures is always the same
-obj %>%
-  filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
-              subtaxa = TRUE) %>% 
-  heat_tree(node_label = taxon_names,
-            node_size_range = c(0.005, 0.02),
-            #edge_size_range = c(0.005, 0.01),
-            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-            node_color = mean_diff, # A column from `obj$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
-            node_size_axis_label = "BIN count",
-            node_color_axis_label = "Mean difference between seasons",
-            layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
-```
-
-![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-1.png)<!-- -->
-
-``` r
-set.seed(16)#to make sure the figures is always the same
-obj %>%
-  filter_taxa(taxon_names %in% c("Trichoptera"),#here is to fliter the figure by groups
-              subtaxa = TRUE) %>% 
-  heat_tree(node_label = taxon_names,
-            node_size_range = c(0.02, 0.05),
-            #edge_size_range = c(0.005, 0.01),
-            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-            node_color = mean_diff, # A column from `obj$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
-            node_size_axis_label = "BIN count",
-            node_color_axis_label = "Mean difference between seasons",
-            layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
-```
-
-![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-2.png)<!-- -->
-
-``` r
-set.seed(16)#to make sure the figures is always the same
-obj %>%
-  filter_taxa(taxon_names %in% c("Diptera"),#here is to fliter the figure by groups
-              subtaxa = TRUE) %>% 
-  heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
-            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-            node_color = mean_diff, # A column from `obj$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
-            node_size_axis_label = "BIN count",
-            node_color_axis_label = "Mean difference between seasons",
-            layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
-```
-
-![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-3.png)<!-- -->
-
-``` r
-set.seed(16)#to make sure the figures is always the same
-obj %>%
-  filter_taxa(taxon_names %in% c("Hemiptera"),#here is to fliter the figure by groups
-              subtaxa = TRUE) %>% 
-  heat_tree(node_label = taxon_names,
-            node_size_range = c(0.02, 0.05),
-            #edge_size_range = c(0.005, 0.01),
-            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-            node_color = mean_diff, # A column from `obj$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
-            node_size_axis_label = "BIN count",
-            node_color_axis_label = "Mean difference between seasons",
-            layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
-```
-
-![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-4.png)<!-- -->
-
-``` r
-set.seed(16)#to make sure the figures is always the same
-obj %>%
-  filter_taxa(taxon_names %in% c("Hymenoptera"),#here is to fliter the figure by groups
-              subtaxa = TRUE) %>% 
-  heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
-            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-            node_color = mean_diff, # A column from `obj$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
-            node_size_axis_label = "BIN count",
-            node_color_axis_label = "Mean difference between seasons",
-            layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
-```
-
-![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-5.png)<!-- -->
-
-``` r
-set.seed(16)#to make sure the figures is always the same
-obj %>%
-  filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
-              subtaxa = TRUE) %>% 
-  heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
-            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
-            node_color = mean_diff, # A column from `obj$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("steelblue", "gray", "goldenrod"), # The color palette used
-            node_size_axis_label = "BIN count",
-            node_color_axis_label = "Mean difference between seasons",
-            #edge_label = n_obs,
-            layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
-```
-
-![](02_metacoder_heat_trees_files/figure-gfm/HeatTreeMEANDIFFFocalSpp-6.png)<!-- -->
-Note these above are mean differences between seasons (node_color =
-mean_diff). In orange for dry season, in blue for wet season. There is
-no statsitical test associated with these trees yet, but we can do it
-using the wilcox_p\_value function we ran on the diff_table above.
+In orange for dry season, in blue for wet season. The following are the
+differences between seasons using wilcox_p\_vlue function we ran on the
+diff_table above.
 
 ``` r
 obj %>%
-  filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
+  metacoder::filter_taxa(taxon_names == "Coleoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
   heat_tree(node_label = taxon_names,
             node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -522,6 +372,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 ```
@@ -530,7 +381,7 @@ obj %>%
 
 ``` r
 obj %>%
-  filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
+  metacoder::filter_taxa(taxon_names =="Lepidoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
   heat_tree(node_label = taxon_names,
             node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -541,6 +392,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 ```
@@ -549,7 +401,7 @@ obj %>%
 
 ``` r
 obj %>%
-  filter_taxa(taxon_names %in% c("Hemiptera"),#here is to fliter the figure by groups
+  metacoder::filter_taxa(taxon_names == "Hemiptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
   heat_tree(node_label = taxon_names,
             node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -560,6 +412,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 ```
@@ -568,7 +421,7 @@ obj %>%
 
 ``` r
 obj %>%
-  filter_taxa(taxon_names %in% c("Hymenoptera"),#here is to fliter the figure by groups
+  metacoder::filter_taxa(taxon_names == "Hymenoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
   heat_tree(node_label = taxon_names,
             node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -579,6 +432,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 ```
@@ -587,7 +441,7 @@ obj %>%
 
 ``` r
 obj %>%
-  filter_taxa(taxon_names %in% c("Diptera"),#here is to fliter the figure by groups
+  metacoder::filter_taxa(taxon_names == "Diptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
   heat_tree(node_label = taxon_names,
             node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -598,6 +452,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 ```
@@ -606,7 +461,7 @@ obj %>%
 
 ``` r
 obj %>%
-  filter_taxa(taxon_names %in% c("Trichoptera"),#here is to fliter the figure by groups
+  metacoder::filter_taxa(taxon_names == "Trichoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>%
   heat_tree(node_label = taxon_names,
             node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
@@ -617,6 +472,7 @@ obj %>%
             node_color_digits = 1,
             node_size_axis_label = "BIN count",
             node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
             initial_layout = "reingold-tilford")
 ```
@@ -624,18 +480,21 @@ obj %>%
 ![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-6.png)<!-- -->
 
 ``` r
-heat_tree(obj,
-          node_label = taxon_names,
-          node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
-          node_color = log2_median_ratio, # A column from `obj$data$diff_table`
-          node_color_trans = 'linear',
-          node_color_interval = c(-0.5, 0.5), # The range of `mean_diff` to display
-          node_color_range = c("goldenrod", "gray", "steelblue"), # The color palette used
-          node_color_digits = 1,
-          node_size_axis_label = "BIN count",
-          node_color_axis_label = "log 2 ratio of median counts",
-          layout = "davidson-harel", # The primary layout algorithm
-          initial_layout = "reingold-tilford")
+obj %>%
+  metacoder::filter_taxa(taxon_names == "Blattodea",#here is to fliter the figure by groups
+              subtaxa = TRUE) %>%
+  heat_tree(node_label = taxon_names,
+            node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon
+            node_color = log2_median_ratio, # A column from `obj$data$diff_table`
+            node_color_trans = 'linear',
+            node_color_interval = c(-0.5, 0.5), # The range of `mean_diff` to display
+            node_color_range = c("goldenrod", "gray", "steelblue"), # The color palette used
+            node_color_digits = 1,
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "log 2 ratio of median counts",
+            node_label_size_range = c( 0.005, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford")
 ```
 
 ![](02_metacoder_heat_trees_files/figure-gfm/HeatTreesSTATDIFFBetweenSeasonsFocalSpecies-7.png)<!-- -->
@@ -644,9 +503,9 @@ wet season has higher diversity compared to the dry season, and here we
 can see where the differences are concentrated (branches in blue
 indicate that those taxa are significantly more abundant in the wet
 season when compared to the dry). Gray branches indicate no significant
-difference between number of reads for that tasxa in wet or dry season.
+difference between number of reads for that taxa in wet or dry season.
 
-These are visually insteresing results but we still need to compare
+These are visually interesting results but we still need to compare
 these data statistically through diversity and ordination analyses which
 will be covered in the following script.
 

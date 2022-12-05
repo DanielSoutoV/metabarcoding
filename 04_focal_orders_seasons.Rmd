@@ -44,7 +44,7 @@ The script above gave me the taxmap object separated by order, however, it remov
 There must be certainly a cleaner way how to do this without so many steps, but I then had to change the classification rank names again ("k__" instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some don't, some have subfamily, some don't, so take note of the nomenclature you are using. I am using Kingdom;Phylum;Order;Class;Family;genus;species  (1 - 7).
 
 If someone knows how to write a loop, this would be faster too. 
-```{r CreatingOrderFiles message=FALSE, warning=FALSE, include=FALSE}
+```{r CreatingOrderFiles, message=FALSE, warning=FALSE, include=FALSE}
 ps_leps <- metacoder::as_phyloseq(leps,
                       otu_table = "tax_data",
                       otu_id_col = "bin_uri",
@@ -327,9 +327,9 @@ es_hemi <- ggeffectsize(obj=dereshemi,
 es_hemi
 ```
 
-There are problems with the Hymenoptera and Blattodea datasets. I still must figure it out. 
+############################ There are problems with the Hymenoptera and Blattodea datasets. I still must figure it out. ##################################
 
-```{r Hymenoptera}
+r Hymenoptera
 set.seed(1024)
 deresbees <- diff_analysis(obj = ps_bees, classgroup = "SEASON",
                        mlfun = "lda",
@@ -385,9 +385,8 @@ es_bees <- ggeffectsize(obj=deresbees,
 
 es_bees
 
-```
 
-```{r Blattodea}
+r Blattodea
 set.seed(1024)
 deresblats <- diff_analysis(obj = ps_blats, classgroup = "SEASON",
                        mlfun = "lda",
@@ -442,4 +441,3 @@ es_blats <- ggeffectsize(obj=deresblats,
   scale_color_manual(values=c("orange", "darkcyan")) 
 
 es_blats
-```

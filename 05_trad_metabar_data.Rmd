@@ -7,7 +7,7 @@ output: github_document
   #chunk_output_type: console
 ---
 
-```{r message=FALSE, warning=FALSE}
+```{r warning=FALSE}
 rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
 library('tidyr')
 library('dplyr')
@@ -44,7 +44,7 @@ obj$data$diff_table <- compare_groups(obj, data = "tax_table",
 Data above now is prepared for comparing traditional classification vs metabarcoding similar to what was done in Basset et al. (2021) Scientific Reports
 Next is a preliminary tree but we still have to separate them by focal groups (potentially by season too).
 
-```{r metacoderTree all counts}
+```{r metacoderTree all counts, warning=FALSE}
 
 ##trhis takes nearly 30 minutes to run
 
@@ -63,7 +63,7 @@ heat_tree(obj,
 
 ```
 
-Once agsain, to understand the colouring scheme, read this paragraph carefully from the metacoder tutorial:
+Once again, to understand the colouring scheme, read this paragraph carefully from the metacoder tutorial:
 
 ### What color corresponds to each group depends on the order they were given in the compare_groups function. Since “leaf” is “treatment_1” in the “diff_table”, and “log2_median_ratio” is defined as “log2(treatment_1 / treatment_2)”, when a taxon has more counts in leaf samples, the ratio is positive, therefore taxa more abundant in leafs are colored magenta in this case.
 
@@ -72,7 +72,7 @@ their code has 'node_color_range = c("cyan", "gray", "magenta")###
 If we look at print(obj$data$diff_table) above the plot, we can see that in our case, treatment_1 is 'TRAD'. The log2 median ratio is defined as"log2(TRAD / METABR). When a taxon has more counts with traditional classificaiton, the ratio is positive, therefore taxa more abundant with traditional are coloured 'darkorchid (purple)' in our case (not magenta).
 
 
-```{r diversity indeces all counts} 
+```{r diversity indeces all counts, warning=FALSE} 
 
 sample$inv_simp <- diversity(obj$data$tax_data[, sample$sampleID],
                              index = "invsimpson",
@@ -99,7 +99,7 @@ ggplot(sample, aes(x = methodClass, y = inv_simp)) +
 
 ```
 
-```{r MBPPCoAPlots and Venn diagram all counts}
+```{r MBPPCoAPlots all counts, warning=FALSE}
 
 ps_obj_all <- metacoder::as_phyloseq(obj,
                       otu_table = "tax_data",
@@ -119,8 +119,7 @@ pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "darkorchid")) +
   scale_fill_manual(values=c("goldenrod", "darkorchid"))
-pcoaplot1
-pcoaplot2
+pcoaplot1 | pcoaplot2 #PCoA between classification methods
 
 pcoaplot1a <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
@@ -131,8 +130,8 @@ pcoaplot2a <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "darkorchid")) +
   scale_fill_manual(values=c("goldenrod", "darkorchid"))
-pcoaplot1a #| pcoaplot2a
-pcoaplot2a
+pcoaplot1a | pcoaplot2a #Between classification and season
+
 
 pcoaplot1c <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "method"), ellipse=TRUE) +
@@ -143,18 +142,23 @@ pcoaplot2c <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE
                         factorNames=c("methodClass", "method"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "darkorchid")) +
   scale_fill_manual(values=c("goldenrod", "darkorchid"))
-pcoaplot1c
-pcoaplot2c
+pcoaplot1c | pcoaplot2c #Between classification, season and trap method
 
+
+```
+
+
+```{r VEnnDiagramAll, warning=FALSE}
 ###### I HAVE A SMALL PROBLEM WITH grid PACKAGE. IT IS PLOTING ON TOP OF PREVIOUS PLOTS SO DO THIS dev.off() to draw in a new plot
 
 dev.off()
 
-vennlist <- get_vennlist(obj=ps_obj_all, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+vennlist_all <- get_vennlist(obj=ps_obj_all, factorNames="methodClass")
+vennp_all <- venn.diagram(vennlist_all,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -169,26 +173,22 @@ vennp <- venn.diagram(vennlist,
                       lty ='dotted',
                       imagetype = "svg")
 
-grid::grid.draw(vennp)
-
-dev.off()
-
-
+grid::grid.draw(vennp_all)
 
 ```
 
-```{r MBPTaxonAbundanceTOP10}
+```{r MBPTaxonAbundanceTOP5, warning=FALSE}
 
 classtaxa <- get_taxadf(obj=ps_obj_all, taxlevel=4)
-# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
-pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=10) +
+# The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
+pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=5) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
   guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
 
 #note the flag "count=TRUE", this shows now total reads, rather than proportion %
-pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="methodClass", topn=10) +
+pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="methodClass", topn=5) +
   xlab(NULL) +
   ylab("count reads") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
@@ -202,7 +202,7 @@ pclass2
 
 ```
 
-```{r}
+```{r Filtering_LT_Only, warning=FALSE}
 
 obj_LT <- parse_tax_data(tradmetabr,
                     class_cols = "classification",
@@ -243,8 +243,18 @@ pcoaplot2_LT <- ggordpoint(obj=pcoares_LT, pc=c(1, 3), biplot=TRUE, speciesannot
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "darkorchid")) +
   scale_fill_manual(values=c("goldenrod", "darkorchid"))
-pcoaplot1_LT #| pcoaplot2_LT
-pcoaplot2_LT
+pcoaplot1_LT | pcoaplot2_LT
+
+classtaxa_LT <- get_taxadf(obj=ps_obj_LT, taxlevel=4)
+# The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
+pclass_LT <- ggbartax(obj=classtaxa_LT, facetNames="methodClass", topn=5) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pclass_LT
+
 
 heat_tree(obj_LT,
           node_label = taxon_names,
@@ -261,13 +271,18 @@ heat_tree(obj_LT,
 
 ##This one takes about 15 minutes to run
 
+```
+
+```{r VennDiagram_LT, warning=FALSE}
+
 dev.off()
 
-vennlist <- get_vennlist(obj=ps_obj_LT, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+vennlist_LT <- get_vennlist(obj=ps_obj_LT, factorNames="methodClass")
+vennp_LT <- venn.diagram(vennlist_LT,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -282,9 +297,10 @@ vennp <- venn.diagram(vennlist,
                       lty ='dotted',
                       imagetype = "svg")
 
-grid::grid.draw(vennp)
+grid::grid.draw(vennp_LT)
+```
 
-dev.off()
+```{r FocalGroups, warning=FALSE}
 
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera", "Coleoptera", "Hymenoptera", "Hemiptera", "Blattodea"),#here is to fliter the figure by focal groups
               subtaxa = TRUE) -> obj_focal
@@ -321,8 +337,8 @@ pcoaplot2_focal <- ggordpoint(obj=pcoares_focal, pc=c(1, 3), biplot=TRUE, specie
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "darkorchid")) +
   scale_fill_manual(values=c("goldenrod", "darkorchid"))
-pcoaplot1_focal #| pcoaplot2_focal
-pcoaplot2_focal
+pcoaplot1_focal | pcoaplot2_focal
+#pcoaplot2_focal
 
 heat_tree(obj_focal,
           node_label = taxon_names,
@@ -339,13 +355,18 @@ heat_tree(obj_focal,
 
 #this one takes about 10 minutes to run
 
+```
+
+```{r VennDiagramFocalGroups, warning=FALSE}
+
 dev.off()
 
-vennlist <- get_vennlist(obj=ps_obj_focal, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+vennlist_focal <- get_vennlist(obj=ps_obj_focal, factorNames="methodClass")
+vennp_focal <- venn.diagram(vennlist_focal,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -360,13 +381,13 @@ vennp <- venn.diagram(vennlist,
                       lty ='dotted',
                       imagetype = "svg")
 
-grid::grid.draw(vennp)
+grid::grid.draw(vennp_focal)
 dev.off()
 
 
 ```
 
-```{r}
+```{r Lepidoptera, warning=FALSE}
 
 set.seed(16)#to make sure the figures is always the same
 obj_focal %>%
@@ -400,13 +421,18 @@ ps_leps_LT <- metacoder::as_phyloseq(leps_LT,
                       sample_id_col = "sampleID")  %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_leps_LT
 colnames(tax_table(ps_leps_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
 
+```
+
+```{r VennDiagramLeps, warning=FALSE}
+
 dev.off()
 
-vennlist <- get_vennlist(obj=ps_leps_LT, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+vennlist_leps <- get_vennlist(obj=ps_leps_LT, factorNames="methodClass")
+vennp_leps <- venn.diagram(vennlist_leps,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -420,14 +446,12 @@ vennp <- venn.diagram(vennlist,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp)
-
-dev.off()
+grid::grid.draw(vennp_leps)
 
 ```
 
 
-```{r}
+```{r Coleoptera, warning=FALSE}
 
 set.seed(16)#to make sure the figures is always the same
 obj_LT %>%
@@ -448,10 +472,6 @@ obj_LT %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 
 #<1 minute
-
-dev.off()
-
-
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> coleo_LT
 
@@ -460,13 +480,18 @@ ps_coleo_LT <- metacoder::as_phyloseq(coleo_LT,
                                       otu_id_col = "bold_bin",
                                       sample_data = sample,
                                       sample_id_col = "sampleID")
+```
 
+```{r VennDiagram Celoptera, warning=FALSE}
 
-vennlist <- get_vennlist(obj=ps_coleo_LT, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+dev.off()
+
+vennlist_coleo <- get_vennlist(obj=ps_coleo_LT, factorNames="methodClass")
+vennp_coleo <- venn.diagram(vennlist_coleo,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -480,13 +505,13 @@ vennp <- venn.diagram(vennlist,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp)
+grid::grid.draw(vennp_coleo)
 
-dev.off()
+
 
 ```
 
-```{r}
+```{r Hymenoptera, warning=FALSE}
 
 set.seed(16)#to make sure the figures is always the same
 obj_LT %>%
@@ -506,8 +531,6 @@ obj_LT %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 
 #>1 minute
-dev.off()
-
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Hymenoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> bees_LT #i know its hymenoptera
 
@@ -516,11 +539,19 @@ ps_bees_LT <- metacoder::as_phyloseq(bees_LT,
                                       otu_id_col = "bold_bin",
                                       sample_data = sample,
                                       sample_id_col = "sampleID")
-vennlist <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+```
+
+```{r VennDiagramHymenoptera, warning=FALSE}
+
+dev.off()
+
+
+vennlist_hymen <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
+vennp_hymen <- venn.diagram(vennlist_hymen,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -534,13 +565,12 @@ vennp <- venn.diagram(vennlist,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp)
+grid::grid.draw(vennp_hymen)
 
-dev.off()
 
 ```
 
-```{r]}
+```{r Hemiptera, warning=FALSE}
 
 set.seed(16)#to make sure the figures is always the same
 obj_LT %>%
@@ -560,9 +590,6 @@ obj_LT %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 
 #>1 minute
-
-dev.off()
-
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> hemi_LT
 ps_hemi_LT <- metacoder::as_phyloseq(hemi_LT,
@@ -570,11 +597,18 @@ ps_hemi_LT <- metacoder::as_phyloseq(hemi_LT,
                                       otu_id_col = "bold_bin",
                                       sample_data = sample,
                                       sample_id_col = "sampleID")
-vennlist <- get_vennlist(obj=ps_hemi_LT, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+```
+
+```{r VennDiagramHemi, warning=FALSE}
+
+dev.off()
+
+vennlist_hemi <- get_vennlist(obj=ps_hemi_LT, factorNames="methodClass")
+vennp_hemi <- venn.diagram(vennlist_hemi,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -588,14 +622,14 @@ vennp <- venn.diagram(vennlist,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp)
+grid::grid.draw(vennp_hemi)
 
-dev.off()
+
 
 ```
 
 
-```{r}
+```{r Blatts, warning=FALSE}
 
 set.seed(16)#to make sure the figures is always the same
 obj_LT %>%
@@ -615,9 +649,6 @@ obj_LT %>%
             initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
 
 #<1 minute
-
-dev.off()
-
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> blats_LT 
 
@@ -626,12 +657,18 @@ ps_blats_LT <- metacoder::as_phyloseq(blats_LT,
                                       otu_id_col = "bold_bin",
                                       sample_data = sample,
                                       sample_id_col = "sampleID")
+```
 
-vennlist <- get_vennlist(obj=ps_blats_LT, factorNames="methodClass")
-vennp <- venn.diagram(vennlist,
+```{r VennDiagramBlatts, warning=FALSE}
+
+dev.off()
+
+vennlist_blats <- get_vennlist(obj=ps_blats_LT, factorNames="methodClass")
+vennp_blats <- venn.diagram(vennlist_blats,
                       height=5,
                       width=5, 
-                      filename=NULL, 
+                      filename=NULL,
+                      disable.logging = TRUE,
                       fill=c("goldenrod", "darkorchid"),
                       cat.col=c("goldenrod", "darkorchid"),
                       alpha = 0.85, 
@@ -645,14 +682,12 @@ vennp <- venn.diagram(vennlist,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp)
-
-
+grid::grid.draw(vennp_blats)
 
 ```
 
 
-```{r]}
+```{r TrichopteraDiptera, warning=FALSE}
 set.seed(16)#to make sure the figures is always the same
 obj_LT %>%
   metacoder::filter_taxa(taxon_names == "Trichoptera",#here is to filter the figure by groups

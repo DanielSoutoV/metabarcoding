@@ -9,7 +9,7 @@ Raw metabarcoding data is processed through mBrave (see parameters.doc) and down
 
 To follow this pipeline, go through the scripts in order 01 - 02 - 03 etc. 
 
-NOTE 1: script 01 is meant for information purposes only. You should not re-run these scripts as you will overwrite the existing files (which have already been merged and cleaned).
+NOTE 1: SCRIPT 01 IS FOR INFORMATION PURPOSES ONLY. You should not re-run these scripts as you will overwrite the existing files (which have already been merged and cleaned).
 
 NOTE 2: Most critical merging/cleaning steps, however, for the metabarcoding data a very meticulous process was later done in excel where 'arbitrarily' I had to decide which species was that BIN associated to, for BINs with more than one species name. This happened much more frequently than I would hope, but its a consequence of BOLD. As a general rule, I used the first species name for that BIN, wich normally corresponds to the name of first database which the barcodes were compared against (in this case, DS-BCIARTH; look at params.doc). 
 

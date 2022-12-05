@@ -3,6 +3,11 @@
 Daniel
 27/09/2022
 
+The chunk above now gave us a filtered taxmap object for each of the
+ForestGEO focal groups (plus Diptera because I think its interesting).
+Downstream analysis will make use of these filtered data sets, but we
+continue with general info (whole data set) between seasons.
+
 ``` r
 sample$inv_simp <- diversity(obj$data$tax_data[, sample$sampleID],
                              index = "invsimpson",
@@ -68,7 +73,8 @@ ggplot(sample, aes(x = SEASON, y = inv_simp)) +
 
 ![](03_diversity_and_ordination_files/figure-gfm/simpleBoxplotANOVAbetweenSeason-2.png)<!-- -->
 
-We can also see differences between sampling days.
+We can also see differences between sampling days although there is
+none.
 
 ``` r
 ggplot(sample, aes(x = day, y = inv_simp)) +
@@ -130,9 +136,9 @@ ggplot(sample, aes(x = day, y = inv_simp)) +
 
 ![](03_diversity_and_ordination_files/figure-gfm/simpleBoxplotANOVAbetweenDays-2.png)<!-- -->
 
-No difference between sampling days. We can also calculate several
-diversity metrics for sampling season and day using phyloseq but we must
-convert the taxmap object ‘obj’ to phyloseq
+We can also calculate several diversity metrics for sampling season and
+day using phyloseq but we must convert the taxmap object ‘obj’ to
+phyloseq
 
 ``` r
 ps_obj <- metacoder::as_phyloseq(obj,
@@ -140,12 +146,9 @@ ps_obj <- metacoder::as_phyloseq(obj,
                       otu_id_col = "bin_uri",
                       sample_data = sample,
                       sample_id_col = "sampleID")
-```
 
-    ## Warning: Discarding non-numeric columns in OTU table:   OTU_ID
+#normally, I load every package I need at the start of the script, but this may cause function masking problems (e.g. both MicrobiotaProcess and Metacoder have a 'as_phyloseq' function and you have to specify to R which package you want to use -  see above: metacoder::as_phyloseq - this means I am telling R to use the 'as_phyloseq' function from the metacoder package)
 
-``` r
-#normally, I load every package I need at the start of the script, but this may cause function masking problems (e.g. both MicrobiotaProcess and Metacoder has a 'as_phyloseq' function and you have to specify to R which package you want to use -  see above: metacoder::as_phyloseq - this means I am telling R to use the 'as_phyloseq' function from the metacoder package)
 plot_richness(ps_obj, color = "SEASON", x = "site") #phyloseq function
 ```
 
@@ -171,32 +174,13 @@ plot_richness(ps_obj, color = "day", x = "SEASON")
 
 ![](03_diversity_and_ordination_files/figure-gfm/multipleDiversityIndices-2.png)<!-- -->
 
-``` r
-library(microViz)
-```
-
-    ## Warning: package 'microViz' was built under R version 4.1.3
-
-    ## 
-    ## microViz version 0.9.4 - Copyright (C) 2021 David Barnett
-    ## * Website: https://david-barnett.github.io/microViz/
-    ## * Useful? For citation info, run: citation('microViz')
-    ## * Silence: suppressPackageStartupMessages(library(microViz))
-
-``` r
-ps_obj2 <- tax_mutate(ps_obj, Rank_0 = "Animalia", .before =1)
-#Note that there is an issue with ps_obj and the way the data has been exported and parsed from mBrave. The issue is that when parsing, Metacoder took the ; as a separation between taxonomic rank, but we do not have a 'Kingdom' or 'root' rank. Straight up to Phyllum. This added some issues downstream, exclusively in the MicroBiotaProcess pipelines. The line above adds this single column to the begining of the tax_table in the phyloseq object. Use this for all MicroBiotaProcess analyeses. 
-
-#ALTERNATIVELY, we could edit the original data sheet used in script 01 to inlcude 'Kingdom'  - I thought this was easier.
-```
-
 Figures above OK but we can do better. I am using the MicrobiotaProcess
 next
 
 ``` r
-alphaobj <- get_alphaindex(ps_obj2)
+alphaobj <- get_alphaindex(ps_obj)
 p_alpha <- ggbox(alphaobj, geom="violin", factorNames="SEASON", indexNames = c('Observe', 'Shannon', 'Simpson'),  signifmap = TRUE) +
-  scale_fill_manual(values=c("orange", "darkcyan"))+
+  scale_fill_manual(values=c("goldenrod", "steelblue"))+
   theme(strip.background = element_rect(colour=NA, fill="grey"))
 ```
 
@@ -213,17 +197,17 @@ p_alpha
 And look at rarefaction curves for both seasons:
 
 ``` r
-alphaobj <- get_alphaindex(ps_obj2)
+alphaobj <- get_alphaindex(ps_obj)
 head(as.data.frame(alphaobj))
 ```
 
     ##       Observe Chao1      ACE  Shannon   Simpson         J site day SEASON
-    ## ARM1A     126 126.0 126.0000 3.600195 0.9422695 0.7444138 ARM1   a    dry
-    ## ARM1B     139 139.0 139.0000 3.061092 0.8221029 0.6203482 ARM1   b    dry
-    ## ARM2A     111 111.0 111.0000 3.685066 0.9559076 0.7824699 ARM2   a    dry
-    ## ARM2B     132 132.5 132.3604 2.053448 0.5819609 0.4205470 ARM2   b    dry
-    ## ARM3A     132 132.0 132.0000 3.901274 0.9599091 0.7989826 ARM3   a    dry
-    ## ARM3B     149 149.0 149.0000 4.229049 0.9762380 0.8451427 ARM3   b    dry
+    ## ARM1A     126   126 126.0000 3.619239 0.9436772 0.7483516 ARM1   a    dry
+    ## ARM1B     139   139 139.0000 3.050564 0.8212502 0.6182147 ARM1   b    dry
+    ## ARM2A     111   111 111.0000 3.689905 0.9561525 0.7834974 ARM2   a    dry
+    ## ARM2B     132   132 132.1678 2.066035 0.5867035 0.4231249 ARM2   b    dry
+    ## ARM3A     132   132 132.0000 3.901274 0.9599091 0.7989826 ARM3   a    dry
+    ## ARM3B     149   149 149.0000 4.231994 0.9762900 0.8457313 ARM3   b    dry
     ##        inv_simp
     ## ARM1A 17.531036
     ## ARM1B  5.591829
@@ -233,14 +217,14 @@ head(as.data.frame(alphaobj))
     ## ARM3B 42.042631
 
 ``` r
-rareres <- get_rarecurve(obj=ps_obj2, chunks=400)
+rareres <- get_rarecurve(obj=ps_obj, chunks=400)
 
 prare2 <- ggrarecurve(obj=rareres,
                       factorNames="SEASON",
                       shadow=FALSE,
                       indexNames="Observe"
 ) +
-  scale_color_manual(values=c("orange", "darkcyan"))+
+  scale_color_manual(values=c("goldenrod", "steelblue"))+
   theme_bw()+
   theme(axis.text=element_text(size=8), panel.grid=element_blank(),
         strip.background = element_rect(colour=NA,fill="grey"),
@@ -255,33 +239,44 @@ prare2
 
 ![](03_diversity_and_ordination_files/figure-gfm/MBPRarefactionCurvesPerSeason-1.png)<!-- -->
 
-We can also do a Principal Coordinate Analysis to see not onlyl the
+We can also do a Principal Coordinate Analysis to see not only the
 differences between seasons, but what BINs are the main drivers of these
 differences
 
 ``` r
 # distmethod
 # "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
-pcoares <- get_pcoa(obj=ps_obj2, distmethod="bray", method="hellinger")
+pcoares <- get_pcoa(obj=ps_obj, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("SEASON"), ellipse=TRUE) +
-  scale_color_manual(values=c("orange", "darkcyan")) +
-  scale_fill_manual(values=c("orange", "darkcyan"))
+  scale_color_manual(values=c("goldenrod", "steelblue")) +
+  scale_fill_manual(values=c("goldenrod", "steelblue"))
 # first and third principal co-ordinates
 pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("SEASON"), ellipse=TRUE) +
-  scale_color_manual(values=c("orange", "darkcyan")) +
-  scale_fill_manual(values=c("orange", "darkcyan"))
-pcoaplot1 | pcoaplot2
+  scale_color_manual(values=c("goldenrod", "steelblue")) +
+  scale_fill_manual(values=c("goldenrod", "steelblue"))
+
+pcoaplot1 
 ```
 
 ![](03_diversity_and_ordination_files/figure-gfm/MBPPCoAPlots-1.png)<!-- -->
 
 ``` r
-#IMPORTANT - FROM HERE ON ITS CRITICAL TO USE PS_OBJ2 IN CASE YOU DIDN'T BEFORE
+pcoaplot2
+```
 
-classtaxa <- get_taxadf(obj=ps_obj2, taxlevel=4)
+![](03_diversity_and_ordination_files/figure-gfm/MBPPCoAPlots-2.png)<!-- -->
+
+``` r
+pcoaplot1 | pcoaplot2
+```
+
+![](03_diversity_and_ordination_files/figure-gfm/MBPPCoAPlots-3.png)<!-- -->
+
+``` r
+classtaxa <- get_taxadf(obj=ps_obj, taxlevel=4)
 # The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
 pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=10) +
   xlab(NULL) +
@@ -298,7 +293,7 @@ pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=10) +
 
 ``` r
 #note the flag "count=TRUE", this shows now total reads, rather than proportion %
-pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=15) +
+pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=10) +
   xlab(NULL) +
   ylab("count reads") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
@@ -311,22 +306,26 @@ pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=15) +
     ## will replace the existing scale.
 
 ``` r
-pclass | pclass2
+pclass
 ```
 
 ![](03_diversity_and_ordination_files/figure-gfm/MBPTaxonAbundanceTOP10-1.png)<!-- -->
 
+``` r
+pclass2
+```
+
+![](03_diversity_and_ordination_files/figure-gfm/MBPTaxonAbundanceTOP10-2.png)<!-- -->
+
 These following chunks might be best to compare metabarcoding vs
 traditional data but its OK to visualize below. Way too many species
 difference between both sampling strategies and so the plots are messy -
-after Kruskal, Wilcox and LDA, 264 taxa are discriminative between wet
-and dry seasons.
+after Kruskal, Wilcox and LDA, 264 taxa discriminate between wet and dry
+seasons.
 
 ``` r
 library('coin')#for kruskal and wilcox test
 ```
-
-    ## Warning: package 'coin' was built under R version 4.1.3
 
     ## Loading required package: survival
 
@@ -334,7 +333,7 @@ library('coin')#for kruskal and wilcox test
 # Since the effect size was calculated by randomly re-sampling, 
 # the seed should be set for reproducibly results.
 set.seed(1024)
-deres <- diff_analysis(obj = ps_obj2, classgroup = "SEASON",
+deres <- diff_analysis(obj = ps_obj, classgroup = "SEASON",
                        mlfun = "lda",
                        filtermod = "pvalue",
                        firstcomfun = "kruskal_test",
@@ -349,12 +348,12 @@ deres <- diff_analysis(obj = ps_obj2, classgroup = "SEASON",
 deres
 ```
 
-    ## The original data: 3002 features and 40 samples
+    ## The original data: 2572 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 2236 by 8 rank
-    ## after first test (kruskal_test) number of feature (pvalue<=0.05):781
-    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:538
-    ## after lda, Number of discriminative features: 264 (certain taxonomy classification:184; uncertain taxonomy classication: 80)
+    ## The taxda contained 2236 by 7 rank
+    ## after first test (kruskal_test) number of feature (pvalue<=0.05):630
+    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:425
+    ## after lda, Number of discriminative features: 205 (certain taxonomy classification:154; uncertain taxonomy classication: 51)
 
 ``` r
 diffclade_p <- ggdiffclade(
@@ -369,7 +368,7 @@ diffclade_p <- ggdiffclade(
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("goldenrod", "steelblue")
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -399,10 +398,10 @@ diffclade_p <- ggdiffclade(
 diffclade_p
 ```
 
-![](03_diversity_and_ordination_files/figure-gfm/MessyFigure-1.png)<!-- -->
+![](03_diversity_and_ordination_files/figure-gfm/MessyFigure_TaxoTree-1.png)<!-- -->
 
 ``` r
-ps_obj2 %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^o_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE)
 ```
 
     ## The otutree is empty in the MPSE object!
@@ -414,39 +413,70 @@ ps_obj2 %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbund
 
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
 
-![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](03_diversity_and_ordination_files/figure-gfm/BoxplotFIlteredFamily-1.png)<!-- -->
 
 ``` r
-diffbox <- ggdiffbox(obj=deres, box_notch=FALSE, 
-                     colorlist=c("darkcyan", "orange"), l_xlabtext="relative abundance", ytextsize = 0.5)
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggeffectsize(colorlist=c("steelblue", "goldenrod"), notch = FALSE)
 ```
+
+    ## The otutree is empty in the MPSE object!
 
     ## The color has been set automatically, you can reset it manually by adding scale_color_manual(values=yourcolors)
 
-    ## Scale for 'colour' is already present. Adding another scale for 'colour',
-    ## which will replace the existing scale.
+![](03_diversity_and_ordination_files/figure-gfm/BoxplotFIlteredFamily-2.png)<!-- -->
 
-``` r
-diffbox
-```
+###### Please pay attention to the code below as it breaks down the code above, but to speed up the process so we don’t have to convert form PS to MPSE to diff_anal. Instead it creates the object ps_obj_rareMPSE which I then used to filter by family and do aeither ggdifbox or ggeffectsize
 
-![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+ps_obj %>% as.MPSE() %>% mp_diff_analysis(.abundance = RareAbundance,
+.group = SEASON, action = ‘get’) -> ps_obj_rareMPSE
 
-``` r
-es_p <- ggeffectsize(obj=deres, 
-                     lineheight=0.1,
-                     linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
-```
+ps_obj_rareMPSE %>% dplyr::filter(grepl(“^f\_\_“, f)) %>%
+ggdiffbox(colorlist = c (”steelblue”, “goldenrod”), notch = FALSE)
 
-    ## The color has been set automatically, you can reset it manually by adding scale_color_manual(values=yourcolors)
-
-    ## Scale for 'colour' is already present. Adding another scale for 'colour',
-    ## which will replace the existing scale.
-
-``` r
-es_p
-```
-
-![](03_diversity_and_ordination_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+ps_obj_rareMPSE %>% dplyr::filter(grepl(“^f\_\_“, f)) %>%
+ggeffectsize(colorlist = c (”steelblue”, “goldenrod”), notch = FALSE)
