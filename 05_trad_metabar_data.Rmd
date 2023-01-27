@@ -28,7 +28,7 @@ Setting up the data which now includes traditional and metabarcoding records
 
 ```{r warning = FALSE}
 
-tradmetabr <- read.csv('data/tradmetabr_merged.csv')
+tradmetabr <- read.csv('data/tradmetabr_merged_clean.csv')
 sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
 obj <- parse_tax_data(tradmetabr,
                       class_cols = "classification",

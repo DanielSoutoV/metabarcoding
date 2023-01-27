@@ -7,7 +7,7 @@ output: github_document
   #chunk_output_type: console
 ---
 
-```{r include = FALSE}
+```{r }
 rm(list=ls())
 library('iNEXT')
 library('ggplot2')

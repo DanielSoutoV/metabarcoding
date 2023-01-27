@@ -3,477 +3,12 @@
 Daniel
 15/11/2022
 
-``` r
-rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
-library('tidyr')
-library('dplyr')
-```
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
+Setting up the data which now includes traditional and metabarcoding
+records
 
 ``` r
-library('metacoder')
-```
-
-    ## This is metacoder verison 0.3.5 (stable)
-
-``` r
-library('ggplot2')
-```
-
-    ## 
-    ## Attaching package: 'ggplot2'
-
-    ## The following object is masked from 'package:metacoder':
-    ## 
-    ##     map_data
-
-``` r
-library('agricolae')
-library('vegan')
-```
-
-    ## Loading required package: permute
-
-    ## Loading required package: lattice
-
-    ## Registered S3 methods overwritten by 'vegan':
-    ##   method      from
-    ##   plot.rda    klaR
-    ##   predict.rda klaR
-    ##   print.rda   klaR
-
-    ## This is vegan 2.5-7
-
-``` r
-library('MicrobiotaProcess')
-```
-
-    ## Registered S3 method overwritten by 'ggtree':
-    ##   method      from 
-    ##   identify.gg ggfun
-
-    ## 
-    ## Attaching package: 'MicrobiotaProcess'
-
-    ## The following object is masked from 'package:metacoder':
-    ## 
-    ##     as_phyloseq
-
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     filter
-
-``` r
-library('phyloseq')
-```
-
-    ## 
-    ## Attaching package: 'phyloseq'
-
-    ## The following object is masked from 'package:MicrobiotaProcess':
-    ## 
-    ##     refseq
-
-    ## The following object is masked from 'package:metacoder':
-    ## 
-    ##     filter_taxa
-
-``` r
-library('ggtree')
-```
-
-    ## ggtree v3.0.4  For help: https://yulab-smu.top/treedata-book/
-    ## 
-    ## If you use ggtree in published research, please cite the most appropriate paper(s):
-    ## 
-    ## 1. Guangchuang Yu. Using ggtree to visualize data on tree-like structures. Current Protocols in Bioinformatics, 2020, 69:e96. doi:10.1002/cpbi.96
-    ## 2. Guangchuang Yu, Tommy Tsan-Yuk Lam, Huachen Zhu, Yi Guan. Two methods for mapping and visualizing associated data on phylogeny using ggtree. Molecular Biology and Evolution 2018, 35(12):3041-3043. doi:10.1093/molbev/msy194
-    ## 3. Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data. Methods in Ecology and Evolution 2017, 8(1):28-36. doi:10.1111/2041-210X.12628
-
-    ## 
-    ## Attaching package: 'ggtree'
-
-    ## The following object is masked from 'package:tidyr':
-    ## 
-    ##     expand
-
-``` r
-library('coin')
-```
-
-    ## Loading required package: survival
-
-``` r
-library('microViz')
-```
-
-    ## 
-    ## microViz version 0.9.4 - Copyright (C) 2021 David Barnett
-    ## * Website: https://david-barnett.github.io/microViz/
-    ## * Useful? For citation info, run: citation('microViz')
-    ## * Silence: suppressPackageStartupMessages(library(microViz))
-
-``` r
-library('VennDiagram')
-```
-
-    ## Loading required package: grid
-
-    ## Loading required package: futile.logger
-
-    ## 
-    ## Attaching package: 'VennDiagram'
-
-    ## The following object is masked from 'package:ggtree':
-    ## 
-    ##     rotate
-
-``` r
-library('UpSetR')
-```
-
-    ## 
-    ## Attaching package: 'UpSetR'
-
-    ## The following object is masked from 'package:lattice':
-    ## 
-    ##     histogram
-
-``` r
-library('iNEXT')
-
-tradmetabr <- read.csv('data/tradmetabr_merged.csv')
+tradmetabr <- read.csv('data/tradmetabr_merged_clean.csv')
 sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
-head(tradmetabr)
-```
-
-    ##       bold_bin
-    ## 1 BOLD:AEK1984
-    ## 2 BOLD:AEK9771
-    ## 3 BOLD:AEL2824
-    ## 4 BOLD:ADT0927
-    ## 5 BOLD:AEL0213
-    ## 6 BOLD:ABV9212
-    ##                                                                    classification
-    ## 1                          k__Animalia;p__Arthropoda;c__Arachnida;o__;f__;g__;s__
-    ## 2                          k__Animalia;p__Arthropoda;c__Arachnida;o__;f__;g__;s__
-    ## 3                          k__Animalia;p__Arthropoda;c__Arachnida;o__;f__;g__;s__
-    ## 4       k__Animalia;p__Arthropoda;c__Arachnida;o__Araneae;f__Anyphaenidae;g__;s__
-    ## 5       k__Animalia;p__Arthropoda;c__Arachnida;o__Araneae;f__Anyphaenidae;g__;s__
-    ## 6 k__Animalia;p__Arthropoda;c__Arachnida;o__Araneae;f__Araneidae;g__Arachnura;s__
-    ##   ALTOSCAMP_na_LT ARGOS_dry_BA ARGOS_wet_BA ARM1_dry_B ARM1_wet_B B05_wet_BB
-    ## 1               0            0            0          0          0          0
-    ## 2               0            0            0          0          0          0
-    ## 3               0            0            0          0          0          0
-    ## 4               0            0            0          0          0          0
-    ## 5               0            0            0          0          0          0
-    ## 6               0            0            0          0          0          0
-    ##   ARM1_dry_BB ARM1_wet_BB ARM1_dry_BT ARM1_wet_BT ARM1_wet_LT ARM1_dry_LT
-    ## 1           0           0           0           0           0           0
-    ## 2           0           0           0           0           0           0
-    ## 3           0           0           0           0           0           0
-    ## 4           0           0           0           0           0           0
-    ## 5           0           0           0           0           0           0
-    ## 6           0           0           0           0           0           0
-    ##   ARM1_dry_W ARM2_dry_B ARM2_wet_B TEST_dry_BB ARM2_dry_BB B06_wet_BB
-    ## 1          0          0          0           0           0          0
-    ## 2          0          0          0           0           0          0
-    ## 3          0          0          0           0           0          0
-    ## 4          0          0          0           0           0          0
-    ## 5          0          0          0           0           0          0
-    ## 6          0          0          0           0           0          0
-    ##   ARM2_wet_BB ARM2_wet_BT ARM2_dry_BT ARM2_wet_LT ARM2_dry_LT ARM2_dry_W
-    ## 1           0           0           0           0           0          0
-    ## 2           0           0           0           0           0          0
-    ## 3           0           0           0           0           0          0
-    ## 4           0           0           0           0           0          0
-    ## 5           0           0           0           0           0          0
-    ## 6           0           0           0           0           0          0
-    ##   ARM3_dry_B ARM3_wet_B ARM3_wet_BB ARM3_dry_BB ARM3_dry_BT ARM3_wet_BT
-    ## 1          0          0           0           0           0           0
-    ## 2          0          0           0           0           0           0
-    ## 3          0          0           0           0           0           0
-    ## 4          0          0           0           0           0           0
-    ## 5          0          0           0           0           0           0
-    ## 6          0          0           0           0           0           0
-    ##   ARM3_wet_LT ARM3_dry_LT L02_wet_LT L02TEST_dry_LT L02_dry_LT M07_dry_MP
-    ## 1           0           0          0              0          0          0
-    ## 2           0           0          0              0          0          0
-    ## 3           0           0          0              0          0          0
-    ## 4           0           0          0              0          0          0
-    ## 5           0           0          0              0          0          0
-    ## 6           0           0          0              0          0          0
-    ##   ARM3_dry_W ARM4_wet_B ARM4_dry_B B08_wet_BB ARM4_dry_BB ARM4_wet_BB
-    ## 1          0          0          0          0           0           0
-    ## 2          0          0          0          0           0           0
-    ## 3          0          0          0          0           0           0
-    ## 4          0          0          0          0           0           0
-    ## 5          0          0          0          0           0           0
-    ## 6          0          0          0          0           0           0
-    ##   ARM4_dry_BT ARM4_wet_BT ARM4_wet_LT ARM4_dry_LT M08_dry_MP ARM4_dry_W
-    ## 1           0           0           0           0          0          0
-    ## 2           0           0           0           0          0          0
-    ## 3           0           0           0           0          0          0
-    ## 4           0           0           0           0          0          0
-    ## 5           0           0           0           0          0          0
-    ## 6           0           0           0           0          0          0
-    ##   ATO_LESM_na_B B_na_BM B_na_TBA BAL1_dry_B BAL1_wet_B BAL1_dry_BB BAL1_wet_BB
-    ## 1             0       0        0          0          0           0           0
-    ## 2             0       0        0          0          0           0           0
-    ## 3             0       0        0          0          0           0           0
-    ## 4             0       0        0          0          0           0           0
-    ## 5             0       0        0          0          0           0           0
-    ## 6             0       0        0          0          0           0           0
-    ##   BAL1_wet_BT BAL1_dry_BT BAL1_dry_LT BAL1_wet_LT M01_dry_MP BAL1_dry_W
-    ## 1           0           0           0           0          0          0
-    ## 2           0           0           0           0          0          0
-    ## 3           0           0           0           0          0          0
-    ## 4           0           0           0           0          0          0
-    ## 5           0           0           0           0          0          0
-    ## 6           0           0           0           0          0          0
-    ##   ARBOREALBUJAN_na_AM ASPAN_na_B BCI_dry_BE BCI_wet_BM BCI_dry_BM BCI_na_HC
-    ## 1                   0          0          0          0          0         0
-    ## 2                   0          0          0          0          0         0
-    ## 3                   0          0          0          0          0         0
-    ## 4                   0          0          0          0          0         0
-    ## 5                   0          0          0          0          0         0
-    ## 6                   0          0          0          0          0         0
-    ##   BCI_wet_HC BCI_dry_HC ALATESHIK_na_LT MANUALJESSE_na_MA ARBOREALENDARA_na_MA
-    ## 1          0          0               0                 0                    0
-    ## 2          0          0               0                 0                    0
-    ## 3          0          0               0                 0                    0
-    ## 4          0          0               0                 0                    0
-    ## 5          0          0               0                 0                    0
-    ## 6          0          0               0                 0                    0
-    ##   MANUALDONOSOLIT_na_MA MANUALDONOSOUND_na_MA BCI_wet_MM BCI_dry_MM
-    ## 1                     0                     0          0          0
-    ## 2                     0                     0          0          0
-    ## 3                     0                     0          0          0
-    ## 4                     0                     0          0          0
-    ## 5                     0                     0          0          0
-    ## 6                     0                     0          0          0
-    ##   FARAOC_dry_RP FARAOC_na_RP FROGDIETDONOSO_na_SC TR8_dry_T TR10_dry_T
-    ## 1             0            0                    0         0          0
-    ## 2             0            0                    0         0          0
-    ## 3             0            0                    0         0          0
-    ## 4             0            0                    0         0          0
-    ## 5             0            0                    0         0          0
-    ## 6             0            0                    0         0          0
-    ##   TR11_dry_T TR2_dry_T TR7_dry_T TR9_dry_T TR1_dry_T TR6_dry_T BL_dry_BM
-    ## 1          0         0         0         0         0         0         0
-    ## 2          0         0         0         0         0         0         0
-    ## 3          0         0         0         0         0         0         0
-    ## 4          0         0         0         0         0         0         0
-    ## 5          0         0         0         0         0         0         0
-    ## 6          0         0         0         0         0         0         0
-    ##   BL_dry_TH C37_dry_BA C37_wet_BA C42_wet_BA C42_dry_BA C48_dry_BA C48_wet_BA
-    ## 1         0          0          0          0          0          0          0
-    ## 2         0          0          0          0          0          0          0
-    ## 3         0          0          0          0          0          0          0
-    ## 4         0          0          0          0          0          0          0
-    ## 5         0          0          0          0          0          0          0
-    ## 6         0          0          0          0          0          0          0
-    ##   CED_dry_T C57_wet_BA C57_dry_BA C64_wet_BA C64_dry_BA CAC_wet_HC
-    ## 1         0          0          0          0          0          0
-    ## 2         0          0          0          0          0          0
-    ## 3         0          0          0          0          0          0
-    ## 4         0          0          0          0          0          0
-    ## 5         0          0          0          0          0          0
-    ## 6         0          0          0          0          0          0
-    ##   ALDERCOTTE_na_LA CHAC_LESM_na_B CHAN_LESM_na_B COM_LESM_na_B CUED_LESM_na_B
-    ## 1                0              0              0             0              0
-    ## 2                0              0              0             0              0
-    ## 3                0              0              0             0              0
-    ## 4                0              0              0             0              0
-    ## 5                0              0              0             0              0
-    ## 6                0              0              0             0              0
-    ##   D_na_BM D_na_TBA DRA1_dry_B DRA1_wet_B DRA1_dry_BB DRA1_wet_BB DRA1_wet_BT
-    ## 1       0        0          0          0           0           0           0
-    ## 2       0        0          0          0           0           0           0
-    ## 3       0        0          0          0           0           0           0
-    ## 4       0        0          0          0           0           0           0
-    ## 5       0        0          0          0           0           0           0
-    ## 6       0        0          0          0           0           0           0
-    ##   DRA1_dry_BT DRA1_dry_LT DRA1_wet_LT L03_wet_LT L03_dry_LT DRA1_dry_W
-    ## 1           0           0           0          0          0          0
-    ## 2           0           0           0          0          0          0
-    ## 3           0           0           0          0          0          0
-    ## 4           0           0           0          0          0          0
-    ## 5           0           0           0          0          0          0
-    ## 6           0           0           0          0          0          0
-    ##   EMI_LESM_na_B FB_dry_BM FB_dry_TBA FM1_dry_BM FM2_dry_BM GIG_wet_TN
-    ## 1             0         0          0          0          0          0
-    ## 2             0         0          0          0          0          0
-    ## 3             0         0          0          0          0          0
-    ## 4             0         0          0          0          0          0
-    ## 5             0         0          0          0          0          0
-    ## 6             0         0          0          0          0          0
-    ##   HER_LESM_na_B IXT_LESM_na_B JDH_dry_BM JVT_dry_BM JVT_dry_TBA JZ_dry_TBA
-    ## 1             0             0          0          0           0          0
-    ## 2             0             0          0          0           0          0
-    ## 3             0             0          0          0           0          0
-    ## 4             0             0          0          0           0          0
-    ## 5             0             0          0          0           0          0
-    ## 6             0             0          0          0           0          0
-    ##   L_dry_BM NRG_LESM_na_B OPEN_na_HC PAN18FG062_na_HC PAN18FG009_na_HC
-    ## 1        0             0          0                0                0
-    ## 2        0             0          0                0                0
-    ## 3        0             0          0                0                0
-    ## 4        0             0          0                0                0
-    ## 5        0             0          0                0                0
-    ## 6        0             0          0                0                0
-    ##   PAN18FG078_na_HC PAN18FG060_na_HC PAN18FG024_na_HC PAN18FG004_na_HC
-    ## 1                0                0                0                0
-    ## 2                0                0                0                0
-    ## 3                0                0                0                0
-    ## 4                0                0                0                0
-    ## 5                0                0                0                0
-    ## 6                0                0                0                0
-    ##   PAN18FG080_na_HC PNM_wet_HC PRD_dry_HC PRD_wet_HC PRD_na_HC PRD_dry_LT
-    ## 1                0          0          0          0         0          0
-    ## 2                0          0          0          0         0          0
-    ## 3                0          0          0          0         0          0
-    ## 4                0          0          0          0         0          0
-    ## 5                0          0          0          0         0          0
-    ## 6                0          0          0          0         0          0
-    ##   PUC_LESM_na_B RIOFRIO2_na_HC RIOFRIO1_na_MM SOL_dry_BM T38_wet_BA T38_dry_BA
-    ## 1             0              0              0          0          0          0
-    ## 2             0              0              0          0          0          0
-    ## 3             0              0              0          0          0          0
-    ## 4             0              0              0          0          0          0
-    ## 5             0              0              0          0          0          0
-    ## 6             0              0              0          0          0          0
-    ##   T39_wet_BA T39_dry_BA TER_dry_T T46_dry_BA T46_wet_BA T47_wet_BA T47_dry_BA
-    ## 1          0          0         0          0          0          0          0
-    ## 2          0          0         0          0          0          0          0
-    ## 3          0          0         0          0          0          0          0
-    ## 4          0          0         0          0          0          0          0
-    ## 5          0          0         0          0          0          0          0
-    ## 6          0          0         0          0          0          0          0
-    ##   T61_wet_BA T61_dry_BA TAP_LESM_na_B TAPIJ_LESM_na_B TB_dry_TBA TB1_dry_BM
-    ## 1          0          0             0               0          0          0
-    ## 2          0          0             0               0          0          0
-    ## 3          0          0             0               0          0          0
-    ## 4          0          0             0               0          0          0
-    ## 5          0          0             0               0          0          0
-    ## 6          0          0             0               0          0          0
-    ##   TB2_dry_BM TB2_dry_TBA TEX_LESM_na_B TGP_dry_TBA TEK_dry_T TK2_wet_BA
-    ## 1          0           0             0           0         0          0
-    ## 2          0           0             0           0         0          0
-    ## 3          0           0             0           0         0          0
-    ## 4          0           0             0           0         0          0
-    ## 5          0           0             0           0         0          0
-    ## 6          0           0             0           0         0          0
-    ##   TK3_wet_BA TK4_wet_BA TK5_wet_BA TUP_dry_HC TUX_LESM_na_B WHE1_wet_B
-    ## 1          0          0          0          0             0          0
-    ## 2          0          0          0          0             0          0
-    ## 3          0          0          0          0             0          0
-    ## 4          0          0          0          0             0          0
-    ## 5          0          0          0          0             0          0
-    ## 6          0          0          0          0             0          0
-    ##   WHE1_dry_B WHE1_dry_BB WHE1_wet_BB B02_wet_BB WHE1_dry_BT WHE1_wet_BT
-    ## 1          0           0           0          0           0           0
-    ## 2          0           0           0          0           0           0
-    ## 3          0           0           0          0           0           0
-    ## 4          0           0           0          0           0           0
-    ## 5          0           0           0          0           0           0
-    ## 6          0           0           0          0           0           0
-    ##   WHE1_wet_LT WHE1_dry_LT M03_dry_MP WHE1_dry_W WHE2_dry_B WHE2_wet_B
-    ## 1           0           0          0          0          0          0
-    ## 2           0           0          0          0          0          0
-    ## 3           0           0          0          0          0          0
-    ## 4           0           0          0          0          0          0
-    ## 5           0           0          0          0          0          0
-    ## 6           0           0          0          0          0          0
-    ##   WHE2_dry_BB WHE2_dry_BT WHE2_wet_BT L05_wet_LT L05TEST_wet_LT WHE2_dry_LT
-    ## 1           0           0           0          0              0           0
-    ## 2           0           0           0          0              0           0
-    ## 3           0           0           0          0              0           0
-    ## 4           0           0           0          0              0           0
-    ## 5           0           0           0          0              0           0
-    ## 6           0           0           0          0              0           0
-    ##   WHE2_wet_LT L05TEST_dry_LT WHE2_dry_W WMW_dry_BM WMW_dry_TBA ZET1_wet_B
-    ## 1           0              0          0          0           0          0
-    ## 2           0              0          0          0           0          0
-    ## 3           0              0          0          0           0          0
-    ## 4           0              0          0          0           0          0
-    ## 5           0              0          0          0           0          0
-    ## 6           0              0          0          0           0          0
-    ##   ZET1_dry_B ZET1_dry_BB B09_wet_BB ZET1_wet_BB ZET1_wet_BT ZET1_dry_BT
-    ## 1          0           0          0           0           0           0
-    ## 2          0           0          0           0           0           0
-    ## 3          0           0          0           0           0           0
-    ## 4          0           0          0           0           0           0
-    ## 5          0           0          0           0           0           0
-    ## 6          0           0          0           0           0           0
-    ##   L04_wet_LT ZET1_wet_LT ZET1_dry_LT L04TEST_dry_LT ZET1_dry_W ZET2_wet_B
-    ## 1          0           0           0              0          0          0
-    ## 2          0           0           0              0          0          0
-    ## 3          0           0           0              0          0          0
-    ## 4          0           0           0              0          0          0
-    ## 5          0           0           0              0          0          0
-    ## 6          0           0           0              0          0          0
-    ##   ZET2_dry_B ZET2_dry_BB B10_wet_BB ZET2_wet_BT ZET2_dry_BT ZET2_wet_LT
-    ## 1          0           0          0           0           0           0
-    ## 2          0           0          0           0           0           0
-    ## 3          0           0          0           0           0           0
-    ## 4          0           0          0           0           0           0
-    ## 5          0           0          0           0           0           0
-    ## 6          0           0          0           0           0           0
-    ##   ZET2_dry_LT L01_wet_LT L01TEST_dry_LT L01_dry_LT M10_dry_MP ZET2_dry_W
-    ## 1           0          0              0          0          0          0
-    ## 2           0          0              0          0          0          0
-    ## 3           0          0              0          0          0          0
-    ## 4           0          0              0          0          0          0
-    ## 5           0          0              0          0          0          0
-    ## 6           0          0              0          0          0          0
-    ##   WINKLERDONOSO_na_W total39864 total39865 total39866 total39867 total39868
-    ## 1                  0          0          0          0          0          0
-    ## 2                  0          0          0          0          0          0
-    ## 3                  0          0          0          0          0          0
-    ## 4                  0          0          1          0          0          0
-    ## 5                  0          0          0          0          0          0
-    ## 6                  0          0          0          0          0          0
-    ##   total39869 total39870 total39871 total39872 total39873 total39874 total39875
-    ## 1          0          0          1          0          0          0          0
-    ## 2          0          0          0          0          0          1          0
-    ## 3          0          0          0          0          0          1          0
-    ## 4          0          0          0          0          0          0          1
-    ## 5          0          0          0          0          0          0          0
-    ## 6          0          0          0          0          0          0          0
-    ##   total39876 total39877 total39878 total39879 total39880 total39881 total39882
-    ## 1          0          0          0          0          0          0          0
-    ## 2          0          1          0          0          0          0          0
-    ## 3          0          0          0          0          0          0          0
-    ## 4          0          0          0          0          0          0          0
-    ## 5          0          0          0          0          0          0          0
-    ## 6          0          0          0          0          0          0          0
-    ##   total39883 ARM1A ARM1B ARM2A ARM2B ARM3A ARM3B ARM4A ARM4B BAL1A BAL1B DRA1A
-    ## 1          0     0     0     0     0     0     0     0     0     0     0     0
-    ## 2          0     0     0     0     0     0     0     0     0     0     0     0
-    ## 3          0     0     0     0     0     0     0     0     0     0     0     0
-    ## 4          0     0     0     0     0     0     0     0     0     0     1     0
-    ## 5          0     0     0     0     0     0     0     0     0     0     1     0
-    ## 6          0     0     0     1     0     0     0     0     0     0     0     0
-    ##   DRA1B WHE1A WHE1B WHE2A WHE2B ZET1A ZET1B ZET2A ZET2B
-    ## 1     0     0     0     0     0     0     0     0     0
-    ## 2     0     0     0     0     0     0     0     0     0
-    ## 3     0     0     0     0     0     0     0     0     0
-    ## 4     0     0     0     0     0     0     0     0     0
-    ## 5     0     0     0     0     0     0     0     0     0
-    ## 6     0     0     0     0     0     0     0     0     0
-
-``` r
 obj <- parse_tax_data(tradmetabr,
                       class_cols = "classification",
                       class_sep = ";",
@@ -506,17 +41,20 @@ separate them by focal groups (potentially by season too).
 ##trhis takes nearly 30 minutes to run
 
 heat_tree(obj,
+          node_size_range = c(0.006, 0.04),
+          edge_size_range = c(0.001,0.003),
           node_label = taxon_names,
           node_size = n_obs,
           node_color = mean_diff,
-          node_color_interval = c(-0.5, 0.5),
-          node_color_range =c("goldenrod", "gray", "darkorchid"),
+          node_color_interval = c(-0.44, 0.44),
+          node_color_range =c("darkolivegreen3", "gray", "darkorchid"),
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportions",
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
-          initial_layout = "reingold-tilford")
+          initial_layout = "reingold-tilford",
+          output_file = "./05_trad_metabar_data_files/meanDiff_tradmetabr.pdf")
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/metacoderTree%20all%20counts-1.png)<!-- -->
@@ -531,7 +69,7 @@ their code has ’node_color_range = c(“cyan”, “gray”, “magenta”)###
 If we look at print(obj$data$diff_table) above the plot, we can see that
 in our case, treatment_1 is ‘TRAD’. The log2 median ratio is defined
 as”log2(TRAD / METABR). When a taxon has more counts with traditional
-classificaiton, the ratio is positive, therefore taxa more abundant with
+classification, the ratio is positive, therefore taxa more abundant with
 traditional are coloured ‘darkorchid (purple)’ in our case (not
 magenta).
 
@@ -612,66 +150,77 @@ pcoares <- get_pcoa(obj=ps_obj_all, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
+
+pdf("./05_trad_metabar_data_files/pcoa_all_2axis.pdf")
+pcoaplot1
+dev.off()
+```
+
+    ## png 
+    ##   2
+
+``` r
 pcoaplot1 | pcoaplot2 #PCoA between classification methods
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/MBPPCoAPlots%20all%20counts-1.png)<!-- -->
 
+Next are some more pcoa plots just to show what we can do as long as we
+have really well detailed metadata (e.g. season and methodClass, or
+colleciton method)
+
 ``` r
 pcoaplot1a <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2a <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
+
 pcoaplot1a | pcoaplot2a #Between classification and season
 ```
 
-![](05_trad_metabar_data_files/figure-gfm/MBPPCoAPlots%20all%20counts-2.png)<!-- -->
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
 pcoaplot1c <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "method"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2c <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "method"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 pcoaplot1c | pcoaplot2c #Between classification, season and trap method
 ```
 
-![](05_trad_metabar_data_files/figure-gfm/MBPPCoAPlots%20all%20counts-3.png)<!-- -->
+    ## Warning: Removed 36 rows containing missing values (geom_star).
+    ## Removed 36 rows containing missing values (geom_star).
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 ``` r
 ###### I HAVE A SMALL PROBLEM WITH grid PACKAGE. IT IS PLOTING ON TOP OF PREVIOUS PLOTS SO DO THIS dev.off() to draw in a new plot
 
-dev.off()
-```
-
-    ## null device 
-    ##           1
-
-``` r
 vennlist_all <- get_vennlist(obj=ps_obj_all, factorNames="methodClass")
 vennp_all <- venn.diagram(vennlist_all,
                       height=5,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -685,69 +234,80 @@ vennp_all <- venn.diagram(vennlist_all,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:22:55] [[1]]
-    ## INFO [2022-12-05 13:22:55] vennlist_all
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $height
-    ## INFO [2022-12-05 13:22:55] [1] 5
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $width
-    ## INFO [2022-12-05 13:22:55] [1] 5
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $filename
-    ## INFO [2022-12-05 13:22:55] NULL
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $disable.logging
-    ## INFO [2022-12-05 13:22:55] [1] TRUE
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $fill
-    ## INFO [2022-12-05 13:22:55] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $cat.col
-    ## INFO [2022-12-05 13:22:55] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $alpha
-    ## INFO [2022-12-05 13:22:55] [1] 0.85
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $fontfamily
-    ## INFO [2022-12-05 13:22:55] [1] "serif"
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $fontface
-    ## INFO [2022-12-05 13:22:55] [1] "bold"
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $cex
-    ## INFO [2022-12-05 13:22:55] [1] 1.2
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $cat.cex
-    ## INFO [2022-12-05 13:22:55] [1] 1.3
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $cat.default.pos
-    ## INFO [2022-12-05 13:22:55] [1] "outer"
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $cat.dist
-    ## INFO [2022-12-05 13:22:55] [1] 0.1
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $margin
-    ## INFO [2022-12-05 13:22:55] [1] 0.1
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $lwd
-    ## INFO [2022-12-05 13:22:55] [1] 3
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $lty
-    ## INFO [2022-12-05 13:22:55] [1] "dotted"
-    ## INFO [2022-12-05 13:22:55] 
-    ## INFO [2022-12-05 13:22:55] $imagetype
-    ## INFO [2022-12-05 13:22:55] [1] "svg"
-    ## INFO [2022-12-05 13:22:55]
+    ## INFO [2023-01-27 15:30:19] [[1]]
+    ## INFO [2023-01-27 15:30:19] vennlist_all
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $height
+    ## INFO [2023-01-27 15:30:19] [1] 5
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $width
+    ## INFO [2023-01-27 15:30:19] [1] 5
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $filename
+    ## INFO [2023-01-27 15:30:19] NULL
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $disable.logging
+    ## INFO [2023-01-27 15:30:19] [1] TRUE
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $fill
+    ## INFO [2023-01-27 15:30:19] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $cat.col
+    ## INFO [2023-01-27 15:30:19] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $alpha
+    ## INFO [2023-01-27 15:30:19] [1] 0.85
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $fontfamily
+    ## INFO [2023-01-27 15:30:19] [1] "serif"
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $fontface
+    ## INFO [2023-01-27 15:30:19] [1] "bold"
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $cex
+    ## INFO [2023-01-27 15:30:19] [1] 1.2
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $cat.cex
+    ## INFO [2023-01-27 15:30:19] [1] 1.3
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $cat.default.pos
+    ## INFO [2023-01-27 15:30:19] [1] "outer"
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $cat.dist
+    ## INFO [2023-01-27 15:30:19] [1] 0.1
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $margin
+    ## INFO [2023-01-27 15:30:19] [1] 0.1
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $lwd
+    ## INFO [2023-01-27 15:30:19] [1] 3
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $lty
+    ## INFO [2023-01-27 15:30:19] [1] "dotted"
+    ## INFO [2023-01-27 15:30:19] 
+    ## INFO [2023-01-27 15:30:19] $imagetype
+    ## INFO [2023-01-27 15:30:19] [1] "svg"
+    ## INFO [2023-01-27 15:30:19]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_all.pdf")
 grid::grid.draw(vennp_all)
+dev.off()
 ```
+
+    ## png 
+    ##   2
+
+Most abundant taxa with either method except this is not an accurate
+representation ForestGEO only uses focal species and differente
+collection methods, so here we are making an unfair comparison. There
+are no Diptera in traditional datasets and no bait colleciotn in
+metabarcoding data.
 
 ``` r
 classtaxa <- get_taxadf(obj=ps_obj_all, taxlevel=4)
 # The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
-pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=5) +
+pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=10) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
@@ -785,6 +345,16 @@ pclass2
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/MBPTaxonAbundanceTOP5-2.png)<!-- -->
+
+So we further filter data to focus only on Light Trap data and after we
+will filter again to only focal families. We could refine these data as
+deep as we want, however, in this case we are limited by taxonomic rank.
+The data I downloaded from mBRAVE did not include subfamily - for future
+analyses, one should aim to include every taxonomic rank instead as this
+could have been ideal for e.g. Arciidae
+
+We will repeat the same type of analyses as before but jsut for Light
+Trap data.
 
 ``` r
 obj_LT <- parse_tax_data(tradmetabr,
@@ -863,13 +433,13 @@ pcoares_LT <- get_pcoa(obj=ps_obj_LT, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1_LT <- ggordpoint(obj=pcoares_LT, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2_LT <- ggordpoint(obj=pcoares_LT, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 pcoaplot1_LT | pcoaplot2_LT
 ```
 
@@ -878,7 +448,7 @@ pcoaplot1_LT | pcoaplot2_LT
 ``` r
 classtaxa_LT <- get_taxadf(obj=ps_obj_LT, taxlevel=4)
 # The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
-pclass_LT <- ggbartax(obj=classtaxa_LT, facetNames="methodClass", topn=5) +
+pclass_LT <- ggbartax(obj=classtaxa_LT, facetNames="methodClass", topn=10) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
@@ -903,13 +473,14 @@ heat_tree(obj_LT,
           node_size = n_obs,
           node_color = mean_diff,
           node_color_interval = c(-0.5, 0.5),
-          node_color_range = c("goldenrod", "gray", "darkorchid"),
+          node_color_range = c("darkolivegreen3", "gray", "darkorchid"),
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportions",
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
-          initial_layout = "reingold-tilford")
+          initial_layout = "reingold-tilford",
+          output_file = "./05_trad_metabar_data_files/light_trap_heattree.pdf")
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/Filtering_LT_Only-3.png)<!-- -->
@@ -932,8 +503,8 @@ vennp_LT <- venn.diagram(vennlist_LT,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -947,64 +518,71 @@ vennp_LT <- venn.diagram(vennlist_LT,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:39:19] [[1]]
-    ## INFO [2022-12-05 13:39:19] vennlist_LT
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $height
-    ## INFO [2022-12-05 13:39:19] [1] 5
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $width
-    ## INFO [2022-12-05 13:39:19] [1] 5
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $filename
-    ## INFO [2022-12-05 13:39:19] NULL
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $disable.logging
-    ## INFO [2022-12-05 13:39:19] [1] TRUE
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $fill
-    ## INFO [2022-12-05 13:39:19] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $cat.col
-    ## INFO [2022-12-05 13:39:19] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $alpha
-    ## INFO [2022-12-05 13:39:19] [1] 0.85
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $fontfamily
-    ## INFO [2022-12-05 13:39:19] [1] "serif"
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $fontface
-    ## INFO [2022-12-05 13:39:19] [1] "bold"
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $cex
-    ## INFO [2022-12-05 13:39:19] [1] 1.2
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $cat.cex
-    ## INFO [2022-12-05 13:39:19] [1] 1.3
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $cat.default.pos
-    ## INFO [2022-12-05 13:39:19] [1] "outer"
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $cat.dist
-    ## INFO [2022-12-05 13:39:19] [1] 0.1
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $margin
-    ## INFO [2022-12-05 13:39:19] [1] 0.1
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $lwd
-    ## INFO [2022-12-05 13:39:19] [1] 3
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $lty
-    ## INFO [2022-12-05 13:39:19] [1] "dotted"
-    ## INFO [2022-12-05 13:39:19] 
-    ## INFO [2022-12-05 13:39:19] $imagetype
-    ## INFO [2022-12-05 13:39:19] [1] "svg"
-    ## INFO [2022-12-05 13:39:19]
+    ## INFO [2023-01-27 15:47:27] [[1]]
+    ## INFO [2023-01-27 15:47:27] vennlist_LT
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $height
+    ## INFO [2023-01-27 15:47:27] [1] 5
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $width
+    ## INFO [2023-01-27 15:47:27] [1] 5
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $filename
+    ## INFO [2023-01-27 15:47:27] NULL
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $disable.logging
+    ## INFO [2023-01-27 15:47:27] [1] TRUE
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $fill
+    ## INFO [2023-01-27 15:47:27] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $cat.col
+    ## INFO [2023-01-27 15:47:27] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $alpha
+    ## INFO [2023-01-27 15:47:27] [1] 0.85
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $fontfamily
+    ## INFO [2023-01-27 15:47:27] [1] "serif"
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $fontface
+    ## INFO [2023-01-27 15:47:27] [1] "bold"
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $cex
+    ## INFO [2023-01-27 15:47:27] [1] 1.2
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $cat.cex
+    ## INFO [2023-01-27 15:47:27] [1] 1.3
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $cat.default.pos
+    ## INFO [2023-01-27 15:47:27] [1] "outer"
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $cat.dist
+    ## INFO [2023-01-27 15:47:27] [1] 0.1
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $margin
+    ## INFO [2023-01-27 15:47:27] [1] 0.1
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $lwd
+    ## INFO [2023-01-27 15:47:27] [1] 3
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $lty
+    ## INFO [2023-01-27 15:47:27] [1] "dotted"
+    ## INFO [2023-01-27 15:47:27] 
+    ## INFO [2023-01-27 15:47:27] $imagetype
+    ## INFO [2023-01-27 15:47:27] [1] "svg"
+    ## INFO [2023-01-27 15:47:27]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_LT.pdf")
 grid::grid.draw(vennp_LT)
+dev.off()
 ```
+
+    ## null device 
+    ##           1
+
+Next we will focus only on focal orders.
 
 ``` r
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera", "Coleoptera", "Hymenoptera", "Hemiptera", "Blattodea"),#here is to fliter the figure by focal groups
@@ -1114,17 +692,26 @@ pcoares_focal <- get_pcoa(obj=ps_obj_focal, distmethod="bray", method="hellinger
 # Visualizing the result
 pcoaplot1_focal <- ggordpoint(obj=pcoares_focal, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2_focal <- ggordpoint(obj=pcoares_focal, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 pcoaplot1_focal | pcoaplot2_focal
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/FocalGroups-1.png)<!-- -->
+
+``` r
+pdf("./05_trad_metabar_data_files/PcoA_1and2_focal.pdf")
+pcoaplot1_focal
+dev.off()
+```
+
+    ## png 
+    ##   2
 
 ``` r
 #pcoaplot2_focal
@@ -1134,13 +721,14 @@ heat_tree(obj_focal,
           node_size = n_obs,
           node_color = mean_diff,
           node_color_interval = c(-0.5, 0.5),
-          node_color_range = c("goldenrod", "gray", "darkorchid"),
+          node_color_range = c("darkolivegreen3", "gray", "darkorchid"),
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportions",
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
-          initial_layout = "reingold-tilford")
+          initial_layout = "reingold-tilford",
+          output_file = "./05_trad_metabar_data_files/focal_MEANDIFFheattree.pdf")
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/FocalGroups-2.png)<!-- -->
@@ -1163,8 +751,8 @@ vennp_focal <- venn.diagram(vennlist_focal,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -1178,62 +766,63 @@ vennp_focal <- venn.diagram(vennlist_focal,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:45:50] [[1]]
-    ## INFO [2022-12-05 13:45:50] vennlist_focal
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $height
-    ## INFO [2022-12-05 13:45:50] [1] 5
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $width
-    ## INFO [2022-12-05 13:45:50] [1] 5
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $filename
-    ## INFO [2022-12-05 13:45:50] NULL
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $disable.logging
-    ## INFO [2022-12-05 13:45:50] [1] TRUE
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $fill
-    ## INFO [2022-12-05 13:45:50] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $cat.col
-    ## INFO [2022-12-05 13:45:50] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $alpha
-    ## INFO [2022-12-05 13:45:50] [1] 0.85
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $fontfamily
-    ## INFO [2022-12-05 13:45:50] [1] "serif"
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $fontface
-    ## INFO [2022-12-05 13:45:50] [1] "bold"
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $cex
-    ## INFO [2022-12-05 13:45:50] [1] 1.2
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $cat.cex
-    ## INFO [2022-12-05 13:45:50] [1] 1.3
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $cat.default.pos
-    ## INFO [2022-12-05 13:45:50] [1] "outer"
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $cat.dist
-    ## INFO [2022-12-05 13:45:50] [1] 0.1
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $margin
-    ## INFO [2022-12-05 13:45:50] [1] 0.1
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $lwd
-    ## INFO [2022-12-05 13:45:50] [1] 3
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $lty
-    ## INFO [2022-12-05 13:45:50] [1] "dotted"
-    ## INFO [2022-12-05 13:45:50] 
-    ## INFO [2022-12-05 13:45:50] $imagetype
-    ## INFO [2022-12-05 13:45:50] [1] "svg"
-    ## INFO [2022-12-05 13:45:50]
+    ## INFO [2023-01-27 15:54:12] [[1]]
+    ## INFO [2023-01-27 15:54:12] vennlist_focal
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $height
+    ## INFO [2023-01-27 15:54:12] [1] 5
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $width
+    ## INFO [2023-01-27 15:54:12] [1] 5
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $filename
+    ## INFO [2023-01-27 15:54:12] NULL
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $disable.logging
+    ## INFO [2023-01-27 15:54:12] [1] TRUE
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $fill
+    ## INFO [2023-01-27 15:54:12] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $cat.col
+    ## INFO [2023-01-27 15:54:12] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $alpha
+    ## INFO [2023-01-27 15:54:12] [1] 0.85
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $fontfamily
+    ## INFO [2023-01-27 15:54:12] [1] "serif"
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $fontface
+    ## INFO [2023-01-27 15:54:12] [1] "bold"
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $cex
+    ## INFO [2023-01-27 15:54:12] [1] 1.2
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $cat.cex
+    ## INFO [2023-01-27 15:54:12] [1] 1.3
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $cat.default.pos
+    ## INFO [2023-01-27 15:54:12] [1] "outer"
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $cat.dist
+    ## INFO [2023-01-27 15:54:12] [1] 0.1
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $margin
+    ## INFO [2023-01-27 15:54:12] [1] 0.1
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $lwd
+    ## INFO [2023-01-27 15:54:12] [1] 3
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $lty
+    ## INFO [2023-01-27 15:54:12] [1] "dotted"
+    ## INFO [2023-01-27 15:54:12] 
+    ## INFO [2023-01-27 15:54:12] $imagetype
+    ## INFO [2023-01-27 15:54:12] [1] "svg"
+    ## INFO [2023-01-27 15:54:12]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_focal.pdf")
 grid::grid.draw(vennp_focal)
 dev.off()
 ```
@@ -1245,25 +834,27 @@ dev.off()
 set.seed(16)#to make sure the figures is always the same
 obj_focal %>%
   metacoder::filter_taxa(taxon_names == "Lepidoptera",#here is to filter the figure by groups
-              subtaxa = TRUE) %>%  
+              subtaxa = TRUE) %>%
+  #metacoder::filter_taxa(taxon_ranks == c("o","f","g", "s")) %>%
   heat_tree(node_label = taxon_names,
-            #node_size_range = c(0.005, 0.02),
-            #edge_size_range = c(0.005, 0.01),
+            node_size_range = c(0.006, 0.04),
+            edge_size_range = c(0.001, 0.003),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used Treatment_1 (trad) corresponds to DarkOrchid Color
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/lepidoptera_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/Lepidoptera-1.png)<!-- -->
 
 ``` r
-#this one takes about 
+#this one takes about 5 minutes
 
 obj_focal %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps_LT #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -1296,8 +887,8 @@ vennp_leps <- venn.diagram(vennlist_leps,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -1311,64 +902,69 @@ vennp_leps <- venn.diagram(vennlist_leps,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:51:05] [[1]]
-    ## INFO [2022-12-05 13:51:05] vennlist_leps
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $height
-    ## INFO [2022-12-05 13:51:05] [1] 5
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $width
-    ## INFO [2022-12-05 13:51:05] [1] 5
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $filename
-    ## INFO [2022-12-05 13:51:05] NULL
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $disable.logging
-    ## INFO [2022-12-05 13:51:05] [1] TRUE
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $fill
-    ## INFO [2022-12-05 13:51:05] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $cat.col
-    ## INFO [2022-12-05 13:51:05] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $alpha
-    ## INFO [2022-12-05 13:51:05] [1] 0.85
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $fontfamily
-    ## INFO [2022-12-05 13:51:05] [1] "serif"
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $fontface
-    ## INFO [2022-12-05 13:51:05] [1] "bold"
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $cex
-    ## INFO [2022-12-05 13:51:05] [1] 1.2
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $cat.cex
-    ## INFO [2022-12-05 13:51:05] [1] 1.3
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $cat.default.pos
-    ## INFO [2022-12-05 13:51:05] [1] "outer"
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $cat.dist
-    ## INFO [2022-12-05 13:51:05] [1] 0.1
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $margin
-    ## INFO [2022-12-05 13:51:05] [1] 0.1
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $lwd
-    ## INFO [2022-12-05 13:51:05] [1] 3
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $lty
-    ## INFO [2022-12-05 13:51:05] [1] "dotted"
-    ## INFO [2022-12-05 13:51:05] 
-    ## INFO [2022-12-05 13:51:05] $imagetype
-    ## INFO [2022-12-05 13:51:05] [1] "svg"
-    ## INFO [2022-12-05 13:51:05]
+    ## INFO [2023-01-27 15:59:45] [[1]]
+    ## INFO [2023-01-27 15:59:45] vennlist_leps
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $height
+    ## INFO [2023-01-27 15:59:45] [1] 5
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $width
+    ## INFO [2023-01-27 15:59:45] [1] 5
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $filename
+    ## INFO [2023-01-27 15:59:45] NULL
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $disable.logging
+    ## INFO [2023-01-27 15:59:45] [1] TRUE
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $fill
+    ## INFO [2023-01-27 15:59:45] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $cat.col
+    ## INFO [2023-01-27 15:59:45] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $alpha
+    ## INFO [2023-01-27 15:59:45] [1] 0.85
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $fontfamily
+    ## INFO [2023-01-27 15:59:45] [1] "serif"
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $fontface
+    ## INFO [2023-01-27 15:59:45] [1] "bold"
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $cex
+    ## INFO [2023-01-27 15:59:45] [1] 1.2
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $cat.cex
+    ## INFO [2023-01-27 15:59:45] [1] 1.3
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $cat.default.pos
+    ## INFO [2023-01-27 15:59:45] [1] "outer"
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $cat.dist
+    ## INFO [2023-01-27 15:59:45] [1] 0.1
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $margin
+    ## INFO [2023-01-27 15:59:45] [1] 0.1
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $lwd
+    ## INFO [2023-01-27 15:59:45] [1] 3
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $lty
+    ## INFO [2023-01-27 15:59:45] [1] "dotted"
+    ## INFO [2023-01-27 15:59:45] 
+    ## INFO [2023-01-27 15:59:45] $imagetype
+    ## INFO [2023-01-27 15:59:45] [1] "svg"
+    ## INFO [2023-01-27 15:59:45]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_leps.pdf")
 grid::grid.draw(vennp_leps)
+dev.off()
 ```
+
+    ## null device 
+    ##           1
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -1376,18 +972,19 @@ obj_LT %>%
   metacoder::filter_taxa(taxon_names == "Coleoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             #edge_label = n_obs,
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/coleoptera_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/Coleoptera-1.png)<!-- -->
@@ -1418,8 +1015,8 @@ vennp_coleo <- venn.diagram(vennlist_coleo,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -1433,64 +1030,69 @@ vennp_coleo <- venn.diagram(vennlist_coleo,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:51:23] [[1]]
-    ## INFO [2022-12-05 13:51:23] vennlist_coleo
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $height
-    ## INFO [2022-12-05 13:51:23] [1] 5
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $width
-    ## INFO [2022-12-05 13:51:23] [1] 5
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $filename
-    ## INFO [2022-12-05 13:51:23] NULL
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $disable.logging
-    ## INFO [2022-12-05 13:51:23] [1] TRUE
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $fill
-    ## INFO [2022-12-05 13:51:23] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $cat.col
-    ## INFO [2022-12-05 13:51:23] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $alpha
-    ## INFO [2022-12-05 13:51:23] [1] 0.85
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $fontfamily
-    ## INFO [2022-12-05 13:51:23] [1] "serif"
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $fontface
-    ## INFO [2022-12-05 13:51:23] [1] "bold"
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $cex
-    ## INFO [2022-12-05 13:51:23] [1] 1.2
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $cat.cex
-    ## INFO [2022-12-05 13:51:23] [1] 1.3
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $cat.default.pos
-    ## INFO [2022-12-05 13:51:23] [1] "outer"
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $cat.dist
-    ## INFO [2022-12-05 13:51:23] [1] 0.1
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $margin
-    ## INFO [2022-12-05 13:51:23] [1] 0.1
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $lwd
-    ## INFO [2022-12-05 13:51:23] [1] 3
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $lty
-    ## INFO [2022-12-05 13:51:23] [1] "dotted"
-    ## INFO [2022-12-05 13:51:23] 
-    ## INFO [2022-12-05 13:51:23] $imagetype
-    ## INFO [2022-12-05 13:51:23] [1] "svg"
-    ## INFO [2022-12-05 13:51:23]
+    ## INFO [2023-01-27 16:00:05] [[1]]
+    ## INFO [2023-01-27 16:00:05] vennlist_coleo
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $height
+    ## INFO [2023-01-27 16:00:05] [1] 5
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $width
+    ## INFO [2023-01-27 16:00:05] [1] 5
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $filename
+    ## INFO [2023-01-27 16:00:05] NULL
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $disable.logging
+    ## INFO [2023-01-27 16:00:05] [1] TRUE
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $fill
+    ## INFO [2023-01-27 16:00:05] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $cat.col
+    ## INFO [2023-01-27 16:00:05] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $alpha
+    ## INFO [2023-01-27 16:00:05] [1] 0.85
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $fontfamily
+    ## INFO [2023-01-27 16:00:05] [1] "serif"
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $fontface
+    ## INFO [2023-01-27 16:00:05] [1] "bold"
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $cex
+    ## INFO [2023-01-27 16:00:05] [1] 1.2
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $cat.cex
+    ## INFO [2023-01-27 16:00:05] [1] 1.3
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $cat.default.pos
+    ## INFO [2023-01-27 16:00:05] [1] "outer"
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $cat.dist
+    ## INFO [2023-01-27 16:00:05] [1] 0.1
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $margin
+    ## INFO [2023-01-27 16:00:05] [1] 0.1
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $lwd
+    ## INFO [2023-01-27 16:00:05] [1] 3
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $lty
+    ## INFO [2023-01-27 16:00:05] [1] "dotted"
+    ## INFO [2023-01-27 16:00:05] 
+    ## INFO [2023-01-27 16:00:05] $imagetype
+    ## INFO [2023-01-27 16:00:05] [1] "svg"
+    ## INFO [2023-01-27 16:00:05]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_coleo.pdf")
 grid::grid.draw(vennp_coleo)
+dev.off()
 ```
+
+    ## null device 
+    ##           1
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -1498,17 +1100,18 @@ obj_LT %>%
   metacoder::filter_taxa(taxon_names == "Hymenoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classifcaiton method",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Hymenoptera_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/Hymenoptera-1.png)<!-- -->
@@ -1539,8 +1142,8 @@ vennp_hymen <- venn.diagram(vennlist_hymen,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -1554,64 +1157,69 @@ vennp_hymen <- venn.diagram(vennlist_hymen,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:51:40] [[1]]
-    ## INFO [2022-12-05 13:51:40] vennlist_hymen
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $height
-    ## INFO [2022-12-05 13:51:40] [1] 5
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $width
-    ## INFO [2022-12-05 13:51:40] [1] 5
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $filename
-    ## INFO [2022-12-05 13:51:40] NULL
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $disable.logging
-    ## INFO [2022-12-05 13:51:40] [1] TRUE
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $fill
-    ## INFO [2022-12-05 13:51:40] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $cat.col
-    ## INFO [2022-12-05 13:51:40] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $alpha
-    ## INFO [2022-12-05 13:51:40] [1] 0.85
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $fontfamily
-    ## INFO [2022-12-05 13:51:40] [1] "serif"
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $fontface
-    ## INFO [2022-12-05 13:51:40] [1] "bold"
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $cex
-    ## INFO [2022-12-05 13:51:40] [1] 1.2
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $cat.cex
-    ## INFO [2022-12-05 13:51:40] [1] 1.3
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $cat.default.pos
-    ## INFO [2022-12-05 13:51:40] [1] "outer"
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $cat.dist
-    ## INFO [2022-12-05 13:51:40] [1] 0.1
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $margin
-    ## INFO [2022-12-05 13:51:40] [1] 0.1
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $lwd
-    ## INFO [2022-12-05 13:51:40] [1] 3
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $lty
-    ## INFO [2022-12-05 13:51:40] [1] "dotted"
-    ## INFO [2022-12-05 13:51:40] 
-    ## INFO [2022-12-05 13:51:40] $imagetype
-    ## INFO [2022-12-05 13:51:40] [1] "svg"
-    ## INFO [2022-12-05 13:51:40]
+    ## INFO [2023-01-27 16:00:24] [[1]]
+    ## INFO [2023-01-27 16:00:24] vennlist_hymen
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $height
+    ## INFO [2023-01-27 16:00:24] [1] 5
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $width
+    ## INFO [2023-01-27 16:00:24] [1] 5
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $filename
+    ## INFO [2023-01-27 16:00:24] NULL
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $disable.logging
+    ## INFO [2023-01-27 16:00:24] [1] TRUE
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $fill
+    ## INFO [2023-01-27 16:00:24] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $cat.col
+    ## INFO [2023-01-27 16:00:24] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $alpha
+    ## INFO [2023-01-27 16:00:24] [1] 0.85
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $fontfamily
+    ## INFO [2023-01-27 16:00:24] [1] "serif"
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $fontface
+    ## INFO [2023-01-27 16:00:24] [1] "bold"
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $cex
+    ## INFO [2023-01-27 16:00:24] [1] 1.2
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $cat.cex
+    ## INFO [2023-01-27 16:00:24] [1] 1.3
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $cat.default.pos
+    ## INFO [2023-01-27 16:00:24] [1] "outer"
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $cat.dist
+    ## INFO [2023-01-27 16:00:24] [1] 0.1
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $margin
+    ## INFO [2023-01-27 16:00:24] [1] 0.1
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $lwd
+    ## INFO [2023-01-27 16:00:24] [1] 3
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $lty
+    ## INFO [2023-01-27 16:00:24] [1] "dotted"
+    ## INFO [2023-01-27 16:00:24] 
+    ## INFO [2023-01-27 16:00:24] $imagetype
+    ## INFO [2023-01-27 16:00:24] [1] "svg"
+    ## INFO [2023-01-27 16:00:24]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_hymenoptera.pdf")
 grid::grid.draw(vennp_hymen)
+dev.off()
 ```
+
+    ## null device 
+    ##           1
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -1620,16 +1228,17 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification method",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Hemiptera_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/Hemiptera-1.png)<!-- -->
@@ -1659,8 +1268,8 @@ vennp_hemi <- venn.diagram(vennlist_hemi,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -1674,64 +1283,69 @@ vennp_hemi <- venn.diagram(vennlist_hemi,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:51:57] [[1]]
-    ## INFO [2022-12-05 13:51:57] vennlist_hemi
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $height
-    ## INFO [2022-12-05 13:51:57] [1] 5
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $width
-    ## INFO [2022-12-05 13:51:57] [1] 5
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $filename
-    ## INFO [2022-12-05 13:51:57] NULL
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $disable.logging
-    ## INFO [2022-12-05 13:51:57] [1] TRUE
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $fill
-    ## INFO [2022-12-05 13:51:57] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $cat.col
-    ## INFO [2022-12-05 13:51:57] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $alpha
-    ## INFO [2022-12-05 13:51:57] [1] 0.85
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $fontfamily
-    ## INFO [2022-12-05 13:51:57] [1] "serif"
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $fontface
-    ## INFO [2022-12-05 13:51:57] [1] "bold"
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $cex
-    ## INFO [2022-12-05 13:51:57] [1] 1.2
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $cat.cex
-    ## INFO [2022-12-05 13:51:57] [1] 1.3
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $cat.default.pos
-    ## INFO [2022-12-05 13:51:57] [1] "outer"
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $cat.dist
-    ## INFO [2022-12-05 13:51:57] [1] 0.1
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $margin
-    ## INFO [2022-12-05 13:51:57] [1] 0.1
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $lwd
-    ## INFO [2022-12-05 13:51:57] [1] 3
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $lty
-    ## INFO [2022-12-05 13:51:57] [1] "dotted"
-    ## INFO [2022-12-05 13:51:57] 
-    ## INFO [2022-12-05 13:51:57] $imagetype
-    ## INFO [2022-12-05 13:51:57] [1] "svg"
-    ## INFO [2022-12-05 13:51:57]
+    ## INFO [2023-01-27 16:00:44] [[1]]
+    ## INFO [2023-01-27 16:00:44] vennlist_hemi
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $height
+    ## INFO [2023-01-27 16:00:44] [1] 5
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $width
+    ## INFO [2023-01-27 16:00:44] [1] 5
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $filename
+    ## INFO [2023-01-27 16:00:44] NULL
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $disable.logging
+    ## INFO [2023-01-27 16:00:44] [1] TRUE
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $fill
+    ## INFO [2023-01-27 16:00:44] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $cat.col
+    ## INFO [2023-01-27 16:00:44] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $alpha
+    ## INFO [2023-01-27 16:00:44] [1] 0.85
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $fontfamily
+    ## INFO [2023-01-27 16:00:44] [1] "serif"
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $fontface
+    ## INFO [2023-01-27 16:00:44] [1] "bold"
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $cex
+    ## INFO [2023-01-27 16:00:44] [1] 1.2
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $cat.cex
+    ## INFO [2023-01-27 16:00:44] [1] 1.3
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $cat.default.pos
+    ## INFO [2023-01-27 16:00:44] [1] "outer"
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $cat.dist
+    ## INFO [2023-01-27 16:00:44] [1] 0.1
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $margin
+    ## INFO [2023-01-27 16:00:44] [1] 0.1
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $lwd
+    ## INFO [2023-01-27 16:00:44] [1] 3
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $lty
+    ## INFO [2023-01-27 16:00:44] [1] "dotted"
+    ## INFO [2023-01-27 16:00:44] 
+    ## INFO [2023-01-27 16:00:44] $imagetype
+    ## INFO [2023-01-27 16:00:44] [1] "svg"
+    ## INFO [2023-01-27 16:00:44]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_hemiptera.pdf")
 grid::grid.draw(vennp_hemi)
+dev.off()
 ```
+
+    ## null device 
+    ##           1
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -1740,16 +1354,17 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Blattodea_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/Blatts-1.png)<!-- -->
@@ -1780,8 +1395,8 @@ vennp_blats <- venn.diagram(vennlist_blats,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -1795,64 +1410,69 @@ vennp_blats <- venn.diagram(vennlist_blats,
                       imagetype = "svg")
 ```
 
-    ## INFO [2022-12-05 13:52:07] [[1]]
-    ## INFO [2022-12-05 13:52:07] vennlist_blats
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $height
-    ## INFO [2022-12-05 13:52:07] [1] 5
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $width
-    ## INFO [2022-12-05 13:52:07] [1] 5
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $filename
-    ## INFO [2022-12-05 13:52:07] NULL
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $disable.logging
-    ## INFO [2022-12-05 13:52:07] [1] TRUE
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $fill
-    ## INFO [2022-12-05 13:52:07] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $cat.col
-    ## INFO [2022-12-05 13:52:07] c("goldenrod", "darkorchid")
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $alpha
-    ## INFO [2022-12-05 13:52:07] [1] 0.85
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $fontfamily
-    ## INFO [2022-12-05 13:52:07] [1] "serif"
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $fontface
-    ## INFO [2022-12-05 13:52:07] [1] "bold"
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $cex
-    ## INFO [2022-12-05 13:52:07] [1] 1.2
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $cat.cex
-    ## INFO [2022-12-05 13:52:07] [1] 1.3
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $cat.default.pos
-    ## INFO [2022-12-05 13:52:07] [1] "outer"
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $cat.dist
-    ## INFO [2022-12-05 13:52:07] [1] 0.1
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $margin
-    ## INFO [2022-12-05 13:52:07] [1] 0.1
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $lwd
-    ## INFO [2022-12-05 13:52:07] [1] 3
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $lty
-    ## INFO [2022-12-05 13:52:07] [1] "dotted"
-    ## INFO [2022-12-05 13:52:07] 
-    ## INFO [2022-12-05 13:52:07] $imagetype
-    ## INFO [2022-12-05 13:52:07] [1] "svg"
-    ## INFO [2022-12-05 13:52:07]
+    ## INFO [2023-01-27 16:00:54] [[1]]
+    ## INFO [2023-01-27 16:00:54] vennlist_blats
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $height
+    ## INFO [2023-01-27 16:00:54] [1] 5
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $width
+    ## INFO [2023-01-27 16:00:54] [1] 5
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $filename
+    ## INFO [2023-01-27 16:00:54] NULL
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $disable.logging
+    ## INFO [2023-01-27 16:00:54] [1] TRUE
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $fill
+    ## INFO [2023-01-27 16:00:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $cat.col
+    ## INFO [2023-01-27 16:00:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $alpha
+    ## INFO [2023-01-27 16:00:54] [1] 0.85
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $fontfamily
+    ## INFO [2023-01-27 16:00:54] [1] "serif"
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $fontface
+    ## INFO [2023-01-27 16:00:54] [1] "bold"
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $cex
+    ## INFO [2023-01-27 16:00:54] [1] 1.2
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $cat.cex
+    ## INFO [2023-01-27 16:00:54] [1] 1.3
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $cat.default.pos
+    ## INFO [2023-01-27 16:00:54] [1] "outer"
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $cat.dist
+    ## INFO [2023-01-27 16:00:54] [1] 0.1
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $margin
+    ## INFO [2023-01-27 16:00:54] [1] 0.1
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $lwd
+    ## INFO [2023-01-27 16:00:54] [1] 3
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $lty
+    ## INFO [2023-01-27 16:00:54] [1] "dotted"
+    ## INFO [2023-01-27 16:00:54] 
+    ## INFO [2023-01-27 16:00:54] $imagetype
+    ## INFO [2023-01-27 16:00:54] [1] "svg"
+    ## INFO [2023-01-27 16:00:54]
 
 ``` r
+pdf("./05_trad_metabar_data_files/venn_termites.pdf")
 grid::grid.draw(vennp_blats)
+dev.off()
 ```
+
+    ## null device 
+    ##           1
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -1861,16 +1481,17 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Trichoptera_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/TrichopteraDiptera-1.png)<!-- -->
@@ -1882,16 +1503,2192 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Diptera_heattree.pdf") # The layout algorithm that initializes node locations
 ```
 
 ![](05_trad_metabar_data_files/figure-gfm/TrichopteraDiptera-2.png)<!-- -->
+
+Finally, we refine further to include focal families only. This is the
+true comparison beteween Metabarcoding and Traditional records as it
+focuses only on apples and apples (geometridae from metabarcoding and
+geometridae from traditional records, instead of ALL leps.)
+
+``` r
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Geometridae"),subtaxa = TRUE) -> geom_LT
+ps_geom_LT <- metacoder::as_phyloseq(geom_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID") %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_geom_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_geom_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Erebidae"), subtaxa = TRUE) -> ereb_LT
+ps_ereb_LT <- metacoder::as_phyloseq(ereb_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_ereb_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_ereb_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Crambidae"), subtaxa = TRUE) -> cramb_LT
+ps_cramb_LT <- metacoder::as_phyloseq(cramb_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_cramb_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_cramb_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Saturniidae"), subtaxa = TRUE) -> satur_LT
+ps_satur_LT <- metacoder::as_phyloseq(satur_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_satur_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_satur_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Noctuidae"), subtaxa = TRUE) -> noctuid_LT
+ps_noctuid_LT <- metacoder::as_phyloseq(noctuid_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_noctuid_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_noctuid_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Nymphalidae"), subtaxa = TRUE) -> nymph_LT
+ps_nymph_LT <- metacoder::as_phyloseq(nymph_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_nymph_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_nymph_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Hesperiidae"), subtaxa = TRUE) -> hesp_LT
+ps_hesp_LT <- metacoder::as_phyloseq(hesp_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_hesp_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_hesp_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Pyralidae"), subtaxa = TRUE) -> pyra_LT
+ps_pyra_LT <- metacoder::as_phyloseq(pyra_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_pyra_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_pyra_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Scarabaeidae"), subtaxa = TRUE) -> scarab_LT
+ps_scarab_LT <- metacoder::as_phyloseq(scarab_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Coleoptera", .before = 1) -> ps_scarab_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_scarab_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Curculionidae"), subtaxa = TRUE) -> curcu_LT
+ps_curcu_LT <- metacoder::as_phyloseq(curcu_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Coleoptera", .before = 1) -> ps_curcu_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_curcu_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Passalidae"), subtaxa = TRUE) -> passa_LT
+ps_passa_LT <- metacoder::as_phyloseq(passa_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Coleoptera", .before = 1) -> ps_passa_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_passa_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Formicidae"), subtaxa = TRUE) -> ants_LT
+ps_ants_LT <- metacoder::as_phyloseq(ants_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hymenoptera", .before = 1) -> ps_ants_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_ants_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Apidae"), subtaxa = TRUE) -> bees_LT
+ps_bees_LT <- metacoder::as_phyloseq(bees_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hymenoptera", .before = 1) -> ps_bees_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_bees_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Flatidae"), subtaxa = TRUE) -> flat_LT
+ps_flat_LT <- metacoder::as_phyloseq(flat_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hemiptera", .before = 1) -> ps_flat_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_flat_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Reduviidae"), subtaxa = TRUE) -> reds_LT
+ps_reds_LT <- metacoder::as_phyloseq(reds_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hemiptera", .before = 1) -> ps_reds_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_reds_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+#obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Termitidae"), subtaxa = TRUE) -> termit_LT
+#ps_termit_LT <- metacoder::as_phyloseq(termit_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Blattodea", .before = 1) -> ps_termit_LT
+#colnames(tax_table(ps_termit_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+#obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Kalotermitidae"), subtaxa = TRUE) -> kalo_LT
+#ps_kalo_LT <- metacoder::as_phyloseq(kalo_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Blattodea", .before = 1) -> ps_kalo_LT
+#colnames(tax_table(ps_kalo_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Blattodea"), subtaxa = TRUE) -> all_termites_LT
+ps_all_termites_LT <- metacoder::as_phyloseq(all_termites_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_all_termites_LT
+```
+
+    ## Warning: Discarding non-numeric columns in OTU table:   classification
+
+``` r
+colnames(tax_table(ps_all_termites_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+```
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+geom_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/geometridae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+ereb_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/erebidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+
+``` r
+ereb_LT$data$taxon_abund <- calc_taxon_abund(ereb_LT, "tax_data", cols = sample_LT$sampleID, groups = sample_LT$methodClass)
+```
+
+    ## Summing per-taxon counts from 76 columns in 2 groups for 662 taxa
+
+``` r
+taxon_names(ereb_LT)[ereb_LT$data$taxon_abund$trad > 0 & ereb_LT$data$taxon_abund$metabr > 0]
+```
+
+    ##                            ahv                            bhy 
+    ##                     "Erebidae"                   "Antiblemma" 
+    ##                            bic                            bof 
+    ##                  "Phaeoblemma"                             "" 
+    ##                            bog                            boh 
+    ##                      "Aclytia"                   "Acridopsis" 
+    ##                            bok                            bom 
+    ##                      "Agaraea"                       "Agylla" 
+    ##                            bon                            bor 
+    ##                        "Agyra"                       "Amaxia" 
+    ##                            bow                            bpa 
+    ##                       "Anomis"                    "Arctiinae" 
+    ##                            bpc                            bpe 
+    ##                  "Argyroeides"                      "Athyrma" 
+    ##                            bpg                            bpm 
+    ##                      "Balbura"                 "Callisthenia" 
+    ##                            bpo                            bps 
+    ##                    "Calonotos"               "CatocalinaeGEN" 
+    ##                            bpt                            bpu 
+    ##                    "Celiptera"                    "Ceromacra" 
+    ##                            bpv                            bpx 
+    ##                      "Chamyna"                  "Chrysostola" 
+    ##                            bpy                            bqa 
+    ##                       "Clapra"                "Coccabdominis" 
+    ##                            bqb                            bqe 
+    ##                    "Coenipeta"                   "Correbidia" 
+    ##                            bqf                            bqh 
+    ##                    "Cosmosoma"               "Cryptochrostis" 
+    ##                            bqj                            bql 
+    ##                      "Deinopa"                    "Dialithis" 
+    ##                            bqo                            bqr 
+    ##                    "Draudtius"                       "Dyomyx" 
+    ##                            bqs                            bqt 
+    ##                    "Dysschema"                      "Ecdemus" 
+    ##                            bqw                            bqx 
+    ##                      "Elysius"                   "Encruphion" 
+    ##                            bra                            brb 
+    ##                 "Epeiromulona"                   "Episcepsis" 
+    ##                            brd                            brg 
+    ##                  "ErebidaeGEN"                  "Erebostrota" 
+    ##                            brh                            bri 
+    ##                     "Eucereon"                    "Euclystis" 
+    ##                            brm                            brn 
+    ##                  "Eulepidotis"                     "Euthyone" 
+    ##                            brr                            brs 
+    ##                       "Gabara"                    "Gaudeator" 
+    ##                            brx                            bry 
+    ##                     "Gymnelia"                    "Haemanota" 
+    ##                            bsb                            bsc 
+    ##                      "Heliura"                 "Hemeroblemma" 
+    ##                            bsd                            bsg 
+    ##                 "Hemicephalis"                   "Herminodes" 
+    ##                            bsi                            bsj 
+    ##                     "Hyalurga"                       "Hyamia" 
+    ##                            bsl                            bsm 
+    ##                   "Hypocharis"                   "Hypocladia" 
+    ##                            bso                            bsp 
+    ##                       "Idalus"                       "Illice" 
+    ##                            bsr                            bsy 
+    ##                      "Isogona"                  "Lepidoneiva" 
+    ##                            bta                            btb 
+    ##                  "Leucanopsis"                  "Leucopleura" 
+    ##                            btd                            bte 
+    ##                   "Lophocampa"                  "Loxophlebia" 
+    ##                            btf                            bth 
+    ##                "Lycomorphodes"                     "Macrodes" 
+    ##                            btk                            btl 
+    ##                       "Melese"                    "Melipotis" 
+    ##                            btn                            btp 
+    ##                   "Metallosia"                "Metaprosphera" 
+    ##                            btv                            btx 
+    ##                       "Munona"                  "NearBiturix" 
+    ##                            btz                            bua 
+    ##                      "Nitoris"                     "Nodozana" 
+    ##                            bub                            bud 
+    ##                     "Obroatis"                      "Odozana" 
+    ##                            bue                            buf 
+    ##                      "Opharus"                      "Ophisma" 
+    ##                            bug                            buj 
+    ##                     "Ormetica"                    "Oxidercia" 
+    ##                            buo                            buq 
+    ##                      "Perasia"                     "Peteroma" 
+    ##                            bus                            buu 
+    ##                        "Pheia"                  "Phyprosopus" 
+    ##                            buv                            buz 
+    ##                       "Pionia"                  "Poliopastea" 
+    ##                            bva                            bvb 
+    ##                    "Prepiella"                 "Pseudbarydia" 
+    ##                            bvc                            bve 
+    ##                  "Pseudosphex"                   "Psoloptera" 
+    ##                            bvi                            bvj 
+    ##                   "Rejectaria"                        "Renia" 
+    ##                            bvk                            bvl 
+    ##                      "Renodes"                  "Rhabdatomis" 
+    ##                            bvm                            bvp 
+    ##                   "Robinsonia"                       "Sarosa" 
+    ##                            bvq                            bvr 
+    ##                      "Sarsina"                      "Saurita" 
+    ##                            bvt                            bvv 
+    ##                     "Scaptius"                     "Sosxetra" 
+    ##                            bvy                            bwa 
+    ##                   "Symphlebia"                       "Talara" 
+    ##                            bwe                            bwh 
+    ##                      "Timalus"                     "Tricypha" 
+    ##                            bwj                            bwm 
+    ##                      "Tyrissa"                       "Virbia" 
+    ##                            bwo                            bwp 
+    ##                     "Xanthyda"                         "Zale" 
+    ##                            gbl                            gbn 
+    ##               "sp.1YB_AAJ1944"             "punctata_AAE3076" 
+    ##                            gbp                            gbq 
+    ##               "sp.1YB_AAB6687"           "sp.AAJ0944_AAJ0944" 
+    ##                            gbt                            gbv 
+    ##               "sp.1YB_AAM6965"             "BioLep05_AAB7465" 
+    ##                            gbw                            gbx 
+    ##             "bioptera_AAM3076"                "agola_AAB0059" 
+    ##                            gby                            gcd 
+    ##              "Poole01_AAD6871"             "carinosa_AAC4552" 
+    ##                            gcf                            gcl 
+    ##     "rocioecheverriae_AAB0265"             "luridula_AAA2708" 
+    ##                            gcq                            gcs 
+    ##              "Poole27_AAC1359"               "sp.1YB_ABU6177" 
+    ##                            gcw                            gcz 
+    ##              "AAM3396_AAM3396"               "sp.1YB_ADU0195" 
+    ##                            gda                            gdd 
+    ##               "sp.2YB_ACC8948"             "adjutrix_ABX5179" 
+    ##                            gdh                            gdi 
+    ##           "dorsisigna_ABY8555"          "intervenata_AAA1348" 
+    ##                            gdp                            gdt 
+    ##             "truncata_AAM7167"               "sp.1YB_AAK1636" 
+    ##                            gdy                            gdz 
+    ##               "sp.1YB_AAL9008"              "helvina_AAC4774" 
+    ##                            geb                            gec 
+    ##               "putida_AAB6450"              "modesta_AAB2492" 
+    ##                            ged                            geh 
+    ##               "sp.1YB_AEC5462"                 "moza_AAM5069" 
+    ##                            gei                            gek 
+    ##          "asthenoides_AAM6704"               "sp.1YB_AAM6705" 
+    ##                            geo                            geu 
+    ##           "sp.ACC9481_ACC9481"               "nubila_AAF3999" 
+    ##                            gex                            gfc 
+    ##               "sp.2YB_AAF4000"          "costinotata_AAA1326" 
+    ##                            gfd                            gff 
+    ##              "elegans_AAA1366"          "paucipuncta_AAE0618" 
+    ##                            gfj                            gfn 
+    ##              "flavala_AAI7478"           "signiplena_AAB1757" 
+    ##                            gfo                            gfq 
+    ##                "ypita_AAK0111"            "gemmifera_AAD4485" 
+    ##                            gft                            gfw 
+    ##           "sp.AAM4399_AAM4399"               "sp.1YB_AAY5638" 
+    ##                            gfx                            gfy 
+    ##             "perplexa_AAD7204"            "obscurata_AAA1401" 
+    ##                            ggb                            ggc 
+    ##               "sp.1YB_AAI5267"              "Poole01_AAA4457" 
+    ##                            ggg                            ggh 
+    ##              "lephina_ACF0970"            "hypoleuca_AAA1417" 
+    ##                            ggm                            ggq 
+    ##               "venata_AAF4439"               "sp.1YB_AAP2097" 
+    ##                            ggr                            ghc 
+    ##               "sp.1YB_AEN4419"        "steneleaDHJ01_AAX8596" 
+    ##                            ghd                            ghe 
+    ##               "aeolum_AAA8661"             "pometina_AAK4328" 
+    ##                            ghl                            ghu 
+    ##              "labecia_AAC3505"              "guttata_AAD6265" 
+    ##                            ghy                            gia 
+    ##             "superior_AAD5886"           "grisescens_ACF4334" 
+    ##                            gib                            gic 
+    ##              "simplex_ACG6230"               "sp.4YB_AAM4128" 
+    ##                            gig                            gih 
+    ##              "Poole02_AAC3278"             "paidicus_AAM7170" 
+    ##                            gio                            gip 
+    ##              "salvini_AAM3632"              "rosacea_AAM3521" 
+    ##                            giu                            giv 
+    ##            "solicauda_AAI6726"            "thysbodes_AAM3522" 
+    ##                            gix                            gjb 
+    ##           "ochrolinea_AAC1549"              "Poole04_AAB4205" 
+    ##                            gjl                            gjq 
+    ##               "valida_AEC5784"             "urioides_AAE4907" 
+    ##                            gjs                            gjy 
+    ##         "palpitatalis_AEC2070"               "sp.1YB_AAM3482" 
+    ##                            gjz                            gkb 
+    ##            "restricta_AAM3075"             "aleteria_AAI7687" 
+    ##                            gki                            gkm 
+    ##               "sp.1YB_AAM7164"             "natatrix_AAB1119" 
+    ##                            gkn                            gkv 
+    ##              "Poole07_AAK4378"             "teuthras_AAA1312" 
+    ##                            glb                            glf 
+    ##              "ciarana_AAA1368"          "maroniensis_AAA1316" 
+    ##                            glh                            glk 
+    ##              "imitata_AAX6550"              "bicolor_AAA4769" 
+    ##                            glq                            glr 
+    ##                "asana_ABY5802"             "incertus_AAA1434" 
+    ##                            glu                            glv 
+    ##     "fasciolarisDHJ02_AAA8829" "perpendicularisDHJ01_AAY4876" 
+    ##                            gmh                            gmp 
+    ##               "sp.1YB_AEM9377"      "robpuschendorfi_AAA6912" 
+    ##                            gmr                            gmt 
+    ##               "sp.1YB_AAA7185"           "sp.AAM5154_AAM5154" 
+    ##                            gmu                            gmw 
+    ##            "picturata_AAD7967"               "sp.1YB_AAM6804" 
+    ##                            gmx                            gmy 
+    ##               "sp.2YB_ADT8926"            "chloropis_AAD7367" 
+    ##                            gmz                            gnc 
+    ##            "distincta_AAB4280"              "decepta_AAN1664" 
+    ##                            gnd                            gne 
+    ##               "sixola_AAH2610"               "sp.1YB_AAM6812" 
+    ##                            gnf                            gng 
+    ##                "gemma_AAC6634"           "despagnesi_AAU1676" 
+    ##                            gnj                            gnk 
+    ##              "ataenia_AAA1432"              "sicilia_AAA1349" 
+    ##                            gnn                            gnv 
+    ##           "thaumantis_AAA2814"              "helvina_AAA8016" 
+    ##                            gny                            goa 
+    ##               "sp.1YB_AAM6706"                "dares_AAB0476" 
+    ##                            gob                            god 
+    ##            "albisigna_AAB5173"           "parthenope_AAB4320" 
+    ##                            goe                            gok 
+    ##              "affinis_ACE8892"              "auripes_AAD1862" 
+    ##                            gol                            gon 
+    ##             "cyllarus_ACE6078"               "sp.1YB_ACE6079" 
+    ##                            goo                            gop 
+    ##             "pexicera_AAA4768"               "japeta_AAB6175" 
+    ##                            gou                            gpb 
+    ##            "thoracica_AAA1364"              "poole13_AEC4915" 
+    ##                            gpf                            gpi 
+    ##               "turpis_ABZ0790"              "Poole06_AAF3189" 
+    ##                            gpj                            gpm 
+    ##                 "cora_AAA4766"                "sanea_AAM3444" 
+    ##                            gps                            gpt 
+    ##                 "azia_AAD6600"             "BioLep02_AAP6197" 
+    ##                            gpu                            gpz 
+    ##              "anselma_ABW9427"         "chrysoperina_AAB9904" 
+    ##                            gqb                            gqe 
+    ##                "grata_AAA8259"                "creon_AAJ0585" 
+    ##                            gqg                            gqh 
+    ##                 "cara_AAD8830"          "minynthadia_AAM3378" 
+    ##                            gqi                            gqj 
+    ##               "sp.2YB_ABX5623"               "sp.3YB_AAA0895" 
+    ##                            gqk                            gql 
+    ##               "sp.4YB_AAM7163"               "sp.7YB_ADU9990" 
+    ##                            gqm                            gqq 
+    ##           "violescens_AAM3345"            "leucomela_AAH8072" 
+    ##                            gqt                            grd 
+    ##           "imperialis_ACE3900"             "mentiens_ABY7927" 
+    ##                            gre                            grh 
+    ##            "thersites_AAM3023"         "chalcosticta_ACF1973" 
+    ##                            grj                            grk 
+    ##                "saron_ABY4182"            "excellens_ACV1927"
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+cramb_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/crambiade_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+satur_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/saturnidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-4.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+noctuid_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/noctuidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-5.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+nymph_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/nymphalidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-6.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+pyra_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/pyralidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-7.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+hesp_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/hesperiidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-8.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+scarab_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/scarabs_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-9.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+curcu_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/curcu_heattree.pdf")
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-10.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+passa_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/passalid_heattree.pdf")
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-11.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+ants_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/formicidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-12.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+bees_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/apidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-13.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+flat_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/flatiidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-14.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+reds_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/reduviidae_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-15.png)<!-- -->
+
+``` r
+set.seed(16)#to make sure the figures is always the same
+all_termites_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/all_termites_heattree.pdf") # The layout algorithm that initializes node locations
+```
+
+![](05_trad_metabar_data_files/figure-gfm/unnamed-chunk-4-16.png)<!-- -->
+
+``` r
+vennlist_geom <- get_vennlist(obj=ps_geom_LT, factorNames="methodClass")
+vennp_geom <- venn.diagram(vennlist_geom,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:52] [[1]]
+    ## INFO [2023-01-27 16:03:52] vennlist_geom
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $height
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $width
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $filename
+    ## INFO [2023-01-27 16:03:52] NULL
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $disable.logging
+    ## INFO [2023-01-27 16:03:52] [1] TRUE
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fill
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.col
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $alpha
+    ## INFO [2023-01-27 16:03:52] [1] 0.85
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontfamily
+    ## INFO [2023-01-27 16:03:52] [1] "serif"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontface
+    ## INFO [2023-01-27 16:03:52] [1] "bold"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.2
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.default.pos
+    ## INFO [2023-01-27 16:03:52] [1] "outer"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.dist
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $margin
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lwd
+    ## INFO [2023-01-27 16:03:52] [1] 3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lty
+    ## INFO [2023-01-27 16:03:52] [1] "dotted"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $imagetype
+    ## INFO [2023-01-27 16:03:52] [1] "svg"
+    ## INFO [2023-01-27 16:03:52]
+
+``` r
+vennlist_ereb <- get_vennlist(obj=ps_ereb_LT, factorNames="methodClass")
+vennp_ereb <- venn.diagram(vennlist_ereb,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:52] [[1]]
+    ## INFO [2023-01-27 16:03:52] vennlist_ereb
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $height
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $width
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $filename
+    ## INFO [2023-01-27 16:03:52] NULL
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $disable.logging
+    ## INFO [2023-01-27 16:03:52] [1] TRUE
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fill
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.col
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $alpha
+    ## INFO [2023-01-27 16:03:52] [1] 0.85
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontfamily
+    ## INFO [2023-01-27 16:03:52] [1] "serif"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontface
+    ## INFO [2023-01-27 16:03:52] [1] "bold"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.2
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.default.pos
+    ## INFO [2023-01-27 16:03:52] [1] "outer"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.dist
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $margin
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lwd
+    ## INFO [2023-01-27 16:03:52] [1] 3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lty
+    ## INFO [2023-01-27 16:03:52] [1] "dotted"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $imagetype
+    ## INFO [2023-01-27 16:03:52] [1] "svg"
+    ## INFO [2023-01-27 16:03:52]
+
+``` r
+vennlist_cramb <- get_vennlist(obj=ps_cramb_LT, factorNames="methodClass")
+vennp_cramb <- venn.diagram(vennlist_cramb,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:52] [[1]]
+    ## INFO [2023-01-27 16:03:52] vennlist_cramb
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $height
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $width
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $filename
+    ## INFO [2023-01-27 16:03:52] NULL
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $disable.logging
+    ## INFO [2023-01-27 16:03:52] [1] TRUE
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fill
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.col
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $alpha
+    ## INFO [2023-01-27 16:03:52] [1] 0.85
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontfamily
+    ## INFO [2023-01-27 16:03:52] [1] "serif"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontface
+    ## INFO [2023-01-27 16:03:52] [1] "bold"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.2
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.default.pos
+    ## INFO [2023-01-27 16:03:52] [1] "outer"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.dist
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $margin
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lwd
+    ## INFO [2023-01-27 16:03:52] [1] 3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lty
+    ## INFO [2023-01-27 16:03:52] [1] "dotted"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $imagetype
+    ## INFO [2023-01-27 16:03:52] [1] "svg"
+    ## INFO [2023-01-27 16:03:52]
+
+``` r
+vennlist_satur <- get_vennlist(obj=ps_satur_LT, factorNames="methodClass")
+vennp_satur <- venn.diagram(vennlist_satur,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:52] [[1]]
+    ## INFO [2023-01-27 16:03:52] vennlist_satur
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $height
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $width
+    ## INFO [2023-01-27 16:03:52] [1] 5
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $filename
+    ## INFO [2023-01-27 16:03:52] NULL
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $disable.logging
+    ## INFO [2023-01-27 16:03:52] [1] TRUE
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fill
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.col
+    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $alpha
+    ## INFO [2023-01-27 16:03:52] [1] 0.85
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontfamily
+    ## INFO [2023-01-27 16:03:52] [1] "serif"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $fontface
+    ## INFO [2023-01-27 16:03:52] [1] "bold"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.2
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.cex
+    ## INFO [2023-01-27 16:03:52] [1] 1.3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.default.pos
+    ## INFO [2023-01-27 16:03:52] [1] "outer"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $cat.dist
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $margin
+    ## INFO [2023-01-27 16:03:52] [1] 0.1
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lwd
+    ## INFO [2023-01-27 16:03:52] [1] 3
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $lty
+    ## INFO [2023-01-27 16:03:52] [1] "dotted"
+    ## INFO [2023-01-27 16:03:52] 
+    ## INFO [2023-01-27 16:03:52] $imagetype
+    ## INFO [2023-01-27 16:03:52] [1] "svg"
+    ## INFO [2023-01-27 16:03:52]
+
+``` r
+vennlist_noctuid <- get_vennlist(obj=ps_noctuid_LT, factorNames="methodClass")
+vennp_noctuid <- venn.diagram(vennlist_noctuid,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:53] [[1]]
+    ## INFO [2023-01-27 16:03:53] vennlist_noctuid
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $height
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $width
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $filename
+    ## INFO [2023-01-27 16:03:53] NULL
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $disable.logging
+    ## INFO [2023-01-27 16:03:53] [1] TRUE
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fill
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.col
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $alpha
+    ## INFO [2023-01-27 16:03:53] [1] 0.85
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontfamily
+    ## INFO [2023-01-27 16:03:53] [1] "serif"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontface
+    ## INFO [2023-01-27 16:03:53] [1] "bold"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.2
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.default.pos
+    ## INFO [2023-01-27 16:03:53] [1] "outer"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.dist
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $margin
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lwd
+    ## INFO [2023-01-27 16:03:53] [1] 3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lty
+    ## INFO [2023-01-27 16:03:53] [1] "dotted"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $imagetype
+    ## INFO [2023-01-27 16:03:53] [1] "svg"
+    ## INFO [2023-01-27 16:03:53]
+
+``` r
+vennlist_nymph <- get_vennlist(obj=ps_nymph_LT, factorNames="methodClass")
+vennp_nymph <- venn.diagram(vennlist_nymph,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:53] [[1]]
+    ## INFO [2023-01-27 16:03:53] vennlist_nymph
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $height
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $width
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $filename
+    ## INFO [2023-01-27 16:03:53] NULL
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $disable.logging
+    ## INFO [2023-01-27 16:03:53] [1] TRUE
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fill
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.col
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $alpha
+    ## INFO [2023-01-27 16:03:53] [1] 0.85
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontfamily
+    ## INFO [2023-01-27 16:03:53] [1] "serif"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontface
+    ## INFO [2023-01-27 16:03:53] [1] "bold"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.2
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.default.pos
+    ## INFO [2023-01-27 16:03:53] [1] "outer"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.dist
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $margin
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lwd
+    ## INFO [2023-01-27 16:03:53] [1] 3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lty
+    ## INFO [2023-01-27 16:03:53] [1] "dotted"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $imagetype
+    ## INFO [2023-01-27 16:03:53] [1] "svg"
+    ## INFO [2023-01-27 16:03:53]
+
+``` r
+vennlist_pyra <- get_vennlist(obj=ps_pyra_LT, factorNames="methodClass")
+vennp_pyra <- venn.diagram(vennlist_pyra,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:53] [[1]]
+    ## INFO [2023-01-27 16:03:53] vennlist_pyra
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $height
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $width
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $filename
+    ## INFO [2023-01-27 16:03:53] NULL
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $disable.logging
+    ## INFO [2023-01-27 16:03:53] [1] TRUE
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fill
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.col
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $alpha
+    ## INFO [2023-01-27 16:03:53] [1] 0.85
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontfamily
+    ## INFO [2023-01-27 16:03:53] [1] "serif"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontface
+    ## INFO [2023-01-27 16:03:53] [1] "bold"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.2
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.default.pos
+    ## INFO [2023-01-27 16:03:53] [1] "outer"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.dist
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $margin
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lwd
+    ## INFO [2023-01-27 16:03:53] [1] 3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lty
+    ## INFO [2023-01-27 16:03:53] [1] "dotted"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $imagetype
+    ## INFO [2023-01-27 16:03:53] [1] "svg"
+    ## INFO [2023-01-27 16:03:53]
+
+``` r
+vennlist_hesp <- get_vennlist(obj=ps_hesp_LT, factorNames="methodClass")
+vennp_hesp <- venn.diagram(vennlist_hesp,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:53] [[1]]
+    ## INFO [2023-01-27 16:03:53] vennlist_hesp
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $height
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $width
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $filename
+    ## INFO [2023-01-27 16:03:53] NULL
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $disable.logging
+    ## INFO [2023-01-27 16:03:53] [1] TRUE
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fill
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.col
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $alpha
+    ## INFO [2023-01-27 16:03:53] [1] 0.85
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontfamily
+    ## INFO [2023-01-27 16:03:53] [1] "serif"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontface
+    ## INFO [2023-01-27 16:03:53] [1] "bold"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.2
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.default.pos
+    ## INFO [2023-01-27 16:03:53] [1] "outer"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.dist
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $margin
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lwd
+    ## INFO [2023-01-27 16:03:53] [1] 3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lty
+    ## INFO [2023-01-27 16:03:53] [1] "dotted"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $imagetype
+    ## INFO [2023-01-27 16:03:53] [1] "svg"
+    ## INFO [2023-01-27 16:03:53]
+
+``` r
+vennlist_scarab <- get_vennlist(obj=ps_scarab_LT, factorNames="methodClass")
+vennp_scarab <- venn.diagram(vennlist_scarab,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:53] [[1]]
+    ## INFO [2023-01-27 16:03:53] vennlist_scarab
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $height
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $width
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $filename
+    ## INFO [2023-01-27 16:03:53] NULL
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $disable.logging
+    ## INFO [2023-01-27 16:03:53] [1] TRUE
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fill
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.col
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $alpha
+    ## INFO [2023-01-27 16:03:53] [1] 0.85
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontfamily
+    ## INFO [2023-01-27 16:03:53] [1] "serif"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontface
+    ## INFO [2023-01-27 16:03:53] [1] "bold"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.2
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.default.pos
+    ## INFO [2023-01-27 16:03:53] [1] "outer"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.dist
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $margin
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lwd
+    ## INFO [2023-01-27 16:03:53] [1] 3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lty
+    ## INFO [2023-01-27 16:03:53] [1] "dotted"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $imagetype
+    ## INFO [2023-01-27 16:03:53] [1] "svg"
+    ## INFO [2023-01-27 16:03:53]
+
+``` r
+vennlist_curcu <- get_vennlist(obj=ps_curcu_LT, factorNames="methodClass")
+vennp_curcu <- venn.diagram(vennlist_curcu,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:53] [[1]]
+    ## INFO [2023-01-27 16:03:53] vennlist_curcu
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $height
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $width
+    ## INFO [2023-01-27 16:03:53] [1] 5
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $filename
+    ## INFO [2023-01-27 16:03:53] NULL
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $disable.logging
+    ## INFO [2023-01-27 16:03:53] [1] TRUE
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fill
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.col
+    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $alpha
+    ## INFO [2023-01-27 16:03:53] [1] 0.85
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontfamily
+    ## INFO [2023-01-27 16:03:53] [1] "serif"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $fontface
+    ## INFO [2023-01-27 16:03:53] [1] "bold"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.2
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.cex
+    ## INFO [2023-01-27 16:03:53] [1] 1.3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.default.pos
+    ## INFO [2023-01-27 16:03:53] [1] "outer"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $cat.dist
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $margin
+    ## INFO [2023-01-27 16:03:53] [1] 0.1
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lwd
+    ## INFO [2023-01-27 16:03:53] [1] 3
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $lty
+    ## INFO [2023-01-27 16:03:53] [1] "dotted"
+    ## INFO [2023-01-27 16:03:53] 
+    ## INFO [2023-01-27 16:03:53] $imagetype
+    ## INFO [2023-01-27 16:03:53] [1] "svg"
+    ## INFO [2023-01-27 16:03:53]
+
+``` r
+vennlist_passa <- get_vennlist(obj=ps_passa_LT, factorNames="methodClass")
+#vennp_passa <- venn.diagram(vennlist_passa,
+                      #height=5,
+                      #width=5, 
+                      #filename=NULL,
+                      #disable.logging = TRUE,
+                      #fill=c("darkolivegreen3", "darkorchid"),
+                      #cat.col=c("darkolivegreen3", "darkorchid"),
+                      #alpha = 0.85, 
+                      #fontfamily = "serif",
+                      #fontface = "bold",
+                      #cex = 1.2,
+                      #cat.cex = 1.3,
+                      #cat.default.pos = "outer",
+                      #cat.dist=0.1,
+                      #margin = 0.1, 
+                      #lwd = 3,
+                      #lty ='dotted',
+                      #imagetype = "svg")
+
+vennlist_ants <- get_vennlist(obj=ps_ants_LT, factorNames="methodClass")
+vennp_ants <- venn.diagram(vennlist_ants,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:54] [[1]]
+    ## INFO [2023-01-27 16:03:54] vennlist_ants
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $height
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $width
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $filename
+    ## INFO [2023-01-27 16:03:54] NULL
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $disable.logging
+    ## INFO [2023-01-27 16:03:54] [1] TRUE
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fill
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.col
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $alpha
+    ## INFO [2023-01-27 16:03:54] [1] 0.85
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontfamily
+    ## INFO [2023-01-27 16:03:54] [1] "serif"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontface
+    ## INFO [2023-01-27 16:03:54] [1] "bold"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.2
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.default.pos
+    ## INFO [2023-01-27 16:03:54] [1] "outer"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.dist
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $margin
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lwd
+    ## INFO [2023-01-27 16:03:54] [1] 3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lty
+    ## INFO [2023-01-27 16:03:54] [1] "dotted"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $imagetype
+    ## INFO [2023-01-27 16:03:54] [1] "svg"
+    ## INFO [2023-01-27 16:03:54]
+
+``` r
+vennlist_bees <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
+vennp_bees <- venn.diagram(vennlist_bees,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:54] [[1]]
+    ## INFO [2023-01-27 16:03:54] vennlist_bees
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $height
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $width
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $filename
+    ## INFO [2023-01-27 16:03:54] NULL
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $disable.logging
+    ## INFO [2023-01-27 16:03:54] [1] TRUE
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fill
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.col
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $alpha
+    ## INFO [2023-01-27 16:03:54] [1] 0.85
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontfamily
+    ## INFO [2023-01-27 16:03:54] [1] "serif"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontface
+    ## INFO [2023-01-27 16:03:54] [1] "bold"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.2
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.default.pos
+    ## INFO [2023-01-27 16:03:54] [1] "outer"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.dist
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $margin
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lwd
+    ## INFO [2023-01-27 16:03:54] [1] 3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lty
+    ## INFO [2023-01-27 16:03:54] [1] "dotted"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $imagetype
+    ## INFO [2023-01-27 16:03:54] [1] "svg"
+    ## INFO [2023-01-27 16:03:54]
+
+``` r
+vennlist_flat <- get_vennlist(obj=ps_flat_LT, factorNames="methodClass")
+vennp_flat <- venn.diagram(vennlist_flat,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:54] [[1]]
+    ## INFO [2023-01-27 16:03:54] vennlist_flat
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $height
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $width
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $filename
+    ## INFO [2023-01-27 16:03:54] NULL
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $disable.logging
+    ## INFO [2023-01-27 16:03:54] [1] TRUE
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fill
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.col
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $alpha
+    ## INFO [2023-01-27 16:03:54] [1] 0.85
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontfamily
+    ## INFO [2023-01-27 16:03:54] [1] "serif"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontface
+    ## INFO [2023-01-27 16:03:54] [1] "bold"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.2
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.default.pos
+    ## INFO [2023-01-27 16:03:54] [1] "outer"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.dist
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $margin
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lwd
+    ## INFO [2023-01-27 16:03:54] [1] 3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lty
+    ## INFO [2023-01-27 16:03:54] [1] "dotted"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $imagetype
+    ## INFO [2023-01-27 16:03:54] [1] "svg"
+    ## INFO [2023-01-27 16:03:54]
+
+``` r
+vennlist_reds <- get_vennlist(obj=ps_reds_LT, factorNames="methodClass")
+vennp_reds <- venn.diagram(vennlist_reds,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:54] [[1]]
+    ## INFO [2023-01-27 16:03:54] vennlist_reds
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $height
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $width
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $filename
+    ## INFO [2023-01-27 16:03:54] NULL
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $disable.logging
+    ## INFO [2023-01-27 16:03:54] [1] TRUE
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fill
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.col
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $alpha
+    ## INFO [2023-01-27 16:03:54] [1] 0.85
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontfamily
+    ## INFO [2023-01-27 16:03:54] [1] "serif"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontface
+    ## INFO [2023-01-27 16:03:54] [1] "bold"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.2
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.default.pos
+    ## INFO [2023-01-27 16:03:54] [1] "outer"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.dist
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $margin
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lwd
+    ## INFO [2023-01-27 16:03:54] [1] 3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lty
+    ## INFO [2023-01-27 16:03:54] [1] "dotted"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $imagetype
+    ## INFO [2023-01-27 16:03:54] [1] "svg"
+    ## INFO [2023-01-27 16:03:54]
+
+``` r
+#vennlist_termit <- get_vennlist(obj=ps_termit_LT, factorNames="methodClass")
+#vennp_termit <- venn.diagram(vennlist_termit,
+                      #height=5,
+                      #width=5, 
+                      #filename=NULL,
+                      #disable.logging = TRUE,
+                      #fill=c("darkolivegreen3", "darkorchid"),
+                      #cat.col=c("darkolivegreen3", "darkorchid"),
+                      #alpha = 0.85, 
+                      #fontfamily = "serif",
+                      #fontface = "bold",
+                      #cex = 1.2,
+                      #cat.cex = 1.3,
+                      #cat.default.pos = "outer",
+                      #cat.dist=0.1,
+                      #margin = 0.1, 
+                      #lwd = 3,
+                      #lty ='dotted',
+                      #imagetype = "svg")
+
+#vennlist_kalo <- get_vennlist(obj=ps_kalo_LT, factorNames="methodClass")
+#vennp_kalo <- venn.diagram(vennlist_kalo,
+                      #height=5,
+                      #width=5, 
+                      #filename=NULL,
+                      #disable.logging = TRUE,
+                      #fill=c("darkolivegreen3", "darkorchid"),
+                      #cat.col=c("darkolivegreen3", "darkorchid"),
+                      #alpha = 0.85, 
+                      #fontfamily = "serif",
+                      #fontface = "bold",
+                      #cex = 1.2,
+                      #cat.cex = 1.3,
+                      #cat.default.pos = "outer",
+                      #cat.dist=0.1,
+                      #margin = 0.1, 
+                      #lwd = 3,
+                      #lty ='dotted',
+                      #imagetype = "svg")
+
+vennlist_all_termites <- get_vennlist(obj=ps_all_termites_LT, factorNames="methodClass")
+vennp_all_termites <- venn.diagram(vennlist_all_termites,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+```
+
+    ## INFO [2023-01-27 16:03:54] [[1]]
+    ## INFO [2023-01-27 16:03:54] vennlist_all_termites
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $height
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $width
+    ## INFO [2023-01-27 16:03:54] [1] 5
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $filename
+    ## INFO [2023-01-27 16:03:54] NULL
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $disable.logging
+    ## INFO [2023-01-27 16:03:54] [1] TRUE
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fill
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.col
+    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $alpha
+    ## INFO [2023-01-27 16:03:54] [1] 0.85
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontfamily
+    ## INFO [2023-01-27 16:03:54] [1] "serif"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $fontface
+    ## INFO [2023-01-27 16:03:54] [1] "bold"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.2
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.cex
+    ## INFO [2023-01-27 16:03:54] [1] 1.3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.default.pos
+    ## INFO [2023-01-27 16:03:54] [1] "outer"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $cat.dist
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $margin
+    ## INFO [2023-01-27 16:03:54] [1] 0.1
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lwd
+    ## INFO [2023-01-27 16:03:54] [1] 3
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $lty
+    ## INFO [2023-01-27 16:03:54] [1] "dotted"
+    ## INFO [2023-01-27 16:03:54] 
+    ## INFO [2023-01-27 16:03:54] $imagetype
+    ## INFO [2023-01-27 16:03:54] [1] "svg"
+    ## INFO [2023-01-27 16:03:54]
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_geom)
+ggsave("./05_trad_metabar_data_files/venn_geom.pdf", vennp_geom)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_ereb)
+ggsave("./05_trad_metabar_data_files/venn_erebidae.pdf", vennp_ereb)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_cramb)
+ggsave("./05_trad_metabar_data_files/venn_crabidae.pdf", vennp_cramb)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_satur)
+ggsave("./05_trad_metabar_data_files/venn_saturnidae.pdf", vennp_satur)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_noctuid)
+ggsave("./05_trad_metabar_data_files/venn_noctuidae.pdf", vennp_noctuid)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_nymph)
+ggsave("./05_trad_metabar_data_files/venn_nymphalidae.pdf", vennp_nymph)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_pyra)
+ggsave("./05_trad_metabar_data_files/venn_pyraliidae.pdf", vennp_pyra)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_hesp)
+ggsave("./05_trad_metabar_data_files/venn_hesperiidae.pdf", vennp_hesp)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_scarab)
+ggsave("./05_trad_metabar_data_files/venn_scarabididae.pdf", vennp_scarab)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_curcu)
+ggsave("./05_trad_metabar_data_files/venn_curculionidae.pdf", vennp_curcu)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+#dev.off()
+#grid::grid.draw(vennp_passa)
+#ggsave("./05_trad_metabar_data_files/venn_passalidae.pdf", vennp_passa)
+
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_ants)
+ggsave("./05_trad_metabar_data_files/venn_formicidae.pdf", vennp_ants)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_bees)
+ggsave("./05_trad_metabar_data_files/venn_apidae.pdf", vennp_bees)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_flat)
+ggsave("./05_trad_metabar_data_files/venn_flatidae.pdf", vennp_flat)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_reds)
+ggsave("./05_trad_metabar_data_files/venn_reduviidae.pdf", vennp_reds)
+```
+
+    ## Saving 7 x 7 in image
+
+``` r
+#dev.off()
+#grid::grid.draw(vennp_termit)
+#ggsave("./05_trad_metabar_data_files/venn_termitidae.pdf", vennp_termit)
+
+#dev.off()
+#grid::grid.draw(vennp_kalo)
+#ggsave("./05_trad_metabar_data_files/venn_kalotermitidae.pdf", vennp_kalo)
+
+dev.off()
+```
+
+    ## null device 
+    ##           1
+
+``` r
+grid::grid.draw(vennp_all_termites)
+ggsave("./05_trad_metabar_data_files/venn_all_termites.pdf", vennp_all_termites)
+```
+
+    ## Saving 7 x 7 in image
