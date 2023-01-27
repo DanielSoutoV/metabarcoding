@@ -7,7 +7,7 @@ output: github_document
   #chunk_output_type: console
 ---
 
-```{r warning=FALSE}
+```{r warning=FALSE, include = FALSE}
 rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
 library('tidyr')
 library('dplyr')
@@ -22,11 +22,14 @@ library('coin')
 library('microViz')
 library('VennDiagram')
 library('UpSetR')
-library('iNEXT')
+```
+
+Setting up the data which now includes traditional and metabarcoding records
+
+```{r warning = FALSE}
 
 tradmetabr <- read.csv('data/tradmetabr_merged.csv')
 sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
-head(tradmetabr)
 obj <- parse_tax_data(tradmetabr,
                       class_cols = "classification",
                       class_sep = ";",
@@ -49,17 +52,20 @@ Next is a preliminary tree but we still have to separate them by focal groups (p
 ##trhis takes nearly 30 minutes to run
 
 heat_tree(obj,
+          nose_size_range = c(0.006, 0.04),
+          edge_size_range = c(0.001,0.003),
           node_label = taxon_names,
           node_size = n_obs,
           node_color = mean_diff,
-          node_color_interval = c(-0.5, 0.5),
-          node_color_range =c("goldenrod", "gray", "darkorchid"),
+          node_color_interval = c(-0.44, 0.44),
+          node_color_range =c("darkolivegreen3", "gray", "darkorchid"),
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportions",
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
-          initial_layout = "reingold-tilford")
+          initial_layout = "reingold-tilford",
+          outputfile = "./05_trad_metabar_data_files/meanDiff_tradmetabr.pdf")
 
 ```
 
@@ -69,7 +75,7 @@ Once again, to understand the colouring scheme, read this paragraph carefully fr
 
 their code has 'node_color_range = c("cyan", "gray", "magenta")### 
 
-If we look at print(obj$data$diff_table) above the plot, we can see that in our case, treatment_1 is 'TRAD'. The log2 median ratio is defined as"log2(TRAD / METABR). When a taxon has more counts with traditional classificaiton, the ratio is positive, therefore taxa more abundant with traditional are coloured 'darkorchid (purple)' in our case (not magenta).
+If we look at print(obj$data$diff_table) above the plot, we can see that in our case, treatment_1 is 'TRAD'. The log2 median ratio is defined as"log2(TRAD / METABR). When a taxon has more counts with traditional classification, the ratio is positive, therefore taxa more abundant with traditional are coloured 'darkorchid (purple)' in our case (not magenta).
 
 
 ```{r diversity indeces all counts, warning=FALSE} 
@@ -95,8 +101,6 @@ ggplot(sample, aes(x = methodClass, y = inv_simp)) +
   xlab("Season") +
   ylab("Inverse simpson index")
 
-
-
 ```
 
 ```{r MBPPCoAPlots all counts, warning=FALSE}
@@ -112,38 +116,48 @@ pcoares <- get_pcoa(obj=ps_obj_all, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
+
+pdf("./05_trad_metabar_data_files/pcoa_all_2axis.pdf")
+pcoaplot1
+dev.off()
+
 pcoaplot1 | pcoaplot2 #PCoA between classification methods
 
+```
+
+Next are some more pcoa plots just to show what we can do as long as we have really well detailed metadata (e.g. season and methodClass, or colleciton method)
+
+```{r}
 pcoaplot1a <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2a <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
+
 pcoaplot1a | pcoaplot2a #Between classification and season
 
 
 pcoaplot1c <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "method"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2c <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "method"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 pcoaplot1c | pcoaplot2c #Between classification, season and trap method
-
 
 ```
 
@@ -151,16 +165,14 @@ pcoaplot1c | pcoaplot2c #Between classification, season and trap method
 ```{r VEnnDiagramAll, warning=FALSE}
 ###### I HAVE A SMALL PROBLEM WITH grid PACKAGE. IT IS PLOTING ON TOP OF PREVIOUS PLOTS SO DO THIS dev.off() to draw in a new plot
 
-dev.off()
-
 vennlist_all <- get_vennlist(obj=ps_obj_all, factorNames="methodClass")
 vennp_all <- venn.diagram(vennlist_all,
                       height=5,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -173,15 +185,19 @@ vennp_all <- venn.diagram(vennlist_all,
                       lty ='dotted',
                       imagetype = "svg")
 
+pdf("./05_trad_metabar_data_files/venn_all.pdf")
 grid::grid.draw(vennp_all)
-
+dev.off()
 ```
+
+Most abundant taxa with either method except this is not an accurate representation
+ForestGEO only uses focal species and differente collection methods, so here we are making an unfair comparison. There are no Diptera in traditional datasets and no bait colleciotn in metabarcoding data.
 
 ```{r MBPTaxonAbundanceTOP5, warning=FALSE}
 
 classtaxa <- get_taxadf(obj=ps_obj_all, taxlevel=4)
 # The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
-pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=5) +
+pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=10) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
@@ -201,6 +217,10 @@ pclass2
 
 
 ```
+
+So we further filter data to focus only on Light Trap data and after we will filter again to only focal families. We could refine these data as deep as we want, however, in this case we are limited by taxonomic rank. The data I downloaded from mBRAVE did not include subfamily - for future analyses, one should aim to include every taxonomic rank instead as this could have been ideal for e.g. Arciidae
+
+We will repeat the same type of analyses as before but jsut for Light Trap data.
 
 ```{r Filtering_LT_Only, warning=FALSE}
 
@@ -236,18 +256,18 @@ pcoares_LT <- get_pcoa(obj=ps_obj_LT, distmethod="bray", method="hellinger")
 # Visualizing the result
 pcoaplot1_LT <- ggordpoint(obj=pcoares_LT, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2_LT <- ggordpoint(obj=pcoares_LT, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 pcoaplot1_LT | pcoaplot2_LT
 
 classtaxa_LT <- get_taxadf(obj=ps_obj_LT, taxlevel=4)
 # The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
-pclass_LT <- ggbartax(obj=classtaxa_LT, facetNames="methodClass", topn=5) +
+pclass_LT <- ggbartax(obj=classtaxa_LT, facetNames="methodClass", topn=10) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
@@ -261,13 +281,14 @@ heat_tree(obj_LT,
           node_size = n_obs,
           node_color = mean_diff,
           node_color_interval = c(-0.5, 0.5),
-          node_color_range = c("goldenrod", "gray", "darkorchid"),
+          node_color_range = c("darkolivegreen3", "gray", "darkorchid"),
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportions",
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
-          initial_layout = "reingold-tilford")
+          initial_layout = "reingold-tilford",
+          output_file = "./05_trad_metabar_data_files/figure-gfm/light_trap_heattree.pdf")
 
 ##This one takes about 15 minutes to run
 
@@ -283,8 +304,8 @@ vennp_LT <- venn.diagram(vennlist_LT,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -297,8 +318,12 @@ vennp_LT <- venn.diagram(vennlist_LT,
                       lty ='dotted',
                       imagetype = "svg")
 
+pdf("./05_trad_metabar_data_files/venn_LT.pdf")
 grid::grid.draw(vennp_LT)
+dev.off()
 ```
+
+Next we will focus only on focal orders.
 
 ```{r FocalGroups, warning=FALSE}
 
@@ -330,14 +355,19 @@ pcoares_focal <- get_pcoa(obj=ps_obj_focal, distmethod="bray", method="hellinger
 # Visualizing the result
 pcoaplot1_focal <- ggordpoint(obj=pcoares_focal, biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 # first and third principal co-ordinates
 pcoaplot2_focal <- ggordpoint(obj=pcoares_focal, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
                         factorNames=c("methodClass", "season"), ellipse=TRUE) +
-  scale_color_manual(values=c("goldenrod", "darkorchid")) +
-  scale_fill_manual(values=c("goldenrod", "darkorchid"))
+  scale_color_manual(values=c("darkolivegreen3", "darkorchid")) +
+  scale_fill_manual(values=c("darkolivegreen3", "darkorchid"))
 pcoaplot1_focal | pcoaplot2_focal
+
+pdf("./05_trad_metabar_data_files/PcoA_1and2_focal.pdf")
+pcoaplot1_focal
+dev.off()
+
 #pcoaplot2_focal
 
 heat_tree(obj_focal,
@@ -345,7 +375,7 @@ heat_tree(obj_focal,
           node_size = n_obs,
           node_color = mean_diff,
           node_color_interval = c(-0.5, 0.5),
-          node_color_range = c("goldenrod", "gray", "darkorchid"),
+          node_color_range = c("darkolivegreen3", "gray", "darkorchid"),
           node_color_digits = 1,
           node_size_axis_label = "BIN count",
           node_color_axis_label = "Mean difference in sample proportions",
@@ -367,8 +397,8 @@ vennp_focal <- venn.diagram(vennlist_focal,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -381,6 +411,7 @@ vennp_focal <- venn.diagram(vennlist_focal,
                       lty ='dotted',
                       imagetype = "svg")
 
+pdf("./05_trad_metabar_data_files/venn_focal.pdf")
 grid::grid.draw(vennp_focal)
 dev.off()
 
@@ -392,21 +423,23 @@ dev.off()
 set.seed(16)#to make sure the figures is always the same
 obj_focal %>%
   metacoder::filter_taxa(taxon_names == "Lepidoptera",#here is to filter the figure by groups
-              subtaxa = TRUE) %>%  
+              subtaxa = TRUE) %>%
+  #metacoder::filter_taxa(taxon_ranks == c("o","f","g", "s")) %>%
   heat_tree(node_label = taxon_names,
-            #node_size_range = c(0.005, 0.02),
-            #edge_size_range = c(0.005, 0.01),
+            node_size_range = c(0.006, 0.04),
+            edge_size_range = c(0.001, 0.003),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used Treatment_1 (trad) corresponds to DarkOrchid Color
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/lepidoptera_heattree.pdf") # The layout algorithm that initializes node locations
 
-#this one takes about 
+#this one takes about 5 minutes
 
 obj_focal %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps_LT #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -433,8 +466,8 @@ vennp_leps <- venn.diagram(vennlist_leps,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -446,7 +479,9 @@ vennp_leps <- venn.diagram(vennlist_leps,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
+pdf("./05_trad_metabar_data_files/venn_leps.pdf")
 grid::grid.draw(vennp_leps)
+dev.off()
 
 ```
 
@@ -458,18 +493,19 @@ obj_LT %>%
   metacoder::filter_taxa(taxon_names == "Coleoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             #edge_label = n_obs,
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/coleoptera_heattree.pdf") # The layout algorithm that initializes node locations
 
 #<1 minute
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Coleoptera"),#here is to fliter the figure by groups
@@ -492,8 +528,8 @@ vennp_coleo <- venn.diagram(vennlist_coleo,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -505,7 +541,10 @@ vennp_coleo <- venn.diagram(vennlist_coleo,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
+
+pdf("./05_trad_metabar_data_files/venn_coleo.pdf")
 grid::grid.draw(vennp_coleo)
+dev.off()
 
 
 
@@ -518,17 +557,18 @@ obj_LT %>%
   metacoder::filter_taxa(taxon_names == "Hymenoptera",#here is to fliter the figure by groups
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
-            node_size_range = c(0.01, 0.02),
-            #edge_size_range = c(0.005, 0.01),
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classifcaiton method",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Hymenoptera_heattree.pdf") # The layout algorithm that initializes node locations
 
 #>1 minute
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Hymenoptera"),#here is to fliter the figure by groups
@@ -552,8 +592,8 @@ vennp_hymen <- venn.diagram(vennlist_hymen,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -565,8 +605,10 @@ vennp_hymen <- venn.diagram(vennlist_hymen,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp_hymen)
 
+pdf("./05_trad_metabar_data_files/venn_hymenoptera.pdf")
+grid::grid.draw(vennp_hymen)
+dev.off()
 
 ```
 
@@ -578,16 +620,17 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification method",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Hemiptera_heattree.pdf") # The layout algorithm that initializes node locations
 
 #>1 minute
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to fliter the figure by groups
@@ -609,8 +652,8 @@ vennp_hemi <- venn.diagram(vennlist_hemi,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -622,8 +665,10 @@ vennp_hemi <- venn.diagram(vennlist_hemi,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp_hemi)
 
+pdf("./05_trad_metabar_data_files/venn_hemiptera.pdf")
+grid::grid.draw(vennp_hemi)
+dev.off()
 
 
 ```
@@ -637,16 +682,17 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
-            node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Blattodea_heattree.pdf") # The layout algorithm that initializes node locations
 
 #<1 minute
 obj_LT %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
@@ -669,8 +715,8 @@ vennp_blats <- venn.diagram(vennlist_blats,
                       width=5, 
                       filename=NULL,
                       disable.logging = TRUE,
-                      fill=c("goldenrod", "darkorchid"),
-                      cat.col=c("goldenrod", "darkorchid"),
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
                       alpha = 0.85, 
                       fontfamily = "serif",
                       fontface = "bold",
@@ -682,8 +728,10 @@ vennp_blats <- venn.diagram(vennlist_blats,
                       lwd = 3,
                       lty ='dotted',
                       imagetype = "svg")
-grid::grid.draw(vennp_blats)
 
+pdf("./05_trad_metabar_data_files/venn_termites.pdf")
+grid::grid.draw(vennp_blats)
+dev.off()
 ```
 
 
@@ -694,16 +742,17 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Trichoptera_heattree.pdf") # The layout algorithm that initializes node locations
 
 
 
@@ -713,19 +762,794 @@ obj_LT %>%
               subtaxa = TRUE) %>% 
   heat_tree(node_label = taxon_names,
             node_size_range = c(0.01, 0.03),
-            #edge_size_range = c(0.005, 0.01),
+            edge_size_range = c(0.003, 0.005),
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-0.01,0.01), # The range of the mean_difference to display
-            node_color_range = c("goldenrod", "gray", "darkorchid"), # The color palette used
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
-            node_label_size_range = c( 0.005, 0.03),
+            node_label_size_range = c( 0.003, 0.03),
             layout = "davidson-harel", # The primary layout algorithm
-            initial_layout = "reingold-tilford") # The layout algorithm that initializes node locations
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/Diptera_heattree.pdf") # The layout algorithm that initializes node locations
 
 
 
 
 ```
 
+Finally, we refine further to include focal families only. This is the true comparison beteween Metabarcoding and Traditional records as it focuses only on apples and apples (geometridae from metabarcoding and geometridae from traditional records, instead of ALL leps.)
+
+```{r FilteringtoFocal}
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Geometridae"),subtaxa = TRUE) -> geom_LT
+ps_geom_LT <- metacoder::as_phyloseq(geom_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID") %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_geom_LT
+colnames(tax_table(ps_geom_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Erebidae"), subtaxa = TRUE) -> ereb_LT
+ps_ereb_LT <- metacoder::as_phyloseq(ereb_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_ereb_LT
+colnames(tax_table(ps_ereb_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Crambidae"), subtaxa = TRUE) -> cramb_LT
+ps_cramb_LT <- metacoder::as_phyloseq(cramb_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_cramb_LT
+colnames(tax_table(ps_cramb_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Saturniidae"), subtaxa = TRUE) -> satur_LT
+ps_satur_LT <- metacoder::as_phyloseq(satur_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_satur_LT
+colnames(tax_table(ps_satur_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Noctuidae"), subtaxa = TRUE) -> noctuid_LT
+ps_noctuid_LT <- metacoder::as_phyloseq(noctuid_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_noctuid_LT
+colnames(tax_table(ps_noctuid_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Nymphalidae"), subtaxa = TRUE) -> nymph_LT
+ps_nymph_LT <- metacoder::as_phyloseq(nymph_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_nymph_LT
+colnames(tax_table(ps_nymph_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Hesperiidae"), subtaxa = TRUE) -> hesp_LT
+ps_hesp_LT <- metacoder::as_phyloseq(hesp_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_hesp_LT
+colnames(tax_table(ps_hesp_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Pyralidae"), subtaxa = TRUE) -> pyra_LT
+ps_pyra_LT <- metacoder::as_phyloseq(pyra_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Lepidoptera", .before = 1) -> ps_pyra_LT
+colnames(tax_table(ps_pyra_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Scarabaeidae"), subtaxa = TRUE) -> scarab_LT
+ps_scarab_LT <- metacoder::as_phyloseq(scarab_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Coleoptera", .before = 1) -> ps_scarab_LT
+colnames(tax_table(ps_scarab_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Curculionidae"), subtaxa = TRUE) -> curcu_LT
+ps_curcu_LT <- metacoder::as_phyloseq(curcu_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Coleoptera", .before = 1) -> ps_curcu_LT
+colnames(tax_table(ps_curcu_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Passalidae"), subtaxa = TRUE) -> passa_LT
+ps_passa_LT <- metacoder::as_phyloseq(passa_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Coleoptera", .before = 1) -> ps_passa_LT
+colnames(tax_table(ps_passa_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Formicidae"), subtaxa = TRUE) -> ants_LT
+ps_ants_LT <- metacoder::as_phyloseq(ants_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hymenoptera", .before = 1) -> ps_ants_LT
+colnames(tax_table(ps_ants_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Apidae"), subtaxa = TRUE) -> bees_LT
+ps_bees_LT <- metacoder::as_phyloseq(bees_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hymenoptera", .before = 1) -> ps_bees_LT
+colnames(tax_table(ps_bees_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Flatidae"), subtaxa = TRUE) -> flat_LT
+ps_flat_LT <- metacoder::as_phyloseq(flat_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hemiptera", .before = 1) -> ps_flat_LT
+colnames(tax_table(ps_flat_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Reduviidae"), subtaxa = TRUE) -> reds_LT
+ps_reds_LT <- metacoder::as_phyloseq(reds_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Hemiptera", .before = 1) -> ps_reds_LT
+colnames(tax_table(ps_reds_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+#obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Termitidae"), subtaxa = TRUE) -> termit_LT
+#ps_termit_LT <- metacoder::as_phyloseq(termit_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Blattodea", .before = 1) -> ps_termit_LT
+#colnames(tax_table(ps_termit_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+#obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Kalotermitidae"), subtaxa = TRUE) -> kalo_LT
+#ps_kalo_LT <- metacoder::as_phyloseq(kalo_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", rank_03 = "Blattodea", .before = 1) -> ps_kalo_LT
+#colnames(tax_table(ps_kalo_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+
+obj_LT %>% metacoder::filter_taxa(taxon_names %in% c("Blattodea"), subtaxa = TRUE) -> all_termites_LT
+ps_all_termites_LT <- metacoder::as_phyloseq(all_termites_LT,otu_table = "tax_data",otu_id_col = "bold_bin",sample_data = sample,sample_id_col = "sampleID")%>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_all_termites_LT
+colnames(tax_table(ps_all_termites_LT)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__")
+```
+
+```{r}
+set.seed(16)#to make sure the figures is always the same
+geom_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/geometridae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+ereb_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/erebidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+ereb_LT$data$taxon_abund <- calc_taxon_abund(ereb_LT, "tax_data", cols = sample_LT$sampleID, groups = sample_LT$methodClass)
+taxon_names(ereb_LT)[ereb_LT$data$taxon_abund$trad > 0 & ereb_LT$data$taxon_abund$metabr > 0]
+
+
+set.seed(16)#to make sure the figures is always the same
+cramb_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/crambiade_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+satur_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/saturnidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+noctuid_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/noctuidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+nymph_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/nymphalidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+pyra_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/pyralidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+hesp_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/hesperiidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+scarab_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/scarabs_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+curcu_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/curcu_heattree.pdf")
+
+set.seed(16)#to make sure the figures is always the same
+passa_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/passalid_heattree.pdf")
+
+set.seed(16)#to make sure the figures is always the same
+ants_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/formicidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+bees_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/apidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+flat_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/flatiidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+reds_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/reduviidae_heattree.pdf") # The layout algorithm that initializes node locations
+
+set.seed(16)#to make sure the figures is always the same
+all_termites_LT %>%
+  heat_tree(node_label = taxon_names,
+            node_size_range = c(0.01, 0.03),
+            edge_size_range = c(0.003, 0.005),
+            node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
+            node_color = mean_diff, # A column from `obj_LT$data$diff_table`
+            node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+            node_size_axis_label = "BIN count",
+            node_color_axis_label = "Mean difference between classification methods",
+            node_label_size_range = c( 0.003, 0.03),
+            layout = "davidson-harel", # The primary layout algorithm
+            initial_layout = "reingold-tilford",
+            output_file = "./05_trad_metabar_data_files/all_termites_heattree.pdf") # The layout algorithm that initializes node locations
+
+
+vennlist_geom <- get_vennlist(obj=ps_geom_LT, factorNames="methodClass")
+vennp_geom <- venn.diagram(vennlist_geom,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_ereb <- get_vennlist(obj=ps_ereb_LT, factorNames="methodClass")
+vennp_ereb <- venn.diagram(vennlist_ereb,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_cramb <- get_vennlist(obj=ps_cramb_LT, factorNames="methodClass")
+vennp_cramb <- venn.diagram(vennlist_cramb,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_satur <- get_vennlist(obj=ps_satur_LT, factorNames="methodClass")
+vennp_satur <- venn.diagram(vennlist_satur,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_noctuid <- get_vennlist(obj=ps_noctuid_LT, factorNames="methodClass")
+vennp_noctuid <- venn.diagram(vennlist_noctuid,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_nymph <- get_vennlist(obj=ps_nymph_LT, factorNames="methodClass")
+vennp_nymph <- venn.diagram(vennlist_nymph,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_pyra <- get_vennlist(obj=ps_pyra_LT, factorNames="methodClass")
+vennp_pyra <- venn.diagram(vennlist_pyra,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_hesp <- get_vennlist(obj=ps_hesp_LT, factorNames="methodClass")
+vennp_hesp <- venn.diagram(vennlist_hesp,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_scarab <- get_vennlist(obj=ps_scarab_LT, factorNames="methodClass")
+vennp_scarab <- venn.diagram(vennlist_scarab,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_curcu <- get_vennlist(obj=ps_curcu_LT, factorNames="methodClass")
+vennp_curcu <- venn.diagram(vennlist_curcu,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_passa <- get_vennlist(obj=ps_passa_LT, factorNames="methodClass")
+#vennp_passa <- venn.diagram(vennlist_passa,
+                      #height=5,
+                      #width=5, 
+                      #filename=NULL,
+                      #disable.logging = TRUE,
+                      #fill=c("darkolivegreen3", "darkorchid"),
+                      #cat.col=c("darkolivegreen3", "darkorchid"),
+                      #alpha = 0.85, 
+                      #fontfamily = "serif",
+                      #fontface = "bold",
+                      #cex = 1.2,
+                      #cat.cex = 1.3,
+                      #cat.default.pos = "outer",
+                      #cat.dist=0.1,
+                      #margin = 0.1, 
+                      #lwd = 3,
+                      #lty ='dotted',
+                      #imagetype = "svg")
+
+vennlist_ants <- get_vennlist(obj=ps_ants_LT, factorNames="methodClass")
+vennp_ants <- venn.diagram(vennlist_ants,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_bees <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
+vennp_bees <- venn.diagram(vennlist_bees,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_flat <- get_vennlist(obj=ps_flat_LT, factorNames="methodClass")
+vennp_flat <- venn.diagram(vennlist_flat,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+vennlist_reds <- get_vennlist(obj=ps_reds_LT, factorNames="methodClass")
+vennp_reds <- venn.diagram(vennlist_reds,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+#vennlist_termit <- get_vennlist(obj=ps_termit_LT, factorNames="methodClass")
+#vennp_termit <- venn.diagram(vennlist_termit,
+                      #height=5,
+                      #width=5, 
+                      #filename=NULL,
+                      #disable.logging = TRUE,
+                      #fill=c("darkolivegreen3", "darkorchid"),
+                      #cat.col=c("darkolivegreen3", "darkorchid"),
+                      #alpha = 0.85, 
+                      #fontfamily = "serif",
+                      #fontface = "bold",
+                      #cex = 1.2,
+                      #cat.cex = 1.3,
+                      #cat.default.pos = "outer",
+                      #cat.dist=0.1,
+                      #margin = 0.1, 
+                      #lwd = 3,
+                      #lty ='dotted',
+                      #imagetype = "svg")
+
+#vennlist_kalo <- get_vennlist(obj=ps_kalo_LT, factorNames="methodClass")
+#vennp_kalo <- venn.diagram(vennlist_kalo,
+                      #height=5,
+                      #width=5, 
+                      #filename=NULL,
+                      #disable.logging = TRUE,
+                      #fill=c("darkolivegreen3", "darkorchid"),
+                      #cat.col=c("darkolivegreen3", "darkorchid"),
+                      #alpha = 0.85, 
+                      #fontfamily = "serif",
+                      #fontface = "bold",
+                      #cex = 1.2,
+                      #cat.cex = 1.3,
+                      #cat.default.pos = "outer",
+                      #cat.dist=0.1,
+                      #margin = 0.1, 
+                      #lwd = 3,
+                      #lty ='dotted',
+                      #imagetype = "svg")
+
+vennlist_all_termites <- get_vennlist(obj=ps_all_termites_LT, factorNames="methodClass")
+vennp_all_termites <- venn.diagram(vennlist_all_termites,
+                      height=5,
+                      width=5, 
+                      filename=NULL,
+                      disable.logging = TRUE,
+                      fill=c("darkolivegreen3", "darkorchid"),
+                      cat.col=c("darkolivegreen3", "darkorchid"),
+                      alpha = 0.85, 
+                      fontfamily = "serif",
+                      fontface = "bold",
+                      cex = 1.2,
+                      cat.cex = 1.3,
+                      cat.default.pos = "outer",
+                      cat.dist=0.1,
+                      margin = 0.1, 
+                      lwd = 3,
+                      lty ='dotted',
+                      imagetype = "svg")
+
+
+
+
+dev.off()
+grid::grid.draw(vennp_geom)
+ggsave("./05_trad_metabar_data_files/venn_geom.pdf", vennp_geom)
+
+dev.off()
+grid::grid.draw(vennp_ereb)
+ggsave("./05_trad_metabar_data_files/venn_erebidae.pdf", vennp_ereb)
+
+dev.off()
+grid::grid.draw(vennp_cramb)
+ggsave("./05_trad_metabar_data_files/venn_crabidae.pdf", vennp_cramb)
+
+dev.off()
+grid::grid.draw(vennp_satur)
+ggsave("./05_trad_metabar_data_files/venn_saturnidae.pdf", vennp_satur)
+
+dev.off()
+grid::grid.draw(vennp_noctuid)
+ggsave("./05_trad_metabar_data_files/venn_noctuidae.pdf", vennp_noctuid)
+
+dev.off()
+grid::grid.draw(vennp_nymph)
+ggsave("./05_trad_metabar_data_files/venn_nymphalidae.pdf", vennp_nymph)
+
+dev.off()
+grid::grid.draw(vennp_pyra)
+ggsave("./05_trad_metabar_data_files/venn_pyraliidae.pdf", vennp_pyra)
+
+dev.off()
+grid::grid.draw(vennp_hesp)
+ggsave("./05_trad_metabar_data_files/venn_hesperiidae.pdf", vennp_hesp)
+
+dev.off()
+grid::grid.draw(vennp_scarab)
+ggsave("./05_trad_metabar_data_files/venn_scarabididae.pdf", vennp_scarab)
+
+dev.off()
+grid::grid.draw(vennp_curcu)
+ggsave("./05_trad_metabar_data_files/venn_curculionidae.pdf", vennp_curcu)
+
+#dev.off()
+#grid::grid.draw(vennp_passa)
+#ggsave("./05_trad_metabar_data_files/venn_passalidae.pdf", vennp_passa)
+
+dev.off()
+grid::grid.draw(vennp_ants)
+ggsave("./05_trad_metabar_data_files/venn_formicidae.pdf", vennp_ants)
+
+dev.off()
+grid::grid.draw(vennp_bees)
+ggsave("./05_trad_metabar_data_files/venn_apidae.pdf", vennp_bees)
+
+dev.off()
+grid::grid.draw(vennp_flat)
+ggsave("./05_trad_metabar_data_files/venn_flatidae.pdf", vennp_flat)
+
+dev.off()
+grid::grid.draw(vennp_reds)
+ggsave("./05_trad_metabar_data_files/venn_reduviidae.pdf", vennp_reds)
+
+#dev.off()
+#grid::grid.draw(vennp_termit)
+#ggsave("./05_trad_metabar_data_files/venn_termitidae.pdf", vennp_termit)
+
+#dev.off()
+#grid::grid.draw(vennp_kalo)
+#ggsave("./05_trad_metabar_data_files/venn_kalotermitidae.pdf", vennp_kalo)
+
+dev.off()
+grid::grid.draw(vennp_all_termites)
+ggsave("./05_trad_metabar_data_files/venn_all_termites.pdf", vennp_all_termites)
+
+```

@@ -1,0 +1,27 @@
+---
+title: "06_iNext"
+author: "Daniel"
+date: "26/01/2023"
+output: github_document
+#editor_options: 
+  #chunk_output_type: console
+---
+
+```{r include = FALSE}
+rm(list=ls())
+library('iNEXT')
+library('ggplot2')
+
+dat<- read.csv('data/metabinary_inext.csv', header = TRUE)
+
+
+mdat <- as.matrix(apply(dat[,-1],2,as.integer))
+row.names(mdat) <- dat[,1]
+mdat[is.na(mdat)] <- 0
+data.list <- list(mdat)
+
+out <- iNEXT(data.list, datatype = "incidence_raw", endpoint = 500)
+
+out
+ggiNEXT(out) 
+```

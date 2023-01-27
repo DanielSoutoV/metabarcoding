@@ -9,7 +9,7 @@ output: github_document
 
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
+rm(list=ls()) #I always start scripts this way to make sure I have a clean R environment
 library('tidyr')
 library('dplyr')
 library('metacoder')
@@ -19,6 +19,11 @@ library('vegan')
 library('MicrobiotaProcess')
 library('phyloseq')
 library('ggtree')
+library('coin')
+
+```
+
+```{r message = FALSE, warning = FALSE}
 
 obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
@@ -39,7 +44,7 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to flit
 sample <- read.csv('data/location_ctrl.csv')
 ```
 
-The chunk above now gave us a filtered taxmap object for each of the ForestGEO focal groups (plus Diptera because I think its interesting).
+The chunk above now gave us a filtered taxmap object for each of the ForestGEO focal Orders (plus Diptera because I think its interesting).
 Downstream analysis will make use of these filtered data sets, but we continue with general info (whole data set) between seasons.
 
 ```{r simpleBoxplotANOVAbetweenSeason}
@@ -48,12 +53,15 @@ sample$inv_simp <- diversity(obj$data$tax_data[, sample$sampleID],
                              MARGIN = 2) # What orietation the matrix is in
 ggplot(sample, aes(x = SEASON, y = inv_simp)) +
   geom_boxplot()
+
 anova_result <- aov(inv_simp ~ SEASON, sample)
 summary(anova_result)
 tukey_result <- HSD.test(anova_result, "SEASON", group = TRUE)
 print(tukey_result)
 
 group_data <- tukey_result$groups[order(rownames(tukey_result$groups)),]
+
+pdf("./03_diversity_and_ordination_files/boxplot.pdf")
 ggplot(sample, aes(x = SEASON, y = inv_simp)) +
   geom_text(data = data.frame(),
             aes(x = rownames(group_data), y = max(sample$inv_simp) + 1, label = group_data$groups),
@@ -63,9 +71,14 @@ ggplot(sample, aes(x = SEASON, y = inv_simp)) +
   ggtitle("Inverse Simpson diversity") +
   xlab("Season") +
   ylab("Inverse simpson index")
+dev.off()
+
+
+
+
 ```
 
-We can also see differences between sampling days although there is none. 
+We can also see differences between sampling days or location (site) although there are none. 
 
 ```{r simpleBoxplotANOVAbetweenDays}
 ggplot(sample, aes(x = day, y = inv_simp)) +
@@ -74,6 +87,13 @@ anova_result <- aov(inv_simp ~ day, sample)
 summary(anova_result)
 tukey_result_day <- HSD.test(anova_result, "day", group = TRUE)
 print(tukey_result_day)
+
+ggplot(sample, aes(x = site, y = inv_simp)) +
+  geom_boxplot()
+anova_result <- aov(inv_simp ~ site, sample)
+summary(anova_result)
+tukey_result_site <- HSD.test(anova_result, "site", group = TRUE)
+print(tukey_result_site)
 
 group_data_day <- tukey_result_day$groups[order(rownames(tukey_result_day$groups)),]
 ggplot(sample, aes(x = day, y = inv_simp)) +
@@ -85,6 +105,18 @@ ggplot(sample, aes(x = day, y = inv_simp)) +
   ggtitle("Inverse Simpson diversity") +
   xlab("Day") +
   ylab("Inverse simpson index")
+
+group_data_site <- tukey_result_site$groups[order(rownames(tukey_result_site$groups)),]
+ggplot(sample, aes(x = site, y = inv_simp)) +
+  geom_text(data = data.frame(),
+            aes(x = rownames(group_data_site), y = max(sample$inv_simp) + 1, label = group_data_site$groups),
+            col = 'black',
+            size = 10) +
+  geom_boxplot() +
+  ggtitle("Inverse Simpson diversity") +
+  xlab("site") +
+  ylab("Inverse simpson index")
+
 ```
 
 We can also calculate several diversity metrics for sampling season and day using phyloseq but we must convert the taxmap object 'obj' to phyloseq 
@@ -96,10 +128,11 @@ ps_obj <- metacoder::as_phyloseq(obj,
                       sample_data = sample,
                       sample_id_col = "sampleID")
 
-#normally, I load every package I need at the start of the script, but this may cause function masking problems (e.g. both MicrobiotaProcess and Metacoder have a 'as_phyloseq' function and you have to specify to R which package you want to use -  see above: metacoder::as_phyloseq - this means I am telling R to use the 'as_phyloseq' function from the metacoder package)
+#normally, I load every package I need at the start of the script, but this causes function masking problems (e.g. both MicrobiotaProcess and Metacoder have a 'as_phyloseq' function and you have to specify to R which package you want to use -  see above: metacoder::as_phyloseq - this means I am telling R to use the 'as_phyloseq' function from the metacoder package)
 
 plot_richness(ps_obj, color = "SEASON", x = "site") #phyloseq function
 plot_richness(ps_obj, color = "day", x = "SEASON")
+
 
 ```
 
@@ -111,9 +144,13 @@ alphaobj <- get_alphaindex(ps_obj)
 p_alpha <- ggbox(alphaobj, geom="violin", factorNames="SEASON", indexNames = c('Observe', 'Shannon', 'Simpson'),  signifmap = TRUE) +
   scale_fill_manual(values=c("goldenrod", "steelblue"))+
   theme(strip.background = element_rect(colour=NA, fill="grey"))
+pdf("./03_diversity_and_ordination_files/diversity_indices_season.pdf")
 p_alpha
+dev.off()
 ```
 And look at rarefaction curves for both seasons:
+These are rarefaction curves of species (Y) and number of reads (X) - tells you how many read coverage you need to capture most diversity.
+
 ```{r MBPRarefactionCurvesPerSeason}
 alphaobj <- get_alphaindex(ps_obj)
 head(as.data.frame(alphaobj))
@@ -131,7 +168,9 @@ prare2 <- ggrarecurve(obj=rareres,
         strip.background = element_rect(colour=NA,fill="grey"),
         strip.text.x = element_text(face="bold"))
 
+pdf("./03_diversity_and_ordination_files/season_rarefaction.pdf")
 prare2
+dev.off()
 ```
 
 We can also do a Principal Coordinate Analysis to see not only the differences between seasons, but what BINs are the main drivers of these differences
@@ -141,47 +180,71 @@ We can also do a Principal Coordinate Analysis to see not only the differences b
 # "unifrac",  "wunifrac", "manhattan", "euclidean", "canberra", "bray", "kulczynski" ...(vegdist, dist)
 pcoares <- get_pcoa(obj=ps_obj, distmethod="bray", method="hellinger")
 # Visualizing the result
-pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=TRUE,
+pcoaplot1 <- ggordpoint(obj=pcoares, biplot=TRUE, speciesannot=FALSE,
                         factorNames=c("SEASON"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "steelblue")) +
   scale_fill_manual(values=c("goldenrod", "steelblue"))
 # first and third principal co-ordinates
-pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=TRUE,
+pcoaplot2 <- ggordpoint(obj=pcoares, pc=c(1, 3), biplot=TRUE, speciesannot=FALSE,
                         factorNames=c("SEASON"), ellipse=TRUE) +
   scale_color_manual(values=c("goldenrod", "steelblue")) +
   scale_fill_manual(values=c("goldenrod", "steelblue"))
 
+pdf("./03_diversity_and_ordination_files/pcoa_2_axis.pdf")
 pcoaplot1 
+dev.off()
 
+pdf("./03_diversity_and_ordination_files/pcoa_3_axis.pdf")
 pcoaplot2
+dev.off()
 
 pcoaplot1 | pcoaplot2
 ```
 
+Next we will see which are the most frequent taxa (in terms of reads)
+We can edit this polot with two important compontents: taxlevel and topn
+taxlevel means the level of taxonomic resolution for the filtering kingdom:phyllum:class:order:family:genus:species
+topn mean the number of the most abundant taxa you want to include e.g. top 10 - be aware that the color may mess up if you choose a large number
+
 ```{r MBPTaxonAbundanceTOP10}
-
-
 classtaxa <- get_taxadf(obj=ps_obj, taxlevel=4)
 # The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
-pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=10) +
+pclass <- ggbartax(obj=classtaxa, facetNames="SEASON", topn=5) +
   xlab(NULL) +
   ylab("relative abundance (%)") +
-  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
-  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(21))) +
+  guides(fill= guide_legend(keyw0idth = 0.5, keyheight = 0.5))
 
 #note the flag "count=TRUE", this shows now total reads, rather than proportion %
-pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=10) +
+pclass2 <- ggbartax(obj=classtaxa, count=TRUE, facetNames="SEASON", topn=5) +
   xlab(NULL) +
   ylab("count reads") +
   scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(12,"Set3"))(31))) +
   guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
 
-
+pdf("./03_diversity_and_ordination_files/relative_abundance_top5_order.pdf")
 pclass
+dev.off()
 
+pdf("./03_diversity_and_ordination_files/count_reads_top5_order.pdf")
 pclass2
+dev.off()
 
+pclass | pclass2
 
+classtaxa_fam <- get_taxadf(obj=ps_obj, taxlevel=5)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_fam <- ggbartax(obj=classtaxa_fam, facetNames="SEASON", topn=20) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(51))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./03_diversity_and_ordination_files/relative_agundance_top20_family.pdf")
+pclass_fam
+dev.off()
+
+pclass | pclass_fam | pclass2
 ```
 
 
@@ -189,7 +252,7 @@ These following chunks might be best to compare metabarcoding vs traditional dat
 Way too many species difference between both sampling strategies and so the plots are messy  - after Kruskal, Wilcox and LDA, 264 taxa discriminate between wet and dry seasons.
 
 ```{r warning=FALSE}
-library('coin')#for kruskal and wilcox test
+#'coin' package used for kruskal and wilcox test
 # Since the effect size was calculated by randomly re-sampling, 
 # the seed should be set for reproducibly results.
 set.seed(1024)
@@ -208,15 +271,17 @@ deres <- diff_analysis(obj = ps_obj, classgroup = "SEASON",
 deres
 ```
 
+this figure gives you a cladogram of all the BINs (based on taxonomy) and highlight which species/genera/orders are different between treatments, in this case seasons
+
 ```{r MessyFigure_TaxoTree}
 diffclade_p <- ggdiffclade(
   obj=deres, 
-  alpha=0.2, 
-  linewd=0.15,
-  skpointsize=0.2, 
+  alpha=0.5, 
+  linewd=0.01,
+  skpointsize=0.05, 
   layout="radial",
-  cladetext = 0.7,
-  taxlevel=4, #taxonomy level from 1 to 8 kingdome:phylum:class:order:family:subfamily:genus:species
+  cladetext = 0.4,
+  taxlevel=4, #taxonomy level from 1 to 8 kingdom:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
@@ -238,14 +303,40 @@ diffclade_p <- ggdiffclade(
     legend.text=element_text(size=6), 
     legend.box.spacing=unit(0.02,"cm")
   )
+
+pdf("./03_diversity_and_ordination_files/diffclade_all.pdf")
 diffclade_p
+dev.off()
 ```
 
+We can also create boxplots for families - this one which includes everything is very messy.
+In the next script we repeat these analyses but for FOCAL orders only.
 
 ```{r BoxplotFIlteredFamily}
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE)
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> ggdiffbox_family
 
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggeffectsize(colorlist=c("steelblue", "goldenrod"), notch = FALSE)
+pdf("./03_diversity_and_ordination_files/ggdiffbox_family.pdf")
+ggdiffbox_family
+dev.off()
+
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>%
+dplyr::filter(grepl("^f__", f)) %>% ggeffectsize(colorlist= c('#daa520', '#4682b4'), notch = FALSE) -> ggeffectsize_family
+
+pdf("./03_diversity_and_ordination_files/ggeffectsize_family.pdf")
+ggeffectsize_family
+dev.off()
+
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^o__", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> ggdiffbox_order
+
+pdf("./03_diversity_and_ordination_files/ggdiffbox_order.pdf")
+ggdiffbox_order
+dev.off()
+
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^o__", f)) %>% ggeffectsize(colorlist=c("steelblue", "goldenrod"), notch = FALSE) -> ggeffectsize_order
+
+pdf("./03_diversity_and_ordination_files/ggeffectsize_order.pdf")
+ggeffectsize_order
+dev.off()
 
 ```
 

@@ -6,12 +6,12 @@ output: github_document
 ---
 
 There is a lot of manipulation that needs to be done with the data. In general, what we need to analyze metabarcoding data is a data frame organized as:
-Bold Bin and classification (separated by taxonomic rank by ";" as: k__ ; p__ ; etc.) in rows, and samples in columns.
+Bold Bin (column A) and classification (separated by taxonomic rank by ";" as: k__ ; p__ ; etc. in column B) in rows, and samples in columns (c - onwards).
 Some of the main issues with the data is that we have multiple duplicated BINs as they are present in multiple sample columns. The scripts below use tidyr and dplyr to merge these duplicates and sum the number of reads in the columns.
 
 The scripts create multiple files which will be used in the subsequent scripts. Sometimes they are redundant because I had to manually check these files for more duplicates. We have issues with BOLD bins being the same even though classified as different species, and several cases where we have duplicated species with different BINs. 
 
-There is one big problem with nomenclature. Particularly when comparing traditional taxonomic records vs metabarcoded records. The problem is that duplicate BOLD BINs are named different in the BOLD database (the name used by mBrave) and the ForestGEO (the names used for the traditional data set). The names can be completely different, but sometimes include spaces or periods, such as sp. 1YB vs sp1YB.
+There is one big problem with nomenclature. Particularly when comparing traditional taxonomic records vs metabarcoded records. The problem is that duplicate BOLD BINs are named different in the BOLD database (the name used by mBrave) and the ForestGEO (the names used for the traditional data set). The names can be completely different, but sometimes include spaces or periods, such as sp. 1YB vs sp1YB or sp. 1 YB.
 
 Be aware that this is a very Frankenstein-ish pipeline which heavily depends on other tutorials I've found. Specifically the metacoder package from the Grunwald Lab (https://grunwaldlab.github.io/metacoder_documentation/example.html) and the Microbiotaprocess package from the Yu Lab (https://github.com/YuLab-SMU/MicrobiotaProcess). Some of the scripts are my own (the dirtier ones), and some of the manipulation has been done in Excel (since I don't know the best way to do so in R - particularly the checking for duplicates and editing the species names).
 
@@ -22,7 +22,7 @@ Any questions or comments can be asked directly on the GitHub repo or to my emai
 
 
 
-```{r, LoadPackages, message = FALSE, warning = FALSE}
+```{r, LoadPackages, include = FALSE}
 #the small green box to insert chunks in different formats. 
 #```{r} for R.
 rm(list=ls()) #reoves all objects in workspace, start with clean environment
@@ -114,3 +114,5 @@ write.csv(tradmetabr, 'data/tradmetabr_merged.csv', row.names =FALSE) #save fina
 
 
 ```
+
+tradmetabr_merged.csv is now the final file we will use in script 05.

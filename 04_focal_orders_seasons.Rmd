@@ -8,7 +8,7 @@ output: github_document
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-rm(list=ls()) #I always start scritps this way to make sure I have a clean R environment
+rm(list=ls()) #I always start scripts this way to make sure I have a clean R environment
 library('tidyr')
 library('dplyr')
 library('metacoder')
@@ -19,6 +19,9 @@ library('MicrobiotaProcess')
 library('phyloseq')
 library('ggtree')
 library('coin')
+```
+
+```{r warning = FALSE, message=FALSE}
 
 obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
@@ -39,11 +42,12 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to flit
 sample <- read.csv('data/location_ctrl.csv')
 ```
 
-The script above gave me the taxmap object separated by order, however, it removes all taxonomic ranks up until "Order", so the script below is firstly, changing the taxmap object (e.g. leps) into a phyloseq object (as_phyloseq) and then using the microViz package to add the taxonomic ranks. 
+The script above gave me the taxmap object separated by order, however, it removes all taxonomic ranks up until "Order", so the script below is firstly, changing the taxmap object (e.g. leps) into a phyloseq object (as_phyloseq) and then using the microViz package to add the taxonomic ranks. These are necessary for some of the microbiotaprocess analyses otherwise the package complains that there is not enough taxonomic ranks.
 
 There must be certainly a cleaner way how to do this without so many steps, but I then had to change the classification rank names again ("k__" instead of Kingdom) as this is more friendly with MicroBiotaProcess. Within the metabarcoding package community, there seems to have been several issues with the ranks, some have root, some don't, some have subfamily, some don't, so take note of the nomenclature you are using. I am using Kingdom;Phylum;Order;Class;Family;genus;species  (1 - 7).
 
-If someone knows how to write a loop, this would be faster too. 
+If someone knows how to write a loop to make this faster, I'll buy you a beer.
+
 ```{r CreatingOrderFiles, message=FALSE, warning=FALSE, include=FALSE}
 ps_leps <- metacoder::as_phyloseq(leps,
                       otu_table = "tax_data",
@@ -91,8 +95,8 @@ colnames(tax_table(ps_hemi)) <- c("k__", "p__", "o__", "c__", "f__", "g__", "s__
 
 ```
 
-Ok we now have datasets separated for each order (ForestGEO focal plus diptera - if we want more, we can adapt the script above to include more focal groups, or even to refine them)
-But below we will create now some taxonomic trees showing differences between seasons (as in the MessyFigure chunk)
+Ok we now have datasets separated for each order (ForestGEO focal plus diptera - if we want more, we can adapt the script above to include more focal groups, or even to refine them - e.g. family level)
+But below we will create now some taxonomic trees showing differences between seasons (as in the previous script).
 
 ```{r Lepidoptera}
 set.seed(1024)
@@ -112,17 +116,17 @@ deresleps
 
 diffclade_leps <- ggdiffclade(
   obj=deresleps, 
-  alpha=0.2, 
-  linewd=0.15,
-  skpointsize=0.2, 
+  alpha=0.5, 
+  linewd=0.01,
+  skpointsize=0.05, 
   layout="radial",
-  cladetext = 0.7,
-  taxlevel=5, #taxonomy level from 1 to 7 kingdom:phylum:class:order:family:genus:species
+  cladetext = 0.4,
+  taxlevel=7, #taxonomy level from 1 to 7 kingdom:phylum:class:order:family:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("goldenrod", "steelblue")
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -139,16 +143,40 @@ diffclade_leps <- ggdiffclade(
     legend.text=element_text(size=6), 
     legend.box.spacing=unit(0.02,"cm")
   )
-diffclade_leps
 
-ps_leps %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+pdf("./04_focal_orders_seasons_files/leps_cladogram.pdf")
+diffclade_leps
+dev.off()
+
+classtaxa_leps <- get_taxadf(obj=ps_leps, taxlevel=5) #taxonomy level from 1 to 7 kingdom:phylum:class:order:family:genus:species
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_leps <- ggbartax(obj=classtaxa_leps, facetNames="SEASON", topn=10) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(11))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./04_focal_orders_seasons_files/leps_relative_difference_season.pdf")
+pclass_leps
+dev.off()
+
+ps_leps %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^g_", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> ggdiffbox_leps
+
+pdf("./04_focal_orders_seasons_files/leps_diffbox.pdf") 
+ggdiffbox_leps
+dev.off()
 
 es_leps <- ggeffectsize(obj=deresleps, 
-                     lineheight=0.1,
-                     linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
+                     lineheight=1,
+                     linewidth=0.01, ytextsize = 0.1) + 
+  scale_color_manual(values=c("goldenrod", "steelblue")) 
 
-es_leps
+pdf("./04_focal_orders_seasons_files/leps_effectsize.pdf") 
+es_leps + theme(axis.text.y = element_text(size=8, angle=30))
+dev.off()
+
+
+#I will buy a beer to whoever manages to fix the y axis lables to be smaller and better spaced.
 
 
 ```
@@ -171,17 +199,17 @@ derescoleo
 
 diffclade_coleo <- ggdiffclade(
   obj=derescoleo, 
-  alpha=0.2, 
-  linewd=0.15,
-  skpointsize=0.2, 
+  alpha=0.5, 
+  linewd=0.01,
+  skpointsize=0.5, 
   layout="radial",
-  cladetext = 0.7,
-  taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:genus:species
+  cladetext = 0.4,
+  taxlevel=7, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("goldenrod", "steelblue")
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -198,16 +226,37 @@ diffclade_coleo <- ggdiffclade(
     legend.text=element_text(size=6), 
     legend.box.spacing=unit(0.02,"cm")
   )
-diffclade_coleo
 
-ps_coleo %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+pdf("./04_gocal_orders_seasons_files/coleo_cladogram.pdf")
+diffclade_coleo
+dev.off
+
+classtaxa_coleo <- get_taxadf(obj=ps_coleo, taxlevel=5)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_coleo <- ggbartax(obj=classtaxa_coleo, facetNames="SEASON", topn=10) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(11))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./04_focal_orders_seasons_files/coleo_diffclass_top5.pdf")
+pclass_coleo
+dev.off()
+
+ps_coleo %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE) -> coleo_ggdiffbox
+
+pdf("./04_focal_orders_seasons_files/coleo_ggdiffbox")
+coleo_ggdiffbox
+dev.off()
 
 es_coleo <- ggeffectsize(obj=derescoleo, 
                      lineheight=0.1,
                      linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
+  scale_color_manual(values=c("goldenrod", "steelblue")) 
 
+pdf("./04_focal_orders_seasons_files/coleo_effectsize.pdf")
 es_coleo
+dev.off()
 ```
 
 ```{r Diptera}
@@ -228,17 +277,17 @@ deresdips
 
 diffclade_dips <- ggdiffclade(
   obj=deresdips, 
-  alpha=0.2, 
-  linewd=0.15,
-  skpointsize=0.2, 
+  alpha=0.5, 
+  linewd=0.01,
+  skpointsize=0.5, 
   layout="radial",
-  cladetext = 0.7,
+  cladetext = 0.4,
   taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("goldenrod", "steelblue")
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -255,19 +304,40 @@ diffclade_dips <- ggdiffclade(
     legend.text=element_text(size=6), 
     legend.box.spacing=unit(0.02,"cm")
   )
-diffclade_dips
 
-ps_dips %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+pdf("./04_focal_orders_seasons_files/dips_clades.pdf")
+diffclade_dips
+dev.off()
+
+
+classtaxa_dips <- get_taxadf(obj=ps_dips, taxlevel=5)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_dips <- ggbartax(obj=classtaxa_dips, facetNames="SEASON", topn=10) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(11))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./04_focal_orders_seasons_files/dips_top5.pdf")
+pclass_dips
+dev.off()
+
+ps_dips %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> diptera_ggdiffbox
+
+pdf("./04_focal_orders_seasons_files/diptera_diffbox.pdf")
+diptera_ggdiffbox
+dev.off()
 
 es_dips <- ggeffectsize(obj=deresdips, 
                      lineheight=0.1,
                      linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
+  scale_color_manual(values=c("goldenrod", "steelblue")) 
 
+pdf("./04_focal_orders_seasons_files/diptera_effectsize.pdf")
 es_dips
+dev.off()
 
 ```
-
 
 
 ```{r Hemyptera}
@@ -288,17 +358,17 @@ dereshemi
 
 diffclade_hemi <- ggdiffclade(
   obj=dereshemi, 
-  alpha=0.2, 
-  linewd=0.15,
-  skpointsize=0.2, 
+  alpha=0.5, 
+  linewd=0.01,
+  skpointsize=0.5, 
   layout="radial",
-  cladetext = 0.7,
-  taxlevel=5, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:subfamily:genus:species
+  cladetext = 0.4,
+  taxlevel=1, #taxonomy level from 1 to 7 kingdome:phylum:class:order:family:subfamily:genus:species
   removeUnkown=TRUE,
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("darkcyan", "orange" ) #Note that I had to change the order here, there are no hemiptera differences in DRY season so they did not come out in plot
+    values=c("steelblue", "goldenrod" ) #Note that I had to change the order here, there are no hemiptera differences in DRY season so they did not come out in plot
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -315,19 +385,71 @@ diffclade_hemi <- ggdiffclade(
     legend.text=element_text(size=6), 
     legend.box.spacing=unit(0.02,"cm")
   )
-diffclade_hemi
 
-ps_hemi %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+pdf("./04_focal_orders_seasons_files/hemiptera_cladogram.pdf")
+diffclade_hemi
+dev.off()
+
+classtaxa_hemi <- get_taxadf(obj=ps_hemi, taxlevel=5)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_hemi <- ggbartax(obj=classtaxa_hemi, facetNames="SEASON", topn=10) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(11))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./04_focal_orders_seasons_files/hemiptera_top5.pdf")
+pclass_hemi
+dev.off()
+
+ps_hemi %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> hemiptera_ggdiffbox
+
+pdf("./04_focal_orders_seasons_files/hemiptera_diffbox.pdf")
+hemiptera_ggdiffbox
+dev.off()
 
 es_hemi <- ggeffectsize(obj=dereshemi, 
                      lineheight=0.1,
                      linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c( "darkcyan", "orange")) #same change due to wrong plotting 
+  scale_color_manual(values=c( "steelblue", "goldenrod")) #same change due to wrong plotting 
 
+pdf("./04_focal_orders_seasons_files/hemi_effectsize.pdf")
 es_hemi
+dev.off()
+
+
+classtaxa_bees <- get_taxadf(obj=ps_bees, taxlevel=5)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_bees <- ggbartax(obj=classtaxa_bees, facetNames="SEASON", topn=10) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(11))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./04_focal_orders_seasons_files/hymenoiptera_top10.pdf")
+pclass_bees
+dev.off()
+
+classtaxa_blats <- get_taxadf(obj=ps_blats, taxlevel=5)
+# The 10 most abundant taxonomy will be visualized by default (parameter `topn=10`). 
+pclass_blats <- ggbartax(obj=classtaxa_blats, facetNames="SEASON", topn=5) +
+  xlab(NULL) +
+  ylab("relative abundance (%)") +
+  scale_fill_manual(values=c(colorRampPalette(RColorBrewer::brewer.pal(11,"Set3"))(11))) +
+  guides(fill= guide_legend(keywidth = 0.5, keyheight = 0.5))
+
+pdf("./04_focal_orders_seasons_files/blats_top5.pdf")
+pclass_blats
+dev.off()
 ```
 
-############################ There are problems with the Hymenoptera and Blattodea datasets. I still must figure it out. ##################################
+############################ 
+
+There are problems with the Hymenoptera and Blattodea datasets. I still must figure it out. I suspect its because there is missing data for one site for each group DRA1B has no Hymenoptera and ZET1A no termites
+
+one more beer to whoever can figure it out!!!!!!!!!!!!!!
+
+##################################
 
 r Hymenoptera
 set.seed(1024)
@@ -347,7 +469,7 @@ deresbees
 
 diffclade_bees <- ggdiffclade(
   obj=deresbees, 
-  alpha=0.2, 
+  alpha=0.5, 
   linewd=0.15,
   skpointsize=0.2, 
   layout="radial",
@@ -357,7 +479,7 @@ diffclade_bees <- ggdiffclade(
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("goldenrod", "steelblue")
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -376,12 +498,12 @@ diffclade_bees <- ggdiffclade(
   )
 diffclade_bees
 
-ps_bees %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+ps_bees %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f_", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE)
 
 es_bees <- ggeffectsize(obj=deresbees, 
                      lineheight=0.1,
                      linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
+  scale_color_manual(values=c("goldenrod", "steelblue")) 
 
 es_bees
 
@@ -404,7 +526,7 @@ deresblats
 
 diffclade_blats <- ggdiffclade(
   obj=deresblats, 
-  alpha=0.2, 
+  alpha=0.5, 
   linewd=0.15,
   skpointsize=0.2, 
   layout="radial",
@@ -414,7 +536,7 @@ diffclade_blats <- ggdiffclade(
   reduce=TRUE # This argument is to remove the branch of unknown taxonomy.
 ) +
   scale_fill_manual(
-    values=c("orange", "darkcyan")
+    values=c("goldenrod", "steelblue")
   ) +
   guides(color = guide_legend(
     keywidth = 0.1, 
@@ -433,11 +555,11 @@ diffclade_blats <- ggdiffclade(
   )
 diffclade_blats
 
-ps_blats %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^st_", f)) %>% ggdiffbox(colorlist=c("darkcyan", "orange"), notch = FALSE)
+ps_blats %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^st_", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE)
 
 es_blats <- ggeffectsize(obj=deresblats, 
                      lineheight=0.1,
                      linewidth=0.3, ytextsize = 0.3) + 
-  scale_color_manual(values=c("orange", "darkcyan")) 
+  scale_color_manual(values=c("goldenrod", "steelblue")) 
 
 es_blats
