@@ -52,7 +52,7 @@ Next is a preliminary tree but we still have to separate them by focal groups (p
 ##trhis takes nearly 30 minutes to run
 
 heat_tree(obj,
-          nose_size_range = c(0.006, 0.04),
+          node_size_range = c(0.006, 0.04),
           edge_size_range = c(0.001,0.003),
           node_label = taxon_names,
           node_size = n_obs,
@@ -65,8 +65,8 @@ heat_tree(obj,
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
           initial_layout = "reingold-tilford",
-          outputfile = "./05_trad_metabar_data_files/meanDiff_tradmetabr.pdf")
-
+          output_file = "./05_trad_metabar_data_files/meanDiff_tradmetabr.pdf")
+          
 ```
 
 Once again, to understand the colouring scheme, read this paragraph carefully from the metacoder tutorial:
@@ -288,7 +288,7 @@ heat_tree(obj_LT,
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
           initial_layout = "reingold-tilford",
-          output_file = "./05_trad_metabar_data_files/figure-gfm/light_trap_heattree.pdf")
+          output_file = "./05_trad_metabar_data_files/light_trap_heattree.pdf")
 
 ##This one takes about 15 minutes to run
 
@@ -381,7 +381,8 @@ heat_tree(obj_focal,
           node_color_axis_label = "Mean difference in sample proportions",
           node_label_size_range = c( 0.005, 0.03),
           layout = "davidson-harel",
-          initial_layout = "reingold-tilford")
+          initial_layout = "reingold-tilford",
+          output_file = "./05_trad_metabar_data_files/focal_MEANDIFFheattree.pdf")
 
 #this one takes about 10 minutes to run
 

@@ -10,7 +10,7 @@ output: github_document
 This script takes the previously merged and formatted data from mBrave (produced through script 01) and does preliminary analyses with Metacoder.
 The idea of this script is to have a preliminary estimate of diversity within the metabarcoding samples. Due to the nature of mBrave's classification associated with BOLD databases, there are a number of BINs which have multiple, uncertain, identifications. I have (manually) cleaned the data further, now we are only including species name for the 1st BOLD BIN hit. This is normally either, the species form the BCI database (the first dataset used to classify through mBRAVE), or the species most frequently 'named' that name. E.g. Agelenopsis pennsylvanica, potteri, emertoni, katsoni, acutosa, is now Agelenopsis pennsylvanica. The file used is the final dataset with ~3500 BINs (finaldat_merged.csv).
 
-```{r include = FALSE}}
+```{r include = FALSE}
 rm(list=ls()) #I always start scripts this way to make sure I have a clean R environment
 library('tidyr')
 library('dplyr')

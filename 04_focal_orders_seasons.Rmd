@@ -227,7 +227,7 @@ diffclade_coleo <- ggdiffclade(
     legend.box.spacing=unit(0.02,"cm")
   )
 
-pdf("./04_gocal_orders_seasons_files/coleo_cladogram.pdf")
+pdf("./04_focal_orders_seasons_files/coleo_cladogram.pdf")
 diffclade_coleo
 dev.off
 
