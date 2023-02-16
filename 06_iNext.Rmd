@@ -11,8 +11,32 @@ output: github_document
 rm(list=ls())
 library('iNEXT')
 library('ggplot2')
+library('tidyr')
+library('dplyr')
 
-dat<- read.csv('data/metabinary_inext.csv', header = TRUE)
+dat<- read.csv('data/final_anal/CYBs_correct_names.csv', header = TRUE)
+
+parallel_dat <- read.csv('data/final_anal/parallel_LT_final.csv', header = T)
+
+trad_dat <-read.csv('data/final_anal/tradbinary_LT_only.csv', header = T)
+trad_dat %>%
+  group_by(bold_bin, classification) %>%
+  summarise_all(sum) %>%
+  data.frame() -> trad_dat
+
+trad_dat %>% group_by(bold_bin) %>% filter(n()>1)
+
+trad_dat %>%
+  group_by(bold_bin, classification) %>%
+  summarise_all(sum) %>%
+  mutate_if(is.numeric, ~1 * (. > 0)) %>% #change values >1 to 1
+  data.frame() -> trad_dat
+
+dat %>%
+  group_by(bin_uri, classification) %>%
+  summarise_all(sum) %>%
+  mutate_if(is.numeric, ~1 * (. > 0)) %>% #change values >1 to 1
+  data.frame() -> dat
 
 
 mdat <- as.matrix(apply(dat[,-1],2,as.integer))
@@ -23,5 +47,29 @@ data.list <- list(mdat)
 out <- iNEXT(data.list, datatype = "incidence_raw", endpoint = 500)
 
 out
-ggiNEXT(out) 
+ggiNEXT(out)
+plot(out, col = "darkolivegreen3")
+
+mtrad_dat <- as.matrix(apply(trad_dat[,-1],2,as.integer))
+row.names(mtrad_dat) <- trad_dat[,1]
+mtrad_dat[is.na(mtrad_dat)] <- 0
+trad_data.list <- list(mtrad_dat)
+
+trad_out <- iNEXT(trad_data.list, datatype = "incidence_raw", endpoint = 500)
+
+trad_out
+ggiNEXT(trad_out)
+plot(trad_out, col = "darkorchid")
+
+mparallel_dat <- as.matrix(apply(parallel_dat[,-1],2,as.integer))
+row.names(mparallel_dat) <- parallel_dat[,1]
+mparallel_dat[is.na(mparallel_dat)] <- 0
+parallel_data.list <- list(mparallel_dat)
+
+parallel_out <- iNEXT(parallel_data.list, datatype = "incidence_raw", endpoint = 500)
+
+parallel_out
+ggiNEXT(parallel_out)
+plot(parallel_out, col = "darkorchid")
+
 ```

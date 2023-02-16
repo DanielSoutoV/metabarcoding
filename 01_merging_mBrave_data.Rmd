@@ -20,40 +20,156 @@ Be aware that this is a very Frankenstein-ish pipeline which heavily depends on 
 
 Any questions or comments can be asked directly on the GitHub repo or to my email: daniel.souto.v@gmail.com
 
+###########################################################################################################
+###########################################################################################################
+###########################################################################################################
+###########################################################################################################
 
+NOTE THAT I HAVE MADE THIS SCRIPT IMPOSSIBLE TO RUN. THIS IS BECASUE THE SCRIPTS UPDATE AND OVERWRITE THE DATA
+THE SCRIPT IS THERE, BUT YOU CAN'T RUN IT UNLESS YOU COPY&PASTE THE SCRIPTS BELOW BUT I LEAVE THIS HERE FOR INOFRMATION PURPOSES ONLY.
 
-```{r, LoadPackages, include = FALSE}
+####### PACKAGES USED########
 #the small green box to insert chunks in different formats. 
 #```{r} for R.
 rm(list=ls()) #reoves all objects in workspace, start with clean environment
 #load packages
 library('tidyr')
 library('dplyr')
-```
+library('microDecon')
+library('stringr')
+
 
 First thing is to merge and clean the samples from the format downloaded from mbrave as right now its rather chaotic with column 1 sample, 2 BIN#, 3 #of READS and 4 classification. Note that I am using the formatted spreadsheet as directly downloaded from mBrave. When in doubt of what I mean, look at the original file called (light_trap_19_21.csv), and then the written new file (dataset_merged.csv).
 
-```{r Merging_and_Grouping_Metabarcoding_data}
-all_merged <- read.csv('data/light_trap_19_21.csv', header=T)
+########## MERGING AND CLEANING DATA FROM MBRAVE#################
+
+all_merged <- read.csv('data/final_anal/CYB001.csv', header=T)
 head(all_merged)
 
 all_merged %>%
   group_by(bin_uri, classification, sampleId) %>%
   summarise_all(sum) %>%
   data.frame() -> all_merged
-write.csv(all_merged, 'data/dataset_merged.csv', row.names =FALSE)
-```
+write.csv(all_merged, 'data/final_anal/CYB001_merged.csv', row.names =FALSE)
 
-This document now needs to be transposed (sample ID in columns, BIN_uri and classification in rows). I did this in excel, surely a way to do in R with dplyr probably with the "transpose_long" function. Then once again we group the bins and classifications and add the columns to avoid repeating BINs.
+#These data need to be transposed using pivot_wider. What names? sampleId, which values? the sequences, if no value fill with 0
 
-```{r FinalMergeofMetabrData}
-merged_colnames <-read.csv('data/dataset_merged_samplecols.csv', header = T) #this is a modified version of dataset_merged.csv above but now samples are in columns.
-merged_colnames %>% #remove duplicated rows while adding reads to each 'sample' column
-  group_by(bin_uri, classification) %>% #No more sampleID because they are the columns now
+all_merged %>% 
+  pivot_wider(
+    names_from = sampleId, 
+    values_from = sequences,
+    values_fill = 0
+  ) -> all_merged_colnames
+
+write.csv(all_merged_colnames, 'data/final_anal/CYB001_colnames.csv', row.names =FALSE)
+
+#We will also decontaminate the data using  the package microDecon.
+#For this, the data must be sorted as a data frame where rows are OTUs (BINs in our case), the blank samples in the first columns, followed by the smaples and finally the taxonomic info (classification column) - this is not the format of the file above, instead we will relocate the columns using function relocate
+
+all_merged_colnames %>% relocate(c(BLANKDNA_CTRL,BLANKPCR_CTRL), .before = `BIOLOT#39872`) -> all_merged_colnames
+all_merged_colnames %>% relocate(classification, .after = last_col()) -> all_merged_colnames
+
+all_merged_colnames #now its sorted in the right format
+write.csv(all_merged_colnames, 'data/final_anal/CYB001_colnames_sorted.csv', row.names =FALSE)
+
+#the file was manually checked for no duplicates
+
+all_merged_colnames <- read.csv('data/final_anal/CYB001_colnames_sorted_noDups.csv', header = T)
+
+all_merged_colnames %>%
+  group_by(bin_uri, classification) %>%
   summarise_all(sum) %>%
-  data.frame() -> all_merged # so that newdf can further be used, if needed
-write.csv(all_merged, 'data/merged_colnames_final.csv', row.names = F) ##Be aware of column names - check that max row numbers is >0, delete those which are 0
-```
+  data.frame() -> all_merged_colnames_noDups
+
+write.csv(all_merged_colnames_noDups, 'data/final_anal/CYB001_colnames_sorted_noDups.csv', row.names =FALSE)
+
+all_merged_colnames_noDups <- read.csv('data/final_anal/CYB001_colnames_sorted_noDups.csv', header = T)
+
+all_merged_colnames_noDups %>% relocate(c(BLANKDNA_CTRL,BLANKPCR_CTRL), .before = `BIOLOT#39872`) -> all_merged_colnames_noDups
+all_merged_colnames_noDups %>% relocate(classification, .after = last_col()) -> all_merged_colnames_noDups
+
+write.csv(all_merged_colnames_noDups, 'data/final_anal/CYB001_colnames_sorted_noDups.csv', row.names =FALSE)
+
+##################DECONTAMINATION STEPS FOR EACH OF THE CYB PROJECTS. DO THIS SEPARATELY AS EACH PROJECT (PLATE) HAS DIFFERENT CONTROL SAMPLES
+
+decontam <- decon(data = all_merged_colnames_noDups, numb.blanks = 2, numb.ind = 20, taxa = TRUE)
+
+#the decontam is now a list of several tables which break down what was removed/decontaminated from the data. 
+#We focus on decon.table  - this is the same dataframe as 'all_merged_colnames_noDups' but with the removed reads from decontamination
+#you can access each table on the decontam object with the symbol '$'
+
+decontam$decon.table
+
+decontam$decon.table -> CYB001_clean 
+
+CYB001_clean %>% mutate (Mean.blank = NULL) -> CYB001_clean
+CYB001_clean %>% relocate(classification, .after = bin_uri) -> CYB001_clean
+
+write.csv(CYB001_clean, 'data/final_anal/CYB001_clean.csv', row.names =FALSE) #Final, decontaminated file for futher analisys. WE must do the same for CYB002
+
+all_merged <- read.csv('data/final_anal/CYB002.csv', header=T)
+head(all_merged)
+
+all_merged %>%
+  group_by(bin_uri, classification, sampleId) %>%
+  summarise_all(sum) %>%
+  data.frame() -> all_merged
+write.csv(all_merged, 'data/final_anal/CYB002_merged.csv', row.names =FALSE)
+
+#These data need to be transposed using pivot_wider. What names? sampleId, which values? the sequences, if no value fill with 0
+
+all_merged %>% 
+  pivot_wider(
+    names_from = sampleId, 
+    values_from = sequences,
+    values_fill = 0
+  ) %>% mutate(AMPtk_CTRL = NULL) %>% relocate(classification, .after = last_col()) %>% relocate(BLANKDNA_CTRL, .after = bin_uri) -> all_merged_colnames
+
+write.csv(all_merged_colnames, 'data/final_anal/CYB002_colnames.csv', row.names =FALSE) #now check this for duplicates
+
+cyb002 <- read.csv('data/final_anal/CYB002_colnames_noDups.csv', header = T)
+
+cyb002 %>%
+  group_by(bin_uri, classification) %>%
+  summarise_all(sum) %>%
+  data.frame() -> cyb002_noDups
+
+cyb002_noDups %>% group_by(bin_uri) %>% filter(n()>1) #this command checks for duplicates
+cyb002_noDups %>% relocate(classification, .after = last_col()) -> cyb002_noDups
+write.csv(cyb002_noDups, 'data/final_anal/CYB002_colnames_noDups.csv', row.names =FALSE) #re-write the file with NO duplicates
+
+decontam_cyb002 <-decon(data = cyb002_noDups, numb.blanks = 1, numb.ind = 20, taxa = TRUE)
+
+decontam_cyb002$decon.table
+decontam_cyb002$OTUs.removed
+decontam_cyb002$reads.removed
+
+decontam$reads.removed
+
+decontam_cyb002$decon.table -> CYB002_clean 
+
+CYB002_clean %>% mutate (BLANKDNA_CTRL = NULL) -> CYB002_clean
+CYB002_clean %>% relocate(classification, .after = bin_uri) -> CYB002_clean
+
+write.csv(CYB002_clean, 'data/final_anal/CYB002_clean.csv', row.names =FALSE)
+
+
+Now we have each CYB project cleaned and decontaminated, in the correct format needed for analsyis. However, We need to merge these two datasets and remove/add duplicates. I have merged them in excel.
+
+
+all_merged <- read.csv('data/final_anal/CYBs_merged.csv', header = T)
+
+all_merged %>%
+  group_by(bin_uri, classification) %>%
+  summarise_all(sum) %>%
+  data.frame() -> all_merged
+
+all_merged %>% group_by(bin_uri) %>% filter(n()>1) #this command checks for duplicates
+
+write.csv(all_merged, 'data/final_anal/CYBs_finaldat_merged.csv', row.names = FALSE)
+
+#here we have the dataset BUT we have to rename the BINs according to the previous format I used. I am doing vlookup function in excel using the data/finaldat_merged.csv file. NOTE, not the one from Final_anal
+
 
 Now we have the dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
 Column 1 BIN_uri (this column is later renamed to bold_bin), Col2: classification (note issues with unique names and match) cols 3-46 number of reads per sample.
@@ -62,46 +178,45 @@ NOTE: The file used for metabarcoding data beyond this point is ######finaldat_m
 
 The following chunks follow a similar process but now to merge and clean the traditional data, and add the metabarcoidng data.
 
-```{r MergeAndCleanTradData}
+############ CLEANING AND MANAGING TRADITIONAL DATA ###########################
+
 traditional <-read.csv('data/traditionaldatabinary.csv') #this .csv was created by taking all ForestGEO recods which have a BIN.
 traditional %>%
   group_by(bold_bin, classification) %>%
   summarise_all(sum) %>%
   data.frame() -> traditional
-write.csv(traditional, 'data/tradbinary_merged.csv', row.names = FALSE) #This new file now has all BINs only once, for each 'sample' in which it ocurrs.
 
-#########
-traditional2 <- read.csv('data/tradbinary_merged.csv')
-traditional2 %>%
-  group_by(bold_bin, classification) %>%
-  summarise_all(sum) %>%
-  data.frame() -> traditional2
-write.csv(traditional2, 'data/tradbinary_merged.csv', row.names = FALSE)
+traditional %>% group_by(bold_bin) %>% filter(n()>1) #this checks for duplicated BINs, if any appear, the classification names are different and you must decide how to change it (in excel)
 
-#This second run was to make sure that no BOLD_BINs were repeated, I manually checked the first tradbinary_merged.csv file and changed names which needed to be double checked. I did this by hihglighting duplicate BOLD_BINs in excel and check any which was duplicated whit a different name.
-########################################
+write.csv(traditional, 'data/final_anal/tradbinary_merged.csv', row.names = FALSE) #This new file now has all BINs only once, for each 'sample' in which it ocurrs.
 
-```
+
 The next chunk is run to include the metabarcoding data to the newly created 'tradbinary_merged.csv'
 To do this, there is probably a right_join function to run in R, but instead I did so manually in excel, adding all metabarcoding BINs to the final row of the spreadsheet plus all the columns from the mtabarcoding to the final column of the tradbinary_merged.csv. (look at trad_and_meta_toMerge.csv)
-```{r}
 
-tradmeta_toMerge <- read.csv('data/trad_and_meta_toMerge.csv') #this new file is the tradbinary_merged.csv with the metabarcoding data added to the end.
+
+tradmeta_toMerge <- read.csv('data/final_anal/trad_metabr_toMerge.csv') #this new file is the tradbinary_merged.csv with the metabarcoding data added to the end.
 tradmeta_toMerge %>%
   group_by(bold_bin, classification) %>%
   summarise_all(sum) %>%
   data.frame() -> tradmeta_toMerge
-write.csv(tradmeta_toMerge, 'data/trad_meta_merged1.csv', row.names = FALSE)
 
-trad_meta01 <- read.csv('data/trad_meta_merged1.csv')
-trad_meta01 %>%
+tradmeta_toMerge %>% group_by(bold_bin) %>% filter(n()>1) #see below, there are 332 Bins which are duplicated. Check in Excel
+
+write.csv(tradmeta_toMerge, 'data/final_anal/trad_meta_merged.csv', row.names = FALSE)
+
+trad_meta_noDups <- read.csv('data/final_anal/trad_meta_merged_noDups.csv', header = T)
+trad_meta_noDups %>%
   group_by(bold_bin, classification) %>%
   summarise_all(sum) %>%
-  data.frame() -> trad_meta01
-write.csv(trad_meta01, 'data/final_tradmeta_merged.csv', row.names = FALSE)
+  data.frame() -> trad_meta_noDups
 
-tradmetabr <- read.csv('data/final_tradmeta_merged.csv')
-sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
+trad_meta_noDups %>% group_by(bold_bin) %>% filter(n()>1)
+
+write.csv(trad_meta_noDups, 'data/final_anal/trad_meta_merged_noDups.csv', row.names = FALSE)
+
+tradmetabr <- read.csv('data/final_anal/trad_meta_merged_noDups.csv')
+
 head(tradmetabr) #Data already organized by samples as columns but need to merge repeated BINs
 
 tradmetabr %>%
@@ -110,9 +225,52 @@ tradmetabr %>%
   mutate_if(is.numeric, ~1 * (. > 0)) %>% #change values >1 to 1
   data.frame() -> tradmetabr
 head(tradmetabr)
-write.csv(tradmetabr, 'data/tradmetabr_merged.csv', row.names =FALSE) #save final dataset
+write.csv(tradmetabr, 'data/final_anal/tradmetabr_final.csv', row.names =FALSE) #save final dataset
 
-
-```
 
 tradmetabr_merged.csv is now the final file we will use in script 05.
+
+Below is the conversion of the file which includes traditional samples which were collected in parallel to the meabarcoding LT samples, but sorted through traditional methods
+
+
+################### PARALLEL SAMPLES CLEANING AND PROCESSING ###############
+
+parallel_LT <-read.csv('data/final_anal/trad_LT_parallel.csv') #this .csv was created by taking all ForestGEO recods which have a BIN.
+
+parallel_LT %>%
+  filter(str_detect(sample_code,"MAY2019*")|str_detect(sample_code, "MAR2021")) -> parallel_LT #subset's the data to include only samples which have the string 'MAY2019' and 'MAR2020' in the sample_code. In other words, the sampling that was done at the same time as the BCI Light Trap for metabarcoding.
+
+parallel_LT %>%
+  group_by(bold_bin, classification, sample_code) %>% #groups by bin, classificaiton and sample code
+  summarise_all(sum) %>% #summarizes the data to add (sum) the number of times that BIN ocurrs in a sample
+  data.frame() -> parallel_LT
+
+parallel_LT %>% na_if("#N/A") %>% na.omit() -> parallel_LT #removes excell '#N/A' values (and empty rows) - Species without BINs in our case
+parallel_LT %>% group_by(bold_bin) %>% filter(n()>1) #this checks for duplicated BINs, if any appear, the classification names are different and you must decide how to change it (in excel)
+
+parallel_LT %>% 
+  pivot_wider(
+    names_from = sample_code, 
+    values_from = abundance,
+    values_fill = 0) %>% mutate_if(is.numeric, ~1 * (. > 0)) -> parallel_LT #this pivots the data.frame to have samples as columns and this changes to binary
+
+parallel_LT
+
+write.csv(parallel_LT, 'data/final_anal/parallel_LT_final.csv', row.names = FALSE) #This new file now has all BINs only once, for each 'sample' in which it ocurrs.
+
+tradmetapara <- read.csv('data/final_anal/tradmetabrparallel.csv')
+
+tradmetapara %>%
+  group_by(bold_bin,classification) %>%
+  summarise_all(sum) %>%
+  data.frame() -> tradmetapara
+
+tradmetapara %>%
+  mutate_if(is.numeric, ~1 * (. > 0)) %>% #change values >1 to 1
+  data.frame() -> tradmetapara
+
+tradmetapara
+
+write.csv(tradmetapara, 'data/final_anal/tradmetabrparallel_final.csv', row.names = FALSE)
+
+

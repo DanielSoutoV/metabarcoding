@@ -23,7 +23,7 @@ library('coin')
 
 ```{r warning = FALSE, message=FALSE}
 
-obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+obj <- readRDS('data/final_anal/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -39,7 +39,7 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to flit
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> blats 
 
-sample <- read.csv('data/location_ctrl.csv')
+sample <- read.csv('data/final_anal/location_ctrl.csv')
 ```
 
 The script above gave me the taxmap object separated by order, however, it removes all taxonomic ranks up until "Order", so the script below is firstly, changing the taxmap object (e.g. leps) into a phyloseq object (as_phyloseq) and then using the microViz package to add the taxonomic ranks. These are necessary for some of the microbiotaprocess analyses otherwise the package complains that there is not enough taxonomic ranks.

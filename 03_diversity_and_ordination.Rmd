@@ -25,7 +25,7 @@ library('coin')
 
 ```{r message = FALSE, warning = FALSE}
 
-obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+obj <- readRDS('data/final_anal/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -41,7 +41,7 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to flit
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> blats 
 
-sample <- read.csv('data/location_ctrl.csv')
+sample <- read.csv('data/final_anal/location_ctrl.csv')
 ```
 
 The chunk above now gave us a filtered taxmap object for each of the ForestGEO focal Orders (plus Diptera because I think its interesting).
@@ -313,7 +313,7 @@ We can also create boxplots for families - this one which includes everything is
 In the next script we repeat these analyses but for FOCAL orders only.
 
 ```{r BoxplotFIlteredFamily}
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> ggdiffbox_family
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE) -> ggdiffbox_family
 
 pdf("./03_diversity_and_ordination_files/ggdiffbox_family.pdf")
 ggdiffbox_family

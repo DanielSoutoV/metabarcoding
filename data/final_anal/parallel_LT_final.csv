@@ -1,0 +1,533 @@
+"bold_bin","classification","LT_ARM4_MAY2019_B","LT_BAL1_MAY2019_A","LT_ZET2_MAR2021_A","LT_ARM1_MAY2019_B","LT_ARM3_MAY2019_B","LT_DRA1_MAY2019_B","LT_WHE1_MAR2021_B","LT_WHE2_MAR2021_B","LT_WHE2_MAY2019_B","LT_ZET2_MAY2019_A","LT_ARM1_MAR2021_A","LT_ARM4_MAR2021_B","LT_WHE1_MAR2021_A","LT_WHE2_MAY2019_A","LT_ARM1_MAY2019_A","LT_ARM4_MAR2021_A","LT_BAL1_MAY2019_B","LT_ZET2_MAR2021_B","LT_DRA1_MAR2021_A","LT_ARM3_MAY2019_A","LT_DRA1_MAY2019_A","LT_WHE1_MAY2019_A","LT_ARM2_MAY2019_B","LT_ARM3_MAR2021_B","LT_ARM2_MAY2019_A","LT_ARM4_MAY2019_A","LT_WHE1_MAY2019_B","LT_ZET1_MAY2019_B","LT_ZET2_MAY2019_B","LT_WHE2_MAR2021_A","LT_ARM2_MAR2021_A","LT_ARM3_MAR2021_A","LT_ARM1_MAR2021_B","LT_ARM2_MAR2021_B","LT_BAL1_MAR2021_A","LT_BAL1_MAR2021_B","LT_ZET1_MAR2021_B","LT_DRA1_MAR2021_B","LT_ZET1_MAY2019_A","LT_ZET1_MAR2021_A"
+"BOLD:AAA0256","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Lamprosema;s__BioLep325",1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0332","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Apilocrocis;s__excelsalis",0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0338","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Blepharomastix;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0347","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Conchylodes;s__nolckenialis",0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0354","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Omiodes;s__croceiceps",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0357","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Eulepte;s__concordalis",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0363","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Palpita;s__venatalis",0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0378","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Ategumia;s__dilecticolor",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0408","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__bajulalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0410","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Syllepte;s__strigicincta",1,0,0,1,0,1,0,0,1,1,0,0,0,0,1,0,1,0,0,0,0,1,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0413","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Argyria;s__lacteella",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0441","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__ploralisDHJ02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0460","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Prenesta;s__scyllalisDHJ01",0,1,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0
+"BOLD:AAA0473","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Parapoynx;s__fluctuosalis",0,1,0,1,1,1,0,1,1,0,0,0,0,1,0,1,1,1,0,1,0,0,1,1,1,1,1,1,0,0,1,0,1,1,1,1,1,0,0,0
+"BOLD:AAA0478","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Dichocrocis;s__tlapalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0509","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Salbia;s__sp. 5YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0539","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Diaphania;s__sp.1YB",1,0,0,0,1,1,1,0,0,1,0,0,1,0,0,1,0,1,0,0,0,0,1,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0559","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Lamprosema;s__BioLep331",0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAA0596","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Pilocrocis;s__cryptalis",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0618","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Gyostega;s__BioLep02",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0620","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Incarcha;s__aporalisDHJ01",0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0783","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Synchlora;s__gerularia",1,1,0,0,1,1,1,1,1,0,0,0,1,0,1,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,1,1,1,1,0,1,0,1,0,0
+"BOLD:AAA0825","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Eusarca;s__nemora",0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0872","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Hemipterodes;s__rotundata",1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA0895","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Talara;s__sp.3YB",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,1,0,0,0,0,0,1,1,1,0,0,1,1,0,1,0,0
+"BOLD:AAA1312","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Lepidoneiva;s__teuthras",0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0
+"BOLD:AAA1316","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Lophocampa;s__maroniensis buchwaldi",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1326","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Correbidia;s__costinotata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:AAA1348","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Balbura;s__intervenata",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,1,0,0
+"BOLD:AAA1349","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ormetica;s__sicilia",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAA1364","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Psoloptera;s__thoracica",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAA1366","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Correbidia;s__elegans",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAA1368","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Leucopleura;s__ciarana",0,0,1,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+"BOLD:AAA1377","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Episcepsis;s__thetisDHJ04",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1395","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Idalus;s__critheis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1401","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ecdemus;s__obscurata",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0
+"BOLD:AAA1424","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Chrysostola;s__Espinoza02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1434","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Melese;s__incertus",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1447","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Lophocampa;s__catenulata",0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1508","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Caio;s__championi",0,0,0,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAA1798","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Chrysauginae_genus;s__sp.4YB",1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA1821","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Hypsopygia;s__BioLep513",1,0,1,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+"BOLD:AAA1825","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Epidelia;s__damia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA2012","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Copiopteryx;s__semiramis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA2072","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Automeris;s__vanschaycki",1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA2394","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Automeris;s__parapichinchensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA2592","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Sphingidae;g__Manduca;s__florestan",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA2701","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Sphacelodes;s__vulneraria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA2787","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Adeloneivaia;s__centrojason",0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAA2814","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Oxidercia;s__thaumantis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAA3205","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Uraniidae;g__Syngria;s__druidariaDHJ02",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA3207","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Uraniidae;g__Erosia;s__incendiata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAA3282","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Coenipeta;s__medina",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA3284","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Drugera;s__mimicaDHJ01",0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA3300","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__nigrescens",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAA3337","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Automeris;s__belti",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAA3403","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Physocleora;s__pauper",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0
+"BOLD:AAA3620","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Deuterollyta;s__sp.1YB",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAA3661","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Patania;s__Solis04",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAA3668","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Piletosoma;s__thialisDHJ03",1,0,0,1,0,1,0,0,0,1,1,0,0,1,1,0,0,1,1,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4193","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Eacles;s__imperialis decoris",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4443","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hesperiidae;g__Synapte;s__silius",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4457","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Encruphion;s__Poole01",0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4462","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Oxytenis;s__naemia",0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4625","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ophisma;s__tropicalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAA4646","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Microthyris;s__prolongalisDHJ02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAA4766","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Rhabdatomis;s__cora",1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4768","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Prepiella;s__pexicera",1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+"BOLD:AAA4769","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Lycomorphodes;s__bicolor",0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,1,0,1,1,0,1
+"BOLD:AAA4842","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__Hemiceras Janzen04",0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA4889","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Palpita;s__flegia",0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0
+"BOLD:AAA5137","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Truncaptera;s__guatemalensis",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA5443","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Spodoptera;s__latifascia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA5961","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Oxydia;s__vesulia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA6386","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Palpusia;s__plumipes",0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0
+"BOLD:AAA6473","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Cryptoses;s__choloepi",0,1,1,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,1,1,0,1,0,0
+"BOLD:AAA6647","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hapigia;s__simplexDHJ07",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA6707","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Rhescyntis;s__hippodamia",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA6866","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Lophocampa;s__modesta",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA7095","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__indistans",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAA7185","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Near Biturix;s__sp. 1YB",0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA7956","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Patalene;s__hamulata",0,0,1,0,1,0,1,1,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,1,0,0,0,1,0,1
+"BOLD:AAA8016","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Perasia;s__helvina",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA8225","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__plana",0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,0,0
+"BOLD:AAA8229","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Piletosoma;s__thialisDHJ01",0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1
+"BOLD:AAA8231","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__spiloBioLep01;s__BioLep498",0,1,1,0,1,0,1,1,1,0,0,0,0,1,1,0,0,0,0,1,1,1,0,1,0,1,1,0,0,0,0,0,0,1,0,0,1,0,0,0
+"BOLD:AAA8259","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Sosxetra;s__grata",1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA8420","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Phrygionis;s__privignaria",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA8476","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Nystalea;s__superciliosa",0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA8661","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Eucereon;s__aeolum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1
+"BOLD:AAA8695","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__BioLep371",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA8829","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Melipotis;s__fasciolarisDHJ02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA9223","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Lepasta;s__lanassa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAA9259","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Attevidae;g__Atteva;s__pustulella",0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0
+"BOLD:AAA9388","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hesperiidae;g__Calpodes;s__ethlius",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAA9670","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Syllepis;s__hortalisDHJ02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAB0059","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Agyra;s__agola",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0
+"BOLD:AAB0265","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Amaxia;s__rocioecheverriae",0,0,1,0,1,0,0,1,0,0,0,1,1,1,0,1,0,1,1,0,0,1,0,1,0,1,0,0,0,0,0,1,0,0,1,0,0,1,0,0
+"BOLD:AAB0298","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Rifargia;s__demissa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAB0438","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Phrudocentra;s__pupillataDHJ02",0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB0476","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Phaeoblemma;s__dares",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB0918","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Oospila;s__confundaria",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0
+"BOLD:AAB1119","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Isogona;s__natatrix",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB1139","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__affinisDHJ02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB1824","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Sphingidae;g__Eumorpha;s__Eumorpha satellitiaDHJ01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB1977","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Perigramma;s__vicina",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB1981","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Glena;s__Janzen05",0,0,1,1,0,0,0,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,0,1,0,0,1,0,0,1,0,1,0,0,1,1,0,1,0,1
+"BOLD:AAB2031","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Eulepte;s__Janzen06",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAB2393","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Rhomboptila;s__brantsiata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0
+"BOLD:AAB2492","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Chamyna;s__modesta",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAB3432","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Nolidae;g__Iscadia;s__furcifera",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB3441","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Ischnopteris;s__bifinitaDHJ02",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAB3591","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Strophocerus;s__thermesia",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB3958","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Toulgoetigia;s__pallida",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB4205","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Hemicephalis;s__Poole04",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB4206","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Hemicephalis;s__alesa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAB4280","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Obroatis;s__distincta",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB4400","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Perigramma;s__repetita",1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB4411","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Sericoptera;s__area",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB4920","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Parilexia;s__cermalaDHJ01",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB5238","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Eulepidotis;s__testaceiceps",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB5568","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Epimecis;s__conjugaria",0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAB6166","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Disphragis;s__tharisICG01",0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAB6175","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Pseudbarydia;s__japeta",0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAB6314","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Idaea;s__subfervensDHJ01",1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAB6450","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ceromacra;s__putida",0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAB6687","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Aclytia;s__sp.1YB",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1,0,0
+"BOLD:AAB6970","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Paragonia;s__crurariaDHJ06",0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,0
+"BOLD:AAB7418","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Sphingidae;g__Xylophanes;s__pistacina",0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB7465","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Agylla;s__BioLep05",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1
+"BOLD:AAB8378","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Thysanopyga;s__amarantha",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAB9030","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Macaria;s__approximaria",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB9360","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hedylidae;g__Macrosoma;s__helicornaria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAB9655","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Pleuroprucha;s__rudimentaria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAB9904","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Scaptius;s__chrysoperina",1,0,0,1,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAC0007","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Diaphania;s__praxialisDHJ01",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC1549","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Hemeroblemma;s__ochrolinea",0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAC1919","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Nemoria;s__scriptaria",0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC2200","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__BioLep03",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC3278","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Gabara;s__Poole02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC3505","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Euclystis;s__labecia",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC4552","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Amaxia;s__carinosa",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1
+"BOLD:AAC4774","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Celiptera;s__helvina",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC5470","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tricentra;s__BioLep51",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAC5786","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Paragonia;s__crurariaDHJ02",0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1
+"BOLD:AAC5884","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Phaedropsis;s__sp.1YB",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC6539","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Schausiella;s__subochreata",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC6957","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Pseudodirphia;s__eupanamensis",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+"BOLD:AAC8074","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__Janzen05",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC8690","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Cyclophora;s__BioLep25",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAC8888","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Coenostolopsis;s__apicalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAC9373","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Prochoerodes;s__striata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD0573","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Iridopsis;s__validariaDHJ01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD3496","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Phrudocentra;s__pupillata",0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1
+"BOLD:AAD3586","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Uraniidae;g__Urania;s__fulgens",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD3815","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Condylorrhiza;s__vestigialis",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAD3900","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Macaria;s__approximata",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD3973","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tachyphyle;s__undilineata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD4485","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Dialithis;s__gemmifera",0,0,1,0,1,1,0,1,0,0,1,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0
+"BOLD:AAD5314","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Pseudautomeris;s__salmonea",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD5886","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Eulepidotis;s__superior",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD6871","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Agyra;s__Poole01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAD6990","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Athyrma;s__tuberosa",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD7367","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Obroatis;s__chloropis",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD8745","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__miniata",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAD8830","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Talara;s__cara",0,0,0,0,0,0,1,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,0,0,1
+"BOLD:AAD9246","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Eragisa;s__juvenis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAE1546","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__fulvescensDHJ01",1,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,1,0,0,0
+"BOLD:AAE2258","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Melanolophia;s__AH16HoPn",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAE2366","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Chloropteryx;s__dealbataDHJ01",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAE2416","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Synchlora;s__pulchrifimbria",1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,0,1,1,0,1,0,1,1,0,0,0,0,0,0,1,1,0,1,1,1,1,1,0,1
+"BOLD:AAE3076","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Aclytia;s__punctata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0
+"BOLD:AAE4907","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Hyalurga;s__urioides",0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAE7892","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Rifargia;s__lineata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAF2202","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Omiodes;s__ochracea",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAF3873","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Deuterollyta;s__sp. 2YB near but not majuscula",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAF3900","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Coenipeta;s__damonia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAF3902","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Coenipeta;s__Poole04",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAF3999","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Coenipeta;s__nubila",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0
+"BOLD:AAF4000","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Coenipeta;s__sp.2YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAF4013","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Azeta;s__imbuta",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAF5033","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__peplumaria",0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,0,0
+"BOLD:AAF5948","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Pyrinia;s__helvaria",1,1,1,0,0,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0
+"BOLD:AAF9484","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__Janzen226",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAF9513","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Hymenomima;s__memorDHJ01",0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAG3068","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Syllepte;s__angulifera",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAG3101","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Phaedropsis;s__alitemeralis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAG6074","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Dyops;s__telharsa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI1139","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ophisma;s__Poole02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI1663","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Oospila;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAI2853","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hepialidae;g__Philoenia;s__sp. 1YB",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI4239","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Chloropteryx;s__BioLep03",1,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0
+"BOLD:AAI5267","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Elysius;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI6442","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Canodia;s__difformis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI6921","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Lycaenidae;g__Calycopis;s__thama",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI7494","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Leucula;s__Leucula festiva",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAI7687","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Idalus;s__aleteria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAI8986","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__spiloBioLep01;s__BioLep443",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAI9070","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Liopasia/Megastes;s__sp. 2YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:AAI9107","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Basacallis;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAJ0944","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Acridopsis;s__sp.AAJ0944",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAJ1207","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hedylidae;g__Macrosoma;s__lucivittata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAJ1944","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAJ6374","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Petrophila;s__sp.5YB",1,1,1,1,1,1,0,0,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1,0
+"BOLD:AAJ8509","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Apidae;g__Trigona;s__fulviventris",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAJ8511","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Apidae;g__Trigona;s__fuscipennis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK0111","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Deinopa;s__ypita",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK0194","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Lycaenidae;g__Arumecla;s__galliena",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK1636","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Calonotos;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAK1942","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Apela;s__dubiosa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK2055","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Kalotermitidae;g__Calcaritermes;s__temnocephalus",1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,1,1
+"BOLD:AAK4028","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Euclystis;s__Euclystis centurialis",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK4029","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Nesebroides;s__mineti",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK4058","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Arsaciodes;s__rufa",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK4378","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Isogona;s__Poole07",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAK9847","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Dyspteris;s__Janzen02",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAL0872","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Diaphania;s__sp.10YB",0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL2396","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Eois;s__dibapha",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL2650","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tachyphyle;s__albisparsa",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL5466","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Euplatypus;s__parallelus",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL5808","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Cyclophora;s__urcearia",0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAL5861","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__caparonensis",0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0
+"BOLD:AAL5976","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__sp.2YB",1,0,0,0,0,0,0,0,0,0,1,0,1,0,1,1,1,1,1,0,1,0,0,1,0,1,1,0,0,1,0,0,0,1,0,0,0,0,1,0
+"BOLD:AAL5986","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Opisthoxia;s__sp.1YB",0,0,0,1,0,0,1,0,0,0,1,0,1,0,0,1,1,1,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0,1,0,0,1,1,0,0
+"BOLD:AAL6532","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Palyas;s__pallicosta",1,0,0,0,0,0,1,0,0,1,0,1,0,1,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0
+"BOLD:AAL6840","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Betulodes;s__matharmaYB01Pn",1,1,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAL6869","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Patalene;s__YB04Pn",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0
+"BOLD:AAL6918","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Trygodes;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAL7262","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Phrudocentra;s__sp.10YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0
+"BOLD:AAL7672","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Trotopera;s__oliviferaYB01Pa",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAL7681","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__sp.17YB",0,1,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL7682","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Apatelodidae;g__Olceclostera;s__amoria",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL8905","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hesperiidae;g__Carystoides;s__sp. 1YB near basoches",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL8991","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Geometridae_incertae_sedis;s__sp.58YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:AAL8993","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Phiditiidae;g__Phiditia;s__maculosissima",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAL8996","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Sterrhinae_genus;s__sp.1YB",0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,1,1,0,0,0,0
+"BOLD:AAL8997","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Sterrhinae_genus;s__sp.4YB",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL9002","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__sp.9YB",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAL9003","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Pyrinia;s__sp.4YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAL9004","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Marthula;s__pleione",0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAL9006","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tricentra;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0
+"BOLD:AAL9585","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Eusarca;s__YB06Pn",0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM2389","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Agyrta;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAM3023","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Virbia;s__thersites",0,0,1,0,1,1,1,1,0,1,0,0,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,0,0,1
+"BOLD:AAM3075","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Hypocladia;s__restricta",1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1
+"BOLD:AAM3076","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Agylla;s__bioptera",1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,0,1,0,1,0,0,1,0,0,1,1
+"BOLD:AAM3345","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Talara;s__violescens",0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,1,0,1,0,1,1,0,0,0
+"BOLD:AAM3378","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Talara;s__minynthadia",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAM3386","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Scotura;s__Scotura leucophleps",1,1,0,1,0,1,0,0,0,1,0,0,0,1,1,0,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAM3396","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Arctiinae;s__AAM3396",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAM3444","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Robinsonia;s__sanea",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM3482","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Hypocharis;s__sp.1YB",0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,1,0,1
+"BOLD:AAM3521","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Haemanota;s__rosacea",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM3522","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Heliura;s__thysbodes",0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAM3581","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Crinodes;s__schausiICG02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM3632","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Gymnelia;s__salvini",1,1,1,1,0,1,0,1,0,0,0,1,0,0,1,0,1,1,0,0,1,0,0,1,0,1,1,0,1,0,0,0,0,0,0,0,1,0,1,0
+"BOLD:AAM4128","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Euthyone;s__sp.4YB",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+"BOLD:AAM4399","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Draudtius;s__sp. AAM4399",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM5154","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Nitoris;s__sp.AAM5154",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM5830","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Aucula;s__particolor",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM6706","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Peteroma;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM6707","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Sterrhinae_genus;s__sp.6YB",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM6708","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__sp.20YB",0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0
+"BOLD:AAM6709","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Sterrhinae_genus;s__sp.5YB",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAM6728","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Josia;s__draconis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAM6804","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Nodozana;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM6812","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Odozana;s__sp.1YB",0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM6965","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Agaraea;s__sp.1YB",1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM6966","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Near Nephodia;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAM7163","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Talara;s__sp.4YB",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAM7164","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Illice;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAM7166","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Parachma;s__sp.1YB",1,1,0,1,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,0,0,1,0,1,0,0,0,0,1,1,0,0,0,0,0
+"BOLD:AAM7167","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Callisthenia;s__truncata",0,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,0,1,1,1,1,0,0,1,0,1,0,0,0,1,1,1,1,1,1,0,1,0,1,1
+"BOLD:AAM7169","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Elachistidae;g__Stenoma;s__sp. 2YB",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM7170","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Gaudeator;s__paidicus",0,1,1,0,0,0,1,1,0,0,1,1,1,0,1,1,1,1,0,1,1,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1
+"BOLD:AAM8273","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp. 91YB",0,1,0,1,0,1,1,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAM8762","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Apogeshna;s__stenialisDHJ01",0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAM9298","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Notodontidae_genus;s__sp.6YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AAM9578","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hapigia;s__curvilinea",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAN1664","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Odozana;s__decepta",0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,0,0
+"BOLD:AAN3751","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Peroara;s__albidiscata",1,1,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1,0,0,1,0,1,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAN7333","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tricentra;s__sp.5YB",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAO3099","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Plectrona;s__dohrnii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1489","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Ceratocilia;s__sp. 1YB",1,0,0,1,0,0,1,0,1,1,0,0,0,1,1,0,1,1,0,0,1,1,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:AAP1492","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Syllepte;s__BioLep597",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAP1499","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Phaedropsis;s__sp.2YB",1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1500","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomela;s__sp.3YB",0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0
+"BOLD:AAP1501","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomela;s__sp.2YB",1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0
+"BOLD:AAP1502","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomela;s__perspicata",1,0,0,1,0,1,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,0,1,1,1,0,0,1,0,0,0,0,1,0,0
+"BOLD:AAP1503","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__spiloBioLep01;s__BioLep403",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:AAP1511","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.1YB",1,0,0,0,0,1,1,1,1,1,0,0,1,0,0,1,0,1,1,1,0,1,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,0,0,1
+"BOLD:AAP1512","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Paridnea;s__sp.5YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1514","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Paridnea;s__sp.2YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0
+"BOLD:AAP1521","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Diaphania;s__sp. 12YB",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1522","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__sp.4YB",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1523","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__sp.16YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1524","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__sp.21YB",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1525","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Cosmopterosis;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0
+"BOLD:AAP1526","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Phaedropsis;s__leialis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1527","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Contortipalpia;s__santiagalis",1,1,1,0,0,0,0,1,0,1,1,0,1,0,1,1,1,1,1,0,1,0,1,0,0,0,1,0,0,1,1,1,1,1,0,1,0,1,1,0
+"BOLD:AAP1528","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.27YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1529","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Chrysauginae_genus;s__sp.5YB",1,1,1,1,1,1,0,0,1,1,0,0,0,1,1,0,1,0,1,1,1,1,1,0,1,1,1,0,1,0,0,0,0,0,1,0,0,0,1,0
+"BOLD:AAP1530","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Azochis;s__sp. 1YB near trichotarsalis",0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1531","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Crambidae_genus;s__sp.261YB",1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1533","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Carcha;s__sp.1YB",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1534","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Chrysauginae_genus;s__sp.7YB",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1535","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.60YB",0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1
+"BOLD:AAP1538","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Bocchoris;s__sp.1YB",1,1,0,1,0,1,0,0,1,0,0,0,0,1,1,0,1,0,0,1,1,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAP1539","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Blepharomastix;s__sp.2YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1541","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Omiodes;s__Janzen10",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1542","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.50YB",0,1,0,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0,1,1,0,0,1,0,0,1,1,0,1,1,1
+"BOLD:AAP1544","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Petrophila;s__sp.4YB",1,1,0,1,1,1,1,1,1,1,0,0,0,1,1,0,1,0,1,1,1,0,1,0,1,1,1,1,0,0,0,0,1,1,0,0,1,0,1,0
+"BOLD:AAP1552","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Acentropinae_genus;s__sp.3YB",0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1553","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Hositea;s__bicincta",0,1,1,0,1,1,0,1,1,1,0,0,0,1,0,1,1,0,0,0,1,1,1,0,1,1,0,0,1,0,0,0,1,1,0,0,0,0,1,0
+"BOLD:AAP1555","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Elachistidae;g__Elachistidae unknown genus;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1561","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Paridnea;s__sp.1YB",0,0,1,0,0,0,1,1,1,1,0,1,1,0,0,1,0,1,1,1,0,0,0,1,0,0,1,0,0,1,1,1,1,1,1,1,1,1,0,1
+"BOLD:AAP1626","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Trischistognatha;s__palindialis",0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1628","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae unknown genus;s__sp. 32YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAP1977","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Albusambia;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
+"BOLD:AAP1981","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.88YB",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAP1982","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Salbia;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP1988","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Herpetogramma;s__sp.3YB",1,0,1,0,1,0,0,0,1,1,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0
+"BOLD:AAP1990","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Eoparargyractis;s__sp. 1YB",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:AAP1992","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Aulacodes;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAP2094","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Bocchoris;s__sp.3YB",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0
+"BOLD:AAP2098","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Clydonopteron;s__pomponius",0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP2333","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Leucochromodes;s__sp.1YB",0,1,1,0,0,0,1,0,0,0,0,1,1,0,0,1,0,1,0,1,0,0,0,1,0,0,0,0,0,1,1,0,1,0,0,1,1,0,0,0
+"BOLD:AAP2357","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Paramacna;s__sp.1YB",1,1,0,0,0,1,0,0,1,1,0,0,0,1,1,0,0,0,0,1,1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAP2358","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Chrysauginae_genus;s__sp.3YB",1,0,1,1,0,0,0,1,1,0,1,0,1,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,1,0,0
+"BOLD:AAP2360","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Prenesta;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP2361","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.3YB",0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP3218","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Neivamyrmex;s__spoliator",1,0,0,1,1,1,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP3309","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Melipotis;s__fasciolaris",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP6197","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Sarsina;s__BioLep02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,1,1,0,0,1,1,0,1,0,0,1,1,0,0,1
+"BOLD:AAP8388","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Periphoba;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP8413","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Aspidolea;s__sp.1YB",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP8416","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Cyclocephala;s__fulgurata",1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP8418","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Cyclocephala;s__carbonaria",1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAP8439","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Cyclocephala;s__brevis",1,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP8497","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Cyclocephala;s__herteli",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP8507","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Euplatypus;s__sp.5YB",1,0,0,0,1,0,1,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0
+"BOLD:AAP8736","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Megaplatypus;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP8918","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Euplatypus;s__sp.10YB",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9348","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Labidus;s__Labidus coecus",0,0,1,0,0,0,1,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,1,1,1,0,0
+"BOLD:AAP9441","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Strategus;s__aloeusAS2",1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,1,1,1,1,0,0,1
+"BOLD:AAP9485","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Tesserocerus;s__dewalquei",0,0,1,0,0,0,0,1,0,1,0,1,0,0,1,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0
+"BOLD:AAP9486","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Apidae;g__Trigona;s__amalthea",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9522","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Nomamyrmex;s__hartigii",0,1,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAP9551","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Rhinotermitidae;g__Heterotermes;s__tenuis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9603","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Euplatypus;s__sp.8YB",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9619","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;g__Nasutitermes;s__ephratae",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9620","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;g__Compositermes;s__vindai",0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9645","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;g__Obtusitermes;s__panamae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9648","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Tesserocerus;s__retusus",0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,1,1,1,1,0,1,0,1,0,0,0,0,0,1,1,1,1,0,1,0,1,0,1,0,1
+"BOLD:AAP9680","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Veturius;s__platyrhinus",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+"BOLD:AAP9693","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Apidae;g__Trigona;s__corvina",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9717","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Halictidae;g__Megalopta;s__genalis",1,1,0,1,0,1,1,1,1,1,0,1,0,1,1,0,1,1,0,0,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,1,0,0,0,0
+"BOLD:AAP9751","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;g__Cornitermes;s__walkeri",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9759","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Labidus;s__praedator",0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1
+"BOLD:AAP9800","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Phileurus;s__carinatus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9801","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Phileurus;s__didymusAS2",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:AAP9804","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Apidae;g__Trigona;s__muzoensis",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAP9809","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Passalus;s__punctiger",1,1,0,0,0,1,0,0,1,1,0,0,0,1,1,0,1,0,0,1,1,1,1,0,1,1,1,1,1,0,1,0,1,0,0,0,0,1,0,0
+"BOLD:AAP9917","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Halictidae;g__Megalopta;s__amoena",1,1,0,1,0,1,0,1,1,0,0,0,0,0,1,0,1,1,0,0,1,0,0,0,1,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AAQ0919","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;g__Euplatypus;s__sp.9YB",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAQ1014","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Verres;s__sternbergianus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAQ1311","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Passalus;s__sp.13YB",1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAS6483","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__metastigma",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU1676","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ophisma;s__despagnesi",0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU1730","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Monoflata;s__banksi",0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AAU1796","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Rhiginia;s__crudelis",1,1,0,0,1,0,1,0,1,1,0,1,0,1,1,0,0,0,0,0,1,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,1,1,1,0
+"BOLD:AAU1848","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Panstrongylus;s__rufotuberculatus",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU1850","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Panstrongylus;s__geniculatus",0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,1,0,0,1,0,0,0,0,1,1,0,1,0,0,0,0,1,0,0
+"BOLD:AAU2030","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Flatoidinus;s__spinosus",1,1,0,1,1,0,0,0,1,1,1,1,0,0,0,1,1,1,0,1,1,0,1,0,1,1,1,1,1,1,0,0,1,1,0,0,0,1,1,0
+"BOLD:AAU2031","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Flataloides;s__metobliqua",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU2032","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Carthaeomorpha;s__rufipes",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAU2041","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Rasahus;s__brasiliensis",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU2046","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Apronius;s__rapax",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AAU2339","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Deocerus;s__corniculatus",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU2358","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Anormenis;s__metdiscus",0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0
+"BOLD:AAU2604","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Stenolemus;s__saileri",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU2881","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Brontostoma;s__notatum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU3443","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Neivamyrmex;s__pilosus",1,1,0,0,0,0,1,0,0,1,0,0,1,1,1,0,1,1,0,1,0,1,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,1,0
+"BOLD:AAU3927","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Eratyrus;s__AAU3927 cuspidatus",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU3968","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Anormenis;s__nigrolimbata",0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+"BOLD:AAU3969","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Anormenis;s__pehlkei",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU4435","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Metcracis;s__metcalfi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU5353","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Apiomerus;s__barrocoloradoi",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU7508","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Near Diastema;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAU8090","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Panstrongylus;s__humeralis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAV2896","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Anormenis;s__media",0,1,0,0,0,1,1,0,1,1,0,1,1,1,1,0,1,0,0,0,0,1,0,1,1,0,0,1,1,0,1,0,0,0,0,0,0,0,0,1
+"BOLD:AAV8869","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Stenolemus;s__AAV8869",1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAW0123","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Pero;s__rumina",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:AAX1377","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__Pogue32",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"BOLD:AAX6219","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Nemoria;s__sp.6YB",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAX6467","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hesperiidae;g__Nicephellus;s__nicephorus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAX8596","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Erebostrota;s__steneleaDHJ01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAY0628","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Tagalis;s__inornata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAY0632","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Oncerotrachelus;s__AAY0632 acuminatus",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAY3605","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Epormenis;s__aripensis",1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,1,1,0,0,0,1,0,0
+"BOLD:AAY4876","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Melipotis;s__perpendicularisDHJ01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAZ1801","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Carthaeomorpha;s__balloui",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AAZ2614","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Flatormenis;s__sp.1YB",1,1,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,1,1,0,0,0,1,0,1,1,0,0,0,0,0,1,0,1,0,1,0,0,0,1
+"BOLD:AAZ2977","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Flatormenis;s__sp.5YB",0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1
+"BOLD:ABA2972","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Cyclocephala;s__kaszabi",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABU6830","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Passalus;s__interstitialis",0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0
+"BOLD:ABU8891","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Patalene;s__sp.4YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
+"BOLD:ABU8984","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Oospila;s__confluaria",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,0
+"BOLD:ABV5503","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Patalene;s__sp.6YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:ABW9427","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Saurita;s__anselma",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABX5179","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Athyrma;s__adjutrix",0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABX6391","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Chrysauginae_genus;s__sp.12YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABX6754","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Apidae;g__Partamona;s__peckolti",0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABY4182","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Xanthyda;s__saron",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0
+"BOLD:ABY4979","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Hylesia;s__praedpichinchensis",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"BOLD:ABY5245","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Desmia;s__sp.2YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABY5519","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hesperiidae;g__Cobalus;s__calvina",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:ABY5802","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Melese;s__asana",0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,1,1,0,1,0,0
+"BOLD:ABY6105","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Loxophlebia;s__sp. 1YB near splendens",0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABY6406","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Episcepsis;s__sp. 3YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABY7335","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Lycaenidae;g__Calycopis;s__drusilla",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABY7602","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Herpetogramma;s__phaeopteralis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:ABY7818","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Citheronia;s__lobesis",1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABY7927","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Virbia;s__mentiens",0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,1,1
+"BOLD:ABY8555","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Balbura;s__dorsisigna",1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,1,0,0,1,0,0
+"BOLD:ABY9281","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ramphia;s__albizona",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0
+"BOLD:ABZ0297","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Patalene;s__sp. 5YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ0690","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Metcracis;s__humeralis",1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0
+"BOLD:ABZ0790","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Renia;s__turpis",0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ1417","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Spodoptera;s__androgea",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ2126","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Parilexia;s__sp. 5YB",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ3440","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Riodinidae;g__Detritivora;s__hermodora",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ3858","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Triatoma;s__ABZ3858 dimidiata",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ5043","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Lophocampa;s__amaxiaeformis",0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:ABZ5121","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Patania;s__Solis01",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ABZ6556","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;g__Epipaschia;s__sp.1YB",0,0,0,0,0,1,0,0,0,1,0,0,0,1,1,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACB7201","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Syngamia;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACC9073","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Dolichesia;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:ACC9448","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Guerinius;s__sp. ACC9448",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACC9481","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Coccabdominis;s__sp.ACC9481",0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACC9565","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tricentra;s__quadrigata",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACC9589","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Ategumia;s__sp. 3YB",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:ACC9592","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Physocleora;s__YB36Pn",0,0,0,0,1,1,0,1,0,0,1,1,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,1
+"BOLD:ACC9627","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Semaeopus;s__sp. 23YB",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACC9655","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Eupithecia;s__sp.1YB",0,1,1,1,1,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,1,1,1,1,0,0,0,1,0,0,0,1,1,1,0,0,0,0
+"BOLD:ACE3053","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Ammalo;s__helops",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACE3946","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Ptiloscola;s__dargei",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACE6019","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp.79YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACE6078","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Poliopastea;s__cyllarus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:ACE7779","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Titaea;s__tamerlan",0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACE9143","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Rhuda;s__focula",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACE9304","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Eubaphe;s__conformis",1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,1,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:ACE9818","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Gamelia;s__rudloffi",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACE9993","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Lamprosema;s__BioLep333",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACF0340","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Neivamyrmex;s__gibbatus",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACF0970","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Epeiromulona;s__lephina",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"BOLD:ACF1973","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Xanthyda;s__chalcosticta",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACF3048","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Oxydia;s__apidania",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0
+"BOLD:ACF3317","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Sphingidae;g__Xylophanes;s__tyndarusDHJ01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACF3637","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Cosmosoma;s__remotum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:ACG2015","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Geometridae_genus;s__sp.118YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACG2994","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Cyclophora;s__sp.5YB",0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACJ4093","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Neivamyrmex;s__puerulus",1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACJ4717","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Marilopteryx;s__lamptera",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACJ4777","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Neivamyrmex;s__pullus",1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACJ5993","k__Animalia;p__Arthropoda;c__Insecta;o__Hymenoptera;f__Formicidae;g__Nomamyrmex;s__esenbeckii wilsoni",1,1,0,1,0,1,0,0,1,1,0,0,0,1,0,0,1,0,0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACL2882","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__flavescens",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:ACS2569","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Pleurosoma;s__sp. 1YB near nigrifer or gracilis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ACV1927","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Zale;s__excellens",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADB2820","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Celiptera;s__Poole02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADB9910","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Noctuidae_genus;s__sp.15YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADE3311","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;g__Anoplotermes;s__sp. 6YB",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADG3427","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Spilomelinae_genus;s__sp. 97YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADK4836","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hesperiidae;g__Dyscophellus;s__phraxanor",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADM2733","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;g__Trosia;s__fallax",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADN0435","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Malocampa;s__satisICG01",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADN8510","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;g__Natada;s__incandescens",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADO4414","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Riodinidae;g__Theope;s__speciosa",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADS5655","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Phileurus;s__zonianis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:ADS5813","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Stenolemus;s__mirabilis",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADS9313","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Tagalis;s__seminigra",0,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:ADT1783","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Castolus;s__rufomarginatus",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADT1916","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Empicoris;s__armatus",0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"BOLD:ADT5884","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;g__Cyclocephala;s__brittoni",0,1,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADT7134","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Tagalis;s__dichroa",1,0,0,1,1,0,1,0,0,0,0,1,0,1,0,0,0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0
+"BOLD:ADT7184","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Passineura;s__sp. ADT7184",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADT8926","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Nodozana;s__sp.2YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:ADU8866","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Popilius;s__sp.1YB",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADU9518","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Ptichopus;s__angulatus",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADV3836","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Stenolemus;s__ADV3836",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADV5566","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Phasmatocoris;s__ADV5566",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADV8130","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Pseudosaica;s__cf. panamensis",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADX2788","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Saturniidae;g__Automeris;s__jucunda",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:ADY4019","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Rhiginia;s__bimaculata",0,0,1,0,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,1
+"BOLD:ADZ8733","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Marilopteryx;s__Malaise8733",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0
+"BOLD:AEC1852","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Apatelodidae;g__Apatelodes;s__firmiana",1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC2070","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Hyamia;s__palpitatalis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC2502","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Crinodes;s__besckei",1,0,0,1,0,1,0,0,0,1,0,0,0,1,1,0,0,0,0,0,1,1,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0
+"BOLD:AEC2679","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;g__Megalopyge;s__sp. 1YB",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC2872","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Hepialidae;g__Druceilla;s__sp. 1YB near amazonensis",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC3125","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Apatelodidae;g__Olceclostera;s__sp. 1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AEC3308","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__conspirataDHJ02",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"BOLD:AEC3375","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;g__Norape;s__ovina",0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC4245","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;g__Megalopyge;s__albicollis",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC4915","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Rejectaria;s__poole13",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC5118","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Phiditiidae;g__Rolepa;s__innotabilis",0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC5300","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Stauropides;s__persimilis",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC5366","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;g__Perola;s__repetita",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEC5462","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Chamyna;s__sp.1YB",0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,1,0,0
+"BOLD:AEC5784","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;g__Herminodes;s__valida",0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEF1395","k__Animalia;p__Arthropoda;c__Insecta;o__Blattodea;f__Kalotermitidae;g__Neotermes;s__castaneus",1,1,1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,0,0,1,1,1,1,0,0,1,0,1,1,0,0,1,1,0
+"BOLD:AEM4984","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Rasahus;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEM6011","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Euteliidae;g__Nagara;s__vitrea",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEM6058","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Mimallonidae;g__Cicinnus;s__fogia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"BOLD:AEM6423","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Macaria;s__perpendiculata",0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1,1,0,0,0,0
+"BOLD:AEM6539","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;g__Noctuidae_genus;s__sp.26YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"BOLD:AEM7926","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Macaria;s__sp.8YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
+"BOLD:AEM9315","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Melanolestes;s__morio",0,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEN0998","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Boeotarcha;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEN1892","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Sufetula;s__sp.1YB",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEN4074","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Hemiceras;s__sp.1YB",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0
+"BOLD:AEN5210","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Ctenotrachelus;s__sp. 1YB",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEN5638","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;g__Tricentra;s__sp. 8YB",0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"BOLD:AEN6317","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Argyria;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"TAX:16587","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Notodontidae;g__Lirimiris;s__lignitecta",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"TAX:327133","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;g__Epormenis;s__roscida",1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0
+"TAX:372024","k__Animalia;p__Arthropoda;c__Insecta;o__Coleoptera;f__Passalidae;g__Verres;s__hageni",0,0,1,0,0,1,1,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1
+"TAX:722403","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Brontostoma;s__nanus",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"TAX:722422","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Saica;s__rubripes",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"TAX:736637","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Bombycidae;g__Anticla;s__anticaDHJ04",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"TAX:804768","k__Animalia;p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;g__Gonocausta;s__Janzen03",1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"TAX:895548","k__Animalia;p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;g__Empicoris;s__sp.1YB",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
