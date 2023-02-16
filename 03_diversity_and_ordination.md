@@ -4,7 +4,7 @@ Daniel
 27/09/2022
 
 ``` r
-obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+obj <- readRDS('data/final_anal/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -20,7 +20,7 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to flit
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> blats 
 
-sample <- read.csv('data/location_ctrl.csv')
+sample <- read.csv('data/final_anal/location_ctrl.csv')
 ```
 
 The chunk above now gave us a filtered taxmap object for each of the
@@ -43,11 +43,9 @@ anova_result <- aov(inv_simp ~ SEASON, sample)
 summary(anova_result)
 ```
 
-    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
-    ## SEASON       1   2016  2016.1   12.03 0.00132 **
-    ## Residuals   38   6367   167.6                   
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ##             Df Sum Sq Mean Sq F value Pr(>F)
+    ## SEASON       1    438   437.6   2.734  0.106
+    ## Residuals   38   6083   160.1
 
 ``` r
 tukey_result <- HSD.test(anova_result, "SEASON", group = TRUE)
@@ -56,7 +54,7 @@ print(tukey_result)
 
     ## $statistics
     ##    MSerror Df     Mean       CV      MSD
-    ##   167.5525 38 28.50982 45.40263 8.286489
+    ##   160.0683 38 26.68375 47.41391 8.099304
     ## 
     ## $parameters
     ##    test name.t ntr StudentizedRange alpha
@@ -64,16 +62,16 @@ print(tukey_result)
     ## 
     ## $means
     ##     inv_simp      std  r      Min      Max      Q25      Q50      Q75
-    ## dry 21.41030 12.79590 20  1.60373 42.04263 12.96907 21.89135 29.49382
-    ## wet 35.60933 13.09084 20 13.15428 63.56903 25.95842 34.52925 39.43509
+    ## DRY 23.37606 13.40250 20 2.445791 45.27749 12.73096 23.51409 31.66699
+    ## WET 29.99144 11.85367 20 9.674935 52.74017 20.92139 29.40302 35.75742
     ## 
     ## $comparison
     ## NULL
     ## 
     ## $groups
     ##     inv_simp groups
-    ## wet 35.60933      a
-    ## dry 21.41030      b
+    ## WET 29.99144      a
+    ## DRY 23.37606      a
     ## 
     ## attr(,"class")
     ## [1] "group"
@@ -113,8 +111,8 @@ summary(anova_result)
 ```
 
     ##             Df Sum Sq Mean Sq F value Pr(>F)
-    ## day          1    373   373.2   1.771  0.191
-    ## Residuals   38   8010   210.8
+    ## day          1    151   151.2   0.902  0.348
+    ## Residuals   38   6369   167.6
 
 ``` r
 tukey_result_day <- HSD.test(anova_result, "day", group = TRUE)
@@ -123,7 +121,7 @@ print(tukey_result_day)
 
     ## $statistics
     ##    MSerror Df     Mean       CV      MSD
-    ##   210.7874 38 28.50982 50.92463 9.294315
+    ##   167.6056 38 26.68375 48.51738 8.287801
     ## 
     ## $parameters
     ##    test name.t ntr StudentizedRange alpha
@@ -131,16 +129,16 @@ print(tukey_result_day)
     ## 
     ## $means
     ##   inv_simp      std  r      Min      Max      Q25      Q50      Q75
-    ## A 25.45531 14.36608 20 1.603730 63.56903 16.44972 24.37844 33.53528
-    ## B 31.56432 14.66937 20 2.395061 57.13042 24.14642 32.29192 39.60799
+    ## A 24.73943 12.15789 20 2.445791 51.99838 16.78395 24.49288 34.21293
+    ## B 28.62807 13.68930 20 2.486889 52.74017 21.72730 30.26043 37.38596
     ## 
     ## $comparison
     ## NULL
     ## 
     ## $groups
     ##   inv_simp groups
-    ## B 31.56432      a
-    ## A 25.45531      a
+    ## B 28.62807      a
+    ## A 24.73943      a
     ## 
     ## attr(,"class")
     ## [1] "group"
@@ -158,8 +156,8 @@ summary(anova_result)
 ```
 
     ##             Df Sum Sq Mean Sq F value Pr(>F)
-    ## site         9   2504   278.2   1.419  0.224
-    ## Residuals   30   5880   196.0
+    ## site         9   1505   167.3   1.001  0.461
+    ## Residuals   30   5015   167.2
 
 ``` r
 tukey_result_site <- HSD.test(anova_result, "site", group = TRUE)
@@ -168,7 +166,7 @@ print(tukey_result_site)
 
     ## $statistics
     ##    MSerror Df     Mean       CV      MSD
-    ##   195.9848 30 28.50982 49.10399 33.76768
+    ##   167.1642 30 26.68375 48.45346 31.18615
     ## 
     ## $parameters
     ##    test name.t ntr StudentizedRange alpha
@@ -176,32 +174,32 @@ print(tukey_result_site)
     ## 
     ## $means
     ##      inv_simp       std r       Min      Max      Q25      Q50      Q75
-    ## ARM1 15.36740  8.199033 4  5.591829 25.19244 11.26366 15.34266 19.44639
-    ## ARM2 27.12839 22.595379 4  2.395061 57.13042 17.67951 24.49404 33.94292
-    ## ARM3 37.95982 10.543994 4 24.943300 49.75889 32.55667 38.56855 43.97170
-    ## ARM4 28.11173  6.170100 4 20.380249 34.08729 24.63881 28.98968 32.46260
-    ## BAL1 25.75585 10.059304 4 13.205763 37.31929 21.16163 26.24917 30.84339
-    ## DRA1 33.66056 25.433612 4  2.418754 63.56903 21.94008 34.32723 46.04771
-    ## WHE1 34.97809  9.774069 4 20.409100 41.37588 34.31452 39.06368 39.72724
-    ## WHE2 40.50644 10.509399 4 32.453747 55.65121 33.99786 36.96040 43.46898
-    ## ZET1 24.24336  9.549588 4 12.259011 33.20952 18.82103 25.75246 31.17478
-    ## ZET2 17.38656 13.696495 4  1.603730 34.54593 10.65642 16.69828 23.42842
+    ## ARM1 15.84491  7.688075 4  6.092521 24.09424 12.05617 16.59644 20.38518
+    ## ARM2 26.05321 20.594880 4  2.486889 52.74017 18.93156 24.49288 31.61453
+    ## ARM3 37.71119  8.746464 4 26.519972 45.27749 32.90024 39.52364 44.33459
+    ## ARM4 30.37807  6.860571 4 21.069352 36.75058 27.50618 31.84617 34.71806
+    ## BAL1 22.28716  7.292670 4 13.112842 30.20629 18.63633 22.91476 26.56560
+    ## DRA1 30.28640 20.633433 4  2.445791 51.99838 23.79305 33.35072 39.84408
+    ## WHE1 33.72469  8.767138 4 22.143898 43.33647 30.79051 34.70920 37.64338
+    ## WHE2 26.09281 15.159544 4  9.674935 43.05749 15.69167 25.81941 36.22055
+    ## ZET1 23.02996  8.852959 4 10.698739 30.31456 19.63598 25.55326 28.94724
+    ## ZET2 21.42911 14.172081 4 11.585331 42.16589 12.74212 15.98260 24.66959
     ## 
     ## $comparison
     ## NULL
     ## 
     ## $groups
     ##      inv_simp groups
-    ## WHE2 40.50644      a
-    ## ARM3 37.95982      a
-    ## WHE1 34.97809      a
-    ## DRA1 33.66056      a
-    ## ARM4 28.11173      a
-    ## ARM2 27.12839      a
-    ## BAL1 25.75585      a
-    ## ZET1 24.24336      a
-    ## ZET2 17.38656      a
-    ## ARM1 15.36740      a
+    ## ARM3 37.71119      a
+    ## WHE1 33.72469      a
+    ## ARM4 30.37807      a
+    ## DRA1 30.28640      a
+    ## WHE2 26.09281      a
+    ## ARM2 26.05321      a
+    ## ZET1 23.02996      a
+    ## BAL1 22.28716      a
+    ## ZET2 21.42911      a
+    ## ARM1 15.84491      a
     ## 
     ## attr(,"class")
     ## [1] "group"
@@ -252,25 +250,11 @@ ps_obj <- metacoder::as_phyloseq(obj,
 plot_richness(ps_obj, color = "SEASON", x = "site") #phyloseq function
 ```
 
-    ## Warning in estimate_richness(physeq, split = TRUE, measures = measures): The data you have provided does not have
-    ## any singletons. This is highly suspicious. Results of richness
-    ## estimates (for example) are probably unreliable, or wrong, if you have already
-    ## trimmed low-abundance taxa from the data.
-    ## 
-    ## We recommended that you find the un-trimmed data and retry.
-
 ![](03_diversity_and_ordination_files/figure-gfm/multipleDiversityIndices-1.png)<!-- -->
 
 ``` r
 plot_richness(ps_obj, color = "day", x = "SEASON")
 ```
-
-    ## Warning in estimate_richness(physeq, split = TRUE, measures = measures): The data you have provided does not have
-    ## any singletons. This is highly suspicious. Results of richness
-    ## estimates (for example) are probably unreliable, or wrong, if you have already
-    ## trimmed low-abundance taxa from the data.
-    ## 
-    ## We recommended that you find the un-trimmed data and retry.
 
 ![](03_diversity_and_ordination_files/figure-gfm/multipleDiversityIndices-2.png)<!-- -->
 
@@ -291,7 +275,7 @@ pdf("./03_diversity_and_ordination_files/diversity_indices_season.pdf")
 p_alpha
 ```
 
-    ## Warning in wilcox.test.default(c(126, 139, 111, 132, 132, 149, 145, 156, :
+    ## Warning in wilcox.test.default(c(314, 308, 278, 314, 377, 459, 421, 437, :
     ## cannot compute exact p-value with ties
 
 ``` r
@@ -310,20 +294,20 @@ alphaobj <- get_alphaindex(ps_obj)
 head(as.data.frame(alphaobj))
 ```
 
-    ##        Observe    Chao1      ACE  Shannon   Simpson         J site day SEASON
-    ## ARM1AD     126 126.0000 126.0000 3.620160 0.9431301 0.7485419 ARM1   A    dry
-    ## ARM1AW     264 267.4615 266.8923 3.906428 0.9223828 0.7005852 ARM1   A    wet
-    ## ARM1BD     139 139.0000 139.0000 3.060776 0.8232365 0.6202841 ARM1   B    dry
-    ## ARM1BW     246 246.0000 246.1599 4.170872 0.9601474 0.7576059 ARM1   B    wet
-    ## ARM2AD     111 111.0000 111.0000 3.682167 0.9558242 0.7818544 ARM2   A    dry
-    ## ARM2AW     388 393.0370 393.3780 4.389950 0.9622889 0.7364446 ARM2   A    wet
-    ##         X X.1  inv_simp
-    ## ARM1AD NA  NA 17.531036
-    ## ARM1AW NA  NA 13.154277
-    ## ARM1BD NA  NA  5.591829
-    ## ARM1BW NA  NA 25.192440
-    ## ARM2AD NA  NA 22.774330
-    ## ARM2AW NA  NA 26.213753
+    ##          Observe    Chao1      ACE  Shannon   Simpson         J site day SEASON
+    ## ARM1ADRY     313 430.5000 430.8782 3.782410 0.9466683 0.6582451 ARM1   A    DRY
+    ## ARM1AWET     409 553.5581 544.6192 4.022198 0.9263859 0.6688375 ARM1   A    WET
+    ## ARM1BDRY     293 414.5357 403.4284 3.236113 0.8359596 0.5697209 ARM1   B    DRY
+    ## ARM1BWET     452 551.6207 561.2909 4.278492 0.9593714 0.6998224 ARM1   B    WET
+    ## ARM2ADRY     281 492.6364 440.2936 3.846407 0.9590294 0.6821860 ARM2   A    DRY
+    ## ARM2AWET     554 775.0339 734.2326 4.326645 0.9589834 0.6849030 ARM2   A    WET
+    ##           inv_simp
+    ## ARM1ADRY 19.148833
+    ## ARM1AWET 14.044054
+    ## ARM1BDRY  6.092521
+    ## ARM1BWET 24.094237
+    ## ARM2ADRY 24.413118
+    ## ARM2AWET 24.572652
 
 ``` r
 rareres <- get_rarecurve(obj=ps_obj, chunks=400)
@@ -510,12 +494,12 @@ deres <- diff_analysis(obj = ps_obj, classgroup = "SEASON",
 deres
 ```
 
-    ## The original data: 2572 features and 40 samples
+    ## The original data: 3863 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 2236 by 7 rank
-    ## after first test (kruskal_test) number of feature (pvalue<=0.05):630
-    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:425
-    ## after lda, Number of discriminative features: 203 (certain taxonomy classification:152; uncertain taxonomy classication: 51)
+    ## The taxda contained 4622 by 7 rank
+    ## after first test (kruskal_test) number of feature (pvalue<=0.05):1115
+    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:732
+    ## after lda, Number of discriminative features: 228 (certain taxonomy classification:176; uncertain taxonomy classication: 52)
 
 this figure gives you a cladogram of all the BINs (based on taxonomy)
 and highlight which species/genera/orders are different between
@@ -574,7 +558,7 @@ everything is very messy. In the next script we repeat these analyses
 but for FOCAL orders only.
 
 ``` r
-ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("goldenrod", "steelblue"), notch = FALSE) -> ggdiffbox_family
+ps_obj %>% as.MPSE() %>% mp_rrarefy() %>% mp_diff_analysis(.abundance=RareAbundance, .group=SEASON, action='get') %>% dplyr::filter(grepl("^f__", f)) %>% ggdiffbox(colorlist=c("steelblue", "goldenrod"), notch = FALSE) -> ggdiffbox_family
 ```
 
     ## The otutree is empty in the MPSE object!
@@ -591,7 +575,6 @@ ggdiffbox_family
 
     ## notch went outside hinges. Try setting notch=FALSE.
 
-    ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
@@ -685,6 +668,7 @@ ggdiffbox_order
 
     ## notch went outside hinges. Try setting notch=FALSE.
 
+    ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
 
 ``` r

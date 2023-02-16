@@ -1,0 +1,88 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	836	16	1	98.09	93.75	458.03	33.84	0
+OTU2	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Rutelinae	Callistethus	Callistethus sp	97.59	447	10	10	97.76	0.00	458	33.79	0
+OTU3	Arthropoda	Insecta	Lepidoptera	Limacodidae				94.93	218	14	14	93.58	0.00	439.49	29.93	0
+OTU4	Arthropoda	Insecta	Lepidoptera	Pyralidae	Chrysauginae	Lophopleura	Lophopleura eurzonalis	95.84	207	6	6	97.10	0.00	457.7	31.21	0
+OTU5	Arthropoda	Insecta	Lepidoptera					94.51	171	5	5	97.08	0.00	457.61	36.91	0
+OTU6	Arthropoda	Insecta	Coleoptera	Chrysomelidae	Galerucinae			91.68	140	8	8	94.29	0.00	457.77	33.67	0
+OTU7	Arthropoda	Insecta	Blattodea	Ectobiidae				97.81	107	4	4	96.26	0.00	457.83	38.22	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	phyBioLep01	phyBioLep01 BioLep3631	93.22	102	5	5	95.10	0.00	457.9	29.92	0
+OTU9	Arthropoda	Insecta	Lepidoptera	Tineidae	Acrolophinae	Acrolophus	Acrolophus pyramellus	91.03	90	4	4	95.56	0.00	458.03	34.3	0
+OTU10	Arthropoda	Insecta	Lepidoptera					90.59	78	3	3	96.15	0.00	457.96	29.71	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	phyBioLep01	phyBioLep01 BioLep725	96.71	74	4	4	94.59	0.00	457.49	31.07	0
+OTU12								0.00	73	4	1	94.52	75.00	452.96	34.76	0
+OTU13								0.00	64	2	1	96.88	50.00	458.69	34.81	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Tineidae				97.80	60	6	6	90.00	0.00	457.2	33.69	0
+OTU15	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Herminodes	Herminodes Poole09	96.27	58	3	3	94.83	0.00	457.93	31.66	0
+OTU16								0.00	56	1	1	98.21	0.00	458	35.15	0
+OTU17	Arthropoda	Insecta	Diptera					96.25	50	1	1	98.00	0.00	458	39.52	0
+OTU18	Arthropoda	Insecta	Lepidoptera					94.07	46	2	2	95.65	0.00	457.87	36.47	0
+OTU19	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Melanolophia	Melanolophia sp.	91.47	45	2	2	95.56	0.00	457.71	29.49	0
+OTU20								0.00	41	4	1	90.24	75.00	458.22	33.78	0
+OTU21	Arthropoda	Insecta	Diptera	Phoridae	Metopininae	Metopina		97.94	39	5	5	87.18	0.00	458.05	38.37	0
+OTU22	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Melolonthinae	Phyllophaga	Phyllophaga panamana	90.15	31	2	2	93.55	0.00	458.45	35.34	0
+OTU23	Arthropoda	Insecta	Diptera	Psychodidae				97.36	30	1	1	96.67	0.00	458	34.28	0
+OTU25	Arthropoda	Insecta	Diptera	Phoridae				92.11	29	2	2	93.10	0.00	457.69	32.34	0
+OTU24	Arthropoda	Insecta	Psocodea	Psocidae				92.01	29	2	2	93.10	0.00	457.83	33.42	0
+OTU28	Arthropoda	Insecta	Lepidoptera	Gelechiidae		geleBioLep01	geleBioLep01 BioLep1180	91.68	28	1	1	96.43	0.00	458	31.44	0
+OTU27	Arthropoda	Insecta	Lepidoptera	Tineidae				90.81	28	2	2	92.86	0.00	458.39	31.63	0
+OTU26								0.00	28	1	1	96.43	0.00	458	35.15	0
+OTU29								0.00	24	2	1	91.67	50.00	459.25	32.72	0
+OTU30	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma		97.58	23	3	3	86.96	0.00	457.91	34.07	0
+OTU31	Arthropoda	Insecta	Hemiptera					97.14	23	2	2	91.30	0.00	457.7	32.55	0
+OTU32	Arthropoda	Insecta	Diptera	Ceratopogonidae				95.38	21	2	2	90.48	0.00	458.38	33.81	0
+OTU33	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Rutelinae	Pelidnota	Pelidnota notata	96.71	21	3	3	85.71	0.00	458	39.38	0
+OTU34	Arthropoda	Insecta	Diptera					97.79	20	1	1	95.00	0.00	458	31.22	0
+OTU35	Arthropoda	Arachnida	Trombidiformes	Erythraeidae				93.83	19	2	2	89.47	0.00	458	36.24	0
+OTU36								0.00	18	2	1	88.89	50.00	217	37.33	0
+OTU37	Arthropoda	Insecta	Lepidoptera	Pyralidae	Chrysauginae	chryBioLep01	chryBioLep01 BioLep1004	96.93	18	1	1	94.44	0.00	458	32.53	0
+OTU38	Arthropoda	Insecta	Lepidoptera	Depressariidae				94.51	17	2	2	88.24	0.00	457.59	33.13	0
+OTU39								0.00	15	2	1	86.67	50.00	458	37	0
+OTU40								0.00	15	1	1	93.33	0.00	458	29.26	0
+OTU44								0.00	13	1	1	92.31	0.00	458	37.99	0
+OTU43								0.00	13	1	1	92.31	0.00	458	34.06	0
+OTU42	Arthropoda	Insecta	Coleoptera	Lampyridae				97.13	13	1	1	92.31	0.00	458	31.66	0
+OTU41	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Dynastinae	Cyclocephala	Cyclocephala carbonaria	97.39	13	1	1	92.31	0.00	458	32.31	0
+OTU47								0.00	12	1	1	91.67	0.00	457	36.76	0
+OTU46	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	12	2	2	83.33	0.00	458.42	30.32	0
+OTU45								0.00	12	1	1	91.67	0.00	458	40.61	0
+OTU49	Arthropoda	Insecta	Diptera	Ceratopogonidae	Ceratopogoninae	Culicoides		94.71	11	1	1	90.91	0.00	458	34.72	0
+OTU48	Arthropoda	Insecta	Lepidoptera					96.04	11	2	2	81.82	0.00	419.27	31.05	0
+OTU50								0.00	10	1	1	90.00	0.00	458	31.22	0
+OTU51	Arthropoda	Insecta	Diptera	Chironomidae				96.01	10	1	1	90.00	0.00	458	32.97	0
+OTU52	Arthropoda	Insecta	Lepidoptera					94.31	10	1	1	90.00	0.00	458	32.31	0
+OTU53	Arthropoda	Insecta	Diptera	Cecidomyiidae				94.69	10	1	1	90.00	0.00	455	25.05	0
+OTU54	Arthropoda	Insecta	Diptera	Cecidomyiidae				90.11	10	1	1	90.00	0.00	458	27.07	0
+OTU55	Arthropoda	Insecta	Lepidoptera	Depressariidae				95.18	10	1	1	90.00	0.00	458	34.72	0
+OTU56	Arthropoda	Insecta	Diptera	Chironomidae				97.57	9	1	1	88.89	0.00	458	36.03	0
+OTU57								0.00	9	1	1	88.89	0.00	458	30.35	0
+OTU58	Arthropoda	Insecta	Hemiptera	Derbidae	Derbinae	Omolicna	Omolicna latens	94.54	8	1	1	87.50	0.00	458	34.28	0
+OTU59	Arthropoda	Insecta	Coleoptera	Nitidulidae	Cillaeinae	Conotelus		91.25	8	1	1	87.50	0.00	458	34.72	0
+OTU61	Arthropoda	Insecta	Lepidoptera	Crambidae	Crambinae	Glaucocharis	Glaucocharis electra	91.23	7	1	1	85.71	0.00	458	32.1	0
+OTU60	Arthropoda	Insecta	Diptera	Cecidomyiidae				97.36	7	1	1	85.71	0.00	458	26.86	0
+OTU62	Arthropoda	Insecta	Diptera					93.83	7	1	1	85.71	0.00	458	39.96	0
+OTU63								0.00	6	1	1	83.33	0.00	458	39.3	0
+OTU65								0.00	6	1	1	83.33	0.00	458	36.68	0
+OTU64								0.00	6	1	1	83.33	0.00	457	30.85	0
+OTU67	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Melolonthinae	Phyllophaga	Phyllophaga densata	97.75	6	1	1	83.33	0.00	457	37.2	0
+OTU66	Arthropoda	Insecta	Diptera	Cecidomyiidae				97.66	6	1	1	83.33	0.00	455	26.15	0
+OTU69								0.00	6	1	1	83.33	0.00	152	35.53	0
+OTU68	Arthropoda	Insecta	Lepidoptera	Tineidae				94.71	6	1	1	83.33	0.00	458	33.62	0
+OTU70	Arthropoda	Insecta	Lepidoptera	Mimallonidae	Cicinninae	Cicinnus	Cicinnus sp.	90.37	6	1	1	83.33	0.00	458	30.35	0
+OTU83								0.00	5	1	1	80.00	0.00	458	28.17	0
+OTU82								0.00	5	1	1	80.00	0.00	458	39.96	0
+OTU81	Arthropoda	Insecta	Diptera	Cecidomyiidae				93.00	5	1	1	80.00	0.00	458	25.55	0
+OTU80	Arthropoda	Insecta	Diptera					91.63	5	1	1	80.00	0.00	457	39.61	0
+OTU87								0.00	5	1	1	80.00	0.00	458	35.15	0
+OTU86								0.00	5	1	1	80.00	0.00	458	28.82	0
+OTU85	Arthropoda	Insecta	Lepidoptera	Geometridae	Sterrhinae	Idaea		96.72	5	1	1	80.00	0.00	458	32.31	0
+OTU84								0.00	5	1	1	80.00	0.00	458	42.14	0
+OTU72								0.00	5	1	1	80.00	0.00	458	40.83	0
+OTU73	Arthropoda	Insecta	Hemiptera					95.82	5	1	1	80.00	0.00	458	34.72	0
+OTU71	Arthropoda	Insecta	Blattodea	Ectobiidae				97.93	5	1	1	80.00	0.00	458	37.77	0
+OTU76	Arthropoda	Insecta	Diptera	Cecidomyiidae				93.63	5	1	1	80.00	0.00	459	26.58	0
+OTU77								0.00	5	1	1	80.00	0.00	458	31.44	0
+OTU74								0.00	5	1	1	80.00	0.00	457	31.51	0
+OTU75	Arthropoda	Insecta	Diptera					92.53	5	1	1	80.00	0.00	458	32.53	0
+OTU78								0.00	5	1	1	80.00	0.00	105	25.71	0
+OTU79								0.00	5	1	1	80.00	0.00	458	33.62	0

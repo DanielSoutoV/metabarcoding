@@ -4,7 +4,7 @@ Daniel
 06/10/2022
 
 ``` r
-obj <- readRDS('data/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+obj <- readRDS('data/final_anal/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -20,7 +20,7 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Hemiptera"),#here is to flit
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> blats 
 
-sample <- read.csv('data/location_ctrl.csv')
+sample <- read.csv('data/final_anal/location_ctrl.csv')
 ```
 
 The script above gave me the taxmap object separated by order, however,
@@ -66,12 +66,12 @@ deresleps <- diff_analysis(obj = ps_leps, classgroup = "SEASON",
 deresleps
 ```
 
-    ## The original data: 1597 features and 40 samples
+    ## The original data: 2290 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 1170 by 7 rank
-    ## after first test (kruskal_test) number of feature (pvalue<=0.05):352
-    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:219
-    ## after lda, Number of discriminative features: 159 (certain taxonomy classification:143; uncertain taxonomy classication: 16)
+    ## The taxda contained 1834 by 7 rank
+    ## after first test (kruskal_test) number of feature (pvalue<=0.05):640
+    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:394
+    ## after lda, Number of discriminative features: 172 (certain taxonomy classification:158; uncertain taxonomy classication: 14)
 
 ``` r
 diffclade_leps <- ggdiffclade(
@@ -216,6 +216,35 @@ ggdiffbox_leps
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
 
 ``` r
 dev.off()
@@ -266,12 +295,12 @@ derescoleo <- diff_analysis(obj = ps_coleo, classgroup = "SEASON",
 derescoleo
 ```
 
-    ## The original data: 275 features and 40 samples
+    ## The original data: 397 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 272 by 7 rank
-    ## after first test (kruskal_test) number of feature (pvalue<=0.05):87
-    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:62
-    ## after lda, Number of discriminative features: 62 (certain taxonomy classification:43; uncertain taxonomy classication: 19)
+    ## The taxda contained 580 by 7 rank
+    ## after first test (kruskal_test) number of feature (pvalue<=0.05):133
+    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:101
+    ## after lda, Number of discriminative features: 79 (certain taxonomy classification:56; uncertain taxonomy classication: 23)
 
 ``` r
 diffclade_coleo <- ggdiffclade(
@@ -325,7 +354,7 @@ dev.off
     ##     .External(C_devoff, as.integer(which))
     ##     dev.cur()
     ## }
-    ## <bytecode: 0x000000001435caf8>
+    ## <bytecode: 0x000000001435cbe8>
     ## <environment: namespace:grDevices>
 
 ``` r
@@ -370,9 +399,6 @@ coleo_ggdiffbox
 
     ## notch went outside hinges. Try setting notch=FALSE.
 
-    ## notch went outside hinges. Try setting notch=FALSE.
-    ## notch went outside hinges. Try setting notch=FALSE.
-    ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
@@ -427,12 +453,12 @@ deresdips <- diff_analysis(obj = ps_dips, classgroup = "SEASON",
 deresdips
 ```
 
-    ## The original data: 259 features and 40 samples
+    ## The original data: 377 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 511 by 7 rank
-    ## after first test (kruskal_test) number of feature (pvalue<=0.05):73
-    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:55
-    ## after lda, Number of discriminative features: 51 (certain taxonomy classification:28; uncertain taxonomy classication: 23)
+    ## The taxda contained 1496 by 7 rank
+    ## after first test (kruskal_test) number of feature (pvalue<=0.05):106
+    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:65
+    ## after lda, Number of discriminative features: 47 (certain taxonomy classification:24; uncertain taxonomy classication: 23)
 
 ``` r
 diffclade_dips <- ggdiffclade(
@@ -573,12 +599,12 @@ dereshemi <- diff_analysis(obj = ps_hemi, classgroup = "SEASON",
 dereshemi
 ```
 
-    ## The original data: 158 features and 40 samples
+    ## The original data: 222 features and 40 samples
     ## The sample data: 1 variables and 40 samples
-    ## The taxda contained 114 by 7 rank
-    ## after first test (kruskal_test) number of feature (pvalue<=0.05):39
-    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:29
-    ## after lda, Number of discriminative features: 29 (certain taxonomy classification:17; uncertain taxonomy classication: 12)
+    ## The taxda contained 240 by 7 rank
+    ## after first test (kruskal_test) number of feature (pvalue<=0.05):61
+    ## after second test (wilcox_test and generalizedFC) number of significantly discriminative feature:41
+    ## after lda, Number of discriminative features: 35 (certain taxonomy classification:23; uncertain taxonomy classication: 12)
 
 ``` r
 diffclade_hemi <- ggdiffclade(
@@ -672,6 +698,8 @@ hemiptera_ggdiffbox
 
     ## notch went outside hinges. Try setting notch=FALSE.
     ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
+    ## notch went outside hinges. Try setting notch=FALSE.
 
 ``` r
 dev.off()
@@ -720,11 +748,6 @@ pclass_bees <- ggbartax(obj=classtaxa_bees, facetNames="SEASON", topn=10) +
 ``` r
 pdf("./04_focal_orders_seasons_files/hymenoiptera_top10.pdf")
 pclass_bees
-```
-
-    ## Warning: Removed 10 rows containing missing values (position_stack).
-
-``` r
 dev.off()
 ```
 
@@ -749,11 +772,6 @@ pclass_blats <- ggbartax(obj=classtaxa_blats, facetNames="SEASON", topn=5) +
 ``` r
 pdf("./04_focal_orders_seasons_files/blats_top5.pdf")
 pclass_blats
-```
-
-    ## Warning: Removed 5 rows containing missing values (position_stack).
-
-``` r
 dev.off()
 ```
 

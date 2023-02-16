@@ -28,14 +28,13 @@ Setting up the data which now includes traditional and metabarcoding records
 
 ```{r warning = FALSE}
 
-tradmetabr <- read.csv('data/tradmetabr_merged_clean.csv')
-sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
+tradmetabr <- read.csv('data/final_anal/tradmetabr_only.csv')
+sample <- read.csv('data/final_anal/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
 obj <- parse_tax_data(tradmetabr,
                       class_cols = "classification",
                       class_sep = ";",
                       class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
                       class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
-
 obj$data$tax_table <- calc_taxon_abund(obj, data = "tax_data", cols = sample$sampleID)
 obj$data$tax_props <- calc_obs_props(obj, "tax_data", cols= sample$sampleID, other_cols = TRUE)
 
@@ -236,7 +235,7 @@ print(obj_LT)
 
 no_reads <- rowSums(obj_LT$data$tax_data[, sample_LT$sampleID]) == 0
 sum(no_reads) 
-#there are 928 BINs that do not have reads when we filter by trap method. We must remove
+#there are 926 BINs that do not have reads when we filter by trap method. We must remove
 obj_LT <- filter_obs(obj_LT, data = "tax_data", ! no_reads, drop_taxa = TRUE)
 
 obj_LT$data$tax_table <- calc_taxon_abund(obj_LT, data = "tax_data", cols = sample_LT$sampleID)
@@ -387,6 +386,16 @@ heat_tree(obj_focal,
 #this one takes about 10 minutes to run
 
 ```
+To understand the colouring scheme, read this paragraph carefully from the metacoder tutorial:
+
+### What color corresponds to each group depends on the order they were given in the compare_groups function. Since “leaf” is “treatment_1” in the “diff_table”, and “log2_median_ratio” is defined as “log2(treatment_1 / treatment_2)”, when a taxon has more counts in leaf samples, the ratio is positive, therefore taxa more abundant in leafs are colored magenta in this case.
+
+their code has 'node_color_range = c("cyan", "gray", "magenta")### 
+
+If we look at print(obj$data$diff_table) above the plot, we can see that in our case, treatment_1 is 'Trad'. The log2 median ratio is defined as"log2(trad / metabr). When a taxon has more counts in the dry season, the ratio is positive, therefore taxa more abundant in the dry season are coloured 'darkorchid' in our case (not magenta). DARKORCHID IS TRADITIONAL
+
+
+But more interesting for us, to separate them according to focal groups. In orange for dry season, in blue for wet season. The following are the differences between seasons using wilcox_p_vlue function we ran on the diff_table above. 
 
 ```{r VennDiagramFocalGroups, warning=FALSE}
 
@@ -890,7 +899,7 @@ ereb_LT %>%
             output_file = "./05_trad_metabar_data_files/erebidae_heattree.pdf") # The layout algorithm that initializes node locations
 
 ereb_LT$data$taxon_abund <- calc_taxon_abund(ereb_LT, "tax_data", cols = sample_LT$sampleID, groups = sample_LT$methodClass)
-taxon_names(ereb_LT)[ereb_LT$data$taxon_abund$trad > 0 & ereb_LT$data$taxon_abund$metabr > 0]
+taxon_names(ereb_LT)[ereb_LT$data$taxon_abund$trad > 0 & ereb_LT$data$taxon_abund$metabr > 0] #THIS SHOWS US THE OVERLAPPING SPECIES
 
 
 set.seed(16)#to make sure the figures is always the same
@@ -1318,7 +1327,7 @@ vennp_curcu <- venn.diagram(vennlist_curcu,
                       lty ='dotted',
                       imagetype = "svg")
 
-vennlist_passa <- get_vennlist(obj=ps_passa_LT, factorNames="methodClass")
+#vennlist_passa <- get_vennlist(obj=ps_passa_LT, factorNames="methodClass")
 #vennp_passa <- venn.diagram(vennlist_passa,
                       #height=5,
                       #width=5, 

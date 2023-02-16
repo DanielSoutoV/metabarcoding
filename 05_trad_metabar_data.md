@@ -7,24 +7,23 @@ Setting up the data which now includes traditional and metabarcoding
 records
 
 ``` r
-tradmetabr <- read.csv('data/tradmetabr_merged_clean.csv')
-sample <- read.csv('data/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
+tradmetabr <- read.csv('data/final_anal/tradmetabr_only.csv')
+sample <- read.csv('data/final_anal/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
 obj <- parse_tax_data(tradmetabr,
                       class_cols = "classification",
                       class_sep = ";",
                       class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
                       class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
-
 obj$data$tax_table <- calc_taxon_abund(obj, data = "tax_data", cols = sample$sampleID)
 ```
 
-    ## Summing per-taxon counts from 266 columns for 5840 taxa
+    ## Summing per-taxon counts from 306 columns for 5927 taxa
 
 ``` r
 obj$data$tax_props <- calc_obs_props(obj, "tax_data", cols= sample$sampleID, other_cols = TRUE)
 ```
 
-    ## Calculating proportions from counts for 266 columns for 4702 observations.
+    ## Calculating proportions from counts for 306 columns for 6164 observations.
 
 ``` r
 obj$data$diff_table <- compare_groups(obj, data = "tax_table",
@@ -88,9 +87,9 @@ anova_result <- aov(inv_simp ~ methodClass, sample)
 summary(anova_result)
 ```
 
-    ##              Df  Sum Sq Mean Sq F value Pr(>F)    
-    ## methodClass   1 3936391 3936391   676.2 <2e-16 ***
-    ## Residuals   264 1536932    5822                   
+    ##              Df   Sum Sq Mean Sq F value Pr(>F)    
+    ## methodClass   1  7052928 7052928   90.89 <2e-16 ***
+    ## Residuals   304 23589596   77597                   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -100,25 +99,25 @@ print(tukey_result)
 ```
 
     ## $statistics
-    ##    MSerror  Df    Mean       CV
-    ##   5821.712 264 77.0188 99.06691
+    ##    MSerror  Df     Mean       CV
+    ##   77597.36 304 108.2222 257.3991
     ## 
     ## $parameters
     ##    test      name.t ntr StudentizedRange alpha
-    ##   Tukey methodClass   2         2.784573  0.05
+    ##   Tukey methodClass   2         2.782887  0.05
     ## 
     ## $means
-    ##         inv_simp       std   r Min Max    Q25 Q50   Q75
-    ## metabr 366.17500 161.35943  40 117 658 218.25 347 503.5
-    ## trad    25.84071  48.14304 226   1 227   2.00   5  25.0
+    ##         inv_simp      std   r Min  Max Q25 Q50    Q75
+    ## metabr 499.72500 154.3190  40 227  840 366 489 628.75
+    ## trad    49.34962 292.4254 266   1 4740   2   7  48.50
     ## 
     ## $comparison
     ## NULL
     ## 
     ## $groups
     ##         inv_simp groups
-    ## metabr 366.17500      a
-    ## trad    25.84071      b
+    ## metabr 499.72500      a
+    ## trad    49.34962      b
     ## 
     ## attr(,"class")
     ## [1] "group"
@@ -234,60 +233,60 @@ vennp_all <- venn.diagram(vennlist_all,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 15:30:19] [[1]]
-    ## INFO [2023-01-27 15:30:19] vennlist_all
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $height
-    ## INFO [2023-01-27 15:30:19] [1] 5
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $width
-    ## INFO [2023-01-27 15:30:19] [1] 5
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $filename
-    ## INFO [2023-01-27 15:30:19] NULL
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $disable.logging
-    ## INFO [2023-01-27 15:30:19] [1] TRUE
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $fill
-    ## INFO [2023-01-27 15:30:19] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $cat.col
-    ## INFO [2023-01-27 15:30:19] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $alpha
-    ## INFO [2023-01-27 15:30:19] [1] 0.85
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $fontfamily
-    ## INFO [2023-01-27 15:30:19] [1] "serif"
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $fontface
-    ## INFO [2023-01-27 15:30:19] [1] "bold"
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $cex
-    ## INFO [2023-01-27 15:30:19] [1] 1.2
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $cat.cex
-    ## INFO [2023-01-27 15:30:19] [1] 1.3
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $cat.default.pos
-    ## INFO [2023-01-27 15:30:19] [1] "outer"
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $cat.dist
-    ## INFO [2023-01-27 15:30:19] [1] 0.1
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $margin
-    ## INFO [2023-01-27 15:30:19] [1] 0.1
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $lwd
-    ## INFO [2023-01-27 15:30:19] [1] 3
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $lty
-    ## INFO [2023-01-27 15:30:19] [1] "dotted"
-    ## INFO [2023-01-27 15:30:19] 
-    ## INFO [2023-01-27 15:30:19] $imagetype
-    ## INFO [2023-01-27 15:30:19] [1] "svg"
-    ## INFO [2023-01-27 15:30:19]
+    ## INFO [2023-02-16 18:43:43] [[1]]
+    ## INFO [2023-02-16 18:43:43] vennlist_all
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $height
+    ## INFO [2023-02-16 18:43:43] [1] 5
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $width
+    ## INFO [2023-02-16 18:43:43] [1] 5
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $filename
+    ## INFO [2023-02-16 18:43:43] NULL
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $disable.logging
+    ## INFO [2023-02-16 18:43:43] [1] TRUE
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $fill
+    ## INFO [2023-02-16 18:43:43] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $cat.col
+    ## INFO [2023-02-16 18:43:43] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $alpha
+    ## INFO [2023-02-16 18:43:43] [1] 0.85
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $fontfamily
+    ## INFO [2023-02-16 18:43:43] [1] "serif"
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $fontface
+    ## INFO [2023-02-16 18:43:43] [1] "bold"
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $cex
+    ## INFO [2023-02-16 18:43:43] [1] 1.2
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $cat.cex
+    ## INFO [2023-02-16 18:43:43] [1] 1.3
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $cat.default.pos
+    ## INFO [2023-02-16 18:43:43] [1] "outer"
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $cat.dist
+    ## INFO [2023-02-16 18:43:43] [1] 0.1
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $margin
+    ## INFO [2023-02-16 18:43:43] [1] 0.1
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $lwd
+    ## INFO [2023-02-16 18:43:43] [1] 3
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $lty
+    ## INFO [2023-02-16 18:43:43] [1] "dotted"
+    ## INFO [2023-02-16 18:43:43] 
+    ## INFO [2023-02-16 18:43:43] $imagetype
+    ## INFO [2023-02-16 18:43:43] [1] "svg"
+    ## INFO [2023-02-16 18:43:43]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_all.pdf")
@@ -369,17 +368,17 @@ print(obj_LT)
 ```
 
     ## <Taxmap>
-    ##   5840 taxa: aab. Animalia, aac. Arthropoda ... iqq. _ADV7786
-    ##   5840 edges: NA->aab, aab->aac, aac->aad ... cvk->iqp, cvk->iqq
+    ##   5927 taxa: aab. Animalia, aac. Arthropoda ... itz. sp.1YB
+    ##   5927 edges: NA->aab, aab->aac, aac->aad ... dia->ity, cxy->itz
     ##   2 data sets:
     ##     tax_data:
-    ##       # A tibble: 4,702 x 79
+    ##       # A tibble: 6,164 x 119
     ##         taxon_id bold_bin     classi~1 ALATE~2 ALTOS~3 ARM1_~4 ARM1_~5
     ##         <chr>    <chr>        <chr>      <int>   <int>   <int>   <int>
-    ##       1 cvl      BOLD:AEK1984 k__Anim~       0       0       0       0
-    ##       2 cvl      BOLD:AEK9771 k__Anim~       0       0       0       0
-    ##       3 cvl      BOLD:AEL2824 k__Anim~       0       0       0       0
-    ##       # ... with 4,699 more rows, 72 more variables:
+    ##       1 dib      BOLD:AAA0009 k__Anim~       0       0       0       0
+    ##       2 dic      BOLD:AAA0012 k__Anim~       0       0       0       0
+    ##       3 did      BOLD:AAA0016 k__Anim~       0       0       0       0
+    ##       # ... with 6,161 more rows, 112 more variables:
     ##       #   ARM2_wet_LT <int>, ARM2_dry_LT <int>, ARM3_wet_LT <int>,
     ##       #   ARM3_dry_LT <int>, ARM4_wet_LT <int>, ARM4_dry_LT <int>,
     ##       #   BAL1_dry_LT <int>, BAL1_wet_LT <int>, DRA1_dry_LT <int>,
@@ -387,13 +386,13 @@ print(obj_LT)
     ##       #   1: classification, 2: ALATESHIK_na_LT, 3: ALTOSCAMP_na_LT,
     ##       #   4: ARM1_wet_LT, 5: ARM1_dry_LT
     ##     class_data:
-    ##       # A tibble: 32,914 x 5
+    ##       # A tibble: 43,148 x 5
     ##         taxon_id input_index tax_rank name       regex_match  
     ##         <chr>          <int> <chr>    <chr>      <chr>        
     ##       1 aab                1 k        Animalia   k__Animalia  
     ##       2 aac                1 p        Arthropoda p__Arthropoda
-    ##       3 aad                1 c        Arachnida  c__Arachnida 
-    ##       # ... with 32,911 more rows
+    ##       3 aad                1 c        Insecta    c__Insecta   
+    ##       # ... with 43,145 more rows
     ##   0 functions:
 
 ``` r
@@ -401,22 +400,22 @@ no_reads <- rowSums(obj_LT$data$tax_data[, sample_LT$sampleID]) == 0
 sum(no_reads) 
 ```
 
-    ## [1] 928
+    ## [1] 926
 
 ``` r
-#there are 928 BINs that do not have reads when we filter by trap method. We must remove
+#there are 926 BINs that do not have reads when we filter by trap method. We must remove
 obj_LT <- filter_obs(obj_LT, data = "tax_data", ! no_reads, drop_taxa = TRUE)
 
 obj_LT$data$tax_table <- calc_taxon_abund(obj_LT, data = "tax_data", cols = sample_LT$sampleID)
 ```
 
-    ## Summing per-taxon counts from 76 columns for 4583 taxa
+    ## Summing per-taxon counts from 116 columns for 4708 taxa
 
 ``` r
 obj_LT$data$tax_props <- calc_obs_props(obj_LT, "tax_data", cols = sample_LT$sampleID)
 ```
 
-    ## Calculating proportions from counts for 76 columns for 3774 observations.
+    ## Calculating proportions from counts for 116 columns for 5238 observations.
 
 ``` r
 obj_LT$data$diff_table <- compare_groups(obj_LT, data = "tax_table",
@@ -518,60 +517,60 @@ vennp_LT <- venn.diagram(vennlist_LT,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 15:47:27] [[1]]
-    ## INFO [2023-01-27 15:47:27] vennlist_LT
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $height
-    ## INFO [2023-01-27 15:47:27] [1] 5
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $width
-    ## INFO [2023-01-27 15:47:27] [1] 5
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $filename
-    ## INFO [2023-01-27 15:47:27] NULL
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $disable.logging
-    ## INFO [2023-01-27 15:47:27] [1] TRUE
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $fill
-    ## INFO [2023-01-27 15:47:27] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $cat.col
-    ## INFO [2023-01-27 15:47:27] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $alpha
-    ## INFO [2023-01-27 15:47:27] [1] 0.85
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $fontfamily
-    ## INFO [2023-01-27 15:47:27] [1] "serif"
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $fontface
-    ## INFO [2023-01-27 15:47:27] [1] "bold"
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $cex
-    ## INFO [2023-01-27 15:47:27] [1] 1.2
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $cat.cex
-    ## INFO [2023-01-27 15:47:27] [1] 1.3
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $cat.default.pos
-    ## INFO [2023-01-27 15:47:27] [1] "outer"
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $cat.dist
-    ## INFO [2023-01-27 15:47:27] [1] 0.1
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $margin
-    ## INFO [2023-01-27 15:47:27] [1] 0.1
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $lwd
-    ## INFO [2023-01-27 15:47:27] [1] 3
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $lty
-    ## INFO [2023-01-27 15:47:27] [1] "dotted"
-    ## INFO [2023-01-27 15:47:27] 
-    ## INFO [2023-01-27 15:47:27] $imagetype
-    ## INFO [2023-01-27 15:47:27] [1] "svg"
-    ## INFO [2023-01-27 15:47:27]
+    ## INFO [2023-02-16 19:04:40] [[1]]
+    ## INFO [2023-02-16 19:04:40] vennlist_LT
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $height
+    ## INFO [2023-02-16 19:04:40] [1] 5
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $width
+    ## INFO [2023-02-16 19:04:40] [1] 5
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $filename
+    ## INFO [2023-02-16 19:04:40] NULL
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $disable.logging
+    ## INFO [2023-02-16 19:04:40] [1] TRUE
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $fill
+    ## INFO [2023-02-16 19:04:40] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $cat.col
+    ## INFO [2023-02-16 19:04:40] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $alpha
+    ## INFO [2023-02-16 19:04:40] [1] 0.85
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $fontfamily
+    ## INFO [2023-02-16 19:04:40] [1] "serif"
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $fontface
+    ## INFO [2023-02-16 19:04:40] [1] "bold"
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $cex
+    ## INFO [2023-02-16 19:04:40] [1] 1.2
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $cat.cex
+    ## INFO [2023-02-16 19:04:40] [1] 1.3
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $cat.default.pos
+    ## INFO [2023-02-16 19:04:40] [1] "outer"
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $cat.dist
+    ## INFO [2023-02-16 19:04:40] [1] 0.1
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $margin
+    ## INFO [2023-02-16 19:04:40] [1] 0.1
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $lwd
+    ## INFO [2023-02-16 19:04:40] [1] 3
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $lty
+    ## INFO [2023-02-16 19:04:40] [1] "dotted"
+    ## INFO [2023-02-16 19:04:40] 
+    ## INFO [2023-02-16 19:04:40] $imagetype
+    ## INFO [2023-02-16 19:04:40] [1] "svg"
+    ## INFO [2023-02-16 19:04:40]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_LT.pdf")
@@ -600,17 +599,17 @@ print(obj_focal)
 ```
 
     ## <Taxmap>
-    ##   3718 taxa: aao. Blattodea ... imn. BioLep28_AAU7449
-    ##   3718 edges: NA->aao, NA->aap, NA->aas ... cto->imm, ctp->imn
+    ##   4056 taxa: aag. Lepidoptera, aah. Hymenoptera ... itz. sp.1YB
+    ##   4056 edges: NA->aag, NA->aah, NA->aam ... dia->ity, cxy->itz
     ##   5 data sets:
     ##     tax_data:
-    ##       # A tibble: 2,722 x 79
+    ##       # A tibble: 3,545 x 119
     ##         taxon_id bold_bin     classi~1 ALATE~2 ALTOS~3 ARM1_~4 ARM1_~5
     ##         <chr>    <chr>        <chr>      <int>   <int>   <int>   <int>
-    ##       1 cxw      BOLD:ADT6615 k__Anim~       0       0       0       0
-    ##       2 cxw      BOLD:ADV7142 k__Anim~       0       0       0       0
-    ##       3 cxx      BOLD:ADB4571 k__Anim~       0       0       0       0
-    ##       # ... with 2,719 more rows, 72 more variables:
+    ##       1 dib      BOLD:AAA0009 k__Anim~       0       0       0       0
+    ##       2 dic      BOLD:AAA0012 k__Anim~       0       0       0       0
+    ##       3 did      BOLD:AAA0016 k__Anim~       0       0       0       0
+    ##       # ... with 3,542 more rows, 112 more variables:
     ##       #   ARM2_wet_LT <int>, ARM2_dry_LT <int>, ARM3_wet_LT <int>,
     ##       #   ARM3_dry_LT <int>, ARM4_wet_LT <int>, ARM4_dry_LT <int>,
     ##       #   BAL1_dry_LT <int>, BAL1_wet_LT <int>, DRA1_dry_LT <int>,
@@ -618,21 +617,21 @@ print(obj_focal)
     ##       #   1: classification, 2: ALATESHIK_na_LT, 3: ALTOSCAMP_na_LT,
     ##       #   4: ARM1_wet_LT, 5: ARM1_dry_LT
     ##     class_data:
-    ##       # A tibble: 12,927 x 5
-    ##         taxon_id input_index tax_rank name         regex_match  
-    ##         <chr>          <int> <chr>    <chr>        <chr>        
-    ##       1 aao               85 o        "Blattodea"  o__Blattodea 
-    ##       2 ach               85 f        "Blaberidae" f__Blaberidae
-    ##       3 ang               85 g        ""           g__          
-    ##       # ... with 12,924 more rows
+    ##       # A tibble: 16,227 x 5
+    ##         taxon_id input_index tax_rank name        regex_match   
+    ##         <chr>          <int> <chr>    <chr>       <chr>         
+    ##       1 aag                1 o        Lepidoptera o__Lepidoptera
+    ##       2 abd                1 f        Gelechiidae f__Gelechiidae
+    ##       3 amw                1 g        gelJanzen1  g__gelJanzen1 
+    ##       # ... with 16,224 more rows
     ##     tax_table:
-    ##       # A tibble: 3,718 x 77
+    ##       # A tibble: 4,056 x 117
     ##         taxon_id ALATESHIK_n~1 ALTOS~2 ARM1_~3 ARM1_~4 ARM2_~5 ARM2_~6
     ##         <chr>            <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ##       1 aao                  0       1       1       2       0       0
-    ##       2 aap                  0       0       5      12       1       7
-    ##       3 aas                  0       0       2       5       5       7
-    ##       # ... with 3,715 more rows, 70 more variables:
+    ##       1 aag                  0       0      90      81     131     112
+    ##       2 aah                 30       0       1       1       3       3
+    ##       3 aam                  0       1       1       2       0       0
+    ##       # ... with 4,053 more rows, 110 more variables:
     ##       #   ARM3_wet_LT <dbl>, ARM3_dry_LT <dbl>, ARM4_wet_LT <dbl>,
     ##       #   ARM4_dry_LT <dbl>, BAL1_dry_LT <dbl>, BAL1_wet_LT <dbl>,
     ##       #   DRA1_dry_LT <dbl>, DRA1_wet_LT <dbl>, L01_wet_LT <dbl>,
@@ -640,13 +639,13 @@ print(obj_focal)
     ##       #   1: ALATESHIK_na_LT, 2: ALTOSCAMP_na_LT, 3: ARM1_wet_LT,
     ##       #   4: ARM1_dry_LT, 5: ARM2_wet_LT, 6: ARM2_dry_LT
     ##     tax_props:
-    ##       # A tibble: 2,722 x 77
+    ##       # A tibble: 3,545 x 117
     ##         taxon_id ALATESHIK_n~1 ALTOS~2 ARM1_~3 ARM1_~4 ARM2_~5 ARM2_~6
     ##         <chr>            <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-    ##       1 cxw                  0       0       0       0       0       0
-    ##       2 cxw                  0       0       0       0       0       0
-    ##       3 cxx                  0       0       0       0       0       0
-    ##       # ... with 2,719 more rows, 70 more variables:
+    ##       1 dib                  0       0       0       0       0       0
+    ##       2 dic                  0       0       0       0       0       0
+    ##       3 did                  0       0       0       0       0       0
+    ##       # ... with 3,542 more rows, 110 more variables:
     ##       #   ARM3_wet_LT <dbl>, ARM3_dry_LT <dbl>, ARM4_wet_LT <dbl>,
     ##       #   ARM4_dry_LT <dbl>, BAL1_dry_LT <dbl>, BAL1_wet_LT <dbl>,
     ##       #   DRA1_dry_LT <dbl>, DRA1_wet_LT <dbl>, L01_wet_LT <dbl>,
@@ -654,13 +653,13 @@ print(obj_focal)
     ##       #   1: ALATESHIK_na_LT, 2: ALTOSCAMP_na_LT, 3: ARM1_wet_LT,
     ##       #   4: ARM1_dry_LT, 5: ARM2_wet_LT, 6: ARM2_dry_LT
     ##     diff_table:
-    ##       # A tibble: 3,718 x 7
+    ##       # A tibble: 4,056 x 7
     ##         taxon_id treatment_1 treatm~1 log2_~2 media~3 mean_~4 wilcox~5
     ##         <chr>    <chr>       <chr>      <dbl>   <dbl>   <dbl>    <dbl>
-    ##       1 aao      trad        metabr     -2.58    -2.5   -3.13 5.86e-10
-    ##       2 aap      trad        metabr     -4.39   -50    -45.9  6.59e-14
-    ##       3 aas      trad        metabr     -2.70   -16.5  -16.0  9.11e-10
-    ##       # ... with 3,715 more rows, and abbreviated variable names
+    ##       1 aag      trad        metabr     -2.03    -168 -157.   1.00e-17
+    ##       2 aah      trad        metabr     -3.39     -19  -16.6  4.79e-16
+    ##       3 aam      trad        metabr     -2         -3   -3.02 9.52e-13
+    ##       # ... with 4,053 more rows, and abbreviated variable names
     ##       #   1: treatment_2, 2: log2_median_ratio, 3: median_diff,
     ##       #   4: mean_diff, 5: wilcox_p_value
     ##   0 functions:
@@ -669,13 +668,13 @@ print(obj_focal)
 obj_focal$data$tax_table <- calc_taxon_abund(obj_focal, data = "tax_data", cols = sample_LT$sampleID)
 ```
 
-    ## Summing per-taxon counts from 76 columns for 3718 taxa
+    ## Summing per-taxon counts from 116 columns for 4056 taxa
 
 ``` r
 obj_focal$data$tax_props <- calc_obs_props(obj_focal, "tax_data", cols = sample_LT$sampleID)
 ```
 
-    ## Calculating proportions from counts for 76 columns for 2722 observations.
+    ## Calculating proportions from counts for 116 columns for 3545 observations.
 
 ``` r
 obj_focal$data$diff_table <- compare_groups(obj_focal, data = "tax_table",
@@ -737,6 +736,25 @@ heat_tree(obj_focal,
 #this one takes about 10 minutes to run
 ```
 
+To understand the colouring scheme, read this paragraph carefully from
+the metacoder tutorial:
+
+### What color corresponds to each group depends on the order they were given in the compare_groups function. Since “leaf” is “treatment_1” in the “diff_table”, and “log2_median_ratio” is defined as “log2(treatment_1 / treatment_2)”, when a taxon has more counts in leaf samples, the ratio is positive, therefore taxa more abundant in leafs are colored magenta in this case.
+
+their code has ’node_color_range = c(“cyan”, “gray”, “magenta”)###
+
+If we look at print(obj$data$diff_table) above the plot, we can see that
+in our case, treatment_1 is ‘Trad’. The log2 median ratio is defined
+as”log2(trad / metabr). When a taxon has more counts in the dry season,
+the ratio is positive, therefore taxa more abundant in the dry season
+are coloured ‘darkorchid’ in our case (not magenta). DARKORCHID IS
+TRADITIONAL
+
+But more interesting for us, to separate them according to focal groups.
+In orange for dry season, in blue for wet season. The following are the
+differences between seasons using wilcox_p\_vlue function we ran on the
+diff_table above.
+
 ``` r
 dev.off()
 ```
@@ -766,60 +784,60 @@ vennp_focal <- venn.diagram(vennlist_focal,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 15:54:12] [[1]]
-    ## INFO [2023-01-27 15:54:12] vennlist_focal
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $height
-    ## INFO [2023-01-27 15:54:12] [1] 5
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $width
-    ## INFO [2023-01-27 15:54:12] [1] 5
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $filename
-    ## INFO [2023-01-27 15:54:12] NULL
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $disable.logging
-    ## INFO [2023-01-27 15:54:12] [1] TRUE
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $fill
-    ## INFO [2023-01-27 15:54:12] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $cat.col
-    ## INFO [2023-01-27 15:54:12] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $alpha
-    ## INFO [2023-01-27 15:54:12] [1] 0.85
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $fontfamily
-    ## INFO [2023-01-27 15:54:12] [1] "serif"
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $fontface
-    ## INFO [2023-01-27 15:54:12] [1] "bold"
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $cex
-    ## INFO [2023-01-27 15:54:12] [1] 1.2
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $cat.cex
-    ## INFO [2023-01-27 15:54:12] [1] 1.3
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $cat.default.pos
-    ## INFO [2023-01-27 15:54:12] [1] "outer"
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $cat.dist
-    ## INFO [2023-01-27 15:54:12] [1] 0.1
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $margin
-    ## INFO [2023-01-27 15:54:12] [1] 0.1
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $lwd
-    ## INFO [2023-01-27 15:54:12] [1] 3
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $lty
-    ## INFO [2023-01-27 15:54:12] [1] "dotted"
-    ## INFO [2023-01-27 15:54:12] 
-    ## INFO [2023-01-27 15:54:12] $imagetype
-    ## INFO [2023-01-27 15:54:12] [1] "svg"
-    ## INFO [2023-01-27 15:54:12]
+    ## INFO [2023-02-16 19:14:00] [[1]]
+    ## INFO [2023-02-16 19:14:00] vennlist_focal
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $height
+    ## INFO [2023-02-16 19:14:00] [1] 5
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $width
+    ## INFO [2023-02-16 19:14:00] [1] 5
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $filename
+    ## INFO [2023-02-16 19:14:00] NULL
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $disable.logging
+    ## INFO [2023-02-16 19:14:00] [1] TRUE
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $fill
+    ## INFO [2023-02-16 19:14:00] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $cat.col
+    ## INFO [2023-02-16 19:14:00] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $alpha
+    ## INFO [2023-02-16 19:14:00] [1] 0.85
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $fontfamily
+    ## INFO [2023-02-16 19:14:00] [1] "serif"
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $fontface
+    ## INFO [2023-02-16 19:14:00] [1] "bold"
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $cex
+    ## INFO [2023-02-16 19:14:00] [1] 1.2
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $cat.cex
+    ## INFO [2023-02-16 19:14:00] [1] 1.3
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $cat.default.pos
+    ## INFO [2023-02-16 19:14:00] [1] "outer"
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $cat.dist
+    ## INFO [2023-02-16 19:14:00] [1] 0.1
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $margin
+    ## INFO [2023-02-16 19:14:00] [1] 0.1
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $lwd
+    ## INFO [2023-02-16 19:14:00] [1] 3
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $lty
+    ## INFO [2023-02-16 19:14:00] [1] "dotted"
+    ## INFO [2023-02-16 19:14:00] 
+    ## INFO [2023-02-16 19:14:00] $imagetype
+    ## INFO [2023-02-16 19:14:00] [1] "svg"
+    ## INFO [2023-02-16 19:14:00]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_focal.pdf")
@@ -902,60 +920,60 @@ vennp_leps <- venn.diagram(vennlist_leps,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 15:59:45] [[1]]
-    ## INFO [2023-01-27 15:59:45] vennlist_leps
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $height
-    ## INFO [2023-01-27 15:59:45] [1] 5
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $width
-    ## INFO [2023-01-27 15:59:45] [1] 5
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $filename
-    ## INFO [2023-01-27 15:59:45] NULL
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $disable.logging
-    ## INFO [2023-01-27 15:59:45] [1] TRUE
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $fill
-    ## INFO [2023-01-27 15:59:45] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $cat.col
-    ## INFO [2023-01-27 15:59:45] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $alpha
-    ## INFO [2023-01-27 15:59:45] [1] 0.85
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $fontfamily
-    ## INFO [2023-01-27 15:59:45] [1] "serif"
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $fontface
-    ## INFO [2023-01-27 15:59:45] [1] "bold"
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $cex
-    ## INFO [2023-01-27 15:59:45] [1] 1.2
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $cat.cex
-    ## INFO [2023-01-27 15:59:45] [1] 1.3
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $cat.default.pos
-    ## INFO [2023-01-27 15:59:45] [1] "outer"
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $cat.dist
-    ## INFO [2023-01-27 15:59:45] [1] 0.1
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $margin
-    ## INFO [2023-01-27 15:59:45] [1] 0.1
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $lwd
-    ## INFO [2023-01-27 15:59:45] [1] 3
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $lty
-    ## INFO [2023-01-27 15:59:45] [1] "dotted"
-    ## INFO [2023-01-27 15:59:45] 
-    ## INFO [2023-01-27 15:59:45] $imagetype
-    ## INFO [2023-01-27 15:59:45] [1] "svg"
-    ## INFO [2023-01-27 15:59:45]
+    ## INFO [2023-02-16 19:21:51] [[1]]
+    ## INFO [2023-02-16 19:21:51] vennlist_leps
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $height
+    ## INFO [2023-02-16 19:21:51] [1] 5
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $width
+    ## INFO [2023-02-16 19:21:51] [1] 5
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $filename
+    ## INFO [2023-02-16 19:21:51] NULL
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $disable.logging
+    ## INFO [2023-02-16 19:21:51] [1] TRUE
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $fill
+    ## INFO [2023-02-16 19:21:51] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $cat.col
+    ## INFO [2023-02-16 19:21:51] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $alpha
+    ## INFO [2023-02-16 19:21:51] [1] 0.85
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $fontfamily
+    ## INFO [2023-02-16 19:21:51] [1] "serif"
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $fontface
+    ## INFO [2023-02-16 19:21:51] [1] "bold"
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $cex
+    ## INFO [2023-02-16 19:21:51] [1] 1.2
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $cat.cex
+    ## INFO [2023-02-16 19:21:51] [1] 1.3
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $cat.default.pos
+    ## INFO [2023-02-16 19:21:51] [1] "outer"
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $cat.dist
+    ## INFO [2023-02-16 19:21:51] [1] 0.1
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $margin
+    ## INFO [2023-02-16 19:21:51] [1] 0.1
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $lwd
+    ## INFO [2023-02-16 19:21:51] [1] 3
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $lty
+    ## INFO [2023-02-16 19:21:51] [1] "dotted"
+    ## INFO [2023-02-16 19:21:51] 
+    ## INFO [2023-02-16 19:21:51] $imagetype
+    ## INFO [2023-02-16 19:21:51] [1] "svg"
+    ## INFO [2023-02-16 19:21:51]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_leps.pdf")
@@ -1030,60 +1048,60 @@ vennp_coleo <- venn.diagram(vennlist_coleo,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:00:05] [[1]]
-    ## INFO [2023-01-27 16:00:05] vennlist_coleo
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $height
-    ## INFO [2023-01-27 16:00:05] [1] 5
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $width
-    ## INFO [2023-01-27 16:00:05] [1] 5
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $filename
-    ## INFO [2023-01-27 16:00:05] NULL
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $disable.logging
-    ## INFO [2023-01-27 16:00:05] [1] TRUE
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $fill
-    ## INFO [2023-01-27 16:00:05] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $cat.col
-    ## INFO [2023-01-27 16:00:05] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $alpha
-    ## INFO [2023-01-27 16:00:05] [1] 0.85
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $fontfamily
-    ## INFO [2023-01-27 16:00:05] [1] "serif"
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $fontface
-    ## INFO [2023-01-27 16:00:05] [1] "bold"
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $cex
-    ## INFO [2023-01-27 16:00:05] [1] 1.2
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $cat.cex
-    ## INFO [2023-01-27 16:00:05] [1] 1.3
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $cat.default.pos
-    ## INFO [2023-01-27 16:00:05] [1] "outer"
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $cat.dist
-    ## INFO [2023-01-27 16:00:05] [1] 0.1
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $margin
-    ## INFO [2023-01-27 16:00:05] [1] 0.1
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $lwd
-    ## INFO [2023-01-27 16:00:05] [1] 3
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $lty
-    ## INFO [2023-01-27 16:00:05] [1] "dotted"
-    ## INFO [2023-01-27 16:00:05] 
-    ## INFO [2023-01-27 16:00:05] $imagetype
-    ## INFO [2023-01-27 16:00:05] [1] "svg"
-    ## INFO [2023-01-27 16:00:05]
+    ## INFO [2023-02-16 19:22:17] [[1]]
+    ## INFO [2023-02-16 19:22:17] vennlist_coleo
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $height
+    ## INFO [2023-02-16 19:22:17] [1] 5
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $width
+    ## INFO [2023-02-16 19:22:17] [1] 5
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $filename
+    ## INFO [2023-02-16 19:22:17] NULL
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $disable.logging
+    ## INFO [2023-02-16 19:22:17] [1] TRUE
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $fill
+    ## INFO [2023-02-16 19:22:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $cat.col
+    ## INFO [2023-02-16 19:22:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $alpha
+    ## INFO [2023-02-16 19:22:17] [1] 0.85
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $fontfamily
+    ## INFO [2023-02-16 19:22:17] [1] "serif"
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $fontface
+    ## INFO [2023-02-16 19:22:17] [1] "bold"
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $cex
+    ## INFO [2023-02-16 19:22:17] [1] 1.2
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $cat.cex
+    ## INFO [2023-02-16 19:22:17] [1] 1.3
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $cat.default.pos
+    ## INFO [2023-02-16 19:22:17] [1] "outer"
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $cat.dist
+    ## INFO [2023-02-16 19:22:17] [1] 0.1
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $margin
+    ## INFO [2023-02-16 19:22:17] [1] 0.1
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $lwd
+    ## INFO [2023-02-16 19:22:17] [1] 3
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $lty
+    ## INFO [2023-02-16 19:22:17] [1] "dotted"
+    ## INFO [2023-02-16 19:22:17] 
+    ## INFO [2023-02-16 19:22:17] $imagetype
+    ## INFO [2023-02-16 19:22:17] [1] "svg"
+    ## INFO [2023-02-16 19:22:17]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_coleo.pdf")
@@ -1157,60 +1175,60 @@ vennp_hymen <- venn.diagram(vennlist_hymen,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:00:24] [[1]]
-    ## INFO [2023-01-27 16:00:24] vennlist_hymen
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $height
-    ## INFO [2023-01-27 16:00:24] [1] 5
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $width
-    ## INFO [2023-01-27 16:00:24] [1] 5
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $filename
-    ## INFO [2023-01-27 16:00:24] NULL
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $disable.logging
-    ## INFO [2023-01-27 16:00:24] [1] TRUE
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $fill
-    ## INFO [2023-01-27 16:00:24] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $cat.col
-    ## INFO [2023-01-27 16:00:24] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $alpha
-    ## INFO [2023-01-27 16:00:24] [1] 0.85
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $fontfamily
-    ## INFO [2023-01-27 16:00:24] [1] "serif"
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $fontface
-    ## INFO [2023-01-27 16:00:24] [1] "bold"
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $cex
-    ## INFO [2023-01-27 16:00:24] [1] 1.2
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $cat.cex
-    ## INFO [2023-01-27 16:00:24] [1] 1.3
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $cat.default.pos
-    ## INFO [2023-01-27 16:00:24] [1] "outer"
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $cat.dist
-    ## INFO [2023-01-27 16:00:24] [1] 0.1
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $margin
-    ## INFO [2023-01-27 16:00:24] [1] 0.1
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $lwd
-    ## INFO [2023-01-27 16:00:24] [1] 3
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $lty
-    ## INFO [2023-01-27 16:00:24] [1] "dotted"
-    ## INFO [2023-01-27 16:00:24] 
-    ## INFO [2023-01-27 16:00:24] $imagetype
-    ## INFO [2023-01-27 16:00:24] [1] "svg"
-    ## INFO [2023-01-27 16:00:24]
+    ## INFO [2023-02-16 19:22:40] [[1]]
+    ## INFO [2023-02-16 19:22:40] vennlist_hymen
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $height
+    ## INFO [2023-02-16 19:22:40] [1] 5
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $width
+    ## INFO [2023-02-16 19:22:40] [1] 5
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $filename
+    ## INFO [2023-02-16 19:22:40] NULL
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $disable.logging
+    ## INFO [2023-02-16 19:22:40] [1] TRUE
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $fill
+    ## INFO [2023-02-16 19:22:40] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $cat.col
+    ## INFO [2023-02-16 19:22:40] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $alpha
+    ## INFO [2023-02-16 19:22:40] [1] 0.85
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $fontfamily
+    ## INFO [2023-02-16 19:22:40] [1] "serif"
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $fontface
+    ## INFO [2023-02-16 19:22:40] [1] "bold"
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $cex
+    ## INFO [2023-02-16 19:22:40] [1] 1.2
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $cat.cex
+    ## INFO [2023-02-16 19:22:40] [1] 1.3
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $cat.default.pos
+    ## INFO [2023-02-16 19:22:40] [1] "outer"
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $cat.dist
+    ## INFO [2023-02-16 19:22:40] [1] 0.1
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $margin
+    ## INFO [2023-02-16 19:22:40] [1] 0.1
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $lwd
+    ## INFO [2023-02-16 19:22:40] [1] 3
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $lty
+    ## INFO [2023-02-16 19:22:40] [1] "dotted"
+    ## INFO [2023-02-16 19:22:40] 
+    ## INFO [2023-02-16 19:22:40] $imagetype
+    ## INFO [2023-02-16 19:22:40] [1] "svg"
+    ## INFO [2023-02-16 19:22:40]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_hymenoptera.pdf")
@@ -1283,60 +1301,60 @@ vennp_hemi <- venn.diagram(vennlist_hemi,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:00:44] [[1]]
-    ## INFO [2023-01-27 16:00:44] vennlist_hemi
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $height
-    ## INFO [2023-01-27 16:00:44] [1] 5
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $width
-    ## INFO [2023-01-27 16:00:44] [1] 5
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $filename
-    ## INFO [2023-01-27 16:00:44] NULL
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $disable.logging
-    ## INFO [2023-01-27 16:00:44] [1] TRUE
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $fill
-    ## INFO [2023-01-27 16:00:44] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $cat.col
-    ## INFO [2023-01-27 16:00:44] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $alpha
-    ## INFO [2023-01-27 16:00:44] [1] 0.85
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $fontfamily
-    ## INFO [2023-01-27 16:00:44] [1] "serif"
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $fontface
-    ## INFO [2023-01-27 16:00:44] [1] "bold"
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $cex
-    ## INFO [2023-01-27 16:00:44] [1] 1.2
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $cat.cex
-    ## INFO [2023-01-27 16:00:44] [1] 1.3
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $cat.default.pos
-    ## INFO [2023-01-27 16:00:44] [1] "outer"
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $cat.dist
-    ## INFO [2023-01-27 16:00:44] [1] 0.1
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $margin
-    ## INFO [2023-01-27 16:00:44] [1] 0.1
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $lwd
-    ## INFO [2023-01-27 16:00:44] [1] 3
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $lty
-    ## INFO [2023-01-27 16:00:44] [1] "dotted"
-    ## INFO [2023-01-27 16:00:44] 
-    ## INFO [2023-01-27 16:00:44] $imagetype
-    ## INFO [2023-01-27 16:00:44] [1] "svg"
-    ## INFO [2023-01-27 16:00:44]
+    ## INFO [2023-02-16 19:22:59] [[1]]
+    ## INFO [2023-02-16 19:22:59] vennlist_hemi
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $height
+    ## INFO [2023-02-16 19:22:59] [1] 5
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $width
+    ## INFO [2023-02-16 19:22:59] [1] 5
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $filename
+    ## INFO [2023-02-16 19:22:59] NULL
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $disable.logging
+    ## INFO [2023-02-16 19:22:59] [1] TRUE
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $fill
+    ## INFO [2023-02-16 19:22:59] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $cat.col
+    ## INFO [2023-02-16 19:22:59] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $alpha
+    ## INFO [2023-02-16 19:22:59] [1] 0.85
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $fontfamily
+    ## INFO [2023-02-16 19:22:59] [1] "serif"
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $fontface
+    ## INFO [2023-02-16 19:22:59] [1] "bold"
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $cex
+    ## INFO [2023-02-16 19:22:59] [1] 1.2
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $cat.cex
+    ## INFO [2023-02-16 19:22:59] [1] 1.3
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $cat.default.pos
+    ## INFO [2023-02-16 19:22:59] [1] "outer"
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $cat.dist
+    ## INFO [2023-02-16 19:22:59] [1] 0.1
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $margin
+    ## INFO [2023-02-16 19:22:59] [1] 0.1
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $lwd
+    ## INFO [2023-02-16 19:22:59] [1] 3
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $lty
+    ## INFO [2023-02-16 19:22:59] [1] "dotted"
+    ## INFO [2023-02-16 19:22:59] 
+    ## INFO [2023-02-16 19:22:59] $imagetype
+    ## INFO [2023-02-16 19:22:59] [1] "svg"
+    ## INFO [2023-02-16 19:22:59]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_hemiptera.pdf")
@@ -1410,60 +1428,60 @@ vennp_blats <- venn.diagram(vennlist_blats,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:00:54] [[1]]
-    ## INFO [2023-01-27 16:00:54] vennlist_blats
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $height
-    ## INFO [2023-01-27 16:00:54] [1] 5
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $width
-    ## INFO [2023-01-27 16:00:54] [1] 5
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $filename
-    ## INFO [2023-01-27 16:00:54] NULL
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $disable.logging
-    ## INFO [2023-01-27 16:00:54] [1] TRUE
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $fill
-    ## INFO [2023-01-27 16:00:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $cat.col
-    ## INFO [2023-01-27 16:00:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $alpha
-    ## INFO [2023-01-27 16:00:54] [1] 0.85
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $fontfamily
-    ## INFO [2023-01-27 16:00:54] [1] "serif"
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $fontface
-    ## INFO [2023-01-27 16:00:54] [1] "bold"
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $cex
-    ## INFO [2023-01-27 16:00:54] [1] 1.2
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $cat.cex
-    ## INFO [2023-01-27 16:00:54] [1] 1.3
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $cat.default.pos
-    ## INFO [2023-01-27 16:00:54] [1] "outer"
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $cat.dist
-    ## INFO [2023-01-27 16:00:54] [1] 0.1
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $margin
-    ## INFO [2023-01-27 16:00:54] [1] 0.1
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $lwd
-    ## INFO [2023-01-27 16:00:54] [1] 3
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $lty
-    ## INFO [2023-01-27 16:00:54] [1] "dotted"
-    ## INFO [2023-01-27 16:00:54] 
-    ## INFO [2023-01-27 16:00:54] $imagetype
-    ## INFO [2023-01-27 16:00:54] [1] "svg"
-    ## INFO [2023-01-27 16:00:54]
+    ## INFO [2023-02-16 19:23:11] [[1]]
+    ## INFO [2023-02-16 19:23:11] vennlist_blats
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $height
+    ## INFO [2023-02-16 19:23:11] [1] 5
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $width
+    ## INFO [2023-02-16 19:23:11] [1] 5
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $filename
+    ## INFO [2023-02-16 19:23:11] NULL
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $disable.logging
+    ## INFO [2023-02-16 19:23:11] [1] TRUE
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $fill
+    ## INFO [2023-02-16 19:23:11] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $cat.col
+    ## INFO [2023-02-16 19:23:11] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $alpha
+    ## INFO [2023-02-16 19:23:11] [1] 0.85
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $fontfamily
+    ## INFO [2023-02-16 19:23:11] [1] "serif"
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $fontface
+    ## INFO [2023-02-16 19:23:11] [1] "bold"
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $cex
+    ## INFO [2023-02-16 19:23:11] [1] 1.2
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $cat.cex
+    ## INFO [2023-02-16 19:23:11] [1] 1.3
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $cat.default.pos
+    ## INFO [2023-02-16 19:23:11] [1] "outer"
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $cat.dist
+    ## INFO [2023-02-16 19:23:11] [1] 0.1
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $margin
+    ## INFO [2023-02-16 19:23:11] [1] 0.1
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $lwd
+    ## INFO [2023-02-16 19:23:11] [1] 3
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $lty
+    ## INFO [2023-02-16 19:23:11] [1] "dotted"
+    ## INFO [2023-02-16 19:23:11] 
+    ## INFO [2023-02-16 19:23:11] $imagetype
+    ## INFO [2023-02-16 19:23:11] [1] "svg"
+    ## INFO [2023-02-16 19:23:11]
 
 ``` r
 pdf("./05_trad_metabar_data_files/venn_termites.pdf")
@@ -1721,260 +1739,174 @@ ereb_LT %>%
 ereb_LT$data$taxon_abund <- calc_taxon_abund(ereb_LT, "tax_data", cols = sample_LT$sampleID, groups = sample_LT$methodClass)
 ```
 
-    ## Summing per-taxon counts from 76 columns in 2 groups for 662 taxa
+    ## Summing per-taxon counts from 116 columns in 2 groups for 748 taxa
 
 ``` r
-taxon_names(ereb_LT)[ereb_LT$data$taxon_abund$trad > 0 & ereb_LT$data$taxon_abund$metabr > 0]
+taxon_names(ereb_LT)[ereb_LT$data$taxon_abund$trad > 0 & ereb_LT$data$taxon_abund$metabr > 0] #THIS SHOWS US THE OVERLAPPING SPECIES
 ```
 
-    ##                            ahv                            bhy 
-    ##                     "Erebidae"                   "Antiblemma" 
-    ##                            bic                            bof 
-    ##                  "Phaeoblemma"                             "" 
-    ##                            bog                            boh 
-    ##                      "Aclytia"                   "Acridopsis" 
-    ##                            bok                            bom 
-    ##                      "Agaraea"                       "Agylla" 
-    ##                            bon                            bor 
-    ##                        "Agyra"                       "Amaxia" 
-    ##                            bow                            bpa 
-    ##                       "Anomis"                    "Arctiinae" 
-    ##                            bpc                            bpe 
-    ##                  "Argyroeides"                      "Athyrma" 
-    ##                            bpg                            bpm 
-    ##                      "Balbura"                 "Callisthenia" 
-    ##                            bpo                            bps 
-    ##                    "Calonotos"               "CatocalinaeGEN" 
-    ##                            bpt                            bpu 
-    ##                    "Celiptera"                    "Ceromacra" 
-    ##                            bpv                            bpx 
-    ##                      "Chamyna"                  "Chrysostola" 
-    ##                            bpy                            bqa 
-    ##                       "Clapra"                "Coccabdominis" 
-    ##                            bqb                            bqe 
-    ##                    "Coenipeta"                   "Correbidia" 
-    ##                            bqf                            bqh 
-    ##                    "Cosmosoma"               "Cryptochrostis" 
-    ##                            bqj                            bql 
-    ##                      "Deinopa"                    "Dialithis" 
-    ##                            bqo                            bqr 
-    ##                    "Draudtius"                       "Dyomyx" 
-    ##                            bqs                            bqt 
-    ##                    "Dysschema"                      "Ecdemus" 
-    ##                            bqw                            bqx 
-    ##                      "Elysius"                   "Encruphion" 
-    ##                            bra                            brb 
-    ##                 "Epeiromulona"                   "Episcepsis" 
-    ##                            brd                            brg 
-    ##                  "ErebidaeGEN"                  "Erebostrota" 
-    ##                            brh                            bri 
-    ##                     "Eucereon"                    "Euclystis" 
-    ##                            brm                            brn 
-    ##                  "Eulepidotis"                     "Euthyone" 
-    ##                            brr                            brs 
-    ##                       "Gabara"                    "Gaudeator" 
-    ##                            brx                            bry 
-    ##                     "Gymnelia"                    "Haemanota" 
-    ##                            bsb                            bsc 
-    ##                      "Heliura"                 "Hemeroblemma" 
-    ##                            bsd                            bsg 
-    ##                 "Hemicephalis"                   "Herminodes" 
-    ##                            bsi                            bsj 
-    ##                     "Hyalurga"                       "Hyamia" 
-    ##                            bsl                            bsm 
-    ##                   "Hypocharis"                   "Hypocladia" 
-    ##                            bso                            bsp 
-    ##                       "Idalus"                       "Illice" 
-    ##                            bsr                            bsy 
-    ##                      "Isogona"                  "Lepidoneiva" 
-    ##                            bta                            btb 
-    ##                  "Leucanopsis"                  "Leucopleura" 
-    ##                            btd                            bte 
-    ##                   "Lophocampa"                  "Loxophlebia" 
-    ##                            btf                            bth 
-    ##                "Lycomorphodes"                     "Macrodes" 
-    ##                            btk                            btl 
-    ##                       "Melese"                    "Melipotis" 
-    ##                            btn                            btp 
-    ##                   "Metallosia"                "Metaprosphera" 
-    ##                            btv                            btx 
-    ##                       "Munona"                  "NearBiturix" 
-    ##                            btz                            bua 
-    ##                      "Nitoris"                     "Nodozana" 
-    ##                            bub                            bud 
-    ##                     "Obroatis"                      "Odozana" 
-    ##                            bue                            buf 
-    ##                      "Opharus"                      "Ophisma" 
-    ##                            bug                            buj 
-    ##                     "Ormetica"                    "Oxidercia" 
-    ##                            buo                            buq 
-    ##                      "Perasia"                     "Peteroma" 
-    ##                            bus                            buu 
-    ##                        "Pheia"                  "Phyprosopus" 
-    ##                            buv                            buz 
-    ##                       "Pionia"                  "Poliopastea" 
-    ##                            bva                            bvb 
-    ##                    "Prepiella"                 "Pseudbarydia" 
-    ##                            bvc                            bve 
-    ##                  "Pseudosphex"                   "Psoloptera" 
-    ##                            bvi                            bvj 
-    ##                   "Rejectaria"                        "Renia" 
-    ##                            bvk                            bvl 
-    ##                      "Renodes"                  "Rhabdatomis" 
-    ##                            bvm                            bvp 
-    ##                   "Robinsonia"                       "Sarosa" 
-    ##                            bvq                            bvr 
-    ##                      "Sarsina"                      "Saurita" 
-    ##                            bvt                            bvv 
-    ##                     "Scaptius"                     "Sosxetra" 
-    ##                            bvy                            bwa 
-    ##                   "Symphlebia"                       "Talara" 
-    ##                            bwe                            bwh 
-    ##                      "Timalus"                     "Tricypha" 
-    ##                            bwj                            bwm 
-    ##                      "Tyrissa"                       "Virbia" 
-    ##                            bwo                            bwp 
-    ##                     "Xanthyda"                         "Zale" 
-    ##                            gbl                            gbn 
-    ##               "sp.1YB_AAJ1944"             "punctata_AAE3076" 
-    ##                            gbp                            gbq 
-    ##               "sp.1YB_AAB6687"           "sp.AAJ0944_AAJ0944" 
-    ##                            gbt                            gbv 
-    ##               "sp.1YB_AAM6965"             "BioLep05_AAB7465" 
-    ##                            gbw                            gbx 
-    ##             "bioptera_AAM3076"                "agola_AAB0059" 
-    ##                            gby                            gcd 
-    ##              "Poole01_AAD6871"             "carinosa_AAC4552" 
-    ##                            gcf                            gcl 
-    ##     "rocioecheverriae_AAB0265"             "luridula_AAA2708" 
-    ##                            gcq                            gcs 
-    ##              "Poole27_AAC1359"               "sp.1YB_ABU6177" 
-    ##                            gcw                            gcz 
-    ##              "AAM3396_AAM3396"               "sp.1YB_ADU0195" 
-    ##                            gda                            gdd 
-    ##               "sp.2YB_ACC8948"             "adjutrix_ABX5179" 
-    ##                            gdh                            gdi 
-    ##           "dorsisigna_ABY8555"          "intervenata_AAA1348" 
-    ##                            gdp                            gdt 
-    ##             "truncata_AAM7167"               "sp.1YB_AAK1636" 
-    ##                            gdy                            gdz 
-    ##               "sp.1YB_AAL9008"              "helvina_AAC4774" 
-    ##                            geb                            gec 
-    ##               "putida_AAB6450"              "modesta_AAB2492" 
-    ##                            ged                            geh 
-    ##               "sp.1YB_AEC5462"                 "moza_AAM5069" 
-    ##                            gei                            gek 
-    ##          "asthenoides_AAM6704"               "sp.1YB_AAM6705" 
-    ##                            geo                            geu 
-    ##           "sp.ACC9481_ACC9481"               "nubila_AAF3999" 
-    ##                            gex                            gfc 
-    ##               "sp.2YB_AAF4000"          "costinotata_AAA1326" 
-    ##                            gfd                            gff 
-    ##              "elegans_AAA1366"          "paucipuncta_AAE0618" 
-    ##                            gfj                            gfn 
-    ##              "flavala_AAI7478"           "signiplena_AAB1757" 
-    ##                            gfo                            gfq 
-    ##                "ypita_AAK0111"            "gemmifera_AAD4485" 
-    ##                            gft                            gfw 
-    ##           "sp.AAM4399_AAM4399"               "sp.1YB_AAY5638" 
-    ##                            gfx                            gfy 
-    ##             "perplexa_AAD7204"            "obscurata_AAA1401" 
-    ##                            ggb                            ggc 
-    ##               "sp.1YB_AAI5267"              "Poole01_AAA4457" 
-    ##                            ggg                            ggh 
-    ##              "lephina_ACF0970"            "hypoleuca_AAA1417" 
-    ##                            ggm                            ggq 
-    ##               "venata_AAF4439"               "sp.1YB_AAP2097" 
-    ##                            ggr                            ghc 
-    ##               "sp.1YB_AEN4419"        "steneleaDHJ01_AAX8596" 
-    ##                            ghd                            ghe 
-    ##               "aeolum_AAA8661"             "pometina_AAK4328" 
-    ##                            ghl                            ghu 
-    ##              "labecia_AAC3505"              "guttata_AAD6265" 
-    ##                            ghy                            gia 
-    ##             "superior_AAD5886"           "grisescens_ACF4334" 
-    ##                            gib                            gic 
-    ##              "simplex_ACG6230"               "sp.4YB_AAM4128" 
-    ##                            gig                            gih 
-    ##              "Poole02_AAC3278"             "paidicus_AAM7170" 
-    ##                            gio                            gip 
-    ##              "salvini_AAM3632"              "rosacea_AAM3521" 
-    ##                            giu                            giv 
-    ##            "solicauda_AAI6726"            "thysbodes_AAM3522" 
-    ##                            gix                            gjb 
-    ##           "ochrolinea_AAC1549"              "Poole04_AAB4205" 
-    ##                            gjl                            gjq 
-    ##               "valida_AEC5784"             "urioides_AAE4907" 
-    ##                            gjs                            gjy 
-    ##         "palpitatalis_AEC2070"               "sp.1YB_AAM3482" 
-    ##                            gjz                            gkb 
-    ##            "restricta_AAM3075"             "aleteria_AAI7687" 
-    ##                            gki                            gkm 
-    ##               "sp.1YB_AAM7164"             "natatrix_AAB1119" 
-    ##                            gkn                            gkv 
-    ##              "Poole07_AAK4378"             "teuthras_AAA1312" 
-    ##                            glb                            glf 
-    ##              "ciarana_AAA1368"          "maroniensis_AAA1316" 
-    ##                            glh                            glk 
-    ##              "imitata_AAX6550"              "bicolor_AAA4769" 
-    ##                            glq                            glr 
-    ##                "asana_ABY5802"             "incertus_AAA1434" 
-    ##                            glu                            glv 
-    ##     "fasciolarisDHJ02_AAA8829" "perpendicularisDHJ01_AAY4876" 
-    ##                            gmh                            gmp 
-    ##               "sp.1YB_AEM9377"      "robpuschendorfi_AAA6912" 
-    ##                            gmr                            gmt 
-    ##               "sp.1YB_AAA7185"           "sp.AAM5154_AAM5154" 
-    ##                            gmu                            gmw 
-    ##            "picturata_AAD7967"               "sp.1YB_AAM6804" 
-    ##                            gmx                            gmy 
-    ##               "sp.2YB_ADT8926"            "chloropis_AAD7367" 
-    ##                            gmz                            gnc 
-    ##            "distincta_AAB4280"              "decepta_AAN1664" 
-    ##                            gnd                            gne 
-    ##               "sixola_AAH2610"               "sp.1YB_AAM6812" 
-    ##                            gnf                            gng 
-    ##                "gemma_AAC6634"           "despagnesi_AAU1676" 
-    ##                            gnj                            gnk 
-    ##              "ataenia_AAA1432"              "sicilia_AAA1349" 
-    ##                            gnn                            gnv 
-    ##           "thaumantis_AAA2814"              "helvina_AAA8016" 
-    ##                            gny                            goa 
-    ##               "sp.1YB_AAM6706"                "dares_AAB0476" 
-    ##                            gob                            god 
-    ##            "albisigna_AAB5173"           "parthenope_AAB4320" 
-    ##                            goe                            gok 
-    ##              "affinis_ACE8892"              "auripes_AAD1862" 
-    ##                            gol                            gon 
-    ##             "cyllarus_ACE6078"               "sp.1YB_ACE6079" 
-    ##                            goo                            gop 
-    ##             "pexicera_AAA4768"               "japeta_AAB6175" 
-    ##                            gou                            gpb 
-    ##            "thoracica_AAA1364"              "poole13_AEC4915" 
-    ##                            gpf                            gpi 
-    ##               "turpis_ABZ0790"              "Poole06_AAF3189" 
-    ##                            gpj                            gpm 
-    ##                 "cora_AAA4766"                "sanea_AAM3444" 
-    ##                            gps                            gpt 
-    ##                 "azia_AAD6600"             "BioLep02_AAP6197" 
-    ##                            gpu                            gpz 
-    ##              "anselma_ABW9427"         "chrysoperina_AAB9904" 
-    ##                            gqb                            gqe 
-    ##                "grata_AAA8259"                "creon_AAJ0585" 
-    ##                            gqg                            gqh 
-    ##                 "cara_AAD8830"          "minynthadia_AAM3378" 
-    ##                            gqi                            gqj 
-    ##               "sp.2YB_ABX5623"               "sp.3YB_AAA0895" 
-    ##                            gqk                            gql 
-    ##               "sp.4YB_AAM7163"               "sp.7YB_ADU9990" 
-    ##                            gqm                            gqq 
-    ##           "violescens_AAM3345"            "leucomela_AAH8072" 
-    ##                            gqt                            grd 
-    ##           "imperialis_ACE3900"             "mentiens_ABY7927" 
-    ##                            gre                            grh 
-    ##            "thersites_AAM3023"         "chalcosticta_ACF1973" 
-    ##                            grj                            grk 
-    ##                "saron_ABY4182"            "excellens_ACV1927"
+    ##                     abm                     aqb                     aqw 
+    ##              "Erebidae"                "Talara"               "Odozana" 
+    ##                     arc                     arf                     ari 
+    ##               "Aclytia"           "Lepidoneiva"            "Correbidia" 
+    ##                     arj                     arl                     arm 
+    ##              "Xanthyda"               "Balbura"              "Ormetica" 
+    ##                     arn                     aro                     arq 
+    ##            "Psoloptera"           "Leucopleura"            "Episcepsis" 
+    ##                     arr                     arv                     arw 
+    ##                "Virbia"               "Ecdemus"              "Hyalurga" 
+    ##                     ary                     arz                     asd 
+    ##           "Chrysostola"                "Melese"         "Andrenimorpha" 
+    ##                     ath                     atk                     aua 
+    ##                "Anomis"             "Oxidercia"             "Coenipeta" 
+    ##                     avd                     avi                     avl 
+    ##            "Encruphion"               "Ophisma"            "Uranophora" 
+    ##                     avm                     avn                     avo 
+    ##           "Rhabdatomis"                "Illice"             "Prepiella" 
+    ##                     avp                     avx                     axg 
+    ##         "Lycomorphodes"           "Poliopastea"                "Munona" 
+    ##                     axl                     axn                     axx 
+    ##            "Antiblemma"          "Near Biturix"               "Perasia" 
+    ##                     ayc                     ayt                     ayv 
+    ##              "Sosxetra"              "Eucereon"             "Melipotis" 
+    ##                     azb                     azm                     azz 
+    ##            "Metallosia"             "Euclystis"                 "Agyra" 
+    ##                     baa                     bai                     bar 
+    ##                "Amaxia"           "Phaeoblemma"               "Deinopa" 
+    ##                     baw                     bbe                     bbo 
+    ##               "Isogona"              "Macrodes"               "Chamyna" 
+    ##                     bcd                     bcm                     bcn 
+    ##          "Hemicephalis"              "Obroatis"           "Phyprosopus" 
+    ##                     bcw                     bcy                     bdh 
+    ##                 "Pheia"           "Eulepidotis"          "Pseudbarydia" 
+    ##                     bdk                     bea                     bfd 
+    ##             "Ceromacra"                "Agylla"              "Scaptius" 
+    ##                     bfo                     bfx                     bgc 
+    ##          "Hemeroblemma"               "Saurita"                "Gabara" 
+    ##                     bgj                     bgu                     bgw 
+    ##             "Celiptera"               "Opharus"        "Cryptochrostis" 
+    ##                     bho                     bht                     bhu 
+    ##            "Rejectaria"               "Tyrissa"                      "" 
+    ##                     bhy                     bin                     bip 
+    ##               "Renodes"             "Dialithis"                 "Renia" 
+    ##                     bjf                     bjg                     bji 
+    ##                "Sarosa"               "Athyrma"             "Dysschema" 
+    ##                     bjq                     bka                     bkh 
+    ##              "Nodozana"             "Cosmosoma"            "Herminodes" 
+    ##                     blk                     bmg                     boy 
+    ##            "Sauritinia"               "Elysius"               "Timalus" 
+    ##                     bpp                     bqg                     brc 
+    ##               "Heliura"            "Acridopsis"             "Calonotos" 
+    ##                     bru                     bsw                     btg 
+    ##           "Leucanopsis"     "Catocalinae_genus"            "Hypocladia" 
+    ##                     bti                     btj                     btk 
+    ##             "Arctiinae"            "Hypocharis"             "Haemanota" 
+    ##                     btl                     btn                     bts 
+    ##              "Gymnelia"              "Euthyone"               "Nitoris" 
+    ##                     btz                     bua                     bue 
+    ##                "Clapra"              "Peteroma"               "Agaraea" 
+    ##                     buh                     bui                     bus 
+    ##          "Callisthenia"             "Gaudeator"           "Argyroeides" 
+    ##                     bxb                     byh                     cbg 
+    ##        "Erebidae_genus"               "Sarsina"           "Pseudosphex" 
+    ##                     ccv                     cdo                     ciy 
+    ##           "Erebostrota"                "Dyomyx"               "Ramphia" 
+    ##                     ckp                     ckt                     clj 
+    ##           "Leucotmemis"         "Coccabdominis"              "Tricypha" 
+    ##                     clu                     cmj                     crc 
+    ##                "Pionia"          "Epeiromulona"                  "Zale" 
+    ##                     crf                     dcs                     dms 
+    ##         "Metaprosphera"                "Hyamia"                "sp.3YB" 
+    ##                     dod                     dog                     doj 
+    ##              "teuthras"           "costinotata"           "intervenata" 
+    ##                     dok                     dol                     dom 
+    ##               "sicilia"             "thoracica"               "elegans" 
+    ##                     don                     dov                     dow 
+    ##               "ciarana"             "obscurata"         "Hyalurga sora" 
+    ##                     dox                     dpa                     dpb 
+    ##             "hypoleuca"               "ataenia"               "vinasia" 
+    ##                     dpc                     dqw                     dqz 
+    ##              "incertus"              "luridula"            "thaumantis" 
+    ##                     dte                     dtt                     dtv 
+    ##               "Poole01"                  "cora"              "pexicera" 
+    ##                     dtw                     dwi                     dws 
+    ##               "bicolor"       "robpuschendorfi"               "sp. 1YB" 
+    ##                     dxi                     dxt                     dyk 
+    ##               "helvina"                 "grata"                "aeolum" 
+    ##                     dyy                     dzk                     eac 
+    ##                "nitens"     "Euclystis guerini"      "rocioecheverriae" 
+    ##                     eal                     ebc                     ebl 
+    ##                 "dares"              "natatrix"            "signiplena" 
+    ##                     ecj                     edu                     edz 
+    ##               "modesta"                 "alesa"             "distincta" 
+    ##                     eea                     eep                     efj 
+    ##            "parthenope"             "albisigna"                "japeta" 
+    ##                     efo                     efx                     egi 
+    ##                "putida"                "sp.1YB"              "BioLep05" 
+    ##                     ehz                     eiq                     eir 
+    ##          "chrysoperina"               "Poole27"            "ochrolinea" 
+    ##                     ejs                     eka                     ekc 
+    ##               "labecia"              "carinosa"               "helvina" 
+    ##                     ekw                     eng                     eoa 
+    ##                 "gemma"               "auripes"             "gemmifera" 
+    ##                     eox                     epa                     epi 
+    ##              "superior"               "guttata"                  "azia" 
+    ##                     epk                     epn                     epp 
+    ##               "Poole01"              "perplexa"             "chloropis" 
+    ##                     epy                     eqd                     eqp 
+    ##             "picturata"                  "cara"           "paucipuncta" 
+    ##                     ero                     esf                     ety 
+    ##              "punctata"              "urioides"    "Sauritinia concisa" 
+    ##                     evc                     evh                     evi 
+    ##               "Poole06"                "nubila"                "sp.2YB" 
+    ##                     evk                     ezb                     fam 
+    ##                "venata"                "sixola"             "leucomela" 
+    ##                     fbn                     fbs                     fcg 
+    ##                "sp.1YB"             "solicauda"               "flavala" 
+    ##                     fdr                     feb                     ffe 
+    ##            "sp.AAJ0944"                "sp.1YB"                 "ypita" 
+    ##                     ffk                     ffz                     fgh 
+    ##                "sp.1YB" "Euclystis centurialis"              "pometina" 
+    ##                     fgi                     fje                     fjp 
+    ##               "Poole07"   "Tyrissa perstrigata"                "sp.1YB" 
+    ##                     fkg                     fkh                     fki 
+    ##             "thersites"             "restricta"              "bioptera" 
+    ##                     fkk                     fkl                     fkq 
+    ##            "violescens"           "minynthadia"               "AAM3396" 
+    ##                     fks                     fku                     fkv 
+    ##                "sp.1YB"               "rosacea"             "thysbodes" 
+    ##                     fkx                     flb                     flh 
+    ##               "salvini"                "sp.4YB"                  "moza" 
+    ##                     fli                     flt                     flv 
+    ##            "sp.AAM5154"           "asthenoides"                "sp.1YB" 
+    ##                     fmb                     fmd                     fmg 
+    ##                "sp.1YB"                "sp.1YB"                "sp.1YB" 
+    ##                     fmj                     fmk                     fmn 
+    ##                "sp.4YB"                "sp.1YB"              "truncata" 
+    ##                     fmq                     fnp                     fnu 
+    ##              "paidicus"            "metallicus"               "decepta" 
+    ##                     fth                     fwt                     gbv 
+    ##                "sp.1YB"              "BioLep02"            "despagnesi" 
+    ##                     ggj                     ghr                     ght 
+    ##         "steneleaDHJ01"  "perpendicularisDHJ01"                "sp.1YB" 
+    ##                     gng                     gqr                     grf 
+    ##                "sp.1YB"               "anselma"              "adjutrix" 
+    ##                     grj                     gsj                     gsu 
+    ##                "sp.2YB"                 "saron"                 "asana" 
+    ##                     gtl                     gtp                     gtu 
+    ##              "mentiens"            "dorsisigna"              "albizona" 
+    ##                     guf                     gxw                     gzf 
+    ##                "turpis"            "sp.ACC9481"            "imperialis" 
+    ##                     gzy                     gzz                     han 
+    ##              "cyllarus"                "sp.1YB"               "affinis" 
+    ##                     hbg                     hbq                     hcc 
+    ##               "lephina"          "chalcosticta"            "grisescens" 
+    ##                     hfj                     hmz                     ica 
+    ##               "simplex"             "excellens"                "sp.2YB" 
+    ##                     icm                     iep                     ijb 
+    ##                "sp.1YB"                "sp.7YB"          "palpitatalis" 
+    ##                     ijn                     ijr                     ioh 
+    ##               "poole13"                "sp.1YB"                "sp.1YB"
 
 ``` r
 set.seed(16)#to make sure the figures is always the same
@@ -2278,60 +2210,60 @@ vennp_geom <- venn.diagram(vennlist_geom,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:52] [[1]]
-    ## INFO [2023-01-27 16:03:52] vennlist_geom
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $height
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $width
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $filename
-    ## INFO [2023-01-27 16:03:52] NULL
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $disable.logging
-    ## INFO [2023-01-27 16:03:52] [1] TRUE
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fill
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.col
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $alpha
-    ## INFO [2023-01-27 16:03:52] [1] 0.85
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontfamily
-    ## INFO [2023-01-27 16:03:52] [1] "serif"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontface
-    ## INFO [2023-01-27 16:03:52] [1] "bold"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.2
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.default.pos
-    ## INFO [2023-01-27 16:03:52] [1] "outer"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.dist
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $margin
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lwd
-    ## INFO [2023-01-27 16:03:52] [1] 3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lty
-    ## INFO [2023-01-27 16:03:52] [1] "dotted"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $imagetype
-    ## INFO [2023-01-27 16:03:52] [1] "svg"
-    ## INFO [2023-01-27 16:03:52]
+    ## INFO [2023-02-16 19:26:16] [[1]]
+    ## INFO [2023-02-16 19:26:16] vennlist_geom
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $height
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $width
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $filename
+    ## INFO [2023-02-16 19:26:16] NULL
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $disable.logging
+    ## INFO [2023-02-16 19:26:16] [1] TRUE
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fill
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.col
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $alpha
+    ## INFO [2023-02-16 19:26:16] [1] 0.85
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontfamily
+    ## INFO [2023-02-16 19:26:16] [1] "serif"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontface
+    ## INFO [2023-02-16 19:26:16] [1] "bold"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.2
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.default.pos
+    ## INFO [2023-02-16 19:26:16] [1] "outer"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.dist
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $margin
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lwd
+    ## INFO [2023-02-16 19:26:16] [1] 3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lty
+    ## INFO [2023-02-16 19:26:16] [1] "dotted"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $imagetype
+    ## INFO [2023-02-16 19:26:16] [1] "svg"
+    ## INFO [2023-02-16 19:26:16]
 
 ``` r
 vennlist_ereb <- get_vennlist(obj=ps_ereb_LT, factorNames="methodClass")
@@ -2355,60 +2287,60 @@ vennp_ereb <- venn.diagram(vennlist_ereb,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:52] [[1]]
-    ## INFO [2023-01-27 16:03:52] vennlist_ereb
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $height
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $width
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $filename
-    ## INFO [2023-01-27 16:03:52] NULL
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $disable.logging
-    ## INFO [2023-01-27 16:03:52] [1] TRUE
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fill
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.col
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $alpha
-    ## INFO [2023-01-27 16:03:52] [1] 0.85
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontfamily
-    ## INFO [2023-01-27 16:03:52] [1] "serif"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontface
-    ## INFO [2023-01-27 16:03:52] [1] "bold"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.2
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.default.pos
-    ## INFO [2023-01-27 16:03:52] [1] "outer"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.dist
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $margin
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lwd
-    ## INFO [2023-01-27 16:03:52] [1] 3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lty
-    ## INFO [2023-01-27 16:03:52] [1] "dotted"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $imagetype
-    ## INFO [2023-01-27 16:03:52] [1] "svg"
-    ## INFO [2023-01-27 16:03:52]
+    ## INFO [2023-02-16 19:26:16] [[1]]
+    ## INFO [2023-02-16 19:26:16] vennlist_ereb
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $height
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $width
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $filename
+    ## INFO [2023-02-16 19:26:16] NULL
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $disable.logging
+    ## INFO [2023-02-16 19:26:16] [1] TRUE
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fill
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.col
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $alpha
+    ## INFO [2023-02-16 19:26:16] [1] 0.85
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontfamily
+    ## INFO [2023-02-16 19:26:16] [1] "serif"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontface
+    ## INFO [2023-02-16 19:26:16] [1] "bold"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.2
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.default.pos
+    ## INFO [2023-02-16 19:26:16] [1] "outer"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.dist
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $margin
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lwd
+    ## INFO [2023-02-16 19:26:16] [1] 3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lty
+    ## INFO [2023-02-16 19:26:16] [1] "dotted"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $imagetype
+    ## INFO [2023-02-16 19:26:16] [1] "svg"
+    ## INFO [2023-02-16 19:26:16]
 
 ``` r
 vennlist_cramb <- get_vennlist(obj=ps_cramb_LT, factorNames="methodClass")
@@ -2432,60 +2364,60 @@ vennp_cramb <- venn.diagram(vennlist_cramb,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:52] [[1]]
-    ## INFO [2023-01-27 16:03:52] vennlist_cramb
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $height
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $width
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $filename
-    ## INFO [2023-01-27 16:03:52] NULL
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $disable.logging
-    ## INFO [2023-01-27 16:03:52] [1] TRUE
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fill
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.col
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $alpha
-    ## INFO [2023-01-27 16:03:52] [1] 0.85
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontfamily
-    ## INFO [2023-01-27 16:03:52] [1] "serif"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontface
-    ## INFO [2023-01-27 16:03:52] [1] "bold"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.2
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.default.pos
-    ## INFO [2023-01-27 16:03:52] [1] "outer"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.dist
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $margin
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lwd
-    ## INFO [2023-01-27 16:03:52] [1] 3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lty
-    ## INFO [2023-01-27 16:03:52] [1] "dotted"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $imagetype
-    ## INFO [2023-01-27 16:03:52] [1] "svg"
-    ## INFO [2023-01-27 16:03:52]
+    ## INFO [2023-02-16 19:26:16] [[1]]
+    ## INFO [2023-02-16 19:26:16] vennlist_cramb
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $height
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $width
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $filename
+    ## INFO [2023-02-16 19:26:16] NULL
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $disable.logging
+    ## INFO [2023-02-16 19:26:16] [1] TRUE
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fill
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.col
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $alpha
+    ## INFO [2023-02-16 19:26:16] [1] 0.85
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontfamily
+    ## INFO [2023-02-16 19:26:16] [1] "serif"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontface
+    ## INFO [2023-02-16 19:26:16] [1] "bold"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.2
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.default.pos
+    ## INFO [2023-02-16 19:26:16] [1] "outer"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.dist
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $margin
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lwd
+    ## INFO [2023-02-16 19:26:16] [1] 3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lty
+    ## INFO [2023-02-16 19:26:16] [1] "dotted"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $imagetype
+    ## INFO [2023-02-16 19:26:16] [1] "svg"
+    ## INFO [2023-02-16 19:26:16]
 
 ``` r
 vennlist_satur <- get_vennlist(obj=ps_satur_LT, factorNames="methodClass")
@@ -2509,60 +2441,60 @@ vennp_satur <- venn.diagram(vennlist_satur,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:52] [[1]]
-    ## INFO [2023-01-27 16:03:52] vennlist_satur
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $height
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $width
-    ## INFO [2023-01-27 16:03:52] [1] 5
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $filename
-    ## INFO [2023-01-27 16:03:52] NULL
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $disable.logging
-    ## INFO [2023-01-27 16:03:52] [1] TRUE
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fill
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.col
-    ## INFO [2023-01-27 16:03:52] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $alpha
-    ## INFO [2023-01-27 16:03:52] [1] 0.85
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontfamily
-    ## INFO [2023-01-27 16:03:52] [1] "serif"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $fontface
-    ## INFO [2023-01-27 16:03:52] [1] "bold"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.2
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.cex
-    ## INFO [2023-01-27 16:03:52] [1] 1.3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.default.pos
-    ## INFO [2023-01-27 16:03:52] [1] "outer"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $cat.dist
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $margin
-    ## INFO [2023-01-27 16:03:52] [1] 0.1
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lwd
-    ## INFO [2023-01-27 16:03:52] [1] 3
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $lty
-    ## INFO [2023-01-27 16:03:52] [1] "dotted"
-    ## INFO [2023-01-27 16:03:52] 
-    ## INFO [2023-01-27 16:03:52] $imagetype
-    ## INFO [2023-01-27 16:03:52] [1] "svg"
-    ## INFO [2023-01-27 16:03:52]
+    ## INFO [2023-02-16 19:26:16] [[1]]
+    ## INFO [2023-02-16 19:26:16] vennlist_satur
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $height
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $width
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $filename
+    ## INFO [2023-02-16 19:26:16] NULL
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $disable.logging
+    ## INFO [2023-02-16 19:26:16] [1] TRUE
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fill
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.col
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $alpha
+    ## INFO [2023-02-16 19:26:16] [1] 0.85
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontfamily
+    ## INFO [2023-02-16 19:26:16] [1] "serif"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontface
+    ## INFO [2023-02-16 19:26:16] [1] "bold"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.2
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.default.pos
+    ## INFO [2023-02-16 19:26:16] [1] "outer"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.dist
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $margin
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lwd
+    ## INFO [2023-02-16 19:26:16] [1] 3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lty
+    ## INFO [2023-02-16 19:26:16] [1] "dotted"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $imagetype
+    ## INFO [2023-02-16 19:26:16] [1] "svg"
+    ## INFO [2023-02-16 19:26:16]
 
 ``` r
 vennlist_noctuid <- get_vennlist(obj=ps_noctuid_LT, factorNames="methodClass")
@@ -2586,60 +2518,60 @@ vennp_noctuid <- venn.diagram(vennlist_noctuid,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:53] [[1]]
-    ## INFO [2023-01-27 16:03:53] vennlist_noctuid
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $height
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $width
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $filename
-    ## INFO [2023-01-27 16:03:53] NULL
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $disable.logging
-    ## INFO [2023-01-27 16:03:53] [1] TRUE
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fill
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.col
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $alpha
-    ## INFO [2023-01-27 16:03:53] [1] 0.85
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontfamily
-    ## INFO [2023-01-27 16:03:53] [1] "serif"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontface
-    ## INFO [2023-01-27 16:03:53] [1] "bold"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.2
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.default.pos
-    ## INFO [2023-01-27 16:03:53] [1] "outer"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.dist
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $margin
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lwd
-    ## INFO [2023-01-27 16:03:53] [1] 3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lty
-    ## INFO [2023-01-27 16:03:53] [1] "dotted"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $imagetype
-    ## INFO [2023-01-27 16:03:53] [1] "svg"
-    ## INFO [2023-01-27 16:03:53]
+    ## INFO [2023-02-16 19:26:16] [[1]]
+    ## INFO [2023-02-16 19:26:16] vennlist_noctuid
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $height
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $width
+    ## INFO [2023-02-16 19:26:16] [1] 5
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $filename
+    ## INFO [2023-02-16 19:26:16] NULL
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $disable.logging
+    ## INFO [2023-02-16 19:26:16] [1] TRUE
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fill
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.col
+    ## INFO [2023-02-16 19:26:16] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $alpha
+    ## INFO [2023-02-16 19:26:16] [1] 0.85
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontfamily
+    ## INFO [2023-02-16 19:26:16] [1] "serif"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $fontface
+    ## INFO [2023-02-16 19:26:16] [1] "bold"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.2
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.cex
+    ## INFO [2023-02-16 19:26:16] [1] 1.3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.default.pos
+    ## INFO [2023-02-16 19:26:16] [1] "outer"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $cat.dist
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $margin
+    ## INFO [2023-02-16 19:26:16] [1] 0.1
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lwd
+    ## INFO [2023-02-16 19:26:16] [1] 3
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $lty
+    ## INFO [2023-02-16 19:26:16] [1] "dotted"
+    ## INFO [2023-02-16 19:26:16] 
+    ## INFO [2023-02-16 19:26:16] $imagetype
+    ## INFO [2023-02-16 19:26:16] [1] "svg"
+    ## INFO [2023-02-16 19:26:16]
 
 ``` r
 vennlist_nymph <- get_vennlist(obj=ps_nymph_LT, factorNames="methodClass")
@@ -2663,60 +2595,60 @@ vennp_nymph <- venn.diagram(vennlist_nymph,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:53] [[1]]
-    ## INFO [2023-01-27 16:03:53] vennlist_nymph
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $height
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $width
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $filename
-    ## INFO [2023-01-27 16:03:53] NULL
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $disable.logging
-    ## INFO [2023-01-27 16:03:53] [1] TRUE
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fill
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.col
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $alpha
-    ## INFO [2023-01-27 16:03:53] [1] 0.85
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontfamily
-    ## INFO [2023-01-27 16:03:53] [1] "serif"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontface
-    ## INFO [2023-01-27 16:03:53] [1] "bold"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.2
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.default.pos
-    ## INFO [2023-01-27 16:03:53] [1] "outer"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.dist
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $margin
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lwd
-    ## INFO [2023-01-27 16:03:53] [1] 3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lty
-    ## INFO [2023-01-27 16:03:53] [1] "dotted"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $imagetype
-    ## INFO [2023-01-27 16:03:53] [1] "svg"
-    ## INFO [2023-01-27 16:03:53]
+    ## INFO [2023-02-16 19:26:17] [[1]]
+    ## INFO [2023-02-16 19:26:17] vennlist_nymph
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $height
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $width
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $filename
+    ## INFO [2023-02-16 19:26:17] NULL
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $disable.logging
+    ## INFO [2023-02-16 19:26:17] [1] TRUE
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fill
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.col
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $alpha
+    ## INFO [2023-02-16 19:26:17] [1] 0.85
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontfamily
+    ## INFO [2023-02-16 19:26:17] [1] "serif"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontface
+    ## INFO [2023-02-16 19:26:17] [1] "bold"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.2
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.default.pos
+    ## INFO [2023-02-16 19:26:17] [1] "outer"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.dist
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $margin
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lwd
+    ## INFO [2023-02-16 19:26:17] [1] 3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lty
+    ## INFO [2023-02-16 19:26:17] [1] "dotted"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $imagetype
+    ## INFO [2023-02-16 19:26:17] [1] "svg"
+    ## INFO [2023-02-16 19:26:17]
 
 ``` r
 vennlist_pyra <- get_vennlist(obj=ps_pyra_LT, factorNames="methodClass")
@@ -2740,60 +2672,60 @@ vennp_pyra <- venn.diagram(vennlist_pyra,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:53] [[1]]
-    ## INFO [2023-01-27 16:03:53] vennlist_pyra
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $height
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $width
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $filename
-    ## INFO [2023-01-27 16:03:53] NULL
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $disable.logging
-    ## INFO [2023-01-27 16:03:53] [1] TRUE
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fill
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.col
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $alpha
-    ## INFO [2023-01-27 16:03:53] [1] 0.85
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontfamily
-    ## INFO [2023-01-27 16:03:53] [1] "serif"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontface
-    ## INFO [2023-01-27 16:03:53] [1] "bold"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.2
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.default.pos
-    ## INFO [2023-01-27 16:03:53] [1] "outer"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.dist
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $margin
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lwd
-    ## INFO [2023-01-27 16:03:53] [1] 3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lty
-    ## INFO [2023-01-27 16:03:53] [1] "dotted"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $imagetype
-    ## INFO [2023-01-27 16:03:53] [1] "svg"
-    ## INFO [2023-01-27 16:03:53]
+    ## INFO [2023-02-16 19:26:17] [[1]]
+    ## INFO [2023-02-16 19:26:17] vennlist_pyra
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $height
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $width
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $filename
+    ## INFO [2023-02-16 19:26:17] NULL
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $disable.logging
+    ## INFO [2023-02-16 19:26:17] [1] TRUE
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fill
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.col
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $alpha
+    ## INFO [2023-02-16 19:26:17] [1] 0.85
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontfamily
+    ## INFO [2023-02-16 19:26:17] [1] "serif"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontface
+    ## INFO [2023-02-16 19:26:17] [1] "bold"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.2
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.default.pos
+    ## INFO [2023-02-16 19:26:17] [1] "outer"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.dist
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $margin
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lwd
+    ## INFO [2023-02-16 19:26:17] [1] 3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lty
+    ## INFO [2023-02-16 19:26:17] [1] "dotted"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $imagetype
+    ## INFO [2023-02-16 19:26:17] [1] "svg"
+    ## INFO [2023-02-16 19:26:17]
 
 ``` r
 vennlist_hesp <- get_vennlist(obj=ps_hesp_LT, factorNames="methodClass")
@@ -2817,60 +2749,60 @@ vennp_hesp <- venn.diagram(vennlist_hesp,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:53] [[1]]
-    ## INFO [2023-01-27 16:03:53] vennlist_hesp
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $height
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $width
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $filename
-    ## INFO [2023-01-27 16:03:53] NULL
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $disable.logging
-    ## INFO [2023-01-27 16:03:53] [1] TRUE
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fill
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.col
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $alpha
-    ## INFO [2023-01-27 16:03:53] [1] 0.85
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontfamily
-    ## INFO [2023-01-27 16:03:53] [1] "serif"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontface
-    ## INFO [2023-01-27 16:03:53] [1] "bold"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.2
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.default.pos
-    ## INFO [2023-01-27 16:03:53] [1] "outer"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.dist
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $margin
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lwd
-    ## INFO [2023-01-27 16:03:53] [1] 3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lty
-    ## INFO [2023-01-27 16:03:53] [1] "dotted"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $imagetype
-    ## INFO [2023-01-27 16:03:53] [1] "svg"
-    ## INFO [2023-01-27 16:03:53]
+    ## INFO [2023-02-16 19:26:17] [[1]]
+    ## INFO [2023-02-16 19:26:17] vennlist_hesp
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $height
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $width
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $filename
+    ## INFO [2023-02-16 19:26:17] NULL
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $disable.logging
+    ## INFO [2023-02-16 19:26:17] [1] TRUE
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fill
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.col
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $alpha
+    ## INFO [2023-02-16 19:26:17] [1] 0.85
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontfamily
+    ## INFO [2023-02-16 19:26:17] [1] "serif"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontface
+    ## INFO [2023-02-16 19:26:17] [1] "bold"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.2
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.default.pos
+    ## INFO [2023-02-16 19:26:17] [1] "outer"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.dist
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $margin
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lwd
+    ## INFO [2023-02-16 19:26:17] [1] 3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lty
+    ## INFO [2023-02-16 19:26:17] [1] "dotted"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $imagetype
+    ## INFO [2023-02-16 19:26:17] [1] "svg"
+    ## INFO [2023-02-16 19:26:17]
 
 ``` r
 vennlist_scarab <- get_vennlist(obj=ps_scarab_LT, factorNames="methodClass")
@@ -2894,60 +2826,60 @@ vennp_scarab <- venn.diagram(vennlist_scarab,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:53] [[1]]
-    ## INFO [2023-01-27 16:03:53] vennlist_scarab
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $height
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $width
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $filename
-    ## INFO [2023-01-27 16:03:53] NULL
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $disable.logging
-    ## INFO [2023-01-27 16:03:53] [1] TRUE
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fill
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.col
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $alpha
-    ## INFO [2023-01-27 16:03:53] [1] 0.85
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontfamily
-    ## INFO [2023-01-27 16:03:53] [1] "serif"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontface
-    ## INFO [2023-01-27 16:03:53] [1] "bold"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.2
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.default.pos
-    ## INFO [2023-01-27 16:03:53] [1] "outer"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.dist
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $margin
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lwd
-    ## INFO [2023-01-27 16:03:53] [1] 3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lty
-    ## INFO [2023-01-27 16:03:53] [1] "dotted"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $imagetype
-    ## INFO [2023-01-27 16:03:53] [1] "svg"
-    ## INFO [2023-01-27 16:03:53]
+    ## INFO [2023-02-16 19:26:17] [[1]]
+    ## INFO [2023-02-16 19:26:17] vennlist_scarab
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $height
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $width
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $filename
+    ## INFO [2023-02-16 19:26:17] NULL
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $disable.logging
+    ## INFO [2023-02-16 19:26:17] [1] TRUE
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fill
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.col
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $alpha
+    ## INFO [2023-02-16 19:26:17] [1] 0.85
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontfamily
+    ## INFO [2023-02-16 19:26:17] [1] "serif"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontface
+    ## INFO [2023-02-16 19:26:17] [1] "bold"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.2
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.default.pos
+    ## INFO [2023-02-16 19:26:17] [1] "outer"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.dist
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $margin
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lwd
+    ## INFO [2023-02-16 19:26:17] [1] 3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lty
+    ## INFO [2023-02-16 19:26:17] [1] "dotted"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $imagetype
+    ## INFO [2023-02-16 19:26:17] [1] "svg"
+    ## INFO [2023-02-16 19:26:17]
 
 ``` r
 vennlist_curcu <- get_vennlist(obj=ps_curcu_LT, factorNames="methodClass")
@@ -2971,63 +2903,63 @@ vennp_curcu <- venn.diagram(vennlist_curcu,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:53] [[1]]
-    ## INFO [2023-01-27 16:03:53] vennlist_curcu
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $height
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $width
-    ## INFO [2023-01-27 16:03:53] [1] 5
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $filename
-    ## INFO [2023-01-27 16:03:53] NULL
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $disable.logging
-    ## INFO [2023-01-27 16:03:53] [1] TRUE
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fill
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.col
-    ## INFO [2023-01-27 16:03:53] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $alpha
-    ## INFO [2023-01-27 16:03:53] [1] 0.85
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontfamily
-    ## INFO [2023-01-27 16:03:53] [1] "serif"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $fontface
-    ## INFO [2023-01-27 16:03:53] [1] "bold"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.2
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.cex
-    ## INFO [2023-01-27 16:03:53] [1] 1.3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.default.pos
-    ## INFO [2023-01-27 16:03:53] [1] "outer"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $cat.dist
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $margin
-    ## INFO [2023-01-27 16:03:53] [1] 0.1
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lwd
-    ## INFO [2023-01-27 16:03:53] [1] 3
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $lty
-    ## INFO [2023-01-27 16:03:53] [1] "dotted"
-    ## INFO [2023-01-27 16:03:53] 
-    ## INFO [2023-01-27 16:03:53] $imagetype
-    ## INFO [2023-01-27 16:03:53] [1] "svg"
-    ## INFO [2023-01-27 16:03:53]
+    ## INFO [2023-02-16 19:26:17] [[1]]
+    ## INFO [2023-02-16 19:26:17] vennlist_curcu
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $height
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $width
+    ## INFO [2023-02-16 19:26:17] [1] 5
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $filename
+    ## INFO [2023-02-16 19:26:17] NULL
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $disable.logging
+    ## INFO [2023-02-16 19:26:17] [1] TRUE
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fill
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.col
+    ## INFO [2023-02-16 19:26:17] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $alpha
+    ## INFO [2023-02-16 19:26:17] [1] 0.85
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontfamily
+    ## INFO [2023-02-16 19:26:17] [1] "serif"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $fontface
+    ## INFO [2023-02-16 19:26:17] [1] "bold"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.2
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.cex
+    ## INFO [2023-02-16 19:26:17] [1] 1.3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.default.pos
+    ## INFO [2023-02-16 19:26:17] [1] "outer"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $cat.dist
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $margin
+    ## INFO [2023-02-16 19:26:17] [1] 0.1
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lwd
+    ## INFO [2023-02-16 19:26:17] [1] 3
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $lty
+    ## INFO [2023-02-16 19:26:17] [1] "dotted"
+    ## INFO [2023-02-16 19:26:17] 
+    ## INFO [2023-02-16 19:26:17] $imagetype
+    ## INFO [2023-02-16 19:26:17] [1] "svg"
+    ## INFO [2023-02-16 19:26:17]
 
 ``` r
-vennlist_passa <- get_vennlist(obj=ps_passa_LT, factorNames="methodClass")
+#vennlist_passa <- get_vennlist(obj=ps_passa_LT, factorNames="methodClass")
 #vennp_passa <- venn.diagram(vennlist_passa,
                       #height=5,
                       #width=5, 
@@ -3068,60 +3000,60 @@ vennp_ants <- venn.diagram(vennlist_ants,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:54] [[1]]
-    ## INFO [2023-01-27 16:03:54] vennlist_ants
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $height
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $width
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $filename
-    ## INFO [2023-01-27 16:03:54] NULL
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $disable.logging
-    ## INFO [2023-01-27 16:03:54] [1] TRUE
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fill
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.col
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $alpha
-    ## INFO [2023-01-27 16:03:54] [1] 0.85
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontfamily
-    ## INFO [2023-01-27 16:03:54] [1] "serif"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontface
-    ## INFO [2023-01-27 16:03:54] [1] "bold"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.2
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.default.pos
-    ## INFO [2023-01-27 16:03:54] [1] "outer"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.dist
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $margin
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lwd
-    ## INFO [2023-01-27 16:03:54] [1] 3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lty
-    ## INFO [2023-01-27 16:03:54] [1] "dotted"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $imagetype
-    ## INFO [2023-01-27 16:03:54] [1] "svg"
-    ## INFO [2023-01-27 16:03:54]
+    ## INFO [2023-02-16 19:26:18] [[1]]
+    ## INFO [2023-02-16 19:26:18] vennlist_ants
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $height
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $width
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $filename
+    ## INFO [2023-02-16 19:26:18] NULL
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $disable.logging
+    ## INFO [2023-02-16 19:26:18] [1] TRUE
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fill
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.col
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $alpha
+    ## INFO [2023-02-16 19:26:18] [1] 0.85
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontfamily
+    ## INFO [2023-02-16 19:26:18] [1] "serif"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontface
+    ## INFO [2023-02-16 19:26:18] [1] "bold"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.2
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.default.pos
+    ## INFO [2023-02-16 19:26:18] [1] "outer"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.dist
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $margin
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lwd
+    ## INFO [2023-02-16 19:26:18] [1] 3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lty
+    ## INFO [2023-02-16 19:26:18] [1] "dotted"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $imagetype
+    ## INFO [2023-02-16 19:26:18] [1] "svg"
+    ## INFO [2023-02-16 19:26:18]
 
 ``` r
 vennlist_bees <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
@@ -3145,60 +3077,60 @@ vennp_bees <- venn.diagram(vennlist_bees,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:54] [[1]]
-    ## INFO [2023-01-27 16:03:54] vennlist_bees
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $height
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $width
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $filename
-    ## INFO [2023-01-27 16:03:54] NULL
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $disable.logging
-    ## INFO [2023-01-27 16:03:54] [1] TRUE
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fill
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.col
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $alpha
-    ## INFO [2023-01-27 16:03:54] [1] 0.85
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontfamily
-    ## INFO [2023-01-27 16:03:54] [1] "serif"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontface
-    ## INFO [2023-01-27 16:03:54] [1] "bold"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.2
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.default.pos
-    ## INFO [2023-01-27 16:03:54] [1] "outer"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.dist
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $margin
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lwd
-    ## INFO [2023-01-27 16:03:54] [1] 3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lty
-    ## INFO [2023-01-27 16:03:54] [1] "dotted"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $imagetype
-    ## INFO [2023-01-27 16:03:54] [1] "svg"
-    ## INFO [2023-01-27 16:03:54]
+    ## INFO [2023-02-16 19:26:18] [[1]]
+    ## INFO [2023-02-16 19:26:18] vennlist_bees
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $height
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $width
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $filename
+    ## INFO [2023-02-16 19:26:18] NULL
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $disable.logging
+    ## INFO [2023-02-16 19:26:18] [1] TRUE
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fill
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.col
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $alpha
+    ## INFO [2023-02-16 19:26:18] [1] 0.85
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontfamily
+    ## INFO [2023-02-16 19:26:18] [1] "serif"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontface
+    ## INFO [2023-02-16 19:26:18] [1] "bold"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.2
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.default.pos
+    ## INFO [2023-02-16 19:26:18] [1] "outer"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.dist
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $margin
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lwd
+    ## INFO [2023-02-16 19:26:18] [1] 3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lty
+    ## INFO [2023-02-16 19:26:18] [1] "dotted"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $imagetype
+    ## INFO [2023-02-16 19:26:18] [1] "svg"
+    ## INFO [2023-02-16 19:26:18]
 
 ``` r
 vennlist_flat <- get_vennlist(obj=ps_flat_LT, factorNames="methodClass")
@@ -3222,60 +3154,60 @@ vennp_flat <- venn.diagram(vennlist_flat,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:54] [[1]]
-    ## INFO [2023-01-27 16:03:54] vennlist_flat
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $height
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $width
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $filename
-    ## INFO [2023-01-27 16:03:54] NULL
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $disable.logging
-    ## INFO [2023-01-27 16:03:54] [1] TRUE
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fill
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.col
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $alpha
-    ## INFO [2023-01-27 16:03:54] [1] 0.85
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontfamily
-    ## INFO [2023-01-27 16:03:54] [1] "serif"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontface
-    ## INFO [2023-01-27 16:03:54] [1] "bold"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.2
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.default.pos
-    ## INFO [2023-01-27 16:03:54] [1] "outer"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.dist
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $margin
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lwd
-    ## INFO [2023-01-27 16:03:54] [1] 3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lty
-    ## INFO [2023-01-27 16:03:54] [1] "dotted"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $imagetype
-    ## INFO [2023-01-27 16:03:54] [1] "svg"
-    ## INFO [2023-01-27 16:03:54]
+    ## INFO [2023-02-16 19:26:18] [[1]]
+    ## INFO [2023-02-16 19:26:18] vennlist_flat
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $height
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $width
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $filename
+    ## INFO [2023-02-16 19:26:18] NULL
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $disable.logging
+    ## INFO [2023-02-16 19:26:18] [1] TRUE
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fill
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.col
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $alpha
+    ## INFO [2023-02-16 19:26:18] [1] 0.85
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontfamily
+    ## INFO [2023-02-16 19:26:18] [1] "serif"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontface
+    ## INFO [2023-02-16 19:26:18] [1] "bold"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.2
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.default.pos
+    ## INFO [2023-02-16 19:26:18] [1] "outer"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.dist
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $margin
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lwd
+    ## INFO [2023-02-16 19:26:18] [1] 3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lty
+    ## INFO [2023-02-16 19:26:18] [1] "dotted"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $imagetype
+    ## INFO [2023-02-16 19:26:18] [1] "svg"
+    ## INFO [2023-02-16 19:26:18]
 
 ``` r
 vennlist_reds <- get_vennlist(obj=ps_reds_LT, factorNames="methodClass")
@@ -3299,60 +3231,60 @@ vennp_reds <- venn.diagram(vennlist_reds,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:54] [[1]]
-    ## INFO [2023-01-27 16:03:54] vennlist_reds
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $height
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $width
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $filename
-    ## INFO [2023-01-27 16:03:54] NULL
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $disable.logging
-    ## INFO [2023-01-27 16:03:54] [1] TRUE
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fill
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.col
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $alpha
-    ## INFO [2023-01-27 16:03:54] [1] 0.85
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontfamily
-    ## INFO [2023-01-27 16:03:54] [1] "serif"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontface
-    ## INFO [2023-01-27 16:03:54] [1] "bold"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.2
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.default.pos
-    ## INFO [2023-01-27 16:03:54] [1] "outer"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.dist
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $margin
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lwd
-    ## INFO [2023-01-27 16:03:54] [1] 3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lty
-    ## INFO [2023-01-27 16:03:54] [1] "dotted"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $imagetype
-    ## INFO [2023-01-27 16:03:54] [1] "svg"
-    ## INFO [2023-01-27 16:03:54]
+    ## INFO [2023-02-16 19:26:18] [[1]]
+    ## INFO [2023-02-16 19:26:18] vennlist_reds
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $height
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $width
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $filename
+    ## INFO [2023-02-16 19:26:18] NULL
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $disable.logging
+    ## INFO [2023-02-16 19:26:18] [1] TRUE
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fill
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.col
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $alpha
+    ## INFO [2023-02-16 19:26:18] [1] 0.85
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontfamily
+    ## INFO [2023-02-16 19:26:18] [1] "serif"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontface
+    ## INFO [2023-02-16 19:26:18] [1] "bold"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.2
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.default.pos
+    ## INFO [2023-02-16 19:26:18] [1] "outer"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.dist
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $margin
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lwd
+    ## INFO [2023-02-16 19:26:18] [1] 3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lty
+    ## INFO [2023-02-16 19:26:18] [1] "dotted"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $imagetype
+    ## INFO [2023-02-16 19:26:18] [1] "svg"
+    ## INFO [2023-02-16 19:26:18]
 
 ``` r
 #vennlist_termit <- get_vennlist(obj=ps_termit_LT, factorNames="methodClass")
@@ -3416,60 +3348,60 @@ vennp_all_termites <- venn.diagram(vennlist_all_termites,
                       imagetype = "svg")
 ```
 
-    ## INFO [2023-01-27 16:03:54] [[1]]
-    ## INFO [2023-01-27 16:03:54] vennlist_all_termites
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $height
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $width
-    ## INFO [2023-01-27 16:03:54] [1] 5
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $filename
-    ## INFO [2023-01-27 16:03:54] NULL
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $disable.logging
-    ## INFO [2023-01-27 16:03:54] [1] TRUE
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fill
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.col
-    ## INFO [2023-01-27 16:03:54] c("darkolivegreen3", "darkorchid")
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $alpha
-    ## INFO [2023-01-27 16:03:54] [1] 0.85
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontfamily
-    ## INFO [2023-01-27 16:03:54] [1] "serif"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $fontface
-    ## INFO [2023-01-27 16:03:54] [1] "bold"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.2
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.cex
-    ## INFO [2023-01-27 16:03:54] [1] 1.3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.default.pos
-    ## INFO [2023-01-27 16:03:54] [1] "outer"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $cat.dist
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $margin
-    ## INFO [2023-01-27 16:03:54] [1] 0.1
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lwd
-    ## INFO [2023-01-27 16:03:54] [1] 3
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $lty
-    ## INFO [2023-01-27 16:03:54] [1] "dotted"
-    ## INFO [2023-01-27 16:03:54] 
-    ## INFO [2023-01-27 16:03:54] $imagetype
-    ## INFO [2023-01-27 16:03:54] [1] "svg"
-    ## INFO [2023-01-27 16:03:54]
+    ## INFO [2023-02-16 19:26:18] [[1]]
+    ## INFO [2023-02-16 19:26:18] vennlist_all_termites
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $height
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $width
+    ## INFO [2023-02-16 19:26:18] [1] 5
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $filename
+    ## INFO [2023-02-16 19:26:18] NULL
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $disable.logging
+    ## INFO [2023-02-16 19:26:18] [1] TRUE
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fill
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.col
+    ## INFO [2023-02-16 19:26:18] c("darkolivegreen3", "darkorchid")
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $alpha
+    ## INFO [2023-02-16 19:26:18] [1] 0.85
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontfamily
+    ## INFO [2023-02-16 19:26:18] [1] "serif"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $fontface
+    ## INFO [2023-02-16 19:26:18] [1] "bold"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.2
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.cex
+    ## INFO [2023-02-16 19:26:18] [1] 1.3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.default.pos
+    ## INFO [2023-02-16 19:26:18] [1] "outer"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $cat.dist
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $margin
+    ## INFO [2023-02-16 19:26:18] [1] 0.1
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lwd
+    ## INFO [2023-02-16 19:26:18] [1] 3
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $lty
+    ## INFO [2023-02-16 19:26:18] [1] "dotted"
+    ## INFO [2023-02-16 19:26:18] 
+    ## INFO [2023-02-16 19:26:18] $imagetype
+    ## INFO [2023-02-16 19:26:18] [1] "svg"
+    ## INFO [2023-02-16 19:26:18]
 
 ``` r
 dev.off()
