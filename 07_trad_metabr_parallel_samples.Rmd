@@ -34,7 +34,11 @@ obj <- parse_tax_data(tradmetabrparallel,
                       class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
                       class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
 
+<<<<<<< HEAD
 sample_parallel <- filter(sample, methodClass == "parallel" | methodClass == "metabr")
+=======
+sample_parallel <- filter(sample, methodClass == c("metabr", "parallel"))
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
 
 obj$data$tax_data <- obj$data$tax_data[c("taxon_id","bold_bin", "classification", sample_parallel$sampleID)] #filters dataset to inlcude only samples within sample_parallel - e.g. only the samples which where collected in parallel. Metabarcoding and trad MAY2019 and MAR2021
 
@@ -43,7 +47,11 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera", "Coleoptera", 
               subtaxa = TRUE) -> obj
 
 no_reads <- rowSums(obj$data$tax_data[, sample_parallel$sampleID]) == 0 #check for zeroes after filtering always. Otherwise we get bad results
+<<<<<<< HEAD
 sum(no_reads) #in this case there are 1348 need to be removed
+=======
+sum(no_reads) #in this case theree is no zeroes, which is good, but we should always check
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
 obj <- filter_obs(obj, data = "tax_data", ! no_reads, drop_taxa = TRUE) 
 print(obj)
 
@@ -58,8 +66,12 @@ ps_obj <- metacoder::as_phyloseq(obj,
                       otu_table = "tax_data",
                       otu_id_col = "bold_bin",
                       sample_data = sample_parallel,
+<<<<<<< HEAD
                       sample_id_col = "sampleID") %>% microViz::tax_mutate(rank_0 = "Animalia",rank_01 = "Arthropoda", rank_02 = "Insecta", .before = 1) -> ps_obj
 colnames(tax_table(ps_obj)) <- c("k__", "p__", "c__", "o__", "f__", "g__", "s__")
+=======
+                      sample_id_col = "sampleID")
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
 
 phyloseq_validate(ps_obj, remove_undetected = TRUE, verbose = TRUE)
 
@@ -80,6 +92,7 @@ pdf("./07_trad_metabar_parallel_data_files/pcoa_meta_parallel.pdf")
 pcoaplot1
 dev.off()
 
+<<<<<<< HEAD
 classtaxa <- get_taxadf(obj=ps_obj, taxlevel=4)
 # The 5 most abundant taxonomy will be visualized by default (parameter `topn=5`). 
 pclass <- ggbartax(obj=classtaxa, facetNames="methodClass", topn=10) +
@@ -97,6 +110,8 @@ dev.off()
 
 
 
+=======
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
 ```
 From here on we are only focusing on focal groups within the focal orders (similar to script 05) but for the metabarcoding and traditional samples which were done in parallel. The following chunk can be run in one go. We will generate metacoder trees in the following cunk. 
 ```{r}
@@ -175,7 +190,11 @@ geom_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -191,7 +210,11 @@ ereb_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -211,7 +234,11 @@ cramb_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -227,7 +254,11 @@ satur_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -243,7 +274,11 @@ noctuid_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -259,7 +294,11 @@ nymph_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -275,7 +314,11 @@ pyra_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -291,7 +334,11 @@ hesp_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -307,7 +354,11 @@ scarab_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -323,7 +374,11 @@ curcu_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -339,7 +394,11 @@ passa_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -355,7 +414,11 @@ ants_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -371,7 +434,11 @@ bees_LT %>%
             node_size = n_obs, # n_obs is a function that calculates, in this case, the number of OTUs per taxon
             node_color = mean_diff, # A column from `obj_LT$data$diff_table`
             node_color_interval = c(-.44,.44), # The range of the mean_difference to display
+<<<<<<< HEAD
             node_color_range = c("darkorchid", "gray", "darkolivegreen3"), # The color palette used
+=======
+            node_color_range = c("darkolivegreen3", "gray", "darkorchid"), # The color palette used
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
             node_size_axis_label = "BIN count",
             node_color_axis_label = "Mean difference between classification methods",
             node_label_size_range = c( 0.003, 0.03),
@@ -490,10 +557,14 @@ vennp_cramb <- venn.diagram(vennlist_cramb,
                       lty ='dotted',
                       imagetype = "svg")
 
+<<<<<<< HEAD
 #something went wrong with this vennlist where get_vennlist did not create a list so I had to manualy change it
 vennlist_satur <- get_vennlist(obj=ps_satur_LT, factorNames="methodClass")
 vennlist_satur = split(vennlist_satur, rep(1:ncol(vennlist_satur), each = nrow(vennlist_satur)))
 names(vennlist_satur) <- c("metabr", "parallel")
+=======
+vennlist_satur <- get_vennlist(obj=ps_satur_LT, factorNames="methodClass")
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
 vennp_satur <- venn.diagram(vennlist_satur,
                       height=5,
                       width=5, 
@@ -674,9 +745,12 @@ vennp_ants <- venn.diagram(vennlist_ants,
                       imagetype = "svg")
 
 vennlist_bees <- get_vennlist(obj=ps_bees_LT, factorNames="methodClass")
+<<<<<<< HEAD
 vennlist_bees = split(vennlist_bees, rep(1:ncol(vennlist_bees), each = nrow(vennlist_bees)))
 names(vennlist_bees) <- c("metabr", "parallel")
 
+=======
+>>>>>>> 1cfaeb7a59422c4746677fe98bc058b5a6a6062f
 vennp_bees <- venn.diagram(vennlist_bees,
                       height=5,
                       width=5, 
