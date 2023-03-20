@@ -3,8 +3,8 @@ title: "06_iNext"
 author: "Daniel"
 date: "26/01/2023"
 output: github_document
-#editor_options: 
-  #chunk_output_type: console
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r }
@@ -14,62 +14,80 @@ library('ggplot2')
 library('tidyr')
 library('dplyr')
 
-dat<- read.csv('data/final_anal/CYBs_correct_names.csv', header = TRUE)
+sample <- read.csv('data/final_anal/metadata_trad_metabr_parallel.csv', header = TRUE)
 
-parallel_dat <- read.csv('data/final_anal/parallel_LT_final.csv', header = T)
+all_dat <- read.csv('data/final_anal/tradmetabrparallel_final.csv', header = TRUE)
 
-trad_dat <-read.csv('data/final_anal/tradbinary_LT_only.csv', header = T)
+metabr_LT <- filter(sample, methodClass == "metabr")
+metabr_list <- as.list(metabr_LT$sampleID)
+metabr_dat <- all_dat[, which((names(all_dat) %in% metabr_list)==TRUE)]
+metabr_dat <- cbind(metabr_dat, bold_bin = all_dat$bold_bin)
+metabr_dat <- cbind(metabr_dat, classification = all_dat$classification)
+metabr_dat %>%
+  group_by(bold_bin, classification) %>%
+  summarise_all(sum) %>%
+  mutate_if(is.numeric, ~1 * (. > 0)) %>%
+  data.frame -> metabr_dat
+metabr_dat %>% group_by(bold_bin) %>% filter(n()>1)
+
+parallel_LT <- filter(sample, methodClass == "parallel")
+parallel_list <- as.list(parallel_LT$sampleID)
+parallel_dat <- all_dat[, which((names(all_dat) %in% parallel_list)==TRUE)]
+parallel_dat <- cbind(parallel_dat, bold_bin = all_dat$bold_bin)
+parallel_dat <- cbind(parallel_dat, classification = all_dat$classification)
+parallel_dat %>%
+  group_by(bold_bin, classification) %>%
+  summarise_all(sum) %>%
+  mutate_if(is.numeric, ~1 * (. > 0)) %>%
+  data.frame -> parallel_dat
+parallel_dat %>% group_by(bold_bin) %>% filter(n()>1)
+
+trad_LT <- filter(sample, method == "LT")
+trad_list <- as.list(trad_LT$sampleID)
+trad_dat <- all_dat[, which((names(all_dat) %in% trad_list)==TRUE)]
+trad_dat <- cbind(trad_dat, bold_bin = all_dat$bold_bin)
+trad_dat <- cbind(trad_dat, classification = all_dat$classification)
 trad_dat %>%
   group_by(bold_bin, classification) %>%
   summarise_all(sum) %>%
-  data.frame() -> trad_dat
-
+  mutate_if(is.numeric, ~1 * (. > 0)) %>%
+  data.frame -> trad_dat
 trad_dat %>% group_by(bold_bin) %>% filter(n()>1)
 
-trad_dat %>%
-  group_by(bold_bin, classification) %>%
-  summarise_all(sum) %>%
-  mutate_if(is.numeric, ~1 * (. > 0)) %>% #change values >1 to 1
-  data.frame() -> trad_dat
-
-dat %>%
-  group_by(bin_uri, classification) %>%
-  summarise_all(sum) %>%
-  mutate_if(is.numeric, ~1 * (. > 0)) %>% #change values >1 to 1
-  data.frame() -> dat
+### The datasets for iNEXT are now metabr_dat, parallel_dat and trad_dat##################
 
 
-mdat <- as.matrix(apply(dat[,-1],2,as.integer))
-row.names(mdat) <- dat[,1]
-mdat[is.na(mdat)] <- 0
-data.list <- list(mdat)
+metabrdat <- as.matrix(apply(metabr_dat[,-1],2,as.integer))
+row.names(metabrdat) <- metabr_dat[,1]
+metabrdat[is.na(metabrdat)] <- 0
+data.list <- list(metabrdat)
 
 out <- iNEXT(data.list, datatype = "incidence_raw", endpoint = 500)
 
 out
+
+
 ggiNEXT(out)
-plot(out, col = "darkolivegreen3")
 
-mtrad_dat <- as.matrix(apply(trad_dat[,-1],2,as.integer))
-row.names(mtrad_dat) <- trad_dat[,1]
-mtrad_dat[is.na(mtrad_dat)] <- 0
-trad_data.list <- list(mtrad_dat)
+paralleldat <- as.matrix(apply(parallel_dat[,-1],2,as.integer))
+row.names(paralleldat) <- parallel_dat[,1]
+paralleldat[is.na(paralleldat)] <- 0
+data.list <- list(paralleldat)
 
-trad_out <- iNEXT(trad_data.list, datatype = "incidence_raw", endpoint = 500)
+out_parallel <- iNEXT(data.list, datatype = "incidence_raw", endpoint = 500)
 
-trad_out
-ggiNEXT(trad_out)
-plot(trad_out, col = "darkorchid")
+out_parallel
+ggiNEXT(out_parallel)
 
-mparallel_dat <- as.matrix(apply(parallel_dat[,-1],2,as.integer))
-row.names(mparallel_dat) <- parallel_dat[,1]
-mparallel_dat[is.na(mparallel_dat)] <- 0
-parallel_data.list <- list(mparallel_dat)
 
-parallel_out <- iNEXT(parallel_data.list, datatype = "incidence_raw", endpoint = 500)
+traddat <- as.matrix(apply(trad_dat[,-1],2,as.integer))
+row.names(traddat) <- trad_dat[,1]
+traddat[is.na(traddat)] <- 0
+data.list <- list(traddat)
 
-parallel_out
-ggiNEXT(parallel_out)
-plot(parallel_out, col = "darkorchid")
+out_trad <- iNEXT(data.list, datatype = "incidence_raw", endpoint = 500)
+
+out_trad
+ggiNEXT(out_trad)
 
 ```

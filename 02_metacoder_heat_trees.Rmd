@@ -8,7 +8,7 @@ output: github_document
 ---
 
 This script takes the previously merged and formatted data from mBrave (produced through script 01) and does preliminary analyses with Metacoder.
-The idea of this script is to have a preliminary estimate of diversity within the metabarcoding samples. Due to the nature of mBrave's classification associated with BOLD databases, there are a number of BINs which have multiple, uncertain, identifications. I have (manually) cleaned the data further, now we are only including species name for the 1st BOLD BIN hit. This is normally either, the species form the BCI database (the first dataset used to classify through mBRAVE), or the species most frequently 'named' that name. E.g. Agelenopsis pennsylvanica, potteri, emertoni, katsoni, acutosa, is now Agelenopsis pennsylvanica. The file used is the final dataset with ~3500 BINs (finaldat_merged.csv).
+The idea of this script is to have a preliminary estimate of diversity within the metabarcoding samples. Due to the nature of mBrave's classification associated with BOLD databases, there are a number of BINs which have multiple, uncertain, identifications. I have (manually) cleaned the data further, now we are only including species name for the 1st BOLD BIN hit. This is normally either, the species form the BCI database (the first dataset used to classify through mBRAVE), or the species most frequently 'named' that name. E.g. Agelenopsis pennsylvanica, potteri, emertoni, katsoni, acutosa, is now Agelenopsis pennsylvanica. The file used is the final dataset with ~4600 BINs (CYBs_correct_names.csv).
 
 ```{r include = FALSE}
 rm(list=ls()) #I always start scripts this way to make sure I have a clean R environment
@@ -78,8 +78,10 @@ It is meant for illustration purposes only and its not very informative, it also
 
 ```{r allcounts}
 set.seed(99) # This makes the plot appear the same each time it is run
-heat_tree(obj,
-          node_label = taxon_names,
+obj %>%
+  metacoder::filter_taxa(taxon_names == "Arthropoda",#here is to filter the figure by groups
+              subtaxa = TRUE) %>%
+heat_tree(node_label = taxon_names,
           node_size = n_obs,
           node_color = n_obs,
           node_size_axis_label = "BIN count",
@@ -110,8 +112,11 @@ obj$data$diff_table$log2_median_ratio[obj$data$diff_table$wilcox_p_value > 0.05]
 And we can plot these differences in a metacoder heat tree.
 
 ```{r quickHeatTreeMEANDIFFAll}
-heat_tree(obj,
-          node_label = taxon_names,
+set.seed(99) # This makes the plot appear the same each time it is run
+obj %>%
+  metacoder::filter_taxa(taxon_names == "Arthropoda",#here is to filter the figure by groups
+              subtaxa = TRUE) %>%
+heat_tree(node_label = taxon_names,
           node_size_range = c(0.006, 0.04),
           edge_size_range = c(0.001,0.003),
           node_size = n_obs, # n_obs is a function that calculates the number of OTUs per taxon

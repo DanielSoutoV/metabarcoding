@@ -3,6 +3,8 @@ title: "01 Merging all required data"
 author: "Daniel"
 date: "16/09/2022"
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 There is a lot of manipulation that needs to be done with the data. In general, what we need to analyze metabarcoding data is a data frame organized as:
@@ -27,7 +29,7 @@ Any questions or comments can be asked directly on the GitHub repo or to my emai
 
 NOTE THAT I HAVE MADE THIS SCRIPT IMPOSSIBLE TO RUN. THIS IS BECASUE THE SCRIPTS UPDATE AND OVERWRITE THE DATA
 THE SCRIPT IS THERE, BUT YOU CAN'T RUN IT UNLESS YOU COPY&PASTE THE SCRIPTS BELOW BUT I LEAVE THIS HERE FOR INOFRMATION PURPOSES ONLY.
-
+ 
 ####### PACKAGES USED########
 #the small green box to insert chunks in different formats. 
 #```{r} for R.
@@ -39,7 +41,7 @@ library('microDecon')
 library('stringr')
 
 
-First thing is to merge and clean the samples from the format downloaded from mbrave as right now its rather chaotic with column 1 sample, 2 BIN#, 3 #of READS and 4 classification. Note that I am using the formatted spreadsheet as directly downloaded from mBrave. When in doubt of what I mean, look at the original file called (light_trap_19_21.csv), and then the written new file (dataset_merged.csv).
+#First thing is to merge and clean the samples from the format downloaded from mbrave as right now its rather chaotic with column 1 sample, 2 BIN#, 3 #of READS and 4 classification. Note that I am using the formatted spreadsheet as directly downloaded from mBrave. When in doubt of what I mean, look at the original file called (light_trap_19_21.csv), and then the written new file (dataset_merged.csv).
 
 ########## MERGING AND CLEANING DATA FROM MBRAVE#################
 
@@ -72,7 +74,7 @@ all_merged_colnames %>% relocate(classification, .after = last_col()) -> all_mer
 all_merged_colnames #now its sorted in the right format
 write.csv(all_merged_colnames, 'data/final_anal/CYB001_colnames_sorted.csv', row.names =FALSE)
 
-#the file was manually checked for no duplicates
+#the file was manually checked for no duplicates, now we must again group_by bin/classification and remove duplicates while adding totals
 
 all_merged_colnames <- read.csv('data/final_anal/CYB001_colnames_sorted_noDups.csv', header = T)
 
@@ -85,7 +87,7 @@ write.csv(all_merged_colnames_noDups, 'data/final_anal/CYB001_colnames_sorted_no
 
 all_merged_colnames_noDups <- read.csv('data/final_anal/CYB001_colnames_sorted_noDups.csv', header = T)
 
-all_merged_colnames_noDups %>% relocate(c(BLANKDNA_CTRL,BLANKPCR_CTRL), .before = `BIOLOT#39872`) -> all_merged_colnames_noDups
+all_merged_colnames_noDups %>% relocate(c(BLANKDNA_CTRL,BLANKPCR_CTRL), .before = `BIOLOT.39872`) -> all_merged_colnames_noDups
 all_merged_colnames_noDups %>% relocate(classification, .after = last_col()) -> all_merged_colnames_noDups
 
 write.csv(all_merged_colnames_noDups, 'data/final_anal/CYB001_colnames_sorted_noDups.csv', row.names =FALSE)
@@ -154,7 +156,7 @@ CYB002_clean %>% relocate(classification, .after = bin_uri) -> CYB002_clean
 write.csv(CYB002_clean, 'data/final_anal/CYB002_clean.csv', row.names =FALSE)
 
 
-Now we have each CYB project cleaned and decontaminated, in the correct format needed for analsyis. However, We need to merge these two datasets and remove/add duplicates. I have merged them in excel.
+#Now we have each CYB project cleaned and decontaminated, in the correct format needed for analsyis. However, We need to merge these two datasets and remove/add duplicates. I have merged them in excel.
 
 
 all_merged <- read.csv('data/final_anal/CYBs_merged.csv', header = T)
@@ -168,15 +170,15 @@ all_merged %>% group_by(bin_uri) %>% filter(n()>1) #this command checks for dupl
 
 write.csv(all_merged, 'data/final_anal/CYBs_finaldat_merged.csv', row.names = FALSE)
 
-#here we have the dataset BUT we have to rename the BINs according to the previous format I used. I am doing vlookup function in excel using the data/finaldat_merged.csv file. NOTE, not the one from Final_anal
+#here we have the dataset BUT we have to rename the BINs according to the previous format I used. I am doing vlookup function in excel using the data/finaldat_merged.csv file. NOTE, not the one from Final_anal The final version is what we use in next script CYBs_correct_names
 
 
-Now we have the dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
-Column 1 BIN_uri (this column is later renamed to bold_bin), Col2: classification (note issues with unique names and match) cols 3-46 number of reads per sample.
+#Now we have the dataset, cleaned and formatted for use with Metacoder/MicroBiotaProcess
+#Column 1 BIN_uri (this column is later renamed to bold_bin), Col2: classification (note issues with unique names and match) cols 3-46 number of reads per sample.
 
-NOTE: The file used for metabarcoding data beyond this point is ######finaldat_merged.csv######### - this file is based off the merged_colnames_final.csv but I went one by one on the classification column changing the names to have a single species name (look at both files if in doubt). This was necessary because some of BOLD BINs have several species names. As a rule of thumb, I picked the first name of the list which corresponds (generally) to the name of the DS-BCIARTH, the database within BOLD supplied by ForestGEO Arthrpod Initiative which corresponds to Barro Colorado Island, where this data comes from.
+#NOTE: The file used for metabarcoding data beyond this point is ######finaldat_merged.csv######### - this file is based off the merged_colnames_final.csv but I went one by one on the classification column changing the names to have a single species name (look at both files if in doubt). This was necessary because some of BOLD BINs have several species names. As a rule of thumb, I picked the first name of the list which corresponds (generally) to the name of the DS-BCIARTH, the database within BOLD supplied by ForestGEO Arthrpod Initiative which corresponds to Barro Colorado Island, where this data comes from.
 
-The following chunks follow a similar process but now to merge and clean the traditional data, and add the metabarcoidng data.
+#The following chunks follow a similar process but now to merge and clean the traditional data, and add the metabarcoidng data.
 
 ############ CLEANING AND MANAGING TRADITIONAL DATA ###########################
 
@@ -191,8 +193,8 @@ traditional %>% group_by(bold_bin) %>% filter(n()>1) #this checks for duplicated
 write.csv(traditional, 'data/final_anal/tradbinary_merged.csv', row.names = FALSE) #This new file now has all BINs only once, for each 'sample' in which it ocurrs.
 
 
-The next chunk is run to include the metabarcoding data to the newly created 'tradbinary_merged.csv'
-To do this, there is probably a right_join function to run in R, but instead I did so manually in excel, adding all metabarcoding BINs to the final row of the spreadsheet plus all the columns from the mtabarcoding to the final column of the tradbinary_merged.csv. (look at trad_and_meta_toMerge.csv)
+#The next chunk is run to include the metabarcoding data to the newly created 'tradbinary_merged.csv'
+#To do this, there is probably a right_join function to run in R, but instead I did so manually in excel, adding all metabarcoding BINs to the final row of the spreadsheet plus all the columns from the mtabarcoding to the final column of the tradbinary_merged.csv. (look at trad_and_meta_toMerge.csv)
 
 
 tradmeta_toMerge <- read.csv('data/final_anal/trad_metabr_toMerge.csv') #this new file is the tradbinary_merged.csv with the metabarcoding data added to the end.
@@ -201,7 +203,7 @@ tradmeta_toMerge %>%
   summarise_all(sum) %>%
   data.frame() -> tradmeta_toMerge
 
-tradmeta_toMerge %>% group_by(bold_bin) %>% filter(n()>1) #see below, there are 332 Bins which are duplicated. Check in Excel
+tradmeta_toMerge %>% group_by(bold_bin) %>% filter(n()>1) #see below, there are 35 Bins which are duplicated. Check in Excel
 
 write.csv(tradmeta_toMerge, 'data/final_anal/trad_meta_merged.csv', row.names = FALSE)
 
@@ -228,9 +230,9 @@ head(tradmetabr)
 write.csv(tradmetabr, 'data/final_anal/tradmetabr_final.csv', row.names =FALSE) #save final dataset
 
 
-tradmetabr_merged.csv is now the final file we will use in script 05.
+#tradmetabr_merged.csv is now the final file we will use in script 05.
 
-Below is the conversion of the file which includes traditional samples which were collected in parallel to the meabarcoding LT samples, but sorted through traditional methods
+#Below is the conversion of the file which includes traditional samples which were collected in parallel to the meabarcoding LT samples, but sorted through traditional methods
 
 
 ################### PARALLEL SAMPLES CLEANING AND PROCESSING ###############
@@ -270,6 +272,8 @@ tradmetapara %>%
   data.frame() -> tradmetapara
 
 tradmetapara
+
+tradmetapara %>% group_by(bold_bin) %>% filter(n()>1)
 
 write.csv(tradmetapara, 'data/final_anal/tradmetabrparallel_final.csv', row.names = FALSE)
 
