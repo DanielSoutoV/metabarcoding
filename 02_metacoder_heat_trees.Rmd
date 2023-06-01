@@ -19,15 +19,13 @@ library('vegan')
 ```
 
 ```{r message = FALSE, warning = FALSE}
-dat<- read.csv('data/final_anal/CYBs_correct_names.csv', header = TRUE)
-sample <- read.csv('data/final_anal/location_ctrl.csv')
+dat<- read.csv('data/correct_anal/CYBs_correct_names.csv', header = TRUE)
+sample <- read.csv('data/correct_anal/location_ctrl.csv')
 obj <- parse_tax_data(dat,
                       class_cols = "classification",
                       class_sep = ";",
                       class_regex = "^([a-z]{0,1})_{0,2}(.*)$",
                       class_key = c("tax_rank" = "taxon_rank", "name" = "taxon_name"))
-print(obj)
-
 ```
 Above is the print out of a taxmap object. The R console output shows that there are 3,651 unique taxa and lists their ID, but this includes many NA's (unassigned taxonomies), Better to look at the tbl_df which shows a 'tibble' of 3,173 rows (assigned classifications) in 43 columns (40 samples + taxon_id, bin_uri and classification). Each row shows how many reads for that taxon was in each sample.
 
@@ -48,7 +46,6 @@ We can add new 'tibbles' to obj$data such as proportion of total reads, or abund
 obj$data$tax_data <- obj$data$tax_data[c("taxon_id","bin_uri", sample$sampleID)]
 obj$data$tax_props <- calc_obs_props(obj, "tax_data", cols= sample$sampleID, other_cols = TRUE)
 obj$data$tax_abund <- calc_taxon_abund(obj, "tax_data", cols = sample$sampleID)
-print(obj)
 
 ```
 Notice we now have 3 tibbles, one for counts (tax_data - this could be changed with something like: >names(obj$data) <- "otu_counts"), one for proportion (tax_props) and one for abundance (tax_abund). We can, and will, add more refined data sets afterwards, all linked to the original parsing so we never loose the information of what taxonid actually means.
@@ -285,6 +282,6 @@ These are visually interesting results but we still need to compare these data s
 
 ```{r save_filtered_taxmap_object}
 
-saveRDS(object = obj, file = "data/final_anal/taxmap_object.rds") #this will save the clean, filtered taxmap object for future uses
+saveRDS(object = obj, file = "data/correct_anal/taxmap_object.rds") #this will save the clean, filtered taxmap object for future uses
 
 ```

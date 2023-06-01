@@ -14,9 +14,9 @@ library('ggplot2')
 library('tidyr')
 library('dplyr')
 
-sample <- read.csv('data/final_anal/metadata_trad_metabr_parallel.csv', header = TRUE)
+sample <- read.csv('data/correct_anal/metadata_trad_metabr_parallel.csv', header = TRUE)
 
-all_dat <- read.csv('data/final_anal/tradmetabrparallel_final.csv', header = TRUE)
+all_dat <- read.csv('data/correct_anal/tradmetabrparallel_final.csv', header = TRUE)
 
 metabr_LT <- filter(sample, methodClass == "metabr")
 metabr_list <- as.list(metabr_LT$sampleID)

@@ -25,7 +25,7 @@ library('coin')
 
 ```{r message = FALSE, warning = FALSE}
 
-obj <- readRDS('data/final_anal/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
+obj <- readRDS('data/correct_anal/taxmap_object.rds') #loads the taxmap object created in script 02_metacoder_heat_trees
 
 obj %>%  metacoder::filter_taxa(taxon_names %in% c("Lepidoptera"),#here is to fliter the figure by groups
               subtaxa = TRUE) -> leps #we will create separate files for each order as this simplifies downstream analysis in microbiotaprocess - until I find a way to filter taxa on the mpse object directly.
@@ -72,10 +72,6 @@ ggplot(sample, aes(x = SEASON, y = inv_simp)) +
   xlab("Season") +
   ylab("Inverse simpson index")
 dev.off()
-
-
-
-
 ```
 
 We can also see differences between sampling days or location (site) although there are none. 
@@ -132,8 +128,6 @@ ps_obj <- metacoder::as_phyloseq(obj,
 
 plot_richness(ps_obj, color = "SEASON", x = "site") #phyloseq function
 plot_richness(ps_obj, color = "day", x = "SEASON")
-
-
 ```
 
 Figures above OK but we can do better.

@@ -28,8 +28,8 @@ Setting up the data which now includes traditional and metabarcoding records
 
 ```{r warning = FALSE}
 
-tradmetabr <- read.csv('data/final_anal/tradmetabr_only.csv')
-sample <- read.csv('data/final_anal/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
+tradmetabr <- read.csv('data/correct_anal/tradmetabr_only.csv')
+sample <- read.csv('data/correct_anal/metadata_trad_metabr.csv') #this includes info on location/collection method/classification method and any more info can be added
 obj <- parse_tax_data(tradmetabr,
                       class_cols = "classification",
                       class_sep = ";",
@@ -232,7 +232,7 @@ obj_LT <- parse_tax_data(tradmetabr,
 sample_LT <- filter(sample, method == "LT")
 
 obj_LT$data$tax_data <- obj_LT$data$tax_data[c("taxon_id","bold_bin", "classification", sample_LT$sampleID)]
-print(obj_LT)
+
 
 no_reads <- rowSums(obj_LT$data$tax_data[, sample_LT$sampleID]) == 0
 sum(no_reads) 
@@ -344,7 +344,7 @@ sum(no_reads) #in this case theree is no zeroes, which is good, but we should al
 
 
 obj_focal$data$tax_data <- obj_focal$data$tax_data[c("taxon_id","bold_bin", "classification", sample_LT$sampleID)]
-print(obj_focal)
+
 
 obj_focal$data$tax_table <- calc_taxon_abund(obj_focal, data = "tax_data", cols = sample_LT$sampleID)
 obj_focal$data$tax_props <- calc_obs_props(obj_focal, "tax_data", cols = sample_LT$sampleID)
