@@ -15,4 +15,4 @@ NOTE 2: Most critical merging/cleaning steps were later done in excel where I 'a
 
 NOTE 3: For the MicrobiotaProcess, some further cleaning will be required, as of now, script 03 still contains some preliminary figures (cladograms, specifically) because the data needs to be further refined to include regular expressions to define the taxonomic rank (e.g. p__;c__;o__) in order for us to be able to properly filter the data to focal groups and/or focus only on a specific rank to visualize the differences between seasons. To bypass this issue, I filteered the datasets using Metacoder and created new 'files' for each focal order. If anyone can think of a Tidy way to do this, go ahead.
 
-
+will it push from usucomp?
