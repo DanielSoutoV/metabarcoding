@@ -1,0 +1,36 @@
+---
+title: "09_map_gpsCoords"
+author: "Daniel"
+output: github_document
+editor_options:
+  chunk_output_type: console
+date: "2024-02-14"
+---
+
+```{r}
+rm(list=ls())
+library('ggplot2')
+library('rnaturalearth')
+library('rnaturalearthdata')
+
+
+metadata <- read.csv('data/correct_anal/location_ctrl.csv')
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+bci<- world[world$admin == "Barro Colorado Island", ]
+panama <- world[world$admin == "Panama"]
+
+ggplot() +
+  # Add map background for Barro Colorado Island
+  geom_sf(data = panama, fill = "gray90", color = "gray50") +
+  # Add points for GPS coordinates
+  geom_point(data = metadata, aes(x = LONG, y = LAT), color = "red", size = 3) +
+  # Add text labels for locations
+  geom_text(data = metadata, aes(x = LONG, y = LAT, label = site), vjust = 1.5, hjust = 0.5, size = 3) +
+  # Customize plot appearance
+  theme_minimal() +
+  labs(title = "GPS Coordinates of sites within the ForestGEO 50ha Plot in Barro Colorado Island", x = "Longitude", y = "Latitude") +
+  # Set the axis limits to zoom in on Panama
+  coord_sf(xlim = c(min(metadata$LONG), max(metadata$LONG)), ylim = c(min(metadata$LAT), max(metadata$LAT)))
+
+```
