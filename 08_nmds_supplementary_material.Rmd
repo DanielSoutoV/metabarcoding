@@ -14,6 +14,8 @@ library("dplyr")
 library("elevatr")
 library("ggplot2")
 library("geosphere")
+library("ape")
+library("ggtree")
 
 arthro <- read.csv('data/correct_anal/CYBs_correct_names.csv')
 metadata <- read.csv('data/correct_anal/location_ctrl.csv')
@@ -32,21 +34,32 @@ metadata$day <- as.factor(metadata$day)
 #metadata$LAT <- as.numeric(metadata$LAT)
 #metadata$LONG <- as.numeric(metadata$LONG)
 
-arthroB_dist <- vegdist(arthro_binary, method = "jaccard") #distance marix of binary data using Jaccard method
+arthroB_dist <- vegdist(arthro_binary, method = "bray") #distance marix of binary data using Bray_curtis method
 arthro.nmds <- metaMDS(arthroB_dist) #run meta nmds analysis
 permanova_season <- adonis2(arthroB_dist ~ SEASON, data = metadata)
 permanova_season
+season_tree <- nj(arthroB_dist)
+ggtree(season_tree, layout = "rectangular") %<+% metadata +
+  geom_tiplab(aes(colour = SEASON)) + 
+  theme(legend.position = "right")
+
 ```
 
 ```{r}
 
 plot(arthro.nmds, display = 'sites', type = 'n') ; points(arthro.nmds, display = 'sites', pch = 20) ; with(metadata, ordiellipse(arthro.nmds, metadata$SEASON, draw = 'polygon', col = 'blue', label = FALSE, show.groups =(c("WET")))) ; with(metadata, ordiellipse(arthro.nmds, metadata$SEASON, draw = 'polygon', col = 'goldenrod', label = FALSE,show.groups =(c("DRY"))))
+
+season_tree <- nj(arthroB_dist)
+ggtree(season_tree, layout = "rectangular") %<+% metadata +
+  geom_tiplab(aes(colour = SEASON)) + 
+  theme(legend.position = "right")
+
 ```
 
 ```{r}
 arthro_wet <- subset(arthro_binary, metadata$SEASON == "WET")
 metadata_wet <- subset(metadata, metadata$SEASON == "WET")
-arthro_wet_dist <- vegdist(arthro_wet, method = 'jaccard')
+arthro_wet_dist <- vegdist(arthro_wet, method = 'bray')
 arthro_wet.nmds <- metaMDS(arthro_wet_dist)
 permanova_wet <- adonis2(arthro_wet_dist ~ day, data = metadata_wet)
 summary(permanova_wet)
@@ -59,12 +72,17 @@ permanova_wet_site
 ```{r}
 plot(arthro_wet.nmds, display = 'sites', type = 'n'); points(arthro_wet.nmds, display = 'sites', pch = 20,col = ifelse(metadata_wet$day == "A", "black", "red" ));with(metadata_wet, ordiellipse(arthro_wet.nmds, day, draw = 'polygon', col = c('black'), label = FALSE, show.groups =(c("A"))));with(metadata_wet, ordiellipse(arthro_wet.nmds, day, draw = 'polygon', col = c('red'), label = FALSE,show.groups =(c("B")))); with(metadata_wet, text(arthro_wet.nmds, labels = metadata_wet$site,pos = 2, cex = 0.5))
 
+wet_tree <- nj(arthro_wet_dist)
+ggtree(wet_tree, layout = "rectangular") %<+% metadata +
+  geom_tiplab(aes(colour = day)) + 
+  theme(legend.position = "right")
+
 ```
 
 ```{r}
 arthro_dry <- subset(arthro_binary, metadata$SEASON == "DRY")
 metadata_dry <- subset(metadata, metadata$SEASON == "DRY")
-arthro_dry_dist <- vegdist(arthro_dry, method = 'jaccard')
+arthro_dry_dist <- vegdist(arthro_dry, method = 'bray')
 arthro_dry.nmds <- metaMDS(arthro_dry_dist)
 permanova_dry<- adonis2(arthro_dry_dist ~ day, data = metadata_dry)
 summary(permanova_dry)
@@ -77,6 +95,11 @@ permanova_dry_sites
 
 ```{r}
 plot(arthro_dry.nmds, display = 'sites', type = 'n'); points(arthro_dry.nmds, display = 'sites', pch = 20,col = ifelse(metadata_dry$day == "A", "black", "red" )); with(metadata_dry, ordiellipse(arthro_dry.nmds, day, draw = 'polygon', col = c('black'), label = FALSE, show.groups =(c("A")))); with(metadata_dry, ordiellipse(arthro_dry.nmds, day, draw = 'polygon', col = c('red'), label = FALSE, show.groups =(c("B")))); with(metadata_dry, text(arthro_dry.nmds, labels = metadata_dry$site,pos = 2, cex = 0.5))
+
+dry_tree <- nj(arthro_dry_dist)
+ggtree(dry_tree, layout = "rectangular") %<+% metadata +
+  geom_tiplab(aes(colour = day)) + 
+  theme(legend.position = "right")
 ```
 
 
@@ -109,11 +132,13 @@ arthro_all_trans[, -1] <- apply(arthro_all_trans[, -1 , drop = FALSE], 2, as.num
 arthro_all_trans <- arthro_all_trans[,which(specnumber(arthro_all_trans,MARGIN=2)>0)] #remove singletons
 arthro_all_binary <- ifelse(arthro_all_trans[, -1] > 0,1,0) #no need since tradmetabrparallel_final.csv already binary
 
+write.csv(arthro_all_binary, "./arthro_all_binary.csv")
+
 metadata_samples$methodClass <- as.factor(metadata_samples$methodClass) #these are needed for plotting issues below 
 metadata_samples$season <- as.factor(metadata_samples$season)
 metadata_samples$location_good <- as.factor(metadata_samples$location_good)
 
-arthroall_dist <- vegdist(arthro_all_binary, method = "jaccard") #distance marix of binary data using Jaccard method
+arthroall_dist <- vegdist(arthro_all_binary, method = "bray") #distance marix of binary data using Jaccard method
 arthro_all.nmds <- metaMDS(arthroall_dist) #run meta nmds analysis
 permanova_all <- adonis2(arthroall_dist ~ methodClass, data = metadata_samples)
 summary(permanova_all)
@@ -135,12 +160,18 @@ with(metadata_samples, ordiellipse(arthro_all.nmds, methodClass, draw =  'polygo
 with(metadata_samples, ordiellipse(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkgoldenrod'), 
                                   show.groups =(c("parallel"))))
 
+all_tree <- nj(arthroall_dist)
+ggtree(all_tree, layout = "rectangular") %<+% metadata_all +
+  geom_tiplab(aes(colour = methodClass)) + 
+  theme(legend.position = "right")
+
 ```
 
 ```{r}
+
 arthro_all_wet <- subset(arthro_all_binary, metadata_samples$season == "wet")
 metadata_samples_wet <- subset(metadata_samples, metadata_samples$season == "wet")
-arthro_all_wet_dist <- vegdist(arthro_all_wet, method = 'jaccard')
+arthro_all_wet_dist <- vegdist(arthro_all_wet, method = 'bray')
 arthro_all_wet.nmds <- metaMDS(arthro_all_wet_dist)
 permutation_all_wet <- adonis2(arthro_all_wet_dist ~ methodClass, data = metadata_samples_wet)
 permutation_all_wet
@@ -157,12 +188,17 @@ with(metadata_samples_wet, ordiellipse(arthro_all_wet.nmds, methodClass,draw =  
 with(metadata_samples_wet, ordiellipse(arthro_all_wet.nmds, methodClass,draw =  'polygon', col = c('darkgoldenrod'), label = FALSE,show.groups =(c("parallel"))))
 with(metadata_samples_wet, text(arthro_all_wet.nmds, labels = metadata_samples_wet$location_good,pos = 2, cex = 0.4))
 
+all_wet_tree <- nj(arthro_all_wet_dist)
+ggtree(all_wet_tree, layout = "rectangular") %<+% metadata_samples_wet +
+  geom_tiplab(aes(colour = methodClass)) + 
+  theme(legend.position = "right")
+
 ```
 
 ```{r}
 arthro_all_dry <- subset(arthro_all_binary, metadata_samples$season == "dry")
 metadata_samples_dry <- subset(metadata_samples, metadata_samples$season == "dry")
-arthro_all_dry_dist <- vegdist(arthro_all_dry, method = 'jaccard')
+arthro_all_dry_dist <- vegdist(arthro_all_dry, method = 'bray')
 arthro_all_dry.nmds <- metaMDS(arthro_all_dry_dist)
 
 permutation_all_dry <- adonis2(arthro_all_dry_dist ~ methodClass, data = metadata_samples_dry)
@@ -179,6 +215,12 @@ with(metadata_samples_dry, ordiellipse(arthro_all_dry.nmds, methodClass, draw = 
 with(metadata_samples_dry, ordiellipse(arthro_all_dry.nmds, methodClass, draw =  'polygon', col = c('darkorchid'), label = FALSE, show.groups =(c("metabr"))))
 with(metadata_samples_dry, ordiellipse(arthro_all_dry.nmds, methodClass, draw =  'polygon',  col = c('darkgoldenrod'), label = FALSE, show.groups =(c("parallel"))))
 with(metadata_samples_dry, text(arthro_all_dry.nmds, labels = metadata_samples_dry$location_good,pos = 2, cex = 0.4))
+
+all_dry_tree <- nj(arthro_all_dry_dist)
+ggtree(all_dry_tree, layout = "rectangular") %<+% metadata_samples_dry +
+  geom_tiplab(aes(colour = methodClass)) + 
+  theme(legend.position = "right")
+
 
 ```
 
