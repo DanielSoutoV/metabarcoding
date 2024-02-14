@@ -135,6 +135,14 @@ focal_arthro_binary <- ifelse(focal_arthro_trans[, -1] > 0,1,0) #no need since t
 #write.csv(focal_arthro_binary, 'data/correct_anal/focal_arthro_bianry.csv')
 
 arthroall_dist <- vegdist(focal_arthro_binary, method = "bray") #distance marix of binary data using Jaccard method
+
+#write.csv(arthro_all_binary, "./arthro_all_binary.csv")
+
+metadata_samples$methodClass <- as.factor(metadata_samples$methodClass) #these are needed for plotting issues below 
+metadata_samples$season <- as.factor(metadata_samples$season)
+metadata_samples$location_good <- as.factor(metadata_samples$location_good)
+
+arthroall_dist <- vegdist(focal_arthro_binary, method = "bray") #distance marix of binary data using Jaccard method
 arthro_all.nmds <- metaMDS(arthroall_dist) #run meta nmds analysis
 permanova_all <- adonis2(arthroall_dist ~ methodClass, data = metadata_samples)
 summary(permanova_all)
@@ -146,11 +154,17 @@ permanova_all_sites
 
 plot(arthro_all.nmds, display = 'sites', type = 'n')
 points(arthro_all.nmds, display = 'sites',  pch = 20,col = ifelse(metadata_samples$season == "wet", "darkblue", "brown4" ))
-with(metadata_samples, ordiellipse(arthro_all.nmds, methodClass,draw =  'polygon',col = c('firebrick4'),
+with(metadata_samples, ordihull(arthro_all.nmds, methodClass,draw =  'polygon',col = c('firebrick4'),
                                   show.groups =(c("trad"))))
-with(metadata_samples, ordiellipse(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), 
+with(metadata_samples, ordispider(arthro_all.nmds, methodClass,draw =  'polygon',col = c('firebrick4'),
+                                  show.groups =(c("trad"))))
+with(metadata_samples, ordihull(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), 
                                   show.groups =(c("metabr"))))
-with(metadata_samples, ordiellipse(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkorchid'), 
+with(metadata_samples, ordispider(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), 
+                                  show.groups =(c("metabr"))))
+with(metadata_samples, ordihull(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkorchid'), 
+                                  show.groups =(c("parallel"))))
+with(metadata_samples, ordispider(arthro_all.nmds, methodClass, draw =  'polygon', col = c('darkorchid'), 
                                   show.groups =(c("parallel"))))
 
 all_tree <- nj(arthroall_dist)
@@ -161,8 +175,8 @@ ggtree(all_tree, layout = "rectangular") %<+% metadata_all +
 ```
 
 ```{r}
-
 arthro_all_wet <- read.csv('data/correct_anal/arthro_all_wet.csv', row.names = 1)
+
 metadata_samples_wet <- subset(metadata_samples, metadata_samples$season == "wet")
 arthro_all_wet_dist <- vegdist(arthro_all_wet, method = 'bray')
 arthro_all_wet.nmds <- metaMDS(arthro_all_wet_dist)
