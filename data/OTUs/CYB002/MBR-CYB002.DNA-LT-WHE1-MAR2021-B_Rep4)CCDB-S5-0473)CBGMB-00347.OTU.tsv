@@ -1,0 +1,14 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Orthoptera	Tettigoniidae	Phaneropterinae	Ceraia	Ceraia mytra	97.92	461	8	8	98.26	0.00	457.89	39.3	0
+OTU2								0.00	86	5	1	94.19	80.00	458.33	32.09	0
+OTU3								0.00	35	2	1	94.29	50.00	457.6	33.78	0
+OTU4								0.00	30	1	1	96.67	0.00	191	36.13	0
+OTU5								0.00	12	1	1	91.67	0.00	186	37.1	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Crambidae	Scopariinae	Eudonia	Eudonia stenota	90.57	11	1	1	90.91	0.00	457	28.67	0
+OTU7	Arthropoda	Insecta	Diptera					96.25	11	1	1	90.91	0.00	458	39.52	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Thyrididae	Siculodinae	Hypolamprus	Hypolamprus stellata	97.59	10	1	1	90.00	0.00	458	30.57	0
+OTU9	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae			96.05	8	1	1	87.50	0.00	458	30.13	0
+OTU10	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	Ectomyelois	Ectomyelois muriscis	90.15	8	1	1	87.50	0.00	458	29.48	0
+OTU11	Arthropoda	Insecta	Orthoptera	Tettigoniidae	Phaneropterinae	Ceraia	Ceraia mytra	96.43	6	1	1	83.33	0.00	458	39.08	0
+OTU12	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sp. gmycC51	97.81	5	1	1	80.00	0.00	458	38.65	0
+OTU13								0.00	5	1	1	80.00	0.00	458	33.19	0

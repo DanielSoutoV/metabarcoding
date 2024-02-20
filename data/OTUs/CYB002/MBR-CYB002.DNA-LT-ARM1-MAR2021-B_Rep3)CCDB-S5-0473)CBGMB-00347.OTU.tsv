@@ -1,0 +1,8 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	250	6	1	97.60	83.33	457.82	32.97	0
+OTU2								0.00	92	3	1	96.74	66.67	106.95	26.69	0
+OTU3								0.00	61	5	1	91.80	80.00	456.61	34.94	0
+OTU4	Arthropoda	Insecta	Lepidoptera					94.53	7	1	1	85.71	0.00	458	32.31	0
+OTU6	Arthropoda	Insecta	Diptera	Chironomidae				94.79	5	1	1	80.00	0.00	458	35.15	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Epimecis	Epimecis conjugaria	97.15	5	1	1	80.00	0.00	458	29.48	0
+OTU5								0.00	5	1	1	80.00	0.00	176	35.8	0

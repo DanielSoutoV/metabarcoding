@@ -1,0 +1,27 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Lepidoptera	Depressariidae				95.18	265	9	9	96.60	0.00	457.75	34.75	0
+OTU2								0.00	48	2	1	95.83	50.00	137.75	35.57	0
+OTU3	Arthropoda	Insecta	Coleoptera	Curculionidae	Platypodinae	Euplatypus	Euplatypus sp. 5YB	96.19	47	2	2	95.74	0.00	135.89	34.59	0
+OTU4	Arthropoda	Insecta	Lepidoptera					94.95	29	2	2	93.10	0.00	457.69	33.65	0
+OTU5								0.00	29	1	1	96.55	0.00	107	27.1	0
+OTU6								0.00	27	2	1	92.59	50.00	457.52	34.1	0
+OTU7								0.00	27	4	1	85.19	75.00	457.59	37.15	0
+OTU8	Arthropoda	Insecta	Blattodea					92.76	20	2	2	90.00	0.00	457.7	34.67	0
+OTU9								0.00	19	2	1	89.47	50.00	103	36.33	0
+OTU10								0.00	16	2	1	87.50	50.00	112.63	40.84	0
+OTU11								0.00	14	2	1	85.71	50.00	457.57	37.59	0
+OTU12								0.00	13	1	1	92.31	0.00	111	26.13	0
+OTU14								0.00	11	1	1	90.91	0.00	458	42.58	0
+OTU13								0.00	11	1	1	90.91	0.00	458	30.79	0
+OTU15								0.00	9	1	1	88.89	0.00	112	24.11	0
+OTU16	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Episcepsis	Episcepsis venata	90.37	8	1	1	87.50	0.00	458	29.91	0
+OTU17								0.00	8	1	1	87.50	0.00	105	25.71	0
+OTU18								0.00	7	1	1	85.71	0.00	458	40.39	0
+OTU19	Arthropoda	Insecta	Diptera					96.25	6	1	1	83.33	0.00	458	39.52	0
+OTU21								0.00	6	1	1	83.33	0.00	122	27.05	0
+OTU20								0.00	6	1	1	83.33	0.00	458	35.37	0
+OTU25								0.00	5	1	1	80.00	0.00	156	32.05	0
+OTU24	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Antaeotricha	Antaeotricha Janzen245	94.09	5	1	1	80.00	0.00	458	31.88	0
+OTU26	Arthropoda	Insecta	Lepidoptera					94.31	5	1	1	80.00	0.00	458	32.31	0
+OTU23								0.00	5	1	1	80.00	0.00	458	35.15	0
+OTU22								0.00	5	1	1	80.00	0.00	458	38.43	0

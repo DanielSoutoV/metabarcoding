@@ -1,0 +1,17 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Coleoptera	Rhipiceridae				90.64	2373	37	6	98.44	83.78	455.42	40.17	0
+OTU2								0.00	664	19	1	97.14	94.74	457.31	36.7	0
+OTU3	Arthropoda	Insecta	Diptera	Calliphoridae				96.93	115	2	2	98.26	0.00	457.45	35.41	0
+OTU4	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Natada	Natada subpectinata	97.37	26	1	1	96.15	0.00	458	28.6	0
+OTU5	Arthropoda	Insecta	Coleoptera	Curculionidae	Platypodinae	Euplatypus	Euplatypus sp. 5YB	96.19	22	2	2	90.91	0.00	135.77	34.62	0
+OTU6	Arthropoda	Insecta	Diptera					96.25	20	1	1	95.00	0.00	458	39.52	0
+OTU7								0.00	15	1	1	93.33	0.00	178	37.64	0
+OTU8	Arthropoda	Insecta	Coleoptera	Carabidae	Paussinae			92.98	11	2	2	81.82	0.00	457.45	32.57	0
+OTU9	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Episcepsis	Episcepsis venata	90.37	10	1	1	90.00	0.00	458	29.91	0
+OTU10	Arthropoda	Insecta	Hemiptera	Cicadellidae				97.80	10	2	2	80.00	0.00	457.5	34.32	0
+OTU11								0.00	8	1	1	87.50	0.00	457	33.7	0
+OTU12								0.00	7	1	1	85.71	0.00	178	34.83	0
+OTU14								0.00	5	1	1	80.00	0.00	458	39.96	0
+OTU15								0.00	5	1	1	80.00	0.00	458	30.79	0
+OTU16								0.00	5	1	1	80.00	0.00	458	33.84	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Geometridae				97.91	5	1	1	80.00	0.00	458	30.35	0

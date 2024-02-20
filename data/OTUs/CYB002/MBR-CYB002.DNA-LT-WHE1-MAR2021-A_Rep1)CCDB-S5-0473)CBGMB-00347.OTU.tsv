@@ -1,0 +1,13 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Ostha	Ostha Janzen249	90.57	60	4	2	93.33	50.00	456.68	35.11	0
+OTU2								0.00	57	2	1	96.49	50.00	190.89	36.15	0
+OTU3	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	42	4	4	90.48	0.00	458.67	30.31	0
+OTU4	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma	Stenoma sp.	96.93	29	2	2	93.10	0.00	457.69	30.59	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Antaeotricha		97.59	13	1	1	92.31	0.00	458	32.1	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Episcepsis	Episcepsis venata	90.37	12	1	1	91.67	0.00	458	29.91	0
+OTU7								0.00	11	1	1	90.91	0.00	120	24.17	0
+OTU8								0.00	10	1	1	90.00	0.00	107	27.1	0
+OTU9	Arthropoda	Insecta	Orthoptera	Gryllidae				94.52	8	1	1	87.50	0.00	457	38.29	0
+OTU10	Arthropoda	Insecta	Diptera					96.25	7	1	1	85.71	0.00	458	39.52	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Herminodes	Herminodes juvenalisDHJ02	97.80	6	1	1	83.33	0.00	455	32.53	0
+OTU12								0.00	5	1	1	80.00	0.00	191	37.17	0

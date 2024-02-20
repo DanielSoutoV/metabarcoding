@@ -1,0 +1,17 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	82	3	1	96.34	66.67	191.09	36.1	0
+OTU2	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Ostha	Ostha Janzen249	90.77	50	5	4	90.00	20.00	456.48	35.08	0
+OTU3								0.00	40	1	1	97.50	0.00	107	27.1	0
+OTU4	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma	Stenoma sp.	96.93	32	2	2	93.75	0.00	457.66	30.59	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	24	2	2	91.67	0.00	459.21	30.27	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Antaeotricha		97.59	19	2	2	89.47	0.00	457.68	32.12	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Herminodes	Herminodes juvenalisDHJ02	97.81	11	2	2	81.82	0.00	456.91	32.59	0
+OTU8								0.00	10	1	1	90.00	0.00	131	27.48	0
+OTU9	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Episcepsis	Episcepsis venata	90.37	9	1	1	88.89	0.00	458	29.91	0
+OTU10								0.00	8	1	1	87.50	0.00	156	32.69	0
+OTU11								0.00	7	1	1	85.71	0.00	113	40.71	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Ischnopteris	Ischnopteris bifinitaDHJ02	97.15	6	1	1	83.33	0.00	459	29.85	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Antaeotricha	Antaeotricha Janzen245	94.08	5	1	1	80.00	0.00	457	31.95	0
+OTU15								0.00	5	1	1	80.00	0.00	458	33.19	0
+OTU16	Arthropoda	Insecta	Diptera					96.25	5	1	1	80.00	0.00	458	39.52	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	phyBioLep01	phyBioLep01 BioLep3631	93.22	5	1	1	80.00	0.00	458	29.91	0

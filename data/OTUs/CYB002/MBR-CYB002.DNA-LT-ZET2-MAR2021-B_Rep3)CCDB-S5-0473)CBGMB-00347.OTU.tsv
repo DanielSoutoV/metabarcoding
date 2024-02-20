@@ -1,0 +1,19 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	163	11	1	93.25	90.91	457.31	35.81	0
+OTU2								0.00	103	3	1	97.09	66.67	143.79	31.88	0
+OTU3	Arthropoda	Insecta	Orthoptera	Tettigoniidae				97.90	27	3	3	88.89	0.00	457.33	34.99	0
+OTU4	Arthropoda	Insecta	Hemiptera	Pentatomidae				94.63	19	2	2	89.47	0.00	458.26	34.97	0
+OTU5								0.00	16	2	1	87.50	50.00	130.69	27.55	0
+OTU6								0.00	14	2	1	85.71	50.00	457.57	33	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	7	1	1	85.71	0.00	459	30.28	0
+OTU9								0.00	7	1	1	85.71	0.00	103	36.89	0
+OTU7								0.00	7	1	1	85.71	0.00	121	34.71	0
+OTU10	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sinuatum	97.59	7	1	1	85.71	0.00	458	38.65	0
+OTU14	Arthropoda	Insecta	Hemiptera	Cicadellidae				97.58	6	1	1	83.33	0.00	458	34.06	0
+OTU15								0.00	6	1	1	83.33	0.00	222	39.19	0
+OTU11								0.00	6	1	1	83.33	0.00	144	32.64	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Herminodes	Herminodes juvenalisDHJ02	97.80	6	1	1	83.33	0.00	456	32.46	0
+OTU13								0.00	6	1	1	83.33	0.00	346	38.15	0
+OTU16	Arthropoda	Insecta	Lepidoptera	Attevidae		Atteva	Atteva pustulella	97.15	5	1	1	80.00	0.00	458	31.22	0
+OTU17								0.00	5	1	1	80.00	0.00	268	33.21	0
+OTU18								0.00	5	1	1	80.00	0.00	185	37.84	0

@@ -1,0 +1,23 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Hemiptera	Cicadidae				94.07	523	29	29	94.46	0.00	409.83	33.16	0
+OTU2								0.00	75	2	1	97.33	50.00	106.89	31.81	0
+OTU3								0.00	43	3	1	93.02	66.67	457.65	31.68	0
+OTU4	Arthropoda	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Pelochrista	Pelochrista fuscostriata	94.31	33	5	5	84.85	0.00	122.09	31.37	0
+OTU5	Arthropoda	Insecta	Blattodea					96.48	26	2	2	92.31	0.00	457.81	37.79	0
+OTU6	Arthropoda	Insecta	Blattodea					92.76	25	2	2	92.00	0.00	457.68	34.67	0
+OTU7								0.00	21	1	1	95.24	0.00	107	27.1	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae			96.05	20	1	1	95.00	0.00	458	30.13	0
+OTU9								0.00	20	2	1	90.00	50.00	457.75	33.21	0
+OTU10	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Ostha	Ostha Janzen249	90.57	12	1	1	91.67	0.00	457	35.23	0
+OTU11								0.00	10	1	1	90.00	0.00	458	30.79	0
+OTU14	Arthropoda	Insecta	Diptera					96.25	9	1	1	88.89	0.00	458	39.52	0
+OTU12								0.00	9	1	1	88.89	0.00	458	29.04	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Tineidae	Acrolophinae	Acrolophus	Acrolophus BioLep39	94.09	9	1	1	88.89	0.00	458	32.53	0
+OTU15								0.00	7	1	1	85.71	0.00	105	25.71	0
+OTU16								0.00	6	1	1	83.33	0.00	113	40.71	0
+OTU17	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	phyBioLep01	phyBioLep01 BioLep207	94.75	6	1	1	83.33	0.00	458	32.75	0
+OTU18								0.00	6	1	1	83.33	0.00	198	33.84	0
+OTU19	Arthropoda	Insecta	Hemiptera					96.26	5	1	1	80.00	0.00	458	33.84	0
+OTU21								0.00	5	1	1	80.00	0.00	458	33.84	0
+OTU20								0.00	5	1	1	80.00	0.00	458	40.17	0
+OTU22								0.00	5	1	1	80.00	0.00	459	33.99	0

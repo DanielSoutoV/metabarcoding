@@ -1,0 +1,19 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	91.85	2605	48	48	98.16	0.00	457.56	33.43	0
+OTU2								0.00	274	8	1	97.08	87.50	457.5	36.27	0
+OTU3								0.00	196	7	1	96.43	85.71	456.2	32.14	0
+OTU4								0.00	88	3	1	96.59	66.67	106.88	31.81	0
+OTU5								0.00	76	2	1	97.37	50.00	106.92	27.12	0
+OTU6								0.00	44	2	1	95.45	50.00	127.86	28.94	0
+OTU7								0.00	29	3	1	89.66	66.67	457.83	33.86	0
+OTU8								0.00	15	2	1	86.67	50.00	185	34.77	0
+OTU9	Arthropoda	Insecta	Diptera					96.25	13	1	1	92.31	0.00	458	39.52	0
+OTU10								0.00	12	2	1	83.33	50.00	458	34.59	0
+OTU11								0.00	12	1	1	91.67	0.00	177	27.12	0
+OTU12								0.00	10	2	1	80.00	50.00	457.5	35.85	0
+OTU13	Arthropoda	Insecta	Diptera	Limoniidae	Chioneinae	Erioptera	Erioptera villosa	91.07	8	1	1	87.50	0.00	113	36.28	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae			96.05	6	1	1	83.33	0.00	458	30.13	0
+OTU15								0.00	6	1	1	83.33	0.00	156	32.69	0
+OTU16								0.00	6	1	1	83.33	0.00	458	31.44	0
+OTU17								0.00	6	1	1	83.33	0.00	113	40.71	0
+OTU18	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	91.43	5	1	1	80.00	0.00	458	33.84	0

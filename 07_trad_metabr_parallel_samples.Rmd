@@ -1026,8 +1026,8 @@ venn_overlap
 ```{r}
 # This section is just to have a general metabarcoding vs parallel analysis (venn diagram and heat tree)
 
-tradmetabrparallel <- read.csv('data/final_anal/tradmetabrparallel_final_reps.csv') #the file "_reps"is the same as tradmetabrparallel_final excep I copy pasted the 'prarallel' samples to keep as traditional so they would show up in the venn diagram which uses ALL traditional samples. Otehrwise it treats them as a separate sampling procedure.
-sample <- read.csv('data/final_anal/metadata_trad_metabr_parallel.csv') #this includes info on location/collection method/classification method and any more info can be added
+tradmetabrparallel <- read.csv('data/correct_anal/tradmetabrparallel_final_reps.csv') #the file "_reps"is the same as tradmetabrparallel_final excep I copy pasted the 'prarallel' samples to keep as traditional so they would show up in the venn diagram which uses ALL traditional samples. Otehrwise it treats them as a separate sampling procedure.
+sample <- read.csv('data/correct_anal/metadata_trad_metabr_parallel.csv') #this includes info on location/collection method/classification method and any more info can be added
 obj <- parse_tax_data(tradmetabrparallel,
                       class_cols = "classification",
                       class_sep = ";",
@@ -1044,7 +1044,6 @@ no_reads <- rowSums(obj$data$tax_data[, sample_parallel$sampleID]) == 0 #check f
 sum(no_reads) #in this case there are 1348 need to be removed
 
 obj <- filter_obs(obj, data = "tax_data", ! no_reads, drop_taxa = TRUE) 
-print(obj)
 
 obj$data$tax_table <- calc_taxon_abund(obj, data = "tax_data", cols = sample_parallel$sampleID)
 obj$data$tax_props <- calc_obs_props(obj, "tax_data", cols= sample_parallel$sampleID, other_cols = TRUE)

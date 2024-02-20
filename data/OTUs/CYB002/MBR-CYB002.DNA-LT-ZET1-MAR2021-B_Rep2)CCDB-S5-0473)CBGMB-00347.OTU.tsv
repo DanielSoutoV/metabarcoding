@@ -1,0 +1,21 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sp. gmycC51	97.81	108	6	6	94.44	0.00	457.21	38.6	0
+OTU2								0.00	104	5	1	95.19	80.00	458.2	35	0
+OTU3								0.00	96	7	1	92.71	85.71	457.8	37.72	0
+OTU4								0.00	77	1	1	98.70	0.00	140	41.43	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae			96.71	76	5	5	93.42	0.00	457.51	29.23	0
+OTU6								0.00	64	6	1	90.63	83.33	457.95	37.12	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Depressariidae				95.18	62	3	3	95.16	0.00	457.77	34.68	0
+OTU8								0.00	39	2	1	94.87	50.00	111.82	24.15	0
+OTU9								0.00	22	2	1	90.91	50.00	457.64	40.43	0
+OTU10								0.00	18	1	1	94.44	0.00	179	36.31	0
+OTU11	Arthropoda	Insecta	Psocodea	Psocidae				92.01	18	3	3	83.33	0.00	457.72	33.43	0
+OTU12								0.00	13	1	1	92.31	0.00	105	25.71	0
+OTU13	Arthropoda	Insecta	Lepidoptera					96.25	12	2	2	83.33	0.00	457.5	31.69	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	phyBioLep01	phyBioLep01 BioLep777	97.36	9	1	1	88.89	0.00	457	30.85	0
+OTU15	Arthropoda	Insecta	Lepidoptera	Gelechiidae	Anacampsinae	Aproaerema	Aproaerema albifrontella	90.15	6	1	1	83.33	0.00	457	31.51	0
+OTU16	Arthropoda	Insecta	Lepidoptera	Noctuidae				92.32	6	1	1	83.33	0.00	457	27.79	0
+OTU17								0.00	5	1	1	80.00	0.00	121	35.54	0
+OTU20								0.00	5	1	1	80.00	0.00	143	37.06	0
+OTU18								0.00	5	1	1	80.00	0.00	458	38.21	0
+OTU19	Arthropoda	Insecta	Orthoptera	Trigonidiidae				97.36	5	1	1	80.00	0.00	458	36.24	0

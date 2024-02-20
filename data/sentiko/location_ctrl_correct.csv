@@ -1,0 +1,285 @@
+sampleID,site,day,slope,vegetation,moonlight,location
+BLANK_IonCode_0194,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0195,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0196,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0294,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0295,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0296,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0394,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+BLANK_IonCode_0395,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl,Neg_ctrl
+CBGMB00486 A01_PNGMBSI1,Kausi,A,flat,secondary,half,road
+CBGMB00486 A03_PNGMBSI1_Rep3,Kausi,A,flat,secondary,half,road
+CBGMB00486 A04_PNGMBSI2,Kausi,B,flat,secondary,dark,forest
+CBGMB00486 A05_PNGMBSI2_Rep2,Kausi,B,flat,secondary,dark,forest
+CBGMB00486 A06_PNGMBSI2_Rep3,Kausi,B,flat,secondary,dark,forest
+CBGMB00486 A07_PNGMBSI3,Kausi,C,steep,secondary,dark,track
+CBGMB00486 A08_PNGMBSI3_Rep2,Kausi,C,steep,secondary,dark,track
+CBGMB00486 A09_PNGMBSI3_Rep3,Kausi,C,steep,secondary,dark,track
+CBGMB00486 A10_PNGMBSI4,Kausi,D,flat,primary,dark,road
+CBGMB00486 A11_PNGMBSI4_Rep2,Kausi,D,flat,primary,dark,road
+CBGMB00486 A12_PNGMBSI4_Rep3,Kausi,D,flat,primary,dark,road
+CBGMB00486 B01_PNGMBSI5,Kausi,E,flat,secondary,dark,garden
+CBGMB00486 B02_PNGMBSI5_Rep2,Kausi,E,flat,secondary,dark,garden
+CBGMB00486 B03_PNGMBSI5_Rep3,Kausi,E,flat,secondary,dark,garden
+CBGMB00486 B04_PNGMBSI6,Kausi,A,flat,secondary,half,road
+CBGMB00486 B05_PNGMBSI6_Rep2,Kausi,A,flat,secondary,half,road
+CBGMB00486 B06_PNGMBSI6_Rep3,Kausi,A,flat,secondary,half,road
+CBGMB00486 B07_PNGMBSI7,Kausi,B,flat,secondary,dark,forest
+CBGMB00486 B08_PNGMBSI7_Rep2,Kausi,B,flat,secondary,dark,forest
+CBGMB00486 B09_PNGMBSI7_Rep3,Kausi,B,flat,secondary,dark,forest
+CBGMB00486 B10_PNGMBSI8,Kausi,C,steep,secondary,dark,track
+CBGMB00486 B11_PNGMBSI8_Rep2,Kausi,C,steep,secondary,dark,track
+CBGMB00486 B12_PNGMBSI8_Rep3,Kausi,C,steep,secondary,dark,track
+CBGMB00486 C01_PNGMBSI9,Kausi,D,flat,primary,dark,road
+CBGMB00486 C02_PNGMBSI9_Rep2,Kausi,D,flat,primary,dark,road
+CBGMB00486 C03_PNGMBSI9_Rep3,Kausi,D,flat,primary,dark,road
+CBGMB00486 C04_PNGMBSI10,Kausi,E,flat,secondary,dark,garden
+CBGMB00486 C05_PNGMBSI10_Rep2,Kausi,E,flat,secondary,dark,garden
+CBGMB00486 C06_PNGMBSI10_Rep3,Kausi,E,flat,secondary,dark,garden
+CBGMB00486 C07_PNGMBSI11,Numba,A,cliff,primary,full,mountain
+CBGMB00486 C08_PNGMBSI11_Rep2,Numba,A,cliff,primary,full,mountain
+CBGMB00486 C09_PNGMBSI11_Rep3,Numba,A,cliff,primary,full,mountain
+CBGMB00486 C10_PNGMBSI12,Numba,B,cliff,primary,dark,landslide
+CBGMB00486 C11_PNGMBSI12_Rep2,Numba,B,cliff,primary,dark,landslide
+CBGMB00486 C12_PNGMBSI12_Rep3,Numba,B,cliff,primary,dark,landslide
+CBGMB00486 D01_PNGMBSI13,Numba,C,cliff,primary,dark,ridge
+CBGMB00486 D02_PNGMBSI13_Rep2,Numba,C,cliff,primary,dark,ridge
+CBGMB00486 D03_PNGMBSI13_Rep3,Numba,C,cliff,primary,dark,ridge
+CBGMB00486 D04_PNGMBSI14,Numba,D,flat,primary,dark,ridge
+CBGMB00486 D05_PNGMBSI14_Rep2,Numba,D,flat,primary,dark,ridge
+CBGMB00486 D06_PNGMBSI14_Rep3,Numba,D,flat,primary,dark,ridge
+CBGMB00486 D07_PNGMBSI15,Numba,E,flat,primary,dark,tree gap
+CBGMB00486 D08_PNGMBSI15_Rep2,Numba,E,flat,primary,dark,tree gap
+CBGMB00486 D09_PNGMBSI15_Rep3,Numba,E,flat,primary,dark,tree gap
+CBGMB00486 D10_PNGMBSI16,Numba,A,cliff,primary,full,mountain
+CBGMB00486 D11_PNGMBSI16_Rep2,Numba,A,cliff,primary,full,mountain
+CBGMB00486 D12_PNGMBSI16_Rep3,Numba,A,cliff,primary,full,mountain
+CBGMB00486 E01_PNGMBSI17,Numba,B,cliff,primary,dark,landslide
+CBGMB00486 E02_PNGMBSI17_Rep2,Numba,B,cliff,primary,dark,landslide
+CBGMB00486 E03_PNGMBSI17_Rep3,Numba,B,cliff,primary,dark,landslide
+CBGMB00486 E04_PNGMBSI18,Numba,C,cliff,primary,dark,ridge
+CBGMB00486 E05_PNGMBSI18_Rep2,Numba,C,cliff,primary,dark,ridge
+CBGMB00486 E06_PNGMBSI18_Rep3,Numba,C,cliff,primary,dark,ridge
+CBGMB00486 E07_PNGMBSI19,Numba,D,flat,primary,dark,ridge
+CBGMB00486 E08_PNGMBSI19_Rep2,Numba,D,flat,primary,dark,ridge
+CBGMB00486 E09_PNGMBSI19_Rep3,Numba,D,flat,primary,dark,ridge
+CBGMB00486 E10_PNGMBSI20,Numba,E,flat,primary,dark,tree gap
+CBGMB00486 E12_PNGMBSI20_Rep3,Numba,E,flat,primary,dark,tree gap
+CBGMB00486 F01_PNGMBSI21,Memeku,A,cliff,primary,dark,forest
+CBGMB00486 F02_PNGMBSI21_Rep2,Memeku,A,cliff,primary,dark,forest
+CBGMB00486 F03_PNGMBSI21_Rep3,Memeku,A,cliff,primary,dark,forest
+CBGMB00486 F04_PNGMBSI22,Memeku,B,cliff,primary,dark,forest
+CBGMB00486 F05_PNGMBSI22_Rep2,Memeku,B,cliff,primary,dark,forest
+CBGMB00486 F06_PNGMBSI22_Rep3,Memeku,B,cliff,primary,dark,forest
+CBGMB00486 F07_PNGMBSI23,Memeku,C,flat,primary,full,forest
+CBGMB00486 F08_PNGMBSI23_Rep2,Memeku,C,flat,primary,full,forest
+CBGMB00486 F09_PNGMBSI23_Rep3,Memeku,C,flat,primary,full,forest
+CBGMB00486 F10_PNGMBSI24,Memeku,D,cliff,primary,dark,ridge
+CBGMB00486 F11_PNGMBSI24_Rep2,Memeku,D,cliff,primary,dark,ridge
+CBGMB00486 F12_PNGMBSI24_Rep3,Memeku,D,cliff,primary,dark,ridge
+CBGMB00486 G01_PNGMBSI25,Memeku,E,cliff,primary,quarter,river
+CBGMB00486 G02_PNGMBSI25_Rep2,Memeku,E,cliff,primary,quarter,river
+CBGMB00486 G03_PNGMBSI25_Rep3,Memeku,E,cliff,primary,quarter,river
+CBGMB00486 G04_PNGMBSI26,Memeku,A,cliff,primary,dark,forest
+CBGMB00486 G05_PNGMBSI26_Rep2,Memeku,A,cliff,primary,dark,forest
+CBGMB00486 G06_PNGMBSI26_Rep3,Memeku,A,cliff,primary,dark,forest
+CBGMB00486 G07_PNGMBSI27,Memeku,B,cliff,primary,dark,forest
+CBGMB00486 G08_PNGMBSI27_Rep2,Memeku,B,cliff,primary,dark,forest
+CBGMB00486 G09_PNGMBSI27_Rep3,Memeku,B,cliff,primary,dark,forest
+CBGMB00486 G10_PNGMBSI28,Memeku,C,flat,primary,full,forest
+CBGMB00486 G11_PNGMBSI28_Rep2,Memeku,C,flat,primary,full,forest
+CBGMB00486 G12_PNGMBSI28_Rep3,Memeku,C,flat,primary,full,forest
+CBGMB00486 H01_PNGMBSI29,Memeku,D,cliff,primary,dark,ridge
+CBGMB00486 H02_PNGMBSI29_Rep2,Memeku,D,cliff,primary,dark,ridge
+CBGMB00486 H03_PNGMBSI29_Rep3,Memeku,D,cliff,primary,dark,ridge
+CBGMB00486 H04_PNGMBSI30,Memeku,E,cliff,primary,quarter,river
+CBGMB00486 H05_PNGMBSI30_Rep2,Memeku,E,cliff,primary,quarter,river
+CBGMB00486 H06_PNGMBSI30_Rep3,Memeku,E,cliff,primary,quarter,river
+CBGMB00487 A01_PNGMBSI31,Dengenumbu,A,cliff,primary,full,forest
+CBGMB00487 A02_PNGMBSI31_Rep2,Dengenumbu,A,cliff,primary,full,forest
+CBGMB00487 A03_PNGMBSI31_Rep3,Dengenumbu,A,cliff,primary,full,forest
+CBGMB00487 A04_PNGMBSI32,Dengenumbu,B,cliff,secondary,dark,garden
+CBGMB00487 A05_PNGMBSI32_Rep2,Dengenumbu,B,cliff,secondary,dark,garden
+CBGMB00487 A06_PNGMBSI32_Rep3,Dengenumbu,B,cliff,secondary,dark,garden
+CBGMB00487 A07_PNGMBSI33,Dengenumbu,C,slope,primary,full,road
+CBGMB00487 A08_PNGMBSI33_Rep2,Dengenumbu,C,slope,primary,full,road
+CBGMB00487 A09_PNGMBSI33_Rep3,Dengenumbu,C,slope,primary,full,road
+CBGMB00487 A10_PNGMBSI34,Dengenumbu,D,flat,secondary,half,road
+CBGMB00487 A11_PNGMBSI34_Rep2,Dengenumbu,D,flat,secondary,half,road
+CBGMB00487 A12_PNGMBSI34_Rep3,Dengenumbu,D,flat,secondary,half,road
+CBGMB00487 B01_PNGMBSI35,Dengenumbu,E,valley,primary,full,river
+CBGMB00487 B02_PNGMBSI35_Rep2,Dengenumbu,E,valley,primary,full,river
+CBGMB00487 B03_PNGMBSI35_Rep3,Dengenumbu,E,valley,primary,full,river
+CBGMB00487 B04_PNGMBSI36,Dengenumbu,A,cliff,primary,full,forest
+CBGMB00487 B05_PNGMBSI36_Rep2,Dengenumbu,A,cliff,primary,full,forest
+CBGMB00487 B06_PNGMBSI36_Rep3,Dengenumbu,A,cliff,primary,full,forest
+CBGMB00487 B07_PNGMBSI37,Dengenumbu,B,cliff,secondary,dark,garden
+CBGMB00487 B08_PNGMBSI37_Rep2,Dengenumbu,B,cliff,secondary,dark,garden
+CBGMB00487 B09_PNGMBSI37_Rep3,Dengenumbu,B,cliff,secondary,dark,garden
+CBGMB00487 B10_PNGMBSI38,Dengenumbu,C,slope,primary,full,road
+CBGMB00487 B11_PNGMBSI38_Rep2,Dengenumbu,C,slope,primary,full,road
+CBGMB00487 B12_PNGMBSI38_Rep3,Dengenumbu,C,slope,primary,full,road
+CBGMB00487 C01_PNGMBSI39,Dengenumbu,D,flat,secondary,half,road
+CBGMB00487 C02_PNGMBSI39_Rep2,Dengenumbu,D,flat,secondary,half,road
+CBGMB00487 C03_PNGMBSI39_Rep3,Dengenumbu,D,flat,secondary,half,road
+CBGMB00487 C04_PNGMBSI40,Dengenumbu,E,valley,primary,full,river
+CBGMB00487 C05_PNGMBSI40_Rep2,Dengenumbu,E,valley,primary,full,river
+CBGMB00487 C06_PNGMBSI40_Rep3,Dengenumbu,E,valley,primary,full,river
+CBGMB00487 C07_PNGMBSI41,Sinopass,A,flat,primary,full,forest
+CBGMB00487 C08_PNGMBSI41_Rep2,Sinopass,A,flat,primary,full,forest
+CBGMB00487 C09_PNGMBSI41_Rep3,Sinopass,A,flat,primary,full,forest
+CBGMB00487 C10_PNGMBSI42,Sinopass,B,cliff,secondary,dark,road
+CBGMB00487 C12_PNGMBSI42_Rep3,Sinopass,B,cliff,secondary,dark,road
+CBGMB00487 D01_PNGMBSI43,Sinopass,C,slope,primary,full,village
+CBGMB00487 D02_PNGMBSI43_Rep2,Sinopass,C,slope,primary,full,village
+CBGMB00487 D03_PNGMBSI43_Rep3,Sinopass,C,slope,primary,full,village
+CBGMB00487 D04_PNGMBSI44,Sinopass,D,cliff,open,dark,village
+CBGMB00487 D05_PNGMBSI44_Rep2,Sinopass,D,cliff,open,dark,village
+CBGMB00487 D06_PNGMBSI44_Rep3,Sinopass,D,cliff,open,dark,village
+CBGMB00487 D07_PNGMBSI45,Sinopass,E,cliff,primary,dark,road
+CBGMB00487 D08_PNGMBSI45_Rep2,Sinopass,E,cliff,primary,dark,road
+CBGMB00487 D09_PNGMBSI45_Rep3,Sinopass,E,cliff,primary,dark,road
+CBGMB00487 D10_PNGMBSI46,Sinopass,A,flat,primary,full,forest
+CBGMB00487 D11_PNGMBSI46_Rep2,Sinopass,A,flat,primary,full,forest
+CBGMB00487 D12_PNGMBSI46_Rep3,Sinopass,A,flat,primary,full,forest
+CBGMB00487 E01_PNGMBSI47,Sinopass,B,cliff,secondary,dark,road
+CBGMB00487 E02_PNGMBSI47_Rep2,Sinopass,B,cliff,secondary,dark,road
+CBGMB00487 E03_PNGMBSI47_Rep3,Sinopass,B,cliff,secondary,dark,road
+CBGMB00487 E04_PNGMBSI48,Sinopass,C,slope,primary,full,village
+CBGMB00487 E05_PNGMBSI48_Rep2,Sinopass,C,slope,primary,full,village
+CBGMB00487 E06_PNGMBSI48_Rep3,Sinopass,C,slope,primary,full,village
+CBGMB00487 E07_PNGMBSI49,Sinopass,D,cliff,open,dark,village
+CBGMB00487 E08_PNGMBSI49_Rep2,Sinopass,D,cliff,open,dark,village
+CBGMB00487 E09_PNGMBSI49_Rep3,Sinopass,D,cliff,open,dark,village
+CBGMB00487 E10_PNGMBSI50,Sinopass,E,cliff,primary,dark,road
+CBGMB00487 E11_PNGMBSI50_Rep2,Sinopass,E,cliff,primary,dark,road
+CBGMB00487 E12_PNGMBSI50_Rep3,Sinopass,E,cliff,primary,dark,road
+CBGMB00487 F01_PNGMBSI51,Kiagiam,A,cliff,primary,unrecord,road
+CBGMB00487 F02_PNGMBSI51_Rep2,Kiagiam,A,cliff,primary,unrecord,road
+CBGMB00487 F03_PNGMBSI51_Rep3,Kiagiam,A,cliff,primary,unrecord,road
+CBGMB00487 F04_PNGMBSI52,Kiagiam,B,flat,primary,dark,forest
+CBGMB00487 F05_PNGMBSI52_Rep2,Kiagiam,B,flat,primary,dark,forest
+CBGMB00487 F06_PNGMBSI52_Rep3,Kiagiam,B,flat,primary,dark,forest
+CBGMB00487 F07_PNGMBSI53,Kiagiam,C,valley,primary,dark,forest
+CBGMB00487 F08_PNGMBSI53_Rep2,Kiagiam,C,valley,primary,dark,forest
+CBGMB00487 F09_PNGMBSI53_Rep3,Kiagiam,C,valley,primary,dark,forest
+CBGMB00487 F10_PNGMBSI54,Kiagiam,D,valley,primary,dark,road
+CBGMB00487 F11_PNGMBSI54_Rep2,Kiagiam,D,valley,primary,dark,road
+CBGMB00487 F12_PNGMBSI54_Rep3,Kiagiam,D,valley,primary,dark,road
+CBGMB00487 G01_PNGMBSI55,Kiagiam,E,flat,primary,dark,forest
+CBGMB00487 G02_PNGMBSI55_Rep2,Kiagiam,E,flat,primary,dark,forest
+CBGMB00487 G03_PNGMBSI55_Rep3,Kiagiam,E,flat,primary,dark,forest
+CBGMB00487 G04_PNGMBSI56,Kiagiam,A,cliff,primary,unrecord,road
+CBGMB00487 G05_PNGMBSI56_Rep2,Kiagiam,A,cliff,primary,unrecord,road
+CBGMB00487 G06_PNGMBSI56_Rep3,Kiagiam,A,cliff,primary,unrecord,road
+CBGMB00487 G07_PNGMBSI57,Kiagiam,B,flat,primary,dark,forest
+CBGMB00487 G08_PNGMBSI57_Rep2,Kiagiam,B,flat,primary,dark,forest
+CBGMB00487 G09_PNGMBSI57_Rep3,Kiagiam,B,flat,primary,dark,forest
+CBGMB00487 G10_PNGMBSI58,Kiagiam,C,valley,primary,dark,forest
+CBGMB00487 G11_PNGMBSI58_Rep2,Kiagiam,C,valley,primary,dark,forest
+CBGMB00487 G12_PNGMBSI58_Rep3,Kiagiam,C,valley,primary,dark,forest
+CBGMB00487 H01_PNGMBSI59,Kiagiam,D,valley,primary,dark,road
+CBGMB00487 H02_PNGMBSI59_Rep2,Kiagiam,D,valley,primary,dark,road
+CBGMB00487 H03_PNGMBSI59_Rep3,Kiagiam,D,valley,primary,dark,road
+CBGMB00487 H04_PNGMBSI60,Kiagiam,E,flat,primary,dark,forest
+CBGMB00487 H05_PNGMBSI60_Rep2,Kiagiam,E,flat,primary,dark,forest
+CBGMB00487 H06_PNGMBSI60_Rep3,Kiagiam,E,flat,primary,dark,forest
+CBGMB00488 A01_PNGMBSI61,Wanang,A,flat,primary,dark,forest
+CBGMB00488 A02_PNGMBSI61_Rep2,Wanang,A,flat,primary,dark,forest
+CBGMB00488 A03_PNGMBSI61_Rep3,Wanang,A,flat,primary,dark,forest
+CBGMB00488 A04_PNGMBSI62,Wanang,B,flat,primary,dark,ridge
+CBGMB00488 A05_PNGMBSI62_Rep2,Wanang,B,flat,primary,dark,ridge
+CBGMB00488 A06_PNGMBSI62_Rep3,Wanang,B,flat,primary,dark,ridge
+CBGMB00488 A07_PNGMBSI63,Wanang,C,cliff,primary,dark,track
+CBGMB00488 A08_PNGMBSI63_Rep2,Wanang,C,cliff,primary,dark,track
+CBGMB00488 A09_PNGMBSI63_Rep3,Wanang,C,cliff,primary,dark,track
+CBGMB00488 A10_PNGMBSI64,Wanang,D,flat,secondary,dark,garden
+CBGMB00488 A11_PNGMBSI64_Rep2,Wanang,D,flat,secondary,dark,garden
+CBGMB00488 A12_PNGMBSI64_Rep3,Wanang,D,flat,secondary,dark,garden
+CBGMB00488 B01_PNGMBSI65,Wanang,E,flat,secondary,dark,track
+CBGMB00488 B02_PNGMBSI65_Rep2,Wanang,E,flat,secondary,dark,track
+CBGMB00488 B03_PNGMBSI65_Rep3,Wanang,E,flat,secondary,dark,track
+CBGMB00488 B04_PNGMBSI66,Wanang,A,flat,primary,dark,forest
+CBGMB00488 B05_PNGMBSI66_Rep2,Wanang,A,flat,primary,dark,forest
+CBGMB00488 B06_PNGMBSI66_Rep3,Wanang,A,flat,primary,dark,forest
+CBGMB00488 B07_PNGMBSI67,Wanang,B,flat,primary,dark,ridge
+CBGMB00488 B08_PNGMBSI67_Rep2,Wanang,B,flat,primary,dark,ridge
+CBGMB00488 B09_PNGMBSI67_Rep3,Wanang,B,flat,primary,dark,ridge
+CBGMB00488 B10_PNGMBSI68,Wanang,C,cliff,primary,dark,track
+CBGMB00488 B11_PNGMBSI68_Rep2,Wanang,C,cliff,primary,dark,track
+CBGMB00488 B12_PNGMBSI68_Rep3,Wanang,C,cliff,primary,dark,track
+CBGMB00488 C01_PNGMBSI69,Wanang,D,flat,secondary,dark,garden
+CBGMB00488 C02_PNGMBSI69_Rep2,Wanang,D,flat,secondary,dark,garden
+CBGMB00488 C03_PNGMBSI69_Rep3,Wanang,D,flat,secondary,dark,garden
+CBGMB00488 C04_PNGMBSI70,Wanang,E,flat,secondary,dark,track
+CBGMB00488 C05_PNGMBSI70_Rep2,Wanang,E,flat,secondary,dark,track
+CBGMB00488 C06_PNGMBSI70_Rep3,Wanang,E,flat,secondary,dark,track
+CBGMB00488 C07_PNGMBSI71,Baitabag,A,slope,primary,dark,tree gap
+CBGMB00488 C08_PNGMBSI71_Rep2,Baitabag,A,slope,primary,dark,tree gap
+CBGMB00488 C09_PNGMBSI71_Rep3,Baitabag,A,slope,primary,dark,tree gap
+CBGMB00488 C10_PNGMBSI72,Baitabag,B,flat,primary,dark,forest
+CBGMB00488 C11_PNGMBSI72_Rep2,Baitabag,B,flat,primary,dark,forest
+CBGMB00488 C12_PNGMBSI72_Rep3,Baitabag,B,flat,primary,dark,forest
+CBGMB00488 D01_PNGMBSI73,Baitabag,C,valley,primary,dark,river
+CBGMB00488 D02_PNGMBSI73_Rep2,Baitabag,C,valley,primary,dark,river
+CBGMB00488 D03_PNGMBSI73_Rep3,Baitabag,C,valley,primary,dark,river
+CBGMB00488 D04_PNGMBSI74,Baitabag,D,slope,secondary,quarter ,garden
+CBGMB00488 D05_PNGMBSI74_Rep2,Baitabag,D,slope,secondary,quarter ,garden
+CBGMB00488 D06_PNGMBSI74_Rep3,Baitabag,D,slope,secondary,quarter ,garden
+CBGMB00488 D07_PNGMBSI75,Baitabag,E,flat,secondary,dark,road
+CBGMB00488 D08_PNGMBSI75_Rep2,Baitabag,E,flat,secondary,dark,road
+CBGMB00488 D09_PNGMBSI75_Rep3,Baitabag,E,flat,secondary,dark,road
+CBGMB00488 D10_PNGMBSI76,Baitabag,A,slope,primary,dark,tree gap
+CBGMB00488 D11_PNGMBSI76_Rep2,Baitabag,A,slope,primary,dark,tree gap
+CBGMB00488 D12_PNGMBSI76_Rep3,Baitabag,A,slope,primary,dark,tree gap
+CBGMB00488 E01_PNGMBSI77,Baitabag,B,flat,primary,dark,forest
+CBGMB00488 E02_PNGMBSI77_Rep2,Baitabag,B,flat,primary,dark,forest
+CBGMB00488 E03_PNGMBSI77_Rep3,Baitabag,B,flat,primary,dark,forest
+CBGMB00488 E04_PNGMBSI78,Baitabag,C,valley,primary,dark,river
+CBGMB00488 E05_PNGMBSI78_Rep2,Baitabag,C,valley,primary,dark,river
+CBGMB00488 E06_PNGMBSI78_Rep3,Baitabag,C,valley,primary,dark,river
+CBGMB00488 E07_PNGMBSI79,Baitabag,D,slope,secondary,quarter ,garden
+CBGMB00488 E08_PNGMBSI79_Rep2,Baitabag,D,slope,secondary,quarter ,garden
+CBGMB00488 E09_PNGMBSI79_Rep3,Baitabag,D,slope,secondary,quarter ,garden
+CBGMB00488 E10_PNGMBSI80,Baitabag,E,flat,secondary,dark,road
+CBGMB00488 E11_PNGMBSI80_Rep2,Baitabag,E,flat,secondary,dark,road
+CBGMB00488 E12_PNGMBSI80_Rep3,Baitabag,E,flat,secondary,dark,road
+CBGMB00488 F01_PNGMBSI81,Ohu,A,cliff,mix forest,dark,forest
+CBGMB00488 F02_PNGMBSI81_Rep2,Ohu,A,cliff,mix forest,dark,forest
+CBGMB00488 F03_PNGMBSI81_Rep3,Ohu,A,cliff,mix forest,dark,forest
+CBGMB00488 F04_PNGMBSI82,Ohu,B,cliff,mix forest,dark,forest
+CBGMB00488 F05_PNGMBSI82_Rep2,Ohu,B,cliff,mix forest,dark,forest
+CBGMB00488 F06_PNGMBSI82_Rep3,Ohu,B,cliff,mix forest,dark,forest
+CBGMB00488 F07_PNGMBSI83,Ohu,C,cliff,secondary,dark,garden
+CBGMB00488 F08_PNGMBSI83_Rep2,Ohu,C,cliff,secondary,dark,garden
+CBGMB00488 F09_PNGMBSI83_Rep3,Ohu,C,cliff,secondary,dark,garden
+CBGMB00488 F10_PNGMBSI84,Ohu,D,cliff,secondary,quarter,garden
+CBGMB00488 F11_PNGMBSI84_Rep2,Ohu,D,cliff,secondary,quarter,garden
+CBGMB00488 F12_PNGMBSI84_Rep3,Ohu,D,cliff,secondary,quarter,garden
+CBGMB00488 G01_PNGMBSI85,Ohu,E,flat,secondary,dark,garden
+CBGMB00488 G02_PNGMBSI85_Rep2,Ohu,E,flat,secondary,dark,garden
+CBGMB00488 G03_PNGMBSI85_Rep3,Ohu,E,flat,secondary,dark,garden
+CBGMB00488 G04_PNGMBSI86,Ohu,A,cliff,mix forest,dark,forest
+CBGMB00488 G05_PNGMBSI86_Rep2,Ohu,A,cliff,mix forest,dark,forest
+CBGMB00488 G06_PNGMBSI86_Rep3,Ohu,A,cliff,mix forest,dark,forest
+CBGMB00488 G07_PNGMBSI87,Ohu,B,cliff,mix forest,dark,forest
+CBGMB00488 G08_PNGMBSI87_Rep2,Ohu,B,cliff,mix forest,dark,forest
+CBGMB00488 G09_PNGMBSI87_Rep3,Ohu,B,cliff,mix forest,dark,forest
+CBGMB00488 G10_PNGMBSI88,Ohu,C,cliff,secondary,dark,garden
+CBGMB00488 G11_PNGMBSI88_Rep2,Ohu,C,cliff,secondary,dark,garden
+CBGMB00488 G12_PNGMBSI88_Rep3,Ohu,C,cliff,secondary,dark,garden
+CBGMB00488 H01_PNGMBSI89,Ohu,D,cliff,secondary,quarter,garden
+CBGMB00488 H02_PNGMBSI89_Rep2,Ohu,D,cliff,secondary,quarter,garden
+CBGMB00488 H03_PNGMBSI89_Rep3,Ohu,D,cliff,secondary,quarter,garden
+CBGMB00488 H04_PNGMBSI90,Ohu,E,flat,secondary,dark,garden
+CBGMB00488 H05_PNGMBSI90_Rep2,Ohu,E,flat,secondary,dark,garden
+CBGMB00488 H06_PNGMBSI90_Rep3,Ohu,E,flat,secondary,dark,garden
+POS_IonCode_0191,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_IonCode_0291,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_IonCode_0391,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_Rep2_IonCode_0192,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_Rep2_IonCode_0292,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_Rep2_IonCode_0392,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_Rep3_IonCode_0193,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_Rep3_IonCode_0293,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl
+POS_Rep3_IonCode_0393,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl,Pos_ctrl

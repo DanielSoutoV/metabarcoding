@@ -1,0 +1,9 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	100	3	1	97.00	66.67	457.51	38.94	0
+OTU2	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Triommatodes	Triommatodes mapiriensis	97.15	31	4	4	87.10	0.00	457.32	29.08	0
+OTU3	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Perola	Perola BioLep05	96.71	23	2	2	91.30	0.00	457.74	32.11	0
+OTU4	Arthropoda	Insecta	Diptera					90.09	14	2	2	85.71	0.00	457.14	42	0
+OTU5	Arthropoda	Insecta	Diptera					96.25	13	1	1	92.31	0.00	458	39.52	0
+OTU6								0.00	10	1	1	90.00	0.00	128	28.91	0
+OTU8	Arthropoda	Insecta	Hymenoptera	Vespidae	Polistinae	Apoica	Apoica pallida	95.62	5	1	1	80.00	0.00	458	29.48	0
+OTU7								0.00	5	1	1	80.00	0.00	458	30.79	0

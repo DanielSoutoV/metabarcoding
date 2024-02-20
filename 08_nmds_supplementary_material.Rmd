@@ -61,7 +61,7 @@ arthro_wet <- subset(arthro_binary, metadata$SEASON == "WET")
 metadata_wet <- subset(metadata, metadata$SEASON == "WET")
 arthro_wet_dist <- vegdist(arthro_wet, method = 'bray')
 arthro_wet.nmds <- metaMDS(arthro_wet_dist)
-permanova_wet <- adonis2(arthro_wet_dist ~ day, data = metadata_wet)
+permanova_wet <- adonis2(arthro_wet_dist ~ day+site, data = metadata_wet)
 summary(permanova_wet)
 permanova_wet
 
@@ -70,12 +70,13 @@ permanova_wet_site
 ```
 
 ```{r}
-plot(arthro_wet.nmds, display = 'sites', type = 'n'); points(arthro_wet.nmds, display = 'sites', pch = 20,col = ifelse(metadata_wet$day == "A", "black", "red" ));with(metadata_wet, ordiellipse(arthro_wet.nmds, day, draw = 'polygon', col = c('black'), label = FALSE, show.groups =(c("A"))));with(metadata_wet, ordiellipse(arthro_wet.nmds, day, draw = 'polygon', col = c('red'), label = FALSE,show.groups =(c("B")))); with(metadata_wet, text(arthro_wet.nmds, labels = metadata_wet$site,pos = 2, cex = 0.5))
+plot(arthro_wet.nmds, display = 'sites', type = 'n'); points(arthro_wet.nmds, display = 'sites', pch = 20,col = ifelse(metadata_wet$day == "A", "black", "red" ));with(metadata_wet, ordihull(arthro_wet.nmds, day, draw = 'polygon', col = c('black'), label = FALSE, show.groups =(c("A"))));with(metadata_wet, ordihull(arthro_wet.nmds, day, draw = 'polygon', col = c('red'), label = FALSE,show.groups =(c("B")))); with(metadata_wet, text(arthro_wet.nmds, labels = metadata_wet$site,pos = 2, cex = 0.5))
 
 wet_tree <- nj(arthro_wet_dist)
 ggtree(wet_tree, layout = "rectangular") %<+% metadata +
   geom_tiplab(aes(colour = day)) + 
   theme(legend.position = "right")
+
 
 ```
 
@@ -94,7 +95,7 @@ permanova_dry_sites
 ```
 
 ```{r}
-plot(arthro_dry.nmds, display = 'sites', type = 'n'); points(arthro_dry.nmds, display = 'sites', pch = 20,col = ifelse(metadata_dry$day == "A", "black", "red" )); with(metadata_dry, ordiellipse(arthro_dry.nmds, day, draw = 'polygon', col = c('black'), label = FALSE, show.groups =(c("A")))); with(metadata_dry, ordiellipse(arthro_dry.nmds, day, draw = 'polygon', col = c('red'), label = FALSE, show.groups =(c("B")))); with(metadata_dry, text(arthro_dry.nmds, labels = metadata_dry$site,pos = 2, cex = 0.5))
+plot(arthro_dry.nmds, display = 'sites', type = 'n'); points(arthro_dry.nmds, display = 'sites', pch = 20,col = ifelse(metadata_dry$day == "A", "black", "red" )); with(metadata_dry, ordihull(arthro_dry.nmds, day, draw = 'polygon', col = c('black'), label = FALSE, show.groups =(c("A")))); with(metadata_dry, ordihull(arthro_dry.nmds, day, draw = 'polygon', col = c('red'), label = FALSE, show.groups =(c("B")))); with(metadata_dry, text(arthro_dry.nmds, labels = metadata_dry$site,pos = 2, cex = 0.5))
 
 dry_tree <- nj(arthro_dry_dist)
 ggtree(dry_tree, layout = "rectangular") %<+% metadata +
@@ -172,6 +173,7 @@ ggtree(all_tree, layout = "rectangular") %<+% metadata_all +
   geom_tiplab(aes(colour = methodClass)) + 
   theme(legend.position = "right")
 
+
 ```
 
 ```{r}
@@ -203,6 +205,19 @@ ggtree(all_wet_tree, layout = "rectangular") %<+% metadata_samples_wet +
   geom_tiplab(aes(colour = methodClass)) + 
   theme(legend.position = "right")
 
+metadata_samples_wet$combined_group <- ifelse(metadata_samples_wet$methodClass %in% c("trad", "parallel"), "trad_parallel", metadata_samples_wet$methodClass)
+
+# Plot NMDS with combined polygon for "trad" and "parallel"
+plot(arthro_all_wet.nmds, display = 'sites', type = 'n')
+points(arthro_all_wet.nmds, display = 'sites', pch = 20)
+with(metadata_samples_wet, ordispider(arthro_all_wet.nmds, combined_group, draw = 'polygon', col = c('firebrick4'), label = FALSE, show.groups = c("trad_parallel")))
+with(metadata_samples_wet, ordihull(arthro_all_wet.nmds, combined_group, draw = 'polygon', col = c('firebrick4'), label = FALSE, show.groups = c("trad_parallel")))
+with(metadata_samples_wet, ordispider(arthro_all_wet.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), label = FALSE, show.groups =(c("metabr"))))
+with(metadata_samples_wet, ordihull(arthro_all_wet.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), label = FALSE, show.groups =(c("metabr"))))
+with(metadata_samples_wet, text(arthro_all_wet.nmds, labels = metadata_samples_wet$location_good, pos = 2, cex = 0.4))
+
+
+
 ```
 
 ```{r}
@@ -211,7 +226,7 @@ metadata_samples_dry <- subset(metadata_samples, metadata_samples$season == "dry
 arthro_all_dry_dist <- vegdist(arthro_all_dry, method = 'bray')
 arthro_all_dry.nmds <- metaMDS(arthro_all_dry_dist)
 
-permutation_all_dry <- adonis2(arthro_all_dry_dist ~ methodClass, data = metadata_samples_dry)
+permutation_all_dry <- adonis2(arthro_all_dry_dist ~ methodClass+location_good, data = metadata_samples_dry)
 permutation_all_dry
 
 permutation_all_dry_sites <-adonis2(arthro_all_dry_dist ~location_good, data = metadata_samples_dry)
@@ -233,6 +248,22 @@ all_dry_tree <- nj(arthro_all_dry_dist)
 ggtree(all_dry_tree, layout = "rectangular") %<+% metadata_samples_dry +
   geom_tiplab(aes(colour = methodClass)) + 
   theme(legend.position = "right")
+
+
+
+
+
+
+metadata_samples_dry$combined_group <- ifelse(metadata_samples_dry$methodClass %in% c("trad", "parallel"), "trad_parallel", metadata_samples_dry$methodClass)
+
+# Plot NMDS with combined polygon for "trad" and "parallel"
+plot(arthro_all_dry.nmds, display = 'sites', type = 'n')
+points(arthro_all_dry.nmds, display = 'sites', pch = 20)
+with(metadata_samples_dry, ordispider(arthro_all_dry.nmds, combined_group, draw = 'polygon', col = c('firebrick4'), label = FALSE, show.groups = c("trad_parallel")))
+with(metadata_samples_dry, ordihull(arthro_all_dry.nmds, combined_group, draw = 'polygon', col = c('firebrick4'), label = FALSE, show.groups = c("trad_parallel")))
+with(metadata_samples_dry, ordispider(arthro_all_dry.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), label = FALSE, show.groups =(c("metabr"))))
+with(metadata_samples_dry, ordihull(arthro_all_dry.nmds, methodClass, draw =  'polygon', col = c('darkolivegreen'), label = FALSE, show.groups =(c("metabr"))))
+with(metadata_samples_dry, text(arthro_all_dry.nmds, labels = metadata_samples_dry$location_good, pos = 2, cex = 0.4))
 
 
 ```

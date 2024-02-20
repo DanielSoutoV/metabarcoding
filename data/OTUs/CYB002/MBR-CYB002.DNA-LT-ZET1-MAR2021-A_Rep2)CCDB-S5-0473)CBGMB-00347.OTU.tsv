@@ -1,0 +1,17 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	159	5	1	96.86	80.00	106.61	27.2	0
+OTU2								0.00	69	3	1	95.65	66.67	457.83	32.98	0
+OTU4	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sp. gmycC51	97.81	33	4	4	87.88	0.00	457.36	38.61	0
+OTU3								0.00	33	4	1	87.88	75.00	458.06	34.06	0
+OTU5	Arthropoda	Insecta	Hemiptera					94.73	27	2	2	92.59	0.00	458	34.28	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma	Stenoma phillipsEPR34	95.39	17	3	3	82.35	0.00	457.29	32.65	0
+OTU7								0.00	14	2	1	85.71	50.00	457.43	33.64	0
+OTU8								0.00	11	1	1	90.91	0.00	252	42.06	0
+OTU9								0.00	10	2	1	80.00	50.00	458	37.45	0
+OTU10	Arthropoda	Insecta	Lepidoptera					96.25	7	1	1	85.71	0.00	457	31.73	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Goniohelia	Goniohelia pangraptica	97.81	7	1	1	85.71	0.00	458	30.57	0
+OTU12								0.00	6	1	1	83.33	0.00	105	25.71	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Erebidae	Erebinae	Erebus	Erebus crepuscularis	97.56	5	1	1	80.00	0.00	124	33.06	0
+OTU15	Arthropoda	Insecta	Diptera	Mycetophilidae	Mycomyinae	Mycomya		91.51	5	1	1	80.00	0.00	107	32.71	0
+OTU16	Arthropoda	Insecta	Coleoptera	Cerophytidae				94.33	5	1	1	80.00	0.00	458	30.57	0
+OTU13	Arthropoda	Insecta	Lepidoptera					91.85	5	1	1	80.00	0.00	456	29.82	0

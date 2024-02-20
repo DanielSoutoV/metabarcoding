@@ -1,0 +1,15 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Coleoptera	Melyridae	Malachiinae	Attalus	Attalus pallifrons	91.00	604	10	2	98.34	80.00	454.47	38.67	0
+OTU2								0.00	148	12	1	91.89	91.67	457.57	37.15	0
+OTU3								0.00	38	2	1	94.74	50.00	106.74	27.17	0
+OTU4								0.00	25	2	1	92.00	50.00	457.36	38.48	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia sp. 5YB	97.37	21	2	2	90.48	0.00	458	29.83	0
+OTU6								0.00	16	2	1	87.50	50.00	457.69	37.14	0
+OTU7								0.00	12	1	1	91.67	0.00	458	30.79	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	96.49	11	2	2	81.82	0.00	456.45	30.67	0
+OTU9								0.00	8	1	1	87.50	0.00	156	32.69	0
+OTU10	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	97.58	7	1	1	85.71	0.00	457	30.42	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	97.59	7	1	1	85.71	0.00	458	31.44	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	96.49	6	1	1	83.33	0.00	458	30.79	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	97.81	6	1	1	83.33	0.00	458	30.35	0
+OTU14								0.00	5	1	1	80.00	0.00	458	32.97	0
