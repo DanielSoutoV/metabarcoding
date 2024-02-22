@@ -23,6 +23,8 @@ library('coin')
 library('Hmisc')
 
 ```
+Note now that it is 'taxmap_object_binary.rds' - we have transformed all data to a binary presence/absence matrix.
+Metabarcoding data although gives us the number of reads for each BIN, does not mean we have a measure of abundance for that BIN. Detectability issues and biases must be well understood. Refer to this article for better understanding: https://onlinelibrary.wiley.com/doi/full/10.1111/1755-0998.13703
 
 ```{r message = FALSE, warning = FALSE}
 
@@ -45,7 +47,7 @@ obj %>%  metacoder::filter_taxa(taxon_names %in% c("Blattodea"),#here is to flit
 sample <- read.csv('data/final_anal/location_ctrl.csv')
 ```
 
-The chunk above now gave us a filtered taxmap object for each of the ForestGEO focal Orders (plus Diptera because I think its interesting).
+The chunk above now gave us a filtered taxmap object for each of the Arthropod Program's focal Orders (plus Diptera because I think its interesting).
 Downstream analysis will make use of these filtered data sets, but we continue with general info (whole data set) between seasons.
 
 ```{r simpleBoxplotANOVAbetweenSeason}

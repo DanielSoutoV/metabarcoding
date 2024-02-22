@@ -29,17 +29,6 @@ obj <- parse_tax_data(dat,
 ```
 Above is the print out of a taxmap object. The R console output shows that there are 3,651 unique taxa and lists their ID, but this includes many NA's (unassigned taxonomies), Better to look at the tbl_df which shows a 'tibble' of 3,173 rows (assigned classifications) in 43 columns (40 samples + taxon_id, bin_uri and classification). Each row shows how many reads for that taxon was in each sample.
 
-```{r}
-# This is now obsolete, as we have already decontaminated based on negative controls from mBrave. We treat every read as presence of that BIN in the data.
-
-#obj$data$tax_data <- zero_low_counts(obj, data = "tax_data", min_count = 10, cols= sample$sampleID, other_cols = TRUE)
-#zeroing 5811 of 126920 counts with less than 10 reads (depending how stringent this can be changed in the min_count flag above
-#no_reads <- rowSums(obj$data$tax_data[, sample$sampleID]) == 0
-#sum(no_reads) 
-#there are 937 taxon_id's with less than 10 reads which we will remove in the next step
-#obj <- filter_obs(obj, data = "tax_data", ! no_reads, drop_taxa = TRUE)
-#print(obj) #2236 taxa in 40 samples (it says 43 columns because of columns taxon, OTU_ID and bin_uri, the classification column is not really needed right now)
-```
 We now have cleaned data set (with our chosen minimum number of reads to >10)
 We can add new 'tibbles' to obj$data such as proportion of total reads, or abundance
 ```{r}
