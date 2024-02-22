@@ -1,0 +1,13 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	359	9	1	97.49	88.89	457.96	32.96	0
+OTU2								0.00	100	4	1	96.00	75.00	106.81	26.78	0
+OTU3								0.00	78	6	1	92.31	83.33	456.44	34.98	0
+OTU4	Arthropoda	Insecta	Coleoptera	Carabidae				90.59	14	2	2	85.71	0.00	458.43	36.3	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Depressariidae				94.96	9	1	1	88.89	0.00	458	34.28	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Noctuidae	Noctuinae	Euxoa	Euxoa infracta	95.77	9	1	1	88.89	0.00	190	28.42	0
+OTU7								0.00	7	1	1	85.71	0.00	131	27.48	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Noctuidae				92.32	6	1	1	83.33	0.00	457	27.79	0
+OTU9	Arthropoda	Insecta	Hemiptera	Flatidae	Flatinae	Epormenis	Epormenis aripensis	96.05	5	1	1	80.00	0.00	458	36.46	0
+OTU10								0.00	5	1	1	80.00	0.00	458	37.77	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Crambidae	Spilomelinae	Prenesta	Prenesta sp. 1YB	90.57	5	1	1	80.00	0.00	107	28.97	0
+OTU12								0.00	5	1	1	80.00	0.00	107	27.1	0

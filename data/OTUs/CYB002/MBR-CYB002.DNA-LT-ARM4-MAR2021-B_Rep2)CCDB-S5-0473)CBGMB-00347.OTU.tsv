@@ -1,0 +1,17 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Lepidoptera	Depressariidae				95.18	124	6	6	95.16	0.00	457.85	34.71	0
+OTU2								0.00	37	3	1	91.89	66.67	457.49	34.1	0
+OTU3	Arthropoda	Insecta	Coleoptera	Curculionidae	Platypodinae	Euplatypus	Euplatypus sp. 5YB	96.19	16	1	1	93.75	0.00	136	34.56	0
+OTU4	Arthropoda	Insecta	Lepidoptera					94.95	15	2	2	86.67	0.00	457.4	33.67	0
+OTU5								0.00	14	1	1	92.86	0.00	458	30.79	0
+OTU6								0.00	13	1	1	92.31	0.00	103	36.89	0
+OTU7								0.00	13	1	1	92.31	0.00	458	42.58	0
+OTU8								0.00	11	1	1	90.91	0.00	138	35.51	0
+OTU9								0.00	11	1	1	90.91	0.00	107	27.1	0
+OTU10								0.00	10	1	1	90.00	0.00	142	32.39	0
+OTU11								0.00	9	1	1	88.89	0.00	113	40.71	0
+OTU12								0.00	8	1	1	87.50	0.00	458	37.12	0
+OTU13								0.00	8	1	1	87.50	0.00	458	38.43	0
+OTU14	Arthropoda	Insecta	Blattodea					92.55	6	1	1	83.33	0.00	458	34.72	0
+OTU15	Arthropoda	Insecta	Lepidoptera					94.31	5	1	1	80.00	0.00	458	32.31	0
+OTU16								0.00	5	1	1	80.00	0.00	457	35.23	0

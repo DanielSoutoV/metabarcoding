@@ -1,0 +1,21 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	196	2	1	98.98	50.00	106.88	31.81	0
+OTU2								0.00	190	4	1	97.89	75.00	106.77	27.16	0
+OTU3								0.00	31	2	1	93.55	50.00	121.81	29.56	0
+OTU4								0.00	22	3	1	86.36	66.67	457.5	35.19	0
+OTU5	Arthropoda	Insecta	Diptera					96.25	19	1	1	94.74	0.00	458	39.52	0
+OTU6								0.00	16	1	1	93.75	0.00	156	32.69	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	16	2	2	87.50	0.00	458.69	30.3	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	95.84	15	2	2	86.67	0.00	458	32.68	0
+OTU9	Arthropoda	Insecta	Diptera	Muscidae				97.80	8	1	1	87.50	0.00	458	31.44	0
+OTU10								0.00	7	1	1	85.71	0.00	113	40.71	0
+OTU11	Arthropoda	Insecta	Coleoptera	Buprestidae	Buprestinae	Chrysobothris	Chrysobothris femorata	90.85	7	1	1	85.71	0.00	232	24.14	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia carinosa	95.62	6	1	1	83.33	0.00	458	32.75	0
+OTU13	Arthropoda	Insecta	Hemiptera	Pentatomidae	Edessinae	Edessa	Edessa arabs	94.96	6	1	1	83.33	0.00	458	34.72	0
+OTU14								0.00	5	1	1	80.00	0.00	273	29.67	0
+OTU15	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Nevrolongus	Nevrolongus thysbodes	93.00	5	1	1	80.00	0.00	458	32.1	0
+OTU16								0.00	5	1	1	80.00	0.00	458	31.88	0
+OTU17								0.00	5	1	1	80.00	0.00	119	25.21	0
+OTU20								0.00	5	1	1	80.00	0.00	131	26.72	0
+OTU18	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	92.78	5	1	1	80.00	0.00	458	33.84	0
+OTU19	Arthropoda	Insecta	Lepidoptera	Oecophoridae		oecoBioLep01	oecoBiolep01 BioLep31	96.70	5	1	1	80.00	0.00	458	30.13	0

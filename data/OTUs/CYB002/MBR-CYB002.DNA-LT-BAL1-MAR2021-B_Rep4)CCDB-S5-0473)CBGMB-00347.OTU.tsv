@@ -1,0 +1,24 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Lepidoptera	Crambidae	Spilomelinae	Omiodes	Omiodes poeonalis	90.56	279	11	2	96.06	81.82	451.43	36.36	0
+OTU2	Arthropoda	Insecta	Orthoptera					91.03	156	8	8	94.87	0.00	457.72	34.08	0
+OTU3								0.00	121	5	1	95.87	80.00	190.92	36.12	0
+OTU4	Arthropoda	Insecta	Hemiptera	Pentatomidae	Discocephalinae	Ablaptus	Ablaptus brevirostrum	91.68	100	7	7	93.00	0.00	457.98	34.54	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Limacodidae				94.93	82	11	11	86.59	0.00	241.32	31.02	0
+OTU6								0.00	45	6	1	86.67	83.33	429.51	34.55	0
+OTU7								0.00	43	2	1	95.35	50.00	116.84	26.53	0
+OTU8								0.00	36	1	1	97.22	0.00	140	38.57	0
+OTU10	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma	Stenoma sp.	96.93	33	2	2	93.94	0.00	457.76	30.58	0
+OTU9								0.00	33	1	1	96.97	0.00	107	27.1	0
+OTU11								0.00	26	1	1	96.15	0.00	263	28.52	0
+OTU12								0.00	25	2	1	92.00	50.00	136.8	37.28	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Erebidae	Herminiinae	Lascoria	Lascoria sp.	94.09	20	1	1	95.00	0.00	458	30.79	0
+OTU14								0.00	10	1	1	90.00	0.00	113	39.82	0
+OTU15								0.00	9	1	1	88.89	0.00	116	28.45	0
+OTU16	Arthropoda	Insecta	Mantodea	Mantoididae		Mantoida	Mantoida brunneriana	94.09	9	1	1	88.89	0.00	458	33.84	0
+OTU17								0.00	8	1	1	87.50	0.00	278	29.14	0
+OTU18								0.00	7	1	1	85.71	0.00	459	36.6	0
+OTU19	Arthropoda	Insecta	Lepidoptera	Crambidae	Crambinae	Diatraea	Diatraea saccharalis	95.85	7	1	1	85.71	0.00	458	32.31	0
+OTU21								0.00	6	1	1	83.33	0.00	113	40.71	0
+OTU20	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	6	1	1	83.33	0.00	459	30.28	0
+OTU23								0.00	5	1	1	80.00	0.00	458	33.84	0
+OTU22	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae			96.05	5	1	1	80.00	0.00	458	30.13	0

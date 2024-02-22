@@ -1,0 +1,24 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	91.85	2497	45	45	98.20	0.00	457.55	33.43	0
+OTU2								0.00	325	9	1	97.23	88.89	457.57	36.27	0
+OTU3	Arthropoda	Insecta	Hemiptera					90.03	186	8	2	95.70	75.00	455.47	32.15	0
+OTU4								0.00	140	2	1	98.57	50.00	106.89	31.81	0
+OTU5								0.00	74	3	1	95.95	66.67	106.77	27.16	0
+OTU6								0.00	60	2	1	96.67	50.00	128	29.09	0
+OTU7								0.00	39	2	1	94.87	50.00	176.82	27.15	0
+OTU8								0.00	30	3	1	90.00	66.67	457.83	33.81	0
+OTU9								0.00	23	4	1	82.61	75.00	458.22	37.46	0
+OTU10								0.00	16	2	1	87.50	50.00	458	34.62	0
+OTU11								0.00	14	1	1	92.86	0.00	113	40.71	0
+OTU12								0.00	13	1	1	92.31	0.00	185	34.59	0
+OTU14								0.00	10	1	1	90.00	0.00	156	32.69	0
+OTU13	Arthropoda	Insecta	Diptera					96.25	10	1	1	90.00	0.00	458	39.52	0
+OTU15								0.00	9	1	1	88.89	0.00	458	30.79	0
+OTU16								0.00	8	1	1	87.50	0.00	458	35.81	0
+OTU17								0.00	7	1	1	85.71	0.00	185	34.05	0
+OTU18	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.99	6	1	1	83.33	0.00	458	33.41	0
+OTU19								0.00	6	1	1	83.33	0.00	119	42.86	0
+OTU20	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.55	6	1	1	83.33	0.00	458	33.62	0
+OTU21	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.33	5	1	1	80.00	0.00	458	33.41	0
+OTU23	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Melese	Melese sixola	95.19	5	1	1	80.00	0.00	458	29.91	0
+OTU22	Arthropoda	Insecta	Lepidoptera	Crambidae	Spilomelinae	Spilomelinae_genus	Spilomelinae_genus sp. 60YB	90.45	5	1	1	80.00	0.00	157	31.85	0

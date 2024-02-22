@@ -1,0 +1,11 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	52	5	1	90.38	80.00	456.31	35.74	0
+OTU2								0.00	35	2	1	94.29	50.00	143.71	32.01	0
+OTU3								0.00	11	1	1	90.91	0.00	103	36.89	0
+OTU4	Arthropoda	Insecta	Orthoptera	Tettigoniidae				97.90	9	1	1	88.89	0.00	458	34.93	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	8	1	1	87.50	0.00	459	30.28	0
+OTU5	Arthropoda	Insecta	Hemiptera	Cicadellidae				97.58	8	1	1	87.50	0.00	458	34.06	0
+OTU8								0.00	7	1	1	85.71	0.00	131	27.48	0
+OTU7	Arthropoda	Insecta	Hemiptera	Pentatomidae				94.63	7	1	1	85.71	0.00	458	34.93	0
+OTU9								0.00	6	1	1	83.33	0.00	222	39.19	0
+OTU10	Arthropoda	Insecta	Neuroptera	Chrysopidae	Chrysopinae	Apertochrysa	Apertochrysa hainana	91.05	6	1	1	83.33	0.00	458	31	0

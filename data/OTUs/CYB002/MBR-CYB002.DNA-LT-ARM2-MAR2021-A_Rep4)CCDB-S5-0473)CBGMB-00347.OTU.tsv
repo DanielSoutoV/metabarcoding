@@ -1,0 +1,54 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	92.09	3753	61	61	98.37	0.00	457.59	33.42	0
+OTU2								0.00	1657	10	1	99.40	90.00	106.88	31.87	0
+OTU3								0.00	1358	14	1	98.97	92.86	106.76	27.23	0
+OTU4								0.00	306	10	1	96.73	90.00	457.61	36.27	0
+OTU5								0.00	292	4	1	98.63	75.00	127.9	28.94	0
+OTU6	Arthropoda	Insecta	Hemiptera					90.03	288	15	2	94.79	86.67	456.09	32.14	0
+OTU7								0.00	140	3	1	97.86	66.67	112.99	40.77	0
+OTU8								0.00	126	3	1	97.62	66.67	176.9	27.13	0
+OTU9								0.00	48	3	1	93.75	66.67	184.88	34.72	0
+OTU10	Arthropoda	Insecta	Diptera					96.25	33	1	1	96.97	0.00	458	39.52	0
+OTU11								0.00	24	1	1	95.83	0.00	156	32.69	0
+OTU12								0.00	23	1	1	95.65	0.00	119	31.09	0
+OTU14								0.00	19	2	1	89.47	50.00	107	28.33	0
+OTU13	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.77	19	3	3	84.21	0.00	457.47	33.72	0
+OTU15								0.00	18	1	1	94.44	0.00	217	36.41	0
+OTU16	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.55	17	2	2	88.24	0.00	458	33.75	0
+OTU17								0.00	16	1	1	93.75	0.00	106	47.17	0
+OTU18	Arthropoda	Insecta	Lepidoptera	Tortricidae	Tortricinae	Aethes		91.43	16	1	1	93.75	0.00	106	31.13	0
+OTU19								0.00	15	1	1	93.33	0.00	185	37.84	0
+OTU21								0.00	15	2	1	86.67	50.00	458	37.34	0
+OTU20	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.99	15	2	2	86.67	0.00	458	33.52	0
+OTU22								0.00	14	2	1	85.71	50.00	458	34.58	0
+OTU23	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Hypocharis	Hypocharis sp. 1YB	91.51	13	2	2	84.62	0.00	107	28.97	0
+OTU24	Arthropoda	Insecta	Lepidoptera	Elachistidae	Elachistinae	Elachista		90.65	11	1	1	90.91	0.00	107	29.91	0
+OTU25	Arthropoda	Insecta	Hymenoptera	Halictidae	Halictinae	Megalopta	Megalopta genalis	93.66	10	2	2	80.00	0.00	142.5	27.72	0
+OTU27								0.00	10	1	1	90.00	0.00	458	33.84	0
+OTU26								0.00	10	2	1	80.00	50.00	119.5	41	0
+OTU30	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Chamyna	Chamyna sp. 1YB	91.51	8	1	1	87.50	0.00	107	29.91	0
+OTU31	Arthropoda	Insecta	Diptera	Tachinidae	Exoristinae	Zizyphomyia	Zizyphomyia Wood02	97.14	8	1	1	87.50	0.00	107	28.97	0
+OTU29	Arthropoda	Insecta	Lepidoptera	Pyralidae	Chrysauginae			92.45	8	1	1	87.50	0.00	107	29.91	0
+OTU28								0.00	8	1	1	87.50	0.00	273	29.67	0
+OTU36								0.00	7	1	1	85.71	0.00	106	30.19	0
+OTU34	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	91.43	7	1	1	85.71	0.00	458	33.84	0
+OTU35								0.00	7	1	1	85.71	0.00	178	37.64	0
+OTU32								0.00	7	1	1	85.71	0.00	458	35.81	0
+OTU33	Arthropoda	Insecta	Lepidoptera	Geometridae	Geometrinae	Oospila	Oospila confluaria	94.34	7	1	1	85.71	0.00	107	27.1	0
+OTU38								0.00	6	1	1	83.33	0.00	178	35.96	0
+OTU39	Arthropoda	Insecta	Lepidoptera	Geometridae	Geometrinae	Nemoria	Nemoria sp. 6YB	91.51	6	1	1	83.33	0.00	107	29.91	0
+OTU37								0.00	6	1	1	83.33	0.00	157	33.12	0
+OTU44	Arthropoda	Insecta	Lepidoptera	Lycaenidae	Theclinae	Kolana	Kolana ligurina	91.51	6	1	1	83.33	0.00	107	28.97	0
+OTU43								0.00	6	1	1	83.33	0.00	107	32.71	0
+OTU42								0.00	6	1	1	83.33	0.00	169	33.14	0
+OTU41	Arthropoda	Insecta	Lepidoptera	Notodontidae	Nystaleinae	Marthula	Marthula pleione	95.28	6	1	1	83.33	0.00	106	31.13	0
+OTU40								0.00	6	1	1	83.33	0.00	185	33.51	0
+OTU50	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Pyrinia	Pyrinia helvaria	95.19	5	1	1	80.00	0.00	458	29.26	0
+OTU51								0.00	5	1	1	80.00	0.00	106	31.13	0
+OTU52	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	93.00	5	1	1	80.00	0.00	458	30.79	0
+OTU53								0.00	5	1	1	80.00	0.00	156	32.69	0
+OTU49	Arthropoda	Insecta	Lepidoptera	Crambidae	Spilomelinae	Eulepte	Eulepte sp. 1YB	90.57	5	1	1	80.00	0.00	107	30.84	0
+OTU48	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	90.33	5	1	1	80.00	0.00	458	33.41	0
+OTU47	Arthropoda	Arachnida	Scorpiones	Buthidae		Centruroides	Centruroides vittatus	90.65	5	1	1	80.00	0.00	107	29.91	0
+OTU46	Arthropoda	Insecta	Lepidoptera	Crambidae	Crambinae	Chilo	Chilo suppressalis	90.65	5	1	1	80.00	0.00	107	29.91	0
+OTU45	Arthropoda	Insecta	Lepidoptera	Hedylidae	Hedylinae	Macrosoma	Macrosoma tipulataDHJ01	90.57	5	1	1	80.00	0.00	107	30.84	0

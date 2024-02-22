@@ -1,0 +1,18 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	119	4	1	96.64	75.00	106.77	27.16	0
+OTU2								0.00	95	2	1	97.89	50.00	106.92	31.8	0
+OTU3								0.00	32	3	1	90.63	66.67	457.28	35.21	0
+OTU4	Arthropoda	Insecta	Diptera					96.25	12	1	1	91.67	0.00	458	39.52	0
+OTU5								0.00	10	2	1	80.00	50.00	457.5	31.91	0
+OTU6	Arthropoda	Insecta	Diptera	Muscidae				97.80	9	1	1	88.89	0.00	458	31.44	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	95.84	7	1	1	85.71	0.00	458	32.75	0
+OTU9								0.00	7	1	1	85.71	0.00	122	29.51	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	7	1	1	85.71	0.00	459	30.28	0
+OTU10								0.00	6	1	1	83.33	0.00	457	34.79	0
+OTU11								0.00	6	1	1	83.33	0.00	113	40.71	0
+OTU14	Arthropoda	Insecta	Hemiptera	Pentatomidae	Edessinae	Edessa	Edessa arabs	94.96	5	1	1	80.00	0.00	458	34.72	0
+OTU15	Arthropoda	Insecta	Lepidoptera	Noctuidae				92.12	5	1	1	80.00	0.00	458	27.95	0
+OTU16	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	96.93	5	1	1	80.00	0.00	458	33.19	0
+OTU17	Arthropoda	Insecta	Lepidoptera	Oecophoridae		oecoBioLep01	oecoBiolep01 BioLep31	96.70	5	1	1	80.00	0.00	458	30.13	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Erebidae	Boletobiinae	Prosoparia	Prosoparia tenebrosa	91.03	5	1	1	80.00	0.00	458	37.77	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Nevrolongus	Nevrolongus thysbodes	94.75	5	1	1	80.00	0.00	458	32.1	0

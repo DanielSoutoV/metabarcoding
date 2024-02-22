@@ -1,0 +1,26 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	138	4	1	97.10	75.00	190.99	36.04	0
+OTU2								0.00	58	2	1	96.55	50.00	109.69	41.94	0
+OTU3								0.00	39	2	1	94.87	50.00	113.15	40.79	0
+OTU4	Arthropoda	Insecta	Diptera					96.25	35	2	2	94.29	0.00	457.8	39.54	0
+OTU6								0.00	30	2	1	93.33	50.00	131	27.35	0
+OTU5								0.00	30	1	1	96.67	0.00	137	37.96	0
+OTU7	Arthropoda	Insecta	Lepidoptera					95.15	25	1	1	96.00	0.00	103	29.13	0
+OTU8	Arthropoda	Insecta	Hemiptera	Cicadidae				94.05	23	3	3	86.96	0.00	457.96	32.54	0
+OTU9	Arthropoda	Insecta	Diptera	Phoridae	Phorinae	Dohrniphora	Dohrniphora ecitophila	96.61	20	1	1	95.00	0.00	178	33.71	0
+OTU10								0.00	18	2	1	88.89	50.00	458.39	33.6	0
+OTU11								0.00	17	2	1	88.24	50.00	190.65	36.72	0
+OTU12								0.00	14	1	1	92.86	0.00	109	42.2	0
+OTU13								0.00	12	1	1	91.67	0.00	139	37.41	0
+OTU14								0.00	10	1	1	90.00	0.00	130	34.62	0
+OTU15								0.00	9	1	1	88.89	0.00	137	36.5	0
+OTU16								0.00	9	1	1	88.89	0.00	109	41.28	0
+OTU17								0.00	6	1	1	83.33	0.00	191	36.65	0
+OTU18								0.00	6	1	1	83.33	0.00	134	38.06	0
+OTU19								0.00	6	1	1	83.33	0.00	458	31.88	0
+OTU20								0.00	6	1	1	83.33	0.00	100	44	0
+OTU25								0.00	5	1	1	80.00	0.00	140	39.29	0
+OTU24								0.00	5	1	1	80.00	0.00	191	34.55	0
+OTU21								0.00	5	1	1	80.00	0.00	131	37.4	0
+OTU23								0.00	5	1	1	80.00	0.00	191	34.55	0
+OTU22								0.00	5	1	1	80.00	0.00	191	35.08	0

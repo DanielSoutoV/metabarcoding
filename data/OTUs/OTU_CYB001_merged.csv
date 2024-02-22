@@ -1,0 +1,390 @@
+"classification","Sequences"
+"p__Arthropoda;c__Arachnida;o__Araneae;f__Anyphaenidae;Sf__NA;g__NA;s__NA",17
+"p__Arthropoda;c__Arachnida;o__Araneae;f__Cheiracanthiidae;Sf__NA;g__Eutichurus;s__Eutichurus sp. 1 FML",25
+"p__Arthropoda;c__Arachnida;o__Mesostigmata;f__Oplitidae;Sf__NA;g__NA;s__NA",61
+"p__Arthropoda;c__Arachnida;o__Trombidiformes;f__Erythraeidae;Sf__NA;g__NA;s__NA",1889
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Blaberidae;Sf__NA;g__NA;s__NA",1358
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Cryptocercidae;Sf__NA;g__NA;s__NA",76
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Ectobiidae;Sf__NA;g__NA;s__NA",7557
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Kalotermitidae;Sf__NA;g__Neotermes;s__Neotermes holmgreni",12
+"p__Arthropoda;c__Insecta;o__Blattodea;f__NA;Sf__NA;g__NA;s__NA",1361
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;Sf__Apicotermitinae;g__OvitermesRHS;s__OvitermesRHS seani",531
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;Sf__Apicotermitinae;g__Patawatermes;s__Patawatermes nigripunctatus",55
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;Sf__Termitinae;g__Amitermes;s__Amitermes foreli",38
+"p__Arthropoda;c__Insecta;o__Blattodea;f__Termitidae;Sf__Termitinae;g__Cylindrotermes;s__Cylindrotermes macrognathus",6
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Anthicidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Biphyllidae;Sf__NA;g__NA;s__NA",76
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Cantharidae;Sf__NA;g__NA;s__NA",77
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Harpalinae;g__Abaris;s__Abaris splendidula",8
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Harpalinae;g__Cymindis;s__Cymindis arizonensis",6
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Harpalinae;g__NA;s__NA",11
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Harpalinae;g__Notiobia;s__Notiobia sp2",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Harpalinae;g__Platynus;s__NA",18
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Harpalinae;g__Stenognathus;s__Stenognathus quadricollis",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__NA;g__NA;s__NA",363
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Carabidae;Sf__Trechinae;g__Micratopus;s__Micratopus insularis",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Cerambycidae;Sf__Lamiinae;g__Lepturges;s__Lepturges limpidusAS1",68
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Chelonariidae;Sf__NA;g__NA;s__NA",1124
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Chrysomelidae;Sf__Galerucinae;g__Diabrotica;s__NA",21
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Chrysomelidae;Sf__Galerucinae;g__NA;s__NA",2126
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Corylophidae;Sf__NA;g__NA;s__NA",17
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;Sf__Entiminae;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Curculionidae;Sf__NA;g__NA;s__NA",381
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Dytiscidae;Sf__NA;g__NA;s__NA",22
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Elateridae;Sf__Agrypninae;g__Lycoreus;s__Lycoreus suturalisAS2",6
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Elateridae;Sf__Elaterinae;g__Dipropus;s__NA",16
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Elateridae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Erotylidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Erotylidae;Sf__Xenoscelinae;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Eupsilobiidae;Sf__NA;g__NA;s__NA",10
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Laemophloeidae;Sf__NA;g__NA;s__NA",121
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Laemophloeidae;Sf__NA;g__Rhabdophloeus;s__Rhabdophloeus sp. BYU CO848",8
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Lampyridae;Sf__NA;g__NA;s__NA",39
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Latridiidae;Sf__NA;g__NA;s__NA",64
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Leiodidae;Sf__NA;g__NA;s__NA",161
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Limnichidae;Sf__NA;g__NA;s__NA",509
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Lycidae;Sf__NA;g__NA;s__NA",619
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Mycteridae;Sf__Eurypinae;g__NA;s__NA",28
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__NA;Sf__NA;g__NA;s__NA",2374
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Nitidulidae;Sf__Cillaeinae;g__Conotelus;s__NA",34
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Nitidulidae;Sf__NA;g__NA;s__NA",53
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Phalacridae;Sf__NA;g__NA;s__NA",41
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Ptilodactylidae;Sf__NA;g__NA;s__NA",12
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Ptinidae;Sf__Anobiinae;g__NA;s__NA",9
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Ptinidae;Sf__Dorcatominae;g__Petalium;s__NA",16
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Ptinidae;Sf__NA;g__NA;s__NA",147
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Dynastinae;g__Cyclocephala;s__Cyclocephala carbonaria",109
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__NA;s__NA",42
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga chiriquina",244
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga densata",1141
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga guanacasteca",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga guapilesea",163
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga morganellaASolis02",1874
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga morganellaASolis03",17
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga panamana",200
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Melolonthinae;g__Phyllophaga;s__Phyllophaga sp",1267
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__NA;g__NA;s__NA",462
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Rutelinae;g__Callistethus;s__Callistethus schneideri",591
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Rutelinae;g__Callistethus;s__Callistethus sp",26997
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Rutelinae;g__Callistethus;s__Callistethus valdecostatus",87
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Rutelinae;g__Pelidnota;s__Pelidnota notata",10112
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Rutelinae;g__Pelidnota;s__Pelidnota sp",2065
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Rutelinae;g__Trizogeniates;s__Trizogeniates foveicollis",21463
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scarabaeidae;Sf__Scarabaeinae;g__Copris;s__Copris brevicornis",245
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scirtidae;Sf__NA;g__NA;s__NA",30
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Scraptiidae;Sf__NA;g__NA;s__NA",207
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Aleocharinae;g__NA;s__NA",6596
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Aleocharinae;g__Tetradonia;s__Tetradonia cf. marginalis",5
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Oxytelinae;g__Carpelimus;s__Carpelimus bilineatus",117
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Oxytelinae;g__Carpelimus;s__NA",138
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Oxytelinae;g__NA;s__NA",14
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Pselaphinae;g__NA;s__NA",110
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Staphylinidae;Sf__Staphylininae;g__NA;s__NA",73
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Tenebrionidae;Sf__Lagriinae;g__NA;s__NA",739
+"p__Arthropoda;c__Insecta;o__Coleoptera;f__Tenebrionidae;Sf__NA;g__NA;s__NA",4027
+"p__Arthropoda;c__Insecta;o__Diptera;f__Anisopodidae;Sf__Anisopodinae;g__Olbiogaster;s__NA",8
+"p__Arthropoda;c__Insecta;o__Diptera;f__Asilidae;Sf__NA;g__NA;s__NA",160
+"p__Arthropoda;c__Insecta;o__Diptera;f__Calliphoridae;Sf__NA;g__NA;s__NA",3176
+"p__Arthropoda;c__Insecta;o__Diptera;f__Cecidomyiidae;Sf__Cecidomyiinae;g__Asteromyia;s__Asteromyia laeviana",13
+"p__Arthropoda;c__Insecta;o__Diptera;f__Cecidomyiidae;Sf__Cecidomyiinae;g__Dasineura;s__NA",44
+"p__Arthropoda;c__Insecta;o__Diptera;f__Cecidomyiidae;Sf__Cecidomyiinae;g__NA;s__NA",82
+"p__Arthropoda;c__Insecta;o__Diptera;f__Cecidomyiidae;Sf__NA;g__NA;s__NA",5012
+"p__Arthropoda;c__Insecta;o__Diptera;f__Ceratopogonidae;Sf__Ceratopogoninae;g__Culicoides;s__Culicoides debilipalpis",6
+"p__Arthropoda;c__Insecta;o__Diptera;f__Ceratopogonidae;Sf__Ceratopogoninae;g__Culicoides;s__NA",724
+"p__Arthropoda;c__Insecta;o__Diptera;f__Ceratopogonidae;Sf__NA;g__NA;s__NA",686
+"p__Arthropoda;c__Insecta;o__Diptera;f__Chironomidae;Sf__Chironominae;g__Chironomus;s__Chironomus sp.",83
+"p__Arthropoda;c__Insecta;o__Diptera;f__Chironomidae;Sf__NA;g__NA;s__NA",509
+"p__Arthropoda;c__Insecta;o__Diptera;f__Chironomidae;Sf__Tanypodinae;g__Thienemannimyia;s__Thienemannimyia sp. 9XL",12
+"p__Arthropoda;c__Insecta;o__Diptera;f__Chloropidae;Sf__NA;g__NA;s__NA",117
+"p__Arthropoda;c__Insecta;o__Diptera;f__Chloropidae;Sf__Oscinellinae;g__Hippelates;s__NA",38
+"p__Arthropoda;c__Insecta;o__Diptera;f__Dolichopodidae;Sf__NA;g__NA;s__NA",24
+"p__Arthropoda;c__Insecta;o__Diptera;f__Drosophilidae;Sf__Drosophilinae;g__Drosophila;s__Drosophila bromeliae",11
+"p__Arthropoda;c__Insecta;o__Diptera;f__Drosophilidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Diptera;f__Keroplatidae;Sf__NA;g__NA;s__NA",211
+"p__Arthropoda;c__Insecta;o__Diptera;f__Lauxaniidae;Sf__NA;g__NA;s__NA",66
+"p__Arthropoda;c__Insecta;o__Diptera;f__Limoniidae;Sf__NA;g__NA;s__NA",10
+"p__Arthropoda;c__Insecta;o__Diptera;f__Milichiidae;Sf__Madizinae;g__Desmometopa;s__NA",5
+"p__Arthropoda;c__Insecta;o__Diptera;f__Milichiidae;Sf__Milichiinae;g__Pholeomyia;s__NA",50
+"p__Arthropoda;c__Insecta;o__Diptera;f__Milichiidae;Sf__Phyllomyzinae;g__Phyllomyza;s__NA",221
+"p__Arthropoda;c__Insecta;o__Diptera;f__NA;Sf__NA;g__NA;s__NA",7144
+"p__Arthropoda;c__Insecta;o__Diptera;f__Phoridae;Sf__Metopininae;g__Megaselia;s__NA",5
+"p__Arthropoda;c__Insecta;o__Diptera;f__Phoridae;Sf__Metopininae;g__Metopina;s__NA",2331
+"p__Arthropoda;c__Insecta;o__Diptera;f__Phoridae;Sf__Metopininae;g__NA;s__NA",7
+"p__Arthropoda;c__Insecta;o__Diptera;f__Phoridae;Sf__Metopininae;g__Nothomicrodon;s__Nothomicrodon sp. 1 GS-2016",233
+"p__Arthropoda;c__Insecta;o__Diptera;f__Phoridae;Sf__NA;g__NA;s__NA",887
+"p__Arthropoda;c__Insecta;o__Diptera;f__Psychodidae;Sf__NA;g__NA;s__NA",242
+"p__Arthropoda;c__Insecta;o__Diptera;f__Sarcophagidae;Sf__NA;g__NA;s__NA",145
+"p__Arthropoda;c__Insecta;o__Diptera;f__Scatopsidae;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Diptera;f__Scatopsidae;Sf__Scatopsinae;g__Rhexoza;s__NA",32
+"p__Arthropoda;c__Insecta;o__Diptera;f__Sciaridae;Sf__NA;g__NA;s__NA",32
+"p__Arthropoda;c__Insecta;o__Diptera;f__Sciaridae;Sf__NA;g__Pseudolycoriella;s__NA",5
+"p__Arthropoda;c__Insecta;o__Diptera;f__Sphaeroceridae;Sf__Limosininae;g__Archiceroptera;s__Archiceroptera highhells_SP",159
+"p__Arthropoda;c__Insecta;o__Diptera;f__Sphaeroceridae;Sf__Limosininae;g__Archiceroptera;s__Archiceroptera venezolana",8
+"p__Arthropoda;c__Insecta;o__Diptera;f__Stratiomyidae;Sf__NA;g__NA;s__NA",1523
+"p__Arthropoda;c__Insecta;o__Diptera;f__Tachinidae;Sf__Exoristinae;g__Prospherysa;s__Prospherysa Malaise8606",74
+"p__Arthropoda;c__Insecta;o__Diptera;f__Tachinidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Diptera;f__Tachinidae;Sf__Tachininae;g__Gymnocheta;s__Gymnocheta sp. GER1",27
+"p__Arthropoda;c__Insecta;o__Embioptera;f__Oligotomidae;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Aleyrodidae;Sf__NA;g__NA;s__NA",25
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Alydidae;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Cicadellidae;Sf__Cicadellinae;g__Ladoffa;s__Ladoffa elauta",24
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Cicadellidae;Sf__NA;g__NA;s__NA",1331
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Cicadellidae;Sf__Typhlocybinae;g__NA;s__NA",35
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Cicadidae;Sf__Cicadinae;g__Fidicina;s__Fidicina mannifera",12479
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Coreidae;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Delphacidae;Sf__NA;g__NA;s__NA",101
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Derbidae;Sf__Derbinae;g__Omolicna;s__Omolicna latens",783
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Derbidae;Sf__NA;g__Herpis;s__Herpis sp. BWB-2020",28
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Derbidae;Sf__NA;g__Oropuna;s__NA",261
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;Sf__Flatoidinae;g__Flatoidinus;s__Flatoidinus spinosus",7
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Flatidae;Sf__NA;g__NA;s__NA",28
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Miridae;Sf__NA;g__NA;s__NA",21
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__NA;Sf__NA;g__NA;s__NA",929
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Pentatomidae;Sf__NA;g__NA;s__NA",102
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;Sf__Harpactorinae;g__Apiomerus;s__Apiomerus barrocoloradoi",5
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Reduviidae;Sf__Saicinae;g__Saica;s__NA",1095
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Rhyparochromidae;Sf__NA;g__NA;s__NA",294
+"p__Arthropoda;c__Insecta;o__Hemiptera;f__Schizopteridae;Sf__NA;g__NA;s__NA",12
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Bethylidae;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Braconidae;Sf__Cheloninae;g__Chelonus;s__NA",5
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Braconidae;Sf__Cheloninae;g__Phanerotoma;s__Phanerotoma sp. ADC6031",5
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Braconidae;Sf__Hormiinae;g__Hormius;s__Hormius Malaise3010",5
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Braconidae;Sf__Microgastrinae;g__Glyptapanteles;s__Glyptapanteles jaquioconnorae",25
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Braconidae;Sf__Microgastrinae;g__Glyptapanteles;s__NA",5
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Braconidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__Crabronidae;Sf__NA;g__NA;s__NA",31
+"p__Arthropoda;c__Insecta;o__Hymenoptera;f__NA;Sf__NA;g__NA;s__NA",95
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Autostichidae;Sf__Glyphidocerinae;g__Glyphidocera;s__Glyphidocera juniperella",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Autostichidae;Sf__Glyphidocerinae;g__NA;s__NA",21
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Autostichidae;Sf__Symmocinae;g__Symmocoides;s__Symmocoides oxybiella",11
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Blastobasidae;Sf__Blastobasinae;g__Hypatopa;s__Hypatopa n. sp.",11
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Blastobasidae;Sf__Blastobasinae;g__blastoBioLep01;s__blastoBioLep01 BioLep5866",28
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Bucculatricidae;Sf__NA;g__Bucculatrix;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Coleophoridae;Sf__Coleophorinae;g__Coleophora;s__Coleophora epijudaica",43
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Cosmopterigidae;Sf__Chrysopeleiinae;g__NA;s__NA",50
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Cosmopterigidae;Sf__Chrysopeleiinae;g__cosmoBioLep01;s__cosmoBioLep01 BioLep05",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Cossidae;Sf__Hypoptinae;g__Langsdorfia;s__Langsdorfia luniferaDHJ03",459
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Cossidae;Sf__Hypoptinae;g__Langsdorfia;s__Langsdorfia luniferaDHJ04",405
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Acentropinae;g__acentroBioLep01;s__acentroBioLep01 BioLep12",10
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Acentropinae;g__acentroBioLep01;s__acentroBioLep01 BioLep704",42
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Crambinae;g__Glaucocharis;s__Glaucocharis electra",13
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Crambinae;g__Myelobia;s__Myelobia BioLep654",176
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Glaphyriinae;g__Dichogama;s__Dichogama BioLep1717",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Glaphyriinae;g__Evergestis;s__Evergestis caesialis",9
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Musotiminae;g__Albusambia;s__Albusambia sp. 1YB",139
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Musotiminae;g__Neurophyseta;s__Neurophyseta BioLep0506",29
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__NA;g__NA;s__NA",950
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Odontiinae;g__Viettessa;s__Viettessa margaritalis",50
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Scopariinae;g__Eudonia;s__Eudonia stenota",75
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Scopariinae;g__Scoparia;s__NA",65
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Coenostolopsis;s__Coenostolopsis apicalis",15
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Conchylodes;s__Conchylodes grammaphora",174
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Desmia;s__Desmia Solis19",18
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Diaphania;s__Diaphania sp. 15YB",21
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Hydriris;s__Hydriris chalybitis",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Neoleucinodes;s__Neoleucinodes torvis",409
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Palpita;s__NA",37
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Palpita;s__Palpita venatalis",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Salbia;s__Salbia Dapkey30",48
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Crambidae;Sf__Spilomelinae;g__Salbia;s__Salbia sp. 2YB",27
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Depressariinae;g__Gonada;s__Gonada cabima",293
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Hypercalliinae;g__Hypercallia;s__Hypercallia syntoma",25
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__NA;s__NA",1348
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep1494",100
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep262",78
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep273",58
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep275",642
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep408",128
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep5405",1326
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachBioLep01;s__elachBioLep01 BioLep789",16
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachJanzen01;s__elachJanzen01 Janzen557",22
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__NA;g__elachJanzen01;s__elachJanzen01 Janzen9347",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Antaeotricha;s__Antaeotricha BioLep542",62
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Antaeotricha;s__Antaeotricha Janzen128",37
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Antaeotricha;s__Antaeotricha Janzen197",295
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Antaeotricha;s__Antaeotricha Janzen208",133
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Antaeotricha;s__Antaeotricha Janzen245",538
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Antaeotricha;s__NA",252
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Chlamydastis;s__Chlamydastis arenaria",51
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Chlamydastis;s__Chlamydastis gracewoodae",18
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Chlamydastis;s__Chlamydastis phytoptera",9
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__NA;s__NA",2559
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Promenesta;s__Promenesta leucomias",130
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Stenoma;s__NA",361
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Stenoma;s__Stenoma Janzen210",13
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Stenoma;s__Stenoma Janzen217",32
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Depressariidae;Sf__Stenomatinae;g__Stenoma;s__Stenoma leucana",7
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Elachistidae;Sf__Agonoxeninae;g__agoMalaise01;s__agoMalaise01 Malaise5228",199
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Elachistidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Arctiinae;g__Euthyone;s__Euthyone simplex",13
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Arctiinae;g__Lophocampa;s__Lophocampa modesta",16
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Arctiinae;g__Melese;s__Melese asana",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Arctiinae;g__Melese;s__Melese sixola",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Arctiinae;g__Nodozana;s__Nodozana sp. 2YB",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Arctiinae;g__Prepiella;s__NA",71
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Boletobiinae;g__Metalectra;s__Metalectra BioLep445",12
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Boletobiinae;g__Metalectra;s__NA",281
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Boletobiinae;g__Prosoparia;s__Prosoparia tenebrosa",120
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Goniohelia;s__Goniohelia pangraptica",168
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Herminodes;s__Herminodes Poole09",5781
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Herminodes;s__Herminodes juvenalisDHJ02",267
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Herminodes;s__Herminodes subclaraDHJ04",537
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Herminodes;s__Herminodes valida",164
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Herminodes;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Ostha;s__Ostha Janzen249",894
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Calpinae;g__Sanys;s__Sanys Poole01",224
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Catocalinae;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Erebinae;g__Athyrma;s__Athyrma tuberosa",78
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Erebinae;g__Helia;s__Helia exsiccata",33
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Erebinae;g__Letis;s__Letis hypnois",18
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Erebinae;g__NA;s__NA",559
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Erebinae;g__Ophiusa;s__Ophiusa melaconisia",7
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Erebinae;g__Syrnia;s__Syrnia hypnois",15
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Eulepidotinae;g__Antiblemma;s__Antiblemma Poole41",82
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Eulepidotinae;g__Antiblemma;s__Antiblemma alcinoe",14
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Eulepidotinae;g__Eulepidotis;s__Eulepidotis foliumDHJ02",27
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__Lascoria;s__Lascoria sp.",49
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__Lascoria;s__NA",12
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__NA;s__NA",232
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__Rejectaria;s__Rejectaria Poole13",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__Rejectaria;s__Rejectaria niciasalis",100
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__Rejectaria;s__Rejectaria zenos",19
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Herminiinae;g__Zanclognatha;s__NA",43
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__NA;g__NA;s__NA",1028
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__NA;g__ereBioLep01;s__ereBioLep01 BioLep656",93
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__NA;g__erebidBioLep01;s__erebidBioLep01 BioLep189",14
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__NA;g__erebidBioLep01;s__erebidBioLep01 BioLep736",87
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Erebidae;Sf__Scolecocampinae;g__Arugisa;s__NA",91
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__Dichomeridinae;g__Cymotricha;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__Dichomeridinae;g__Dichomeris;s__Dichomeris Janzen270",9
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__Dichomeridinae;g__Dichomeris;s__Dichomeris Janzen376",281
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__Dichomeridinae;g__Dichomeris;s__Dichomeris gleba",16
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__Gelechiinae;g__Filatima;s__Filatima ukrainica",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__Gelechiinae;g__Teleiodes;s__Teleiodes brevivalvus",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__NA;s__NA",268
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelBioLep01;s__NA",68
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelBioLep01;s__gelBioLep01 BioLep1366",222
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelBioLep01;s__gelBioLep01 BioLep1713",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelBioLep01;s__gelBioLep01 BioLep418",157
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelBioLep01;s__gelBioLep01 BioLep601",11
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelJanzen01;s__gelJanzen01 Janzen1207",32
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelMalaise01;s__NA",15
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelMalaise01;s__gelMalaise01 Malaise8081",797
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelMalaise01;s__gelMalaise01 MalaiseMetz5154",31
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__geleBioLep01;s__NA",125
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__geleBioLep01;s__geleBioLep01 BioLep1006",11
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__geleBioLep01;s__geleBioLep01 BioLep1180",185
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__geleBioLep01;s__geleBioLep01 BioLep1189",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__geleBioLep01;s__geleBioLep01 BioLep4740",2077
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__geleBioLep01;s__geleBioLep01 BioLep5500",111
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gelechiidae;Sf__NA;g__gelechioidBioAlfa01;s__gelechioidBioAlfa01 BioAlfa122",24
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Biston;s__Biston sp. SH01",22
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Chiasmia;s__Chiasmia sp. ANIC1",483
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Melanolophia;s__Melanolophia sp.",144
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Menophra;s__Menophra obtusata",99
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Nephodia;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Opisthoxia;s__Opisthoxia sp. 1YB",7
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Pero;s__Pero sp.",57
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Perusia;s__Perusia apicalis",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Pyrinia;s__Pyrinia helvaria",10
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Ennominae;g__Tmetomorpha;s__Tmetomorpha bitias",62
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Geometrinae;g__Rhodochlora;s__Rhodochlora BioLep22",21
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__NA;g__geoJanzen01;s__geoJanzen01 Janzen816",63
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Idaea;s__Idaea BioLep243",109
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Idaea;s__Idaea Malaise9610",10
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Idaea;s__Idaea muscifasciata",40
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Idaea;s__NA",318
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__NA;s__NA",24
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Semaeopus;s__Semaeopus deflexa",42
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Semaeopus;s__Semaeopus sp. 21YB",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Geometridae;Sf__Sterrhinae;g__Tricentra;s__Tricentra sp. 5YB",209
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gracillariidae;Sf__Acrocercopinae;g__Acrocercops;s__NA",45
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gracillariidae;Sf__Gracillariinae;g__Caloptilia;s__Caloptilia dicksoni",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gracillariidae;Sf__Gracillariinae;g__Caloptilia;s__Caloptilia sp.",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Gracillariidae;Sf__NA;g__graciJanzen01;s__graciJanzen01 Janzen3165",15
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Lasiocampidae;Sf__Poecilocampinae;g__Euglyphis;s__Euglyphis libnitesJMR01",116
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;Sf__Limacodinae;g__Euprosterna;s__Euprosterna hosia",20266
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;Sf__Limacodinae;g__Natada;s__Natada kokiiDHJ01",54
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;Sf__Limacodinae;g__Perola;s__Perola aenea",186
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;Sf__Limacodinae;g__Prolimacodes;s__Prolimacodes badiaDHJ03",79
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Limacodidae;Sf__NA;g__NA;s__NA",10172
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Lycaenidae;Sf__Polyommatinae;g__Plebejus;s__Plebejus sarta",71
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;Sf__Megalopyginae;g__Megalopyge;s__Megalopyge Janzen03",138
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;Sf__Megalopyginae;g__Megalopyge;s__Megalopyge albicollis",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Megalopygidae;Sf__Trosiinae;g__Mesoscia;s__Mesoscia dumilla",11
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Mimallonidae;Sf__Cicinninae;g__Cicinnus;s__Cicinnus sp.",12
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Momphidae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__NA;Sf__NA;g__NA;s__NA",11328
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Nepticulidae;Sf__NA;g__NA;s__NA",162
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Nepticulidae;Sf__NA;g__Stigmella;s__Stigmella RubusrosifoliusAus",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Nepticulidae;Sf__NA;g__Stigmella;s__Stigmella WesternCapeEvN4075",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Acontiinae;g__Chalenata;s__Chalenata Poole01",431
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Acontiinae;g__Nanamonodes;s__Nanamonodes sp.",104
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Agaristinae;g__Darceta;s__Darceta spAS1",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Agaristinae;g__Leucovis;s__Leucovis alba",40
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Amphipyrinae;g__Cropia;s__Cropia cedica",7
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Heliothinae;g__Chloridea;s__Chloridea virescens",143
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__NA;g__Catharina;s__Catharina sp.",170
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__NA;g__NA;s__NA",270
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__NA;g__NoctSullivan01;s__NoctSullivan01 Sullivan2904",33
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__NA;g__Noctuidae_incertae_sedis;s__Noctuidae_incertae_sedis sp. 14YB",60
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__NA;g__noctBioLep01;s__noctBioLep01 BioLep850",17
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Noctuidae;Sf__Noctuinae;g__Spodoptera;s__Spodoptera pulchella",48
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Nolidae;Sf__Nolinae;g__Callinola;s__Callinola BioLep709",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Nolidae;Sf__Westermanniinae;g__Miaromima;s__Miaromima columbina",11
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Oecophoridae;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Oecophoridae;Sf__Oecophorinae;g__Elaphromorpha;s__Elaphromorpha axierasta",17
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Opostegidae;Sf__NA;g__oposBioLep01;s__oposBioLep01 BioLep01",167
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Papilionidae;Sf__Papilioninae;g__Papilio;s__Papilio maackii ssp CBGPFLC_00067",21
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Psychidae;Sf__NA;g__NA;s__NA",260
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__Abaera;s__NA",270
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__Chrysauginae_genus;s__Chrysauginae_genus sp. 20YB",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__Lophopleura;s__Lophopleura eurzonalis",5263
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__NA;s__NA",481
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep1004",832
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep1279",44
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep168",1678
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep546",228
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep781",126
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep788",1356
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Chrysauginae;g__chryBioLep01;s__chryBioLep01 BioLep8760",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__NA;g__NA;s__NA",76
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__Balinskyia;s__Balinskyia apidis",86
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__Cryptoblabes;s__Cryptoblabes sp. ANIC8",14
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__Fundella;s__Fundella argentina",38
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__NA;s__NA",146
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__phyBioLep01;s__phyBioLep01 BioLep207",125
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__phyBioLep01;s__phyBioLep01 BioLep3631",2090
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__phyBioLep01;s__phyBioLep01 BioLep725",483
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Pyralidae;Sf__Phycitinae;g__phyMalaise01;s__phyMalaise01 Malaise4971",6
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Sphingidae;Sf__Macroglossinae;g__Eumorpha;s__Eumorpha satellitia",49
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Stathmopodidae;Sf__NA;g__Stathmopoda;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__Acrolophinae;g__Acrolophus;s__Acrolophus pyramellus",461
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__Acrolophinae;g__acroBioLep01;s__acroBioLep01 BioLep14",22
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__Acrolophinae;g__acroBioLep01;s__acroBioLep01 BioLep18",766
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__NA;g__Diachorisia;s__NA",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__NA;g__NA;s__NA",15052
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__NA;g__tinBioLep01;s__NA",17
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__NA;g__tinBioLep01;s__tinBioLep01 BioLep1194",18
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tineidae;Sf__NA;g__tinBioLep01;s__tinBioLep01 BioLep5482",158
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Tortricidae;Sf__Olethreutinae;g__Pelochrista;s__Pelochrista fuscostriata",46
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__Uraniidae;Sf__Epipleminae;g__uraBioLep01;s__uraBioLep01 BioLep340",5
+"p__Arthropoda;c__Insecta;o__Lepidoptera;f__unclassified Lepidoptera;Sf__NA;g__lepJanzen01;s__lepJanzen01 Janzen01",1316
+"p__Arthropoda;c__Insecta;o__Mantodea;f__Mantoididae;Sf__NA;g__Mantoida;s__Mantoida brunneriana",816
+"p__Arthropoda;c__Insecta;o__NA;f__NA;Sf__NA;g__NA;s__NA",5
+"p__Arthropoda;c__Insecta;o__Neuroptera;f__Chrysopidae;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Neuroptera;f__Mantispidae;Sf__Mantispinae;g__Leptomantispa;s__Leptomantispa antillesensis",187
+"p__Arthropoda;c__Insecta;o__Neuroptera;f__Mantispidae;Sf__Symphrasinae;g__Trichoscelia;s__Trichoscelia varia",16
+"p__Arthropoda;c__Insecta;o__Orthoptera;f__Gryllidae;Sf__NA;g__NA;s__NA",943
+"p__Arthropoda;c__Insecta;o__Orthoptera;f__NA;Sf__NA;g__NA;s__NA",649
+"p__Arthropoda;c__Insecta;o__Orthoptera;f__Tettigoniidae;Sf__Phaneropterinae;g__Microcentrum;s__NA",111
+"p__Arthropoda;c__Insecta;o__Orthoptera;f__Tettigoniidae;Sf__Phaneropterinae;g__Steirodon;s__Steirodon sandrae",63
+"p__Arthropoda;c__Insecta;o__Orthoptera;f__Trigonidiidae;Sf__NA;g__NA;s__NA",161
+"p__Arthropoda;c__Insecta;o__Psocodea;f__Cladiopsocidae;Sf__NA;g__NA;s__NA",181
+"p__Arthropoda;c__Insecta;o__Psocodea;f__Myopsocidae;Sf__NA;g__NA;s__NA",24
+"p__Arthropoda;c__Insecta;o__Psocodea;f__NA;Sf__NA;g__NA;s__NA",6
+"p__Arthropoda;c__Insecta;o__Psocodea;f__Psocidae;Sf__NA;g__NA;s__NA",2722
+"p__Arthropoda;c__Insecta;o__Trichoptera;f__Hydropsychidae;Sf__Macronematinae;g__Leptonema;s__Leptonema sinuatum",404
+"p__Arthropoda;c__Insecta;o__Trichoptera;f__Hydropsychidae;Sf__Macronematinae;g__Leptonema;s__Leptonema sp. gmycC51",23
+"p__Arthropoda;c__Pauropoda;o__NA;f__NA;Sf__NA;g__NA;s__NA",65
+"p__NA;c__NA;o__NA;f__NA;Sf__NA;g__NA;s__NA",70928

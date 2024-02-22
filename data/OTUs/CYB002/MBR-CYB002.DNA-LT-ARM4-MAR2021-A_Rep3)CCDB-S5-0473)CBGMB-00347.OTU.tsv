@@ -1,0 +1,32 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Diptera	Chloropidae	Chloropinae	Steleocerellus	Steleocerellus sp. 2	94.44	231	7	5	96.97	28.57	121.91	28.69	0
+OTU2	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Perola	Perola BioLep05	96.71	109	4	4	96.33	0.00	457.74	32.11	0
+OTU3	Arthropoda	Insecta	Blattodea	Blaberidae				95.84	82	5	5	93.90	0.00	457.98	35.14	0
+OTU4								0.00	66	3	1	95.45	66.67	458.05	38.43	0
+OTU5								0.00	46	2	1	95.65	50.00	166.74	38.98	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Euteliidae	Euteliinae	Marathyssa	Marathyssa minus	93.65	43	3	3	93.02	0.00	457.56	30.38	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Ostha	Ostha Janzen249	90.57	38	2	2	94.74	0.00	456.84	35.24	0
+OTU8								0.00	24	2	1	91.67	50.00	107	26.87	0
+OTU9								0.00	22	3	1	86.36	66.67	457.77	37.14	0
+OTU10								0.00	18	1	1	94.44	0.00	122	28.69	0
+OTU11								0.00	15	1	1	93.33	0.00	137	37.23	0
+OTU14	Arthropoda	Insecta	Coleoptera	Curculionidae				95.60	13	2	2	84.62	0.00	457.62	33.87	0
+OTU12								0.00	13	1	1	92.31	0.00	140	38.57	0
+OTU13								0.00	13	1	1	92.31	0.00	104	34.62	0
+OTU15	Arthropoda	Insecta	Diptera					94.71	12	1	1	91.67	0.00	458	40.83	0
+OTU16	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Episcepsis	Episcepsis venata	90.37	11	1	1	90.91	0.00	458	29.91	0
+OTU17								0.00	11	1	1	90.91	0.00	122	30.33	0
+OTU18	Arthropoda	Insecta	Blattodea					92.76	10	2	2	80.00	0.00	457.5	34.64	0
+OTU19	Arthropoda	Insecta	Lepidoptera	Depressariidae				94.96	10	2	2	80.00	0.00	457.5	34.54	0
+OTU21	Arthropoda	Insecta	Diptera					96.25	9	1	1	88.89	0.00	458	39.52	0
+OTU20								0.00	9	1	1	88.89	0.00	142	30.99	0
+OTU22								0.00	8	1	1	87.50	0.00	131	27.48	0
+OTU25								0.00	6	1	1	83.33	0.00	142	32.39	0
+OTU24								0.00	6	1	1	83.33	0.00	431	35.27	0
+OTU23	Arthropoda	Insecta	Diptera					94.49	6	1	1	83.33	0.00	458	39.96	0
+OTU30	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma		97.58	5	1	1	80.00	0.00	458	34.06	0
+OTU31	Arthropoda	Insecta	Lepidoptera	Tortricidae	Olethreutinae	Pelochrista	Pelochrista fuscostriata	93.60	5	1	1	80.00	0.00	125	32	0
+OTU29	Arthropoda	Insecta	Diptera	Chloropidae				90.98	5	1	1	80.00	0.00	122	28.69	0
+OTU28								0.00	5	1	1	80.00	0.00	122	29.51	0
+OTU27								0.00	5	1	1	80.00	0.00	458	37.55	0
+OTU26	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sinuatum	97.59	5	1	1	80.00	0.00	458	38.65	0

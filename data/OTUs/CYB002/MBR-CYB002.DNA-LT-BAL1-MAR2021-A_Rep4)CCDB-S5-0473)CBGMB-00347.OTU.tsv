@@ -1,0 +1,18 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	79	3	1	96.20	66.67	106.82	31.83	0
+OTU2								0.00	71	2	1	97.18	50.00	106.9	27.13	0
+OTU3								0.00	22	1	1	95.45	0.00	122	29.51	0
+OTU4	Arthropoda	Insecta	Diptera					96.25	13	1	1	92.31	0.00	458	39.52	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	97.37	9	1	1	88.89	0.00	458	32.97	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Oecophoridae		oecoBioLep01	oecoBiolep01 BioLep31	96.70	8	1	1	87.50	0.00	458	30.13	0
+OTU7								0.00	8	1	1	87.50	0.00	108	34.26	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	93.87	7	1	1	85.71	0.00	458	32.31	0
+OTU9								0.00	7	1	1	85.71	0.00	457	34.79	0
+OTU10	Arthropoda	Insecta	Lepidoptera	Noctuidae				92.32	6	1	1	83.33	0.00	457	27.79	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	5	1	1	80.00	0.00	459	30.28	0
+OTU15	Arthropoda	Insecta	Lepidoptera	Pyralidae	Epipaschiinae	Deuterollyta	Deuterollyta sp. 4YB	92.00	5	1	1	80.00	0.00	125	35.2	0
+OTU16								0.00	5	1	1	80.00	0.00	217	36.41	0
+OTU17								0.00	5	1	1	80.00	0.00	457	35.23	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Amaxia	Amaxia rocioecheverriae	92.78	5	1	1	80.00	0.00	458	33.84	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Nevrolongus	Nevrolongus thysbodes	94.75	5	1	1	80.00	0.00	458	32.1	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Chlamydastis	Chlamydastis phytoptera	97.58	5	1	1	80.00	0.00	458	32.53	0

@@ -1,0 +1,28 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	351	11	1	96.87	90.91	457.62	36.27	0
+OTU2	Arthropoda	Insecta	Orthoptera					91.03	162	7	7	95.68	0.00	457.6	34.09	0
+OTU3	Arthropoda	Insecta	Hemiptera	Pentatomidae	Discocephalinae	Ablaptus	Ablaptus brevirostrum	91.68	123	8	8	93.50	0.00	457.96	34.54	0
+OTU4								0.00	105	5	1	95.24	80.00	190.96	36.12	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Limacodidae				94.93	55	8	8	85.45	0.00	265.64	31.15	0
+OTU6								0.00	51	2	1	96.08	50.00	140.12	38.62	0
+OTU7								0.00	46	2	1	95.65	50.00	116.78	26.55	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Depressariidae	Stenomatinae	Stenoma	Stenoma sp.	96.93	43	2	2	95.35	0.00	457.72	30.59	0
+OTU10								0.00	42	2	1	95.24	50.00	106.88	27.13	0
+OTU9								0.00	42	5	1	88.10	80.00	458.31	34.05	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Erebidae	Herminiinae	Lascoria	Lascoria sp.	94.09	26	1	1	96.15	0.00	458	30.79	0
+OTU12								0.00	19	1	1	94.74	0.00	137	37.23	0
+OTU13								0.00	16	1	1	93.75	0.00	263	28.52	0
+OTU14								0.00	13	1	1	92.31	0.00	458	30.79	0
+OTU15								0.00	13	2	1	84.62	50.00	457.54	33.67	0
+OTU16	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae			96.05	9	1	1	88.89	0.00	458	30.13	0
+OTU17	Arthropoda	Insecta	Diptera					96.25	9	1	1	88.89	0.00	458	39.52	0
+OTU18								0.00	8	1	1	87.50	0.00	278	29.14	0
+OTU19								0.00	7	1	1	85.71	0.00	191	37.17	0
+OTU20								0.00	7	1	1	85.71	0.00	354	36.72	0
+OTU21								0.00	6	1	1	83.33	0.00	191	35.08	0
+OTU23								0.00	6	1	1	83.33	0.00	112	40.18	0
+OTU22	Arthropoda	Insecta	Lepidoptera	Limacodidae	Limacodinae	Euprosterna	Euprosterna hosia	97.81	6	1	1	83.33	0.00	459	30.28	0
+OTU25	Arthropoda	Insecta	Lepidoptera	Erebidae				97.58	5	1	1	80.00	0.00	457	31.95	0
+OTU24								0.00	5	1	1	80.00	0.00	458	36.68	0
+OTU27	Arthropoda	Insecta	Lepidoptera	Crambidae	Crambinae	Diatraea	Diatraea saccharalis	95.85	5	1	1	80.00	0.00	458	32.31	0
+OTU26	Arthropoda	Insecta	Mantodea	Mantoididae		Mantoida	Mantoida brunneriana	94.09	5	1	1	80.00	0.00	458	33.84	0

@@ -1,0 +1,18 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	103	3	1	97.09	66.67	106.83	27.15	0
+OTU2								0.00	86	3	1	96.51	66.67	457.73	32.96	0
+OTU3	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sp. gmycC51	97.81	44	5	5	88.64	0.00	457.45	38.63	0
+OTU4								0.00	23	3	1	86.96	66.67	457.7	34.08	0
+OTU5								0.00	14	1	1	92.86	0.00	156	32.69	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Goniohelia	Goniohelia pangraptica	97.81	11	1	1	90.91	0.00	458	30.57	0
+OTU6								0.00	11	1	1	90.91	0.00	252	42.06	0
+OTU7								0.00	11	2	1	81.82	50.00	458	33.6	0
+OTU9								0.00	9	1	1	88.89	0.00	252	40.87	0
+OTU10								0.00	7	1	1	85.71	0.00	458	33.62	0
+OTU11	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Scarabaeinae	Copris	Copris brevicornis	97.59	7	1	1	85.71	0.00	458	33.62	0
+OTU14								0.00	6	1	1	83.33	0.00	458	37.34	0
+OTU15	Arthropoda	Insecta	Lepidoptera					96.25	6	1	1	83.33	0.00	457	31.73	0
+OTU16	Arthropoda	Insecta	Hemiptera					94.51	6	1	1	83.33	0.00	458	34.28	0
+OTU12	Arthropoda	Insecta	Coleoptera	Cerophytidae				94.33	6	1	1	83.33	0.00	458	30.57	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Depressariidae		elachJanzen01	elachJanzen01 Janzen211	95.18	6	1	1	83.33	0.00	457	32.82	0
+OTU17	Arthropoda	Insecta	Lepidoptera					91.85	5	1	1	80.00	0.00	457	29.76	0

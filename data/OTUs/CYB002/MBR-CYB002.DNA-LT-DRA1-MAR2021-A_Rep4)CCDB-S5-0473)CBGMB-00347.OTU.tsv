@@ -1,0 +1,25 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	990	13	1	98.69	92.31	457.46	38.71	0
+OTU2								0.00	275	16	1	94.18	93.75	453.1	37.23	0
+OTU3								0.00	86	4	1	95.35	75.00	106.95	27.2	0
+OTU4								0.00	41	2	1	95.12	50.00	457.37	38.48	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia sp. 5YB	97.37	16	2	2	87.50	0.00	458	29.79	0
+OTU6	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	97.81	15	2	2	86.67	0.00	457.67	29.72	0
+OTU8								0.00	12	1	1	91.67	0.00	458	30.79	0
+OTU9								0.00	12	1	1	91.67	0.00	458	37.55	0
+OTU7								0.00	12	2	1	83.33	50.00	457.58	37.15	0
+OTU10								0.00	11	1	1	90.91	0.00	458	38.21	0
+OTU11	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Acridopsis	Acridopsis sp. AAJ0944	97.58	10	2	2	80.00	0.00	457.5	31.8	0
+OTU12								0.00	10	1	1	90.00	0.00	128	28.91	0
+OTU14								0.00	8	1	1	87.50	0.00	150	40	0
+OTU15	Arthropoda	Insecta	Hemiptera					90.35	8	1	1	87.50	0.00	458	34.72	0
+OTU16								0.00	8	1	1	87.50	0.00	458	37.99	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Erebidae		erebidBioLep01	erebidBioLep01 BioLep736	94.75	8	1	1	87.50	0.00	458	32.31	0
+OTU17								0.00	6	1	1	83.33	0.00	458	33.84	0
+OTU18								0.00	6	1	1	83.33	0.00	156	32.69	0
+OTU19	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	97.58	6	1	1	83.33	0.00	457	30.42	0
+OTU20								0.00	6	1	1	83.33	0.00	165	41.21	0
+OTU24								0.00	5	1	1	80.00	0.00	165	37.58	0
+OTU21	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	96.71	5	1	1	80.00	0.00	458	30.57	0
+OTU23	Arthropoda	Insecta	Lepidoptera					95.14	5	1	1	80.00	0.00	456	30.92	0
+OTU22	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	96.49	5	1	1	80.00	0.00	457	30.63	0

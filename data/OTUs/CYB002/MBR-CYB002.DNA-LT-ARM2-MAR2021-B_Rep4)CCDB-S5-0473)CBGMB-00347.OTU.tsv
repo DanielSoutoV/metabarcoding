@@ -1,0 +1,16 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Dynastinae	Cyclocephala	Cyclocephala sp. 13YB	97.81	210	9	9	95.71	0.00	457.86	35.38	0
+OTU2								0.00	41	3	1	92.68	66.67	458.05	34.77	0
+OTU3								0.00	23	1	1	95.65	0.00	128	30.47	0
+OTU4								0.00	22	1	1	95.45	0.00	107	29.91	0
+OTU5	Arthropoda	Insecta	Blattodea					95.83	21	2	2	90.48	0.00	457.67	38.02	0
+OTU6								0.00	10	1	1	90.00	0.00	107	27.1	0
+OTU7	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Dynastinae	Cyclocephala	Cyclocephala sp. 13YB	94.97	9	1	1	88.89	0.00	458	35.37	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Pyralidae	Phycitinae	phyBioLep01	phyBioLep01 BioLep929	96.49	7	1	1	85.71	0.00	458	30.35	0
+OTU9	Arthropoda	Insecta	Lepidoptera	Pyralidae	Epipaschiinae	Carthara		97.81	5	1	1	80.00	0.00	458	29.69	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Depressariidae		elachJanzen01	elachJanzen01 Janzen211	95.18	5	1	1	80.00	0.00	457	32.82	0
+OTU15	Arthropoda	Insecta	Lepidoptera	Pyralidae	Epipaschiinae	Carthara		97.37	5	1	1	80.00	0.00	458	30.57	0
+OTU10	Arthropoda	Insecta	Lepidoptera	Pyralidae	Epipaschiinae	Carthara		97.59	5	1	1	80.00	0.00	458	31.44	0
+OTU11	Arthropoda	Insecta	Diptera	Muscidae				97.58	5	1	1	80.00	0.00	458	31.66	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Erebidae	Arctiinae	Psoloptera	Psoloptera thoracica	97.37	5	1	1	80.00	0.00	458	32.53	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Pyralidae	Epipaschiinae	Carthara		97.81	5	1	1	80.00	0.00	458	30.79	0

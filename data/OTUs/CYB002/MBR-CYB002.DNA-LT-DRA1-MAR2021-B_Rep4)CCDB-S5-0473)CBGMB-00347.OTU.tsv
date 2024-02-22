@@ -1,0 +1,17 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1	Arthropoda	Insecta	Hemiptera	Fulgoridae		Pterodictya	Pterodictya reticularis	91.85	304	11	11	96.38	0.00	457.64	33.43	0
+OTU2								0.00	33	1	1	96.97	0.00	107	29.91	0
+OTU3								0.00	28	1	1	96.43	0.00	107	31.78	0
+OTU4								0.00	19	1	1	94.74	0.00	122	29.51	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Pyralidae	Chrysauginae	chryBioLep01	chryBioLep01 BioLep788	97.15	12	1	1	91.67	0.00	458	32.75	0
+OTU6								0.00	11	1	1	90.91	0.00	120	26.67	0
+OTU8								0.00	10	2	1	80.00	50.00	458	30.79	0
+OTU9	Arthropoda	Insecta	Coleoptera	Curculionidae	Platypodinae	Euplatypus	Euplatypus sp. 5YB	96.19	10	1	1	90.00	0.00	136	34.56	0
+OTU7								0.00	10	1	1	90.00	0.00	107	27.1	0
+OTU10	Arthropoda	Insecta	Diptera					96.25	9	1	1	88.89	0.00	458	39.52	0
+OTU11								0.00	9	1	1	88.89	0.00	458	32.97	0
+OTU12								0.00	8	1	1	87.50	0.00	128	28.91	0
+OTU14								0.00	6	1	1	83.33	0.00	128	29.69	0
+OTU13								0.00	6	1	1	83.33	0.00	122	27.87	0
+OTU15								0.00	5	1	1	80.00	0.00	458	35.15	0
+OTU16								0.00	5	1	1	80.00	0.00	178	33.71	0

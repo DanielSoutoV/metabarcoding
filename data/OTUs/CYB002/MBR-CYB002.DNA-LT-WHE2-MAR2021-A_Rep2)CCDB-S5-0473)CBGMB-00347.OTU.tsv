@@ -1,0 +1,21 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	80	4	1	95.00	75.00	191	36.1	0
+OTU2	Arthropoda	Insecta	Diptera					96.25	35	1	1	97.14	0.00	458	39.52	0
+OTU3	Arthropoda	Insecta	Hemiptera	Cicadidae				94.05	33	3	3	90.91	0.00	457.61	32.56	0
+OTU4								0.00	27	2	1	92.59	50.00	130.81	27.52	0
+OTU5								0.00	27	2	1	92.59	50.00	109.7	41.93	0
+OTU6								0.00	21	1	1	95.24	0.00	113	40.71	0
+OTU7								0.00	18	2	1	88.89	50.00	458.28	33.6	0
+OTU8								0.00	17	1	1	94.12	0.00	137	37.96	0
+OTU9								0.00	11	1	1	90.91	0.00	136	38.97	0
+OTU10								0.00	11	1	1	90.91	0.00	109	42.2	0
+OTU11	Arthropoda	Insecta	Diptera	Phoridae	Phorinae	Dohrniphora	Dohrniphora ecitophila	96.61	8	1	1	87.50	0.00	178	33.71	0
+OTU14								0.00	7	1	1	85.71	0.00	131	37.4	0
+OTU15								0.00	7	1	1	85.71	0.00	191	35.08	0
+OTU16	Arthropoda	Insecta	Coleoptera	Curculionidae				93.69	7	1	1	85.71	0.00	206	36.41	0
+OTU12								0.00	7	1	1	85.71	0.00	140	40	0
+OTU13								0.00	7	1	1	85.71	0.00	109	41.28	0
+OTU17								0.00	6	1	1	83.33	0.00	139	37.41	0
+OTU20	Arthropoda	Insecta	Hemiptera	Rhyparochromidae				93.17	5	1	1	80.00	0.00	457	40.48	0
+OTU18	Arthropoda	Insecta	Hemiptera	Pentatomidae	Edessinae	Edessa	Edessa sp7	94.75	5	1	1	80.00	0.00	458	32.53	0
+OTU19	Arthropoda	Insecta	Lepidoptera	Erebidae	Scolecocampinae	Arugisa	Arugisa BioLep87	95.62	5	1	1	80.00	0.00	458	30.57	0

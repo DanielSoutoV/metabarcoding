@@ -1,0 +1,24 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	148	6	1	95.95	83.33	457.62	36.28	0
+OTU2	Arthropoda	Insecta	Blattodea	Blaberidae				94.49	123	5	5	95.93	0.00	457.91	35.38	0
+OTU3								0.00	61	2	1	96.72	50.00	191.11	36.16	0
+OTU4								0.00	51	2	1	96.08	50.00	106.9	27.13	0
+OTU5	Arthropoda	Insecta	Diptera					96.25	41	2	2	95.12	0.00	457.85	39.53	0
+OTU6								0.00	28	2	1	92.86	50.00	457.79	32.98	0
+OTU8								0.00	23	2	1	91.30	50.00	109.78	41.9	0
+OTU7	Arthropoda	Insecta	Hemiptera	Coreidae				96.26	23	1	1	95.65	0.00	458	37.12	0
+OTU9	Arthropoda	Insecta	Coleoptera	Hydrophilidae				93.37	17	3	3	82.35	0.00	197.12	36.53	0
+OTU10								0.00	12	1	1	91.67	0.00	107	29.91	0
+OTU11								0.00	11	1	1	90.91	0.00	128	30.47	0
+OTU12								0.00	10	1	1	90.00	0.00	458	30.79	0
+OTU13	Arthropoda	Insecta	Lepidoptera	Oecophoridae		oecoBioLep01	oecoBiolep01 BioLep31	97.14	9	1	1	88.89	0.00	458	30.13	0
+OTU14	Arthropoda	Insecta	Diptera	Culicidae	Culicinae	Culex	Culex sp. 6 HY-2020	91.18	8	1	1	87.50	0.00	102	28.43	0
+OTU15								0.00	7	1	1	85.71	0.00	238	33.19	0
+OTU16								0.00	7	1	1	85.71	0.00	128	39.06	0
+OTU17								0.00	6	1	1	83.33	0.00	196	36.73	0
+OTU18								0.00	6	1	1	83.33	0.00	137	37.96	0
+OTU19								0.00	6	1	1	83.33	0.00	222	39.19	0
+OTU21								0.00	5	1	1	80.00	0.00	156	32.69	0
+OTU20								0.00	5	1	1	80.00	0.00	137	36.5	0
+OTU23	Arthropoda	Insecta	Lepidoptera	Depressariidae		elachBioLep01	elachBioLep01 BioLep5405	95.40	5	1	1	80.00	0.00	458	32.97	0
+OTU22	Arthropoda	Insecta	Lepidoptera	Noctuidae	Acronictinae	Chalcoecia	Chalcoecia emessa	92.23	5	1	1	80.00	0.00	458	30.35	0

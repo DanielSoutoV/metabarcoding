@@ -1,0 +1,27 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	96	4	1	95.83	75.00	457.74	36.27	0
+OTU2	Arthropoda	Insecta	Blattodea	Blaberidae				94.27	72	2	2	97.22	0.00	457.69	35.39	0
+OTU3								0.00	45	2	1	95.56	50.00	191	36.01	0
+OTU4								0.00	38	1	1	97.37	0.00	107	27.1	0
+OTU5	Arthropoda	Insecta	Hemiptera	Coreidae				96.26	27	1	1	96.30	0.00	458	37.12	0
+OTU8								0.00	20	1	1	95.00	0.00	110	41.82	0
+OTU6	Arthropoda	Insecta	Coleoptera	Hydrophilidae				92.89	20	2	2	90.00	0.00	197.7	36.42	0
+OTU7								0.00	20	2	1	90.00	50.00	457.7	32.99	0
+OTU9								0.00	18	1	1	94.44	0.00	128	30.47	0
+OTU10	Arthropoda	Insecta	Coleoptera	Scarabaeidae	Rutelinae	Anomala		94.74	16	3	3	81.25	0.00	456.63	34.82	0
+OTU11	Arthropoda	Insecta	Diptera					96.25	15	1	1	93.33	0.00	458	39.52	0
+OTU12	Arthropoda	Insecta	Lepidoptera	Oecophoridae		oecoBioLep01	oecoBiolep01 BioLep31	97.14	12	2	2	83.33	0.00	457.58	30.16	0
+OTU13								0.00	11	2	1	81.82	50.00	457.09	30.85	0
+OTU14	Arthropoda	Insecta	Coleoptera	Curculionidae	Platypodinae	Euplatypus	Euplatypus sp. 5YB	96.19	10	1	1	90.00	0.00	136	34.56	0
+OTU15								0.00	9	1	1	88.89	0.00	101	42.57	0
+OTU16								0.00	9	1	1	88.89	0.00	107	29.91	0
+OTU17								0.00	8	1	1	87.50	0.00	156	32.69	0
+OTU18								0.00	8	1	1	87.50	0.00	135	39.26	0
+OTU19								0.00	8	1	1	87.50	0.00	191	34.03	0
+OTU21	Arthropoda	Insecta	Coleoptera	Carabidae	Harpalinae	Lebia	Lebia cruxminor	90.81	7	1	1	85.71	0.00	458	35.37	0
+OTU20								0.00	7	1	1	85.71	0.00	222	39.19	0
+OTU22								0.00	6	1	1	83.33	0.00	140	37.14	0
+OTU25								0.00	5	1	1	80.00	0.00	238	33.19	0
+OTU24								0.00	5	1	1	80.00	0.00	458	30.79	0
+OTU26								0.00	5	1	1	80.00	0.00	458	30.79	0
+OTU23								0.00	5	1	1	80.00	0.00	457	39.39	0

@@ -1,0 +1,18 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	99	9	1	90.91	88.89	456.18	35.71	0
+OTU2								0.00	56	3	1	94.64	66.67	143.79	31.93	0
+OTU3								0.00	15	2	1	86.67	50.00	102.6	37.04	0
+OTU4	Arthropoda	Insecta	Hemiptera	Pentatomidae				94.63	11	2	2	81.82	0.00	457.45	34.86	0
+OTU6	Arthropoda	Insecta	Orthoptera	Tettigoniidae				97.90	9	1	1	88.89	0.00	458	34.93	0
+OTU5								0.00	9	1	1	88.89	0.00	113	40.71	0
+OTU7								0.00	7	1	1	85.71	0.00	222	39.19	0
+OTU8	Arthropoda	Insecta	Hemiptera	Cicadellidae				97.58	6	1	1	83.33	0.00	458	34.06	0
+OTU9	Arthropoda	Insecta	Lepidoptera	Geometridae	Ennominae	Paragonia	Paragonia crurariaDHJ06	97.81	6	1	1	83.33	0.00	458	29.69	0
+OTU10								0.00	6	1	1	83.33	0.00	268	33.21	0
+OTU11								0.00	6	1	1	83.33	0.00	103	33.98	0
+OTU12								0.00	6	1	1	83.33	0.00	270	39.26	0
+OTU14	Arthropoda	Insecta	Lepidoptera	Erebidae	Calpinae	Herminodes	Herminodes juvenalisDHJ02	97.80	5	1	1	80.00	0.00	456	32.46	0
+OTU15	Arthropoda	Insecta	Trichoptera	Hydropsychidae	Macronematinae	Leptonema	Leptonema sinuatum	97.58	5	1	1	80.00	0.00	457	38.51	0
+OTU16	Arthropoda	Insecta	Neuroptera	Chrysopidae	Chrysopinae	Apertochrysa	Apertochrysa hainana	91.05	5	1	1	80.00	0.00	458	31	0
+OTU17								0.00	5	1	1	80.00	0.00	131	27.48	0
+OTU13								0.00	5	1	1	80.00	0.00	458	32.97	0

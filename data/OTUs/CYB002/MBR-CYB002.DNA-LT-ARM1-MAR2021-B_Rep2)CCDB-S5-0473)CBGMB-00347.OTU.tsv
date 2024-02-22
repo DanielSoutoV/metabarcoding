@@ -1,0 +1,11 @@
+OTU	Phylum	Class	Order	Family	Subfamily	Genus	Species	Taxon Similarity	Sequences	Dereplicates	PreClusters	Dereplication Reduction (%)	Preclustering Reduction (%)	Length	GC Composition	MID
+OTU1								0.00	244	4	1	98.36	75.00	457.82	32.97	0
+OTU2								0.00	46	4	1	91.30	75.00	456.11	34.91	0
+OTU3								0.00	26	1	1	96.15	0.00	107	27.1	0
+OTU4								0.00	14	2	1	85.71	50.00	192.57	37.91	0
+OTU5	Arthropoda	Insecta	Lepidoptera	Noctuidae	Noctuinae	Euxoa	Euxoa infracta	95.77	13	1	1	92.31	0.00	190	28.42	0
+OTU6	Arthropoda	Insecta	Coleoptera	Carabidae				90.59	12	1	1	91.67	0.00	458	36.24	0
+OTU7	Arthropoda	Insecta	Lepidoptera	Noctuidae				92.32	9	1	1	88.89	0.00	457	27.79	0
+OTU8	Arthropoda	Insecta	Lepidoptera	Depressariidae				94.96	8	1	1	87.50	0.00	458	34.28	0
+OTU9								0.00	6	1	1	83.33	0.00	131	27.48	0
+OTU10								0.00	5	1	1	80.00	0.00	458	32.53	0
